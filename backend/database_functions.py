@@ -40,4 +40,10 @@ def query_all_records(db_connection):
     db_connection.commit()
 
 
-db = connection()
+# Check if a particular user exists
+def user_exists(db_connection, username):
+    cursor = db_connection.execute(f'''SELECT username FROM USERS where username = "{username}" LIMIT 1''')
+    for row in cursor:
+        if row:
+            return True
+    return False
