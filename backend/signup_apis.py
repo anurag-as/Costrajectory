@@ -5,7 +5,6 @@ from json import dumps
 from flask import jsonify
 from query_signup import *
 
-from backend.query_signup import SignUp
 
 app = Flask(__name__)
 api = Api(app)
@@ -32,7 +31,7 @@ class AddUser(Resource):
         return jsonify(signup.add_user())
 
 
-api.add_resource(CheckUser, '/check_user/<username>/<password>')
+api.add_resource(CheckUser, '/check_user/<username>')
 api.add_resource(AddUser, '/add_user/<username>/<password>')
 
 
