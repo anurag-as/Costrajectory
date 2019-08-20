@@ -32,7 +32,7 @@ class AddUser(Resource):
 
 
 api.add_resource(CheckUser, '/check_user/<username>')
-api.add_resource(AddUser, '/add_user/<username>/<password>')
+api.add_resource(AddUser, '/add_user')
 
 
 if __name__ == '__main__':
