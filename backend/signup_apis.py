@@ -4,9 +4,11 @@ from sqlalchemy import create_engine
 from json import dumps
 from flask import jsonify
 from query_signup import *
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
+cors = CORS(app)
 api = Api(app)
 
 
@@ -36,4 +38,4 @@ api.add_resource(AddUser, '/add_user')
 
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run(port=8000,debug=True)
