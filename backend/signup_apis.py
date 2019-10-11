@@ -6,6 +6,10 @@ from flask import jsonify
 from query_signup import *
 from flask_cors import CORS, cross_origin
 
+<<<<<<< Updated upstream
+=======
+#from query_signup import SignUp
+>>>>>>> Stashed changes
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -34,7 +38,11 @@ class AddUser(Resource):
 
 
 api.add_resource(CheckUser, '/check_user/<username>')
+<<<<<<< Updated upstream
 api.add_resource(AddUser, '/add_user')
+=======
+api.add_resource(AddUser, '/add_user/<username>')
+>>>>>>> Stashed changes
 
 
 if __name__ == '__main__':
