@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -13,8 +15,8 @@ export class LoginComponent implements OnInit {
   pwd1: any = '';
   pwd2: any = '';
   submitted = false;
-
-  constructor(private formBuilder: FormBuilder) { }
+  isUserexisting: any = false;
+  constructor(private formBuilder: FormBuilder , private http: HttpClient) {}
 
   private MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
         }
     };
   }
+
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -55,6 +58,17 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
+  private isUserexists( email: string ) {
+    this.http.post('http://127.0.0.1:8000/checkUser', {username: email }).subscribe(posts => {
+      this.isUserexisting = posts;
+    });
+  }
+
+  private registerUser( email: string , enteredPassword: string) {
+    this.http.post('http://127.0.0.1:8000/registerUser', {username: email , password: enteredPassword}).subscribe(posts => {
+    });
+  }
+
     onSubmit() {
         this.submitted = true;
 
@@ -63,8 +77,17 @@ export class LoginComponent implements OnInit {
             return;
         }
 
+        console.log(this.registerForm.value.password);
+        this.isUserexists( this.registerForm.value.password);
+
+        if (this.isUserexisting === 'true') {
+          alert('Username alredy registered, please use another\n\n');
+          return;
+        }
+
         // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value));
-    }
+        this.registerUser(this.registerForm.value.email, this.registerForm.value.password);
+          }
 
 
 }
