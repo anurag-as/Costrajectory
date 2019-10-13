@@ -45,5 +45,6 @@ def user_exists(db_connection, username):
     cursor = db_connection.execute(f'''SELECT username FROM USERS where username = "{username}" LIMIT 1''')
     for row in cursor:
         if row:
+            print('**************',row,username)
             return True
     return False

@@ -48,14 +48,6 @@ export class LoginComponent implements OnInit {
   });
   }
 
-  private onCanSubmit() {
-    if ( this.username !== '' && this.pwd1 !== '' && this.pwd2 !== '') {
-      return( true );
-    } else {
-      return( false );
-    }
-  }
-
   get f() { return this.registerForm.controls; }
 
   private isUserexists( email: string ) {
@@ -77,10 +69,9 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        console.log(this.registerForm.value.password);
-        this.isUserexists( this.registerForm.value.password);
+        this.isUserexists( this.registerForm.value.email);
 
-        if (this.isUserexisting === 'true') {
+        if (this.isUserexisting === true) {
           alert('Username alredy registered, please use another\n\n');
           return;
         }

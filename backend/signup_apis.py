@@ -44,6 +44,7 @@ api.add_resource(AddUser, '/add_user/<username>/')
 @cross_origin()
 def checkUser():
 	signup = SignUp(request.json['username'])
+	#print('----------',signup.check_user())
 	return jsonify(signup.check_user())
 	
 @app.route('/registerUser',methods = ['POST'])
@@ -52,7 +53,7 @@ def registerUser():
 	username = request.json['username']
 	password = request.json['password']
 	signup = SignUp(username, password)
-	return jsonify(signup.add_user())
+	return jsonify(signup.add_user_after_authentication())
 
 
 if __name__ == '__main__':
