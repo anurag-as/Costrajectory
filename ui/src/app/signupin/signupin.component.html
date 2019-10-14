@@ -1,0 +1,15 @@
+<mat-card>
+    <h3>SignUp
+<mat-slide-toggle
+    (change) = "changeState()">
+</mat-slide-toggle>&nbsp; SignIn</h3>
+</mat-card>
+
+<div class="fluid-container">
+    <div *ngIf="signup == true">
+        <app-signup (userdata)="authorization($event)"></app-signup>
+    </div>
+    <div *ngIf="signup == false">
+        <app-signin (userdata)="authorization($event)"></app-signin>
+    </div>
+</div>

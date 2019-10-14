@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
-
+import { EventEmitter } from '@angular/core';
+import { Output } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   username: any = '';
   registerForm: FormGroup;
   pwd1: any = '';
   pwd2: any = '';
   submitted = false;
   isUserexisting: any = false;
+  @Output() userdata = new EventEmitter<{username: string, password: string}>();
+
   constructor(private formBuilder: FormBuilder , private http: HttpClient) {}
 
   private MustMatch(controlName: string, matchingControlName: string) {
@@ -53,6 +55,7 @@ export class LoginComponent implements OnInit {
   private isUserexists( email: string ) {
     this.http.post('http://127.0.0.1:8000/checkUser', {username: email }).subscribe(posts => {
       this.isUserexisting = posts;
+      console.log( this.isUserexisting);
     });
   }
 
@@ -68,9 +71,9 @@ export class LoginComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-        console.log('here');
+        
         this.isUserexists( this.registerForm.value.email);
-        console.log('here2');
+
         if (this.isUserexisting === true) {
           alert('Username alredy registered, please use another\n\n');
           return;
@@ -78,6 +81,8 @@ export class LoginComponent implements OnInit {
 
         // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value));
         this.registerUser(this.registerForm.value.email, this.registerForm.value.password);
+
+        this.userdata.emit({username: this.registerForm.value.email, password: this.registerForm.value.password});
           }
 
 

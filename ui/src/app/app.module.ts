@@ -10,13 +10,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import { SignupinComponent } from './signupin/signupin.component';
+import { SignupComponent } from './signupin/signup/signup.component';
+import { SigninComponent } from './signupin/signin/signin.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCardModule} from '@angular/material/card'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SignupinComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatToolbarModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSlideToggleModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
