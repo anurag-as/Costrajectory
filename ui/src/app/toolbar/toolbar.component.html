@@ -7,6 +7,10 @@
               <p>WELCOME {{userName.username.split('@',1)[0]}}</p>
       </div>
 
+      <div *ngIf="Authoriation == false">
+          <a routerLink="/" style="color:white;"><span style="color:black;" class="glyphicon glyphicon-user"></span>&nbsp; LOGIN</a>
+      </div>
+      
 
     </mat-toolbar-row>
   </mat-toolbar>
