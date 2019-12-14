@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'UI';
+  userdata: any = undefined;
+  authorizationDone = false;
+
+  private authorization(loginDetails: {username: string , password: string}) {
+    // console.log(loginDetails.username, loginDetails.password);
+    this.userdata = loginDetails;
+    console.log(this.userdata);
+    this.authorizationDone = true;
+ }
+
+
 }

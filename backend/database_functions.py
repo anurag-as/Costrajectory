@@ -42,7 +42,7 @@ def query_all_records(db_connection):
 
 # Check if a particular user exists
 def user_exists(db_connection, username):
-    cursor = db_connection.execute(f'''SELECT username FROM USERS where username = "{username}" LIMIT 1''')
+    cursor = db_connection.execute('''SELECT username FROM USERS where username = "{username}" LIMIT 1''')
     for row in cursor:
         if row:
             print('**************',row,username)

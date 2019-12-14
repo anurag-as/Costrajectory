@@ -1,2 +1,9 @@
-<app-toolbar></app-toolbar>
-<app-signupin></app-signupin>
+<app-toolbar [userName]="userdata" [Authoriation]="authorizationDone"></app-toolbar>
+
+<div *ngIf="authorizationDone == false">
+    <app-signupin (userdata)="authorization($event)"></app-signupin>
+</div>
+
+<div *ngIf="authorizationDone == true">
+    <p>SIGNED IN</p>
+</div>

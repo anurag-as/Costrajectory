@@ -2,5 +2,11 @@
     <mat-toolbar-row>
       <span>Costrajectory &copy;</span>
       <span class="example-spacer"></span>
+
+      <div *ngIf="Authoriation == true">
+              <p>WELCOME {{userName.username.split('@',1)[0]}}</p>
+      </div>
+
+
     </mat-toolbar-row>
   </mat-toolbar>
