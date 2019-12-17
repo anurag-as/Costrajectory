@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <title>Sign UP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Sign Up</h2>
+  <form method="POST" form action="/action_page.php" onsubmit="return checkForm(this);">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="username" class="form-control" id="username" placeholder="Enter email" name="username">
+    </div>
+    <div class="form-group">
+      <label for="pwd1">Password:</label>
+      <input type="password" class="form-control" id="pwd1" placeholder="Enter password" name="pwd1">
+    </div>
+	<!--<body>Password should contain atleast 1 cap Alphabet, 1 number, 1 small alphabet and minimum 6 characters</body>-->
+	<div class="form-group">
+      <label for="pwd2">Retype Password:</label>
+      <input type="password" class="form-control" id="pwd2" placeholder="Retype password" name="pwd2">
+    </div>
+	
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+  <button type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" >Submit</button>
+  <div id="demo" class="collapse">
+    Please wait till the credentials are verified
+  </div>
+  </form>
+</div>
+</div>
+
+<script type="text/javascript">
+  function checkPassword(str)
+  {
+    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    return re.test(str);
+  }
+
+  function checkForm(form)
+  {
+    if(form.username.value == "") {
+      alert("Error: Username cannot be blank!");
+      form.username.focus();
+      return false;
+    }
+    re = /^\w+$/;
+    if(!re.test(form.username.value)) {
+      alert("Error: Username must contain only letters, numbers and underscores!");
+      form.username.focus();
+      return false;
+    }
+    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
+      if(!checkPassword(form.pwd1.value)) {
+        alert("The password you have entered is not valid!");
+        form.pwd1.focus();
+        return false;
+      }
+    } else {
+      alert("Error: Please check that you've entered and confirmed your password!");
+      form.pwd1.focus();
+      return false;
+    }
+    return true;
+  }
+</script>
+
+
+
+</body>
+</html>

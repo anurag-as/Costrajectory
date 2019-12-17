@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Costrajectory &copy;</span>
+      <span class="example-spacer"></span>
+
+      <div *ngIf="Authoriation == true">
+              <p><span style="color:black;" class="glyphicon glyphicon-user"></span>&nbsp; {{userName.username.split('@',1)[0]}}</p>
+      </div>
+
+      <div *ngIf="Authoriation == false">
+          <a routerLink="/" style="color:white;"><span style="color:black;" class="glyphicon glyphicon-user"></span>&nbsp; LOGIN</a>
+      </div>
+      
+
+    </mat-toolbar-row>
+  </mat-toolbar>
