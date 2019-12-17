@@ -44,7 +44,6 @@ api.add_resource(AddUser, '/add_user/<username>/')
 @cross_origin()
 def checkUser():
 	signup = SignUp(request.json['username'])
-	#print('----------',signup.check_user())
 	return jsonify(signup.check_user())
 	
 @app.route('/registerUser',methods = ['POST'])
