@@ -1,89 +1,61 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { Output } from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthService} from './auth.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   username: any = '';
   registerForm: FormGroup;
   pwd1: any = '';
   pwd2: any = '';
   submitted = false;
-  isUserexisting: any = false;
+  allusers: any;
+  isUserexisting: any = undefined;
+  loading = false;
   @Output() userdata = new EventEmitter<{username: string, password: string}>();
 
-  constructor(private formBuilder: FormBuilder , private http: HttpClient) {}
+  constructor(private http: HttpClient, private Authserviceclient: AuthService) {}
 
-  private MustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-        const control = formGroup.controls[controlName];
-        const matchingControl = formGroup.controls[matchingControlName];
+  onSubmit(f: NgForm) {
+      if (f.value.password !== f.value.cpassword) {
+        window.alert('Password Doesnt Match, please try again');
+        return;
+      }
 
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
-            return;
-        }
+      this.loading = true;
+      this.Authserviceclient.signup(f.value.email, f.value.password).subscribe(result => {
+          // result = this.isUserexisting;
+          // console.log('FROM BASE', result);
+          // this.loading = false;
+          if (!result.available) {
+              // this.isUserexisting = result;
+              this.Authserviceclient.register(result.username, result.password).subscribe(res => {
+                // console.log('FROM BASE 2', res);
+                this.loading = false;
+                if (res.registered) {
+                  this.userdata.emit({username: res.username, password: res.password});
+                } else {
+                  window.alert('Some problem with registering, try again later!!!');
+                  this.loading = false;
+                  return;
+                }
+              });
+                } else {
+                  window.alert('USERNAME already present, choose other name');
+                  this.loading = false;
+                  return;
+                        }
+              });
 
-        // set error on matchingControl if validation fails
-        if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
-        } else {
-            matchingControl.setErrors(null);
-        }
-    };
-  }
-
-
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-  }, {
-      validator: this.MustMatch('password', 'confirmPassword')
-  });
-  }
-
-  get f() { return this.registerForm.controls; }
-
-  private isUserexists( email: string ) {
-    this.http.post('http://127.0.0.1:8000/checkUser', {username: email }).subscribe(posts => {
-      this.isUserexisting = posts;
-      console.log( this.isUserexisting);
-    });
-  }
-
-  private registerUser( email: string , enteredPassword: string) {
-    this.http.post('http://127.0.0.1:8000/registerUser', {username: email , password: enteredPassword}).subscribe(posts => {
-    });
-  }
-
-    onSubmit() {
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-        
-        this.isUserexists( this.registerForm.value.email);
-
-        if (this.isUserexisting === true) {
-          alert('Username alredy registered, please use another\n\n');
-          return;
-        }
-
-        // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value));
-        this.registerUser(this.registerForm.value.email, this.registerForm.value.password);
-
-        this.userdata.emit({username: this.registerForm.value.email, password: this.registerForm.value.password});
-          }
-
+}
 
 }
