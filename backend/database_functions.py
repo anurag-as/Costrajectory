@@ -5,6 +5,10 @@ import sqlite3
 def connection():
     db_connection = sqlite3.connect('costracjectory.db')
     db_connection.commit()
+    try:
+        create_user_table(db_connection)
+    except:
+        pass
     return db_connection
 
 
