@@ -1,4 +1,4 @@
-from backend.database_functions import *
+from backend.utilities.utils import *
 
 
 class SignIn:
