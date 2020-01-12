@@ -5,6 +5,10 @@ import sqlite3
 def connection():
     db_connection = sqlite3.connect('costracjectory.db')
     db_connection.commit()
+    try:
+        create_user_table(db_connection)
+    except:
+        pass
     return db_connection
 
 
@@ -39,6 +43,12 @@ def query_all_records(db_connection):
         print(row[1])
     db_connection.commit()
 
+def get_all_records(db_connection):
+    cursor = db_connection.execute("SELECT * FROM USERS")
+    out = [row[1] for row in cursor]
+    db_connection.commit()
+    return list(set(out))
+
 
 # Check if a particular user exists
 def user_exists(db_connection, username):
@@ -48,3 +58,7 @@ def user_exists(db_connection, username):
             print('**************',row,username)
             return True
     return False
+
+if( __name__ == '__main__'):
+    dbConnection = connection()
+    print(get_all_records(dbConnection))
