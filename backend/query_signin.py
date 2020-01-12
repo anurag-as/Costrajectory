@@ -20,6 +20,3 @@ class SignIn:
             if verify_password(hashed_password, self.password):
                 return "User successfully authenticated"
             return "Incorrect password, please try again"
-
-
-
