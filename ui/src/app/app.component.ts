@@ -21,6 +21,9 @@ export class AppComponent implements OnInit {
       console.log('NO CURRENT SESSIONS');
     } else {
       this.sessionStorageclient.getKey();
+      this.userdata = {username: 'test@t.com',password: 'test@123'};
+      // this.authorizationDone = true;
+      this.authorizationDone = false;
     }
   }
 

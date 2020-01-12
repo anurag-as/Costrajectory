@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connecting to the database
-from backend.utilities.utils import hash_password
+from utilities.utils import hash_password
 
 
 def connection():

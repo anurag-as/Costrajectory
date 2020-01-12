@@ -75,7 +75,7 @@ def signInUser():
         valid = signin.check_password()
     else:
         valid = "User does not exist"
-    return jsonify(valid)
+    return jsonify({'valid':valid})
 
 
 if __name__ == '__main__':
