@@ -1,7 +1,11 @@
 import sqlite3
+from backend.utils import *
 
 
 # Connecting to the database
+from backend.utils import hash_password
+
+
 def connection():
     db_connection = sqlite3.connect('costracjectory.db')
     db_connection.commit()
@@ -30,6 +34,7 @@ def create_user_table(db_connection):
 
 # Inserting Entry into User Table
 def insert_into_user_table(db_connection, username, password):
+    password = hash_password(password)
     db_connection.execute('''INSERT INTO USERS (username, password) VALUES ("{username}","{password}")'''
                           .format(username=username, password=password))
     print("User entry inserted into table")
@@ -43,6 +48,7 @@ def query_all_records(db_connection):
         print(row[1])
     db_connection.commit()
 
+
 def get_all_records(db_connection):
     cursor = db_connection.execute("SELECT * FROM USERS")
     out = [row[1] for row in cursor]
@@ -52,13 +58,20 @@ def get_all_records(db_connection):
 
 # Check if a particular user exists
 def user_exists(db_connection, username):
-    cursor = db_connection.execute('''SELECT username FROM USERS where username = "{username}" LIMIT 1'''.format(username=username))
+    cursor = db_connection.execute('''SELECT username FROM USERS where username = "{username}" LIMIT 1'''.
+                                   format(username=username))
     for row in cursor:
         if row:
-            print('**************',row,username)
             return True
     return False
 
-if( __name__ == '__main__'):
-    dbConnection = connection()
-    print(get_all_records(dbConnection))
+
+# function to get the hashed password for the particular user
+def get_password(db_connection, username):
+    cursor = db_connection.execute('''SELECT password FROM USERS where username = "{username}" LIMIT 1'''.
+                                   format(username=username))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False
+
