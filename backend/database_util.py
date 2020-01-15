@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 
 
+# utility function to dump database for analysis
 def to_csv():
     db = sqlite3.connect('costrajectory.db')
     cursor = db.cursor()
@@ -13,6 +14,3 @@ def to_csv():
         table.to_csv(table_name + '.csv', index_label='index')
     cursor.close()
     db.close()
-
-
-to_csv()
