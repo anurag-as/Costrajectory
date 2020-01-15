@@ -14,4 +14,5 @@ def to_csv():
     cursor.close()
     db.close()
 
+
 to_csv()

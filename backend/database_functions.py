@@ -6,7 +6,7 @@ from utilities.utils import hash_password
 
 
 def connection():
-    db_connection = sqlite3.connect('costracjectory.db')
+    db_connection = sqlite3.connect('costrajectory.db')
     db_connection.commit()
     try:
         create_user_table(db_connection)
@@ -84,5 +84,3 @@ def create_image_uploads(db_connection):
          description        TEXT    NOT NULL);''')
     print("Image Table created successfully")
     db_connection.commit()
-
-
