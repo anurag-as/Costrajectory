@@ -1,6 +1,7 @@
 import sqlite3
 
 # Connecting to the database
+import pandas as pd
 from utilities.utils import hash_password
 
 
@@ -72,4 +73,16 @@ def get_password(db_connection, username):
         if row:
             return row[0]
     return False
+
+
+# Creating the user and password table
+def create_image_uploads(db_connection):
+    db_connection.execute('''CREATE TABLE IMAGES
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         username           TEXT    NOT NULL,
+         datetime           TEXT    NOT NULL,
+         description        TEXT    NOT NULL);''')
+    print("Image Table created successfully")
+    db_connection.commit()
+
 
