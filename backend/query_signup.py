@@ -28,5 +28,11 @@ class SignUp:
             return True
         return False
 
-    def add_user_after_authentication(self):
-        insert_into_user_table(self.db, self.user, self.password)
+    def add_user_after_authentication(self):    
+        try:
+            insert_into_user_table(self.db, self.user, self.password)
+            return True
+        except:
+            return False
+
+
