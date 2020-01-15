@@ -9,9 +9,9 @@ token = 'UVXGVWSMloAAAAAAAAAAYH3ZFioGbCYRCJGNDTnYGkFy0-qmsh9AwB-BofQ14gW2'
 
 def download():
     dbx = dropbox.Dropbox(token)
-    dbx.files_download_to_file(os.getcwd().rstrip('Utilities') + 'backend\\costracjectory_downloaded.db',
-                               '/costracjectory.db')
-    print('Downloaded the db')
+    dbx.files_download_to_file(os.getcwd().rstrip("utilities") + 'costrajectory.db',
+                               '/costrajectory.db')
+    print('DB Successfully updated to remote')
 
 
 if __name__ == "__main__":

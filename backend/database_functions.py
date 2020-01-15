@@ -1,11 +1,10 @@
 import sqlite3
-
-# Connecting to the database
 from utilities.utils import hash_password
 
 
+# Connecting to the database
 def connection():
-    db_connection = sqlite3.connect('costracjectory.db')
+    db_connection = sqlite3.connect('costrajectory.db')
     db_connection.commit()
     try:
         create_user_table(db_connection)
@@ -73,3 +72,21 @@ def get_password(db_connection, username):
             return row[0]
     return False
 
+
+# Creating the user and password table
+def create_image_uploads(db_connection):
+    db_connection.execute('''CREATE TABLE IMAGES
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         username           TEXT    NOT NULL,
+         datetime           TEXT    NOT NULL,
+         description        TEXT    NOT NULL);''')
+    print("Image Table created successfully")
+    db_connection.commit()
+
+
+# function to add image upload entries into IMAGES table for query and download
+def insert_into_image_table(db_connection, username, datetime, description):
+    db_connection.execute('''INSERT INTO IMAGES (username, datetime, description) VALUES ("{username}","{datetime}",
+    "{description}")'''.format(username=username, datetime=datetime, description=description))
+    print("Image entry inserted into table")
+    db_connection.commit()
