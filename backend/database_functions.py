@@ -90,4 +90,3 @@ def insert_into_image_table(db_connection, username, datetime, description):
     "{description}")'''.format(username=username, datetime=datetime, description=description))
     print("Image entry inserted into table")
     db_connection.commit()
-
