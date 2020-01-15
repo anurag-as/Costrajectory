@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private sessionStorageclient: SessionStorage) {}
 
   ngOnInit() {
-    if(this.sessionStorageclient.hasKey() == false) {
+    if(this.sessionStorageclient.hasKey() === false) {
       this.sessionStorageclient.setKey('test','value');
       console.log('NO CURRENT SESSIONS');
     } else {
