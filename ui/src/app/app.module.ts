@@ -14,7 +14,8 @@ import { SignupinComponent } from './signupin/signupin.component';
 import { SignupComponent } from './signupin/signup/signup.component';
 import { SigninComponent } from './signupin/signin/signin.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatCardModule} from '@angular/material/card'
+import {MatCardModule} from '@angular/material/card';
+import { UploadFormComponent } from './upload-form/upload-form.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatCardModule} from '@angular/material/card'
     ToolbarComponent,
     SignupinComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    UploadFormComponent
   ],
   imports: [
     BrowserModule,
