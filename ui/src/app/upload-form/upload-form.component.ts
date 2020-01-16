@@ -17,12 +17,11 @@ export class UploadFormComponent implements OnInit {
 
   private handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
-
+    console.log(this.fileToUpload);
 }
 
  private uploadFileToActivity(f: NgForm) {
-  console.log(f.value);
-  this.uploader.postFile(this.fileToUpload).subscribe(data => {
+  this.uploader.postFile(this.fileToUpload, f).subscribe(data => {
     window.alert('FILE UPLOADED SUCCESSFULLY');
     }, error => {
       window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
