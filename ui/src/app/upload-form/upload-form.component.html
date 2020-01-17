@@ -4,17 +4,17 @@
 </mat-toolbar>
 
 <div class="col-md-6 offset-md-3">
-<form #imageForm=ngForm (ngSubmit)="uploadFileToActivity(imageForm)">
+<form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
 
-    <div class="container-fluid">
+    <div class="container-fluid"></div>
         <label>Bill name:</label>
         <input id="name" required type="text" placeholder="Enter name" ngModel name="name" class="form-control" />
 
         <label>Bill Amount:</label>
-        <input id="value" required type="number" placeholder="Enter amount" ngModel name = "value" class="form-control"/>
+        <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control"/>
 
         <label>File:</label>
-        <input id="file-input" type="file" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" ngModel name = "filename"/>
+        <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill"/>
         
         <button type="submit" class="btn-large btn-submit" [disabled]="Image.value=='' || !imageForm.valid"><i
                 class="material-icons">save</i></button>
