@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {HttpParams} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 interface Status {
     UploadStatus: boolean;
@@ -16,7 +17,7 @@ export class UploadService {
     postFile(fileToUpload: File, f: NgForm) {
         console.log(f.value, fileToUpload.name);
         const endpoint = 'http://127.0.0.1:8000/test';
-        const formData: FormData = new FormData();
+        let formData: FormData = new FormData();
         formData.append('fileKey', fileToUpload, fileToUpload.name);
         // formData.append('body', f.value);
         

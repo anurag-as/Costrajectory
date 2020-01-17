@@ -16,6 +16,7 @@ import { SigninComponent } from './signupin/signin/signin.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card'
 import {UploadFormComponent} from './upload-form/upload-form.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {UploadFormComponent} from './upload-form/upload-form.component';
     HttpModule,
     HttpClientModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    FileSelectDirective
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -23,6 +23,7 @@ def test():
     # time.sleep(5)
     print(request)
     print(request.view_args)
+    print(request.form)
     return(jsonify(True))
 
 
