@@ -3,6 +3,7 @@
 import dropbox
 import os
 from dropbox.files import WriteMode
+import base64
 
 token = 'UVXGVWSMloAAAAAAAAAAYH3ZFioGbCYRCJGNDTnYGkFy0-qmsh9AwB-BofQ14gW2'
 
@@ -13,6 +14,11 @@ def upload():
     f = open(file_name, 'rb')
     dbx.files_upload(f.read(), '/costrajectory.db', mode=WriteMode('overwrite'))
     print('Remote database updated successfully.')
+
+def uploadFile(file,file_name):
+    dbx = dropbox.Dropbox(token)
+    dbx.files_upload(file.read(),"/"+file_name, mode=WriteMode('overwrite'))
+    print(file_name + 'Uploaded')
 
 
 if __name__ == "__main__":

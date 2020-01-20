@@ -10,6 +10,8 @@ from query_signin import *
 from flask_cors import CORS, cross_origin
 import database_functions
 import time
+from utilities.upload import *
+import os
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -77,6 +79,17 @@ def signInUser():
         valid = "User does not exist"
     return jsonify({'valid':valid})
 
+@app.route('/uploadBill', methods=['POST'])
+@cross_origin()
+def upload():
+    if 'file' not in request.files:
+        return jsonify({'uploadStatus': False})
+    file = request.files['file']
+    fileName = file.filename
+    fileExtension = fileName.split('.')[-1]
+    fileName = str(time.time()) + '.' + fileExtension
+    uploadFile(file, fileName)
+    return jsonify({'uploadStatus':True})
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
