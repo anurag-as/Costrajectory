@@ -4,7 +4,7 @@ import pandas as pd
 
 # utility function to dump database for analysis
 def to_csv():
-    db = sqlite3.connect('costrajectory.db')
+    db = sqlite3.connect('..//costrajectory.db')
     cursor = db.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = cursor.fetchall()
