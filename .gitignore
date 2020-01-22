@@ -44,3 +44,4 @@ Thumbs.db
 backend/__pycache__/
 ui/node_modules/
 backend/costracjectory.db
+backend/utilities/__pycache__/
