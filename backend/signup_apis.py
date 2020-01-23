@@ -87,8 +87,10 @@ def upload():
     file = request.files['image']
     fileName = file.filename
     fileExtension = fileName.split('.')[-1]
-    fileName = str(time.time()) + '.' + fileExtension
+    presentTime = str(time.time())
+    fileName = presentTime + '.' + fileExtension
     uploadFile(file, fileName)
+    database_functions.insert_into_image_table(database_functions.connection(),request.form['username'],presentTime,request.form['description'])
     return jsonify({'uploadStatus':True})
 
 if __name__ == '__main__':
