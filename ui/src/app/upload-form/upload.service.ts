@@ -15,10 +15,10 @@ export class UploadService {
 
     postFile(fileToUpload: File, f: NgForm) {
         console.log(f.value, fileToUpload.name);
-        const endpoint = 'http://127.0.0.1:8000/test';
+        const endpoint = 'http://127.0.0.1:5000/uploadBill';
         const formData: FormData = new FormData();
-        formData.append('fileKey', fileToUpload, fileToUpload.name);
-        // formData.append('body', f.value);
+        // formData.append('body', fileToUpload, fileToUpload.name);
+        formData.append('image', fileToUpload, fileToUpload.name);
         
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'multipart/form-data');
