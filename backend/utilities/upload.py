@@ -3,7 +3,6 @@
 import dropbox
 import os
 from dropbox.files import WriteMode
-import base64
 
 token = 'UVXGVWSMloAAAAAAAAAAYH3ZFioGbCYRCJGNDTnYGkFy0-qmsh9AwB-BofQ14gW2'
 
