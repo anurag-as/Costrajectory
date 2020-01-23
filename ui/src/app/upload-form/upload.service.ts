@@ -15,7 +15,7 @@ export class UploadService {
 
     postFile(fileToUpload: File, f: NgForm) {
         console.log(f.value, fileToUpload.name);
-        const endpoint = 'http://127.0.0.1:8000/test';
+        const endpoint = 'http://127.0.0.1:5000/uploadBill';
         const formData: FormData = new FormData();
         // formData.append('body', fileToUpload, fileToUpload.name);
         formData.append('image', fileToUpload, fileToUpload.name);

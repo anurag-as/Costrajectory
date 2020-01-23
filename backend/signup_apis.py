@@ -82,9 +82,9 @@ def signInUser():
 @app.route('/uploadBill', methods=['POST'])
 @cross_origin()
 def upload():
-    if 'file' not in request.files:
+    if 'image' not in request.files:
         return jsonify({'uploadStatus': False})
-    file = request.files['file']
+    file = request.files['image']
     fileName = file.filename
     fileExtension = fileName.split('.')[-1]
     fileName = str(time.time()) + '.' + fileExtension
