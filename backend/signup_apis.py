@@ -8,10 +8,13 @@ from flask import jsonify
 from query_signup import *
 from query_signin import *
 from flask_cors import CORS, cross_origin
-import database_functions
+from database_functions import *
 import time
 from utilities.upload import *
 import os
+
+from backend.database_functions import insert_into_token_table, connection, get_datetime_token
+from backend.utilities.utils import generate_token
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -67,6 +70,30 @@ def registerUser():
     return x
 
 
+def check_validity_token(username, token):
+    """
+    Function to check validity of a token
+    :param username: Username
+    :param token: Token
+    :return: Validity of a token
+    """
+    db = connection()
+    date_time = get_datetime_token(db, username, token)
+    present_time = time.time()
+    timeout = 120 # seconds
+    return int(present_time - date_time) < timeout
+
+
+@app.route('/checkValidity', methods=['POST'])
+@cross_origin()
+def checkValid():
+    username = request.json['username']
+    token = request.json['token']
+    valid = check_validity_token(username, token)
+    x = jsonify({'valid': valid})
+    return x
+
+
 @app.route('/signin', methods=['POST'])
 @cross_origin()
 def signInUser():
@@ -79,6 +106,9 @@ def signInUser():
         valid = "User does not exist"
     if valid == "User successfully authenticated":
         token = generate_token()
+        db = connection()
+        presentTime = str(time.time())
+        insert_into_token_table(db, username, presentTime, token)
     else:
         token = False
     return jsonify({'valid': valid, 'token': token, 'username': username})
@@ -95,7 +125,8 @@ def upload():
     presentTime = str(time.time())
     fileName = presentTime + '.' + fileExtension
     uploadFile(file, fileName)
-    database_functions.insert_into_image_table(database_functions.connection(),request.form['username'],presentTime,request.form['description'])
+    database_functions.insert_into_image_table(database_functions.connection(), request.form['username'],
+                                               presentTime, request.form['description'])
     return jsonify({'uploadStatus':True})
 
 if __name__ == '__main__':
