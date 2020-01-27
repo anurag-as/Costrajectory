@@ -15,7 +15,10 @@ import { SignupComponent } from './signupin/signup/signup.component';
 import { SigninComponent } from './signupin/signin/signin.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
-import { UploadFormComponent } from './upload-form/upload-form.component'
+import { UploadFormComponent } from './upload-form/upload-form.component';
+import { IconbarComponent } from './upload-form/iconbar/iconbar.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddBillsComponent } from './upload-form/add-bills/add-bills.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { UploadFormComponent } from './upload-form/upload-form.component'
     SignupinComponent,
     SignupComponent,
     SigninComponent,
-    UploadFormComponent
+    UploadFormComponent,
+    IconbarComponent,
+    AddBillsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,12 +42,14 @@ import { UploadFormComponent } from './upload-form/upload-form.component'
     HttpModule,
     HttpClientModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
-  ]
+  ],
+  entryComponents: [AddBillsComponent],
 })
 export class AppModule { }

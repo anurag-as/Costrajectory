@@ -77,7 +77,12 @@ def signInUser():
         valid = signin.check_password()
     else:
         valid = "User does not exist"
-    return jsonify({'valid':valid})
+    if valid == "User successfully authenticated":
+        token = generate_token()
+    else:
+        token = False
+    return jsonify({'valid': valid, 'token': token, 'username': username})
+
 
 @app.route('/uploadBill', methods=['POST'])
 @cross_origin()
@@ -87,8 +92,10 @@ def upload():
     file = request.files['image']
     fileName = file.filename
     fileExtension = fileName.split('.')[-1]
-    fileName = str(time.time()) + '.' + fileExtension
+    presentTime = str(time.time())
+    fileName = presentTime + '.' + fileExtension
     uploadFile(file, fileName)
+    database_functions.insert_into_image_table(database_functions.connection(),request.form['username'],presentTime,request.form['description'])
     return jsonify({'uploadStatus':True})
 
 if __name__ == '__main__':
