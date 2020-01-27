@@ -84,13 +84,13 @@ def check_validity_token(username, token):
     return int(present_time - date_time) < timeout
 
 
-@app.route('/checkValidity', methods=['GET'])
+@app.route('/checkValidity', methods=['POST'])
 @cross_origin()
 def checkValid():
     username = request.json['username']
     token = request.json['token']
     valid = check_validity_token(username, token)
-    x = jsonify({'valid':valid})
+    x = jsonify({'valid': valid})
     return x
 
 
