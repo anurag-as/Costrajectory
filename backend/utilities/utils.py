@@ -1,6 +1,7 @@
 import binascii
 import hashlib
 import os
+import random
 
 
 def hash_password(password):
@@ -22,3 +23,20 @@ def verify_password(stored_password, provided_password):
                                   100000)
     pwdhash = binascii.hexlify(pwdhash).decode('ascii')
     return pwdhash == stored_password
+
+
+def token():
+    """
+    Function to get a token
+    :return: Token yield seed
+    """
+    seed = random.getrandbits(64)
+    yield seed
+
+
+def generate_token():
+    """
+    Function to generate a unique token
+    :return: Token
+    """
+    return list(token())[0]

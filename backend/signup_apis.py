@@ -77,7 +77,12 @@ def signInUser():
         valid = signin.check_password()
     else:
         valid = "User does not exist"
-    return jsonify({'valid':valid})
+    if valid == "User successfully authenticated":
+        token = generate_token()
+    else:
+        token = False
+    return jsonify({'valid': valid, 'token': token, 'username': username})
+
 
 @app.route('/uploadBill', methods=['POST'])
 @cross_origin()
