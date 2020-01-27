@@ -111,7 +111,6 @@ def insert_into_token_table(db_connection, username, datetime, token):
     db_connection.commit()
 
 
-
 # function to get the hashed password for the particular user
 def get_datetime_token(db_connection, username, token):
     cursor = db_connection.execute('''SELECT datetime FROM TOKEN where username = "{username}" AND token = "{token}"
@@ -120,3 +119,5 @@ def get_datetime_token(db_connection, username, token):
         if row:
             return row[0]
     return False
+
+# TODO Session key for Signup
