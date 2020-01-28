@@ -12,6 +12,7 @@ interface Result {
     username: string;
     password: string;
     registered: boolean;
+    token: string;
 }
 
 @Injectable({providedIn : 'root'} )
