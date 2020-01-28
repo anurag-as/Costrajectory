@@ -129,10 +129,11 @@ def upload():
     presentTime = str(time.time())
     fileName = presentTime + '.' + fileExtension
     uploadFile(file, fileName)
-    database_functions.insert_into_image_table(database_functions.connection(), request.form['username'],
-                                               presentTime, request.form['description'])
-    return jsonify({'uploadStatus': True})
+    insert_into_image_table(connection(), request.form['username'],
+                                               fileName, request.form['description'])
+    return jsonify({'uploadStatus':True})
 
 
 if __name__ == '__main__':
+    download()
     app.run(port=5000, debug=True)
