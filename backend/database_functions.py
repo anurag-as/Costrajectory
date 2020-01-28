@@ -47,7 +47,7 @@ def query_all_records(db_connection):
 
 
 def get_all_records(db_connection):
-    cursor = db_connection.execute("SELECT * FROM USERS")
+    cursor = db_connection.execute("SELECT * FROM TOKENS")
     out = [row[1] for row in cursor]
     db_connection.commit()
     return list(set(out))
@@ -113,11 +113,10 @@ def insert_into_token_table(db_connection, username, datetime, token):
 
 # function to get the hashed password for the particular user
 def get_datetime_token(db_connection, username, token):
-    cursor = db_connection.execute('''SELECT datetime FROM TOKEN where username = "{username}" AND token = "{token}"
+    cursor = db_connection.execute('''SELECT datetime FROM TOKENS where username = "{username}" AND token = "{token}"
     LIMIT 1'''.format(username=username, token=token))
     for row in cursor:
         if row:
             return row[0]
     return False
 
-# TODO Session key for Signup
