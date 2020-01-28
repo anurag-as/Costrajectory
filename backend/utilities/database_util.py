@@ -14,3 +14,6 @@ def to_csv():
         table.to_csv(table_name + '.csv', index_label='index')
     cursor.close()
     db.close()
+
+
+to_csv()
