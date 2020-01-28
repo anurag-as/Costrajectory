@@ -39,4 +39,4 @@ def generate_token():
     Function to generate a unique token
     :return: Token
     """
-    return list(token())[0]
+    return str(list(token())[0])

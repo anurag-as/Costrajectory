@@ -65,9 +65,15 @@ def registerUser():
     username = request.json['username']
     password = request.json['password']
     signup = SignUp(username, password)
-
+    registered = signup.add_user_after_authentication()
+    token = False
+    if registered:
+        token = str(generate_token())
+        db = connection()
+        presentTime = str(time.time())
+        insert_into_token_table(db, username, presentTime, token)
     x = jsonify({'username': request.json['username'], 'password': request.json['password'],
-                 'registered': signup.add_user_after_authentication()})
+                 'registered': registered, 'token': token})
     return x
 
 
@@ -82,7 +88,7 @@ def check_validity_token(username, token):
     date_time = get_datetime_token(db, username, token)
     present_time = time.time()
     timeout = 120 # seconds
-    return int(present_time - date_time) < timeout
+    return float(present_time) - float(date_time) < timeout
 
 
 @app.route('/checkValidity', methods=['POST'])
@@ -106,7 +112,7 @@ def signInUser():
     else:
         valid = "User does not exist"
     if valid == "User successfully authenticated":
-        token = generate_token()
+        token = str(generate_token())
         db = connection()
         presentTime = str(time.time())
         insert_into_token_table(db, username, presentTime, token)
