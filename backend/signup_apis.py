@@ -11,6 +11,7 @@ from flask_cors import CORS, cross_origin
 from database_functions import *
 import time
 from utilities.upload import *
+from utilities.download import *
 import os
 
 from backend.database_functions import insert_into_token_table, connection, get_datetime_token
@@ -125,9 +126,10 @@ def upload():
     presentTime = str(time.time())
     fileName = presentTime + '.' + fileExtension
     uploadFile(file, fileName)
-    database_functions.insert_into_image_table(database_functions.connection(), request.form['username'],
-                                               presentTime, request.form['description'])
+    insert_into_image_table(connection(), request.form['username'],
+                                               fileName, request.form['description'])
     return jsonify({'uploadStatus':True})
 
 if __name__ == '__main__':
+    download()
     app.run(port=5000, debug=True)
