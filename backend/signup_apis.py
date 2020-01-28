@@ -14,8 +14,6 @@ from utilities.upload import *
 from utilities.download import *
 import os
 
-from backend.database_functions import insert_into_token_table, connection, get_datetime_token
-from backend.utilities.utils import generate_token
 
 app = Flask(__name__)
 cors = CORS(app)
