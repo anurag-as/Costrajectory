@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { Output } from '@angular/core';
 import {AuthService} from './signinauth.service';
+import { SessionStorage } from '../../app.session';
 
 @Component({
   selector: 'app-signin',
@@ -14,7 +15,8 @@ export class SigninComponent implements OnInit {
   registerForm: FormGroup;
   @Output() userdata = new EventEmitter<{username: string, password: string}>();
   submitted = false;
-  constructor(private formBuilder: FormBuilder , private http: HttpClient, private Authserviceclient: AuthService) { }
+  constructor(private formBuilder: FormBuilder , private http: HttpClient, private Authserviceclient: AuthService,
+              private sessionKey: SessionStorage ) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -31,23 +33,24 @@ export class SigninComponent implements OnInit {
       return;
   }
 
-  this.Authserviceclient.signin(this.registerForm.value.email, this.registerForm.value.password).subscribe(result => {
-    if(result.valid === 'User successfully authenticated') {
-      this.userdata.emit({username: this.registerForm.value.email, password: this.registerForm.value.password});
-    } else if(result.valid === 'User does not exist') {
+    this.Authserviceclient.signin(this.registerForm.value.email, this.registerForm.value.password).subscribe(result => {
+  if (result.valid === 'User successfully authenticated') {
+    this.sessionKey.setKey(result.token, this.registerForm.value.email);
+    this.userdata.emit({username: this.registerForm.value.email, password: this.registerForm.value.password});
+    } else if (result.valid === 'User does not exist') {
       window.alert('No record of such username, please register');
       return ;
-    } else if(result.valid === 'Incorrect password, please try again') {
+    } else if (result.valid === 'Incorrect password, please try again') {
       window.alert('Incorrect username or password');
       return ;
     } else {
       window.alert('SORRY!!! Some error has occured, please try again');
       return ;
     }
-    
-  })
-    
-  
+
+  });
+
+
 }
 
 }

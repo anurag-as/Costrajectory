@@ -6,6 +6,7 @@ import { Output } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from './auth.service';
 import { mergeMap } from 'rxjs/operators';
+import { SessionStorage } from '../../app.session';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,7 @@ export class SignupComponent {
   loading = false;
   @Output() userdata = new EventEmitter<{username: string, password: string}>();
 
-  constructor(private http: HttpClient, private Authserviceclient: AuthService) {}
+  constructor(private http: HttpClient, private Authserviceclient: AuthService, private sessionKey: SessionStorage) {}
 
   onSubmit(f: NgForm) {
       if (f.value.password !== f.value.cpassword) {
@@ -42,6 +43,7 @@ export class SignupComponent {
                 // console.log('FROM BASE 2', res);
                 this.loading = false;
                 if (res.registered) {
+                  this.sessionKey.setKey(res.token, res.username);
                   this.userdata.emit({username: res.username, password: res.password});
                 } else {
                   window.alert('Some problem with registering, try again later!!!');

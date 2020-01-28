@@ -5,6 +5,8 @@ import { mergeMap } from 'rxjs/operators';
 
 interface Result {
     valid: string;
+    token: string;
+    username: string;
 }
 
 @Injectable({providedIn : 'root'} )
