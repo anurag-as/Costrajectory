@@ -11,9 +11,10 @@ def to_csv():
     for table_name in tables:
         table_name = table_name[0]
         table = pd.read_sql_query("SELECT * from %s" % table_name, db)
-        table.to_csv(table_name + '.csv', index_label='index')
+        table.to_csv("./downloads/" + table_name + '.csv', index_label='index')
     cursor.close()
     db.close()
 
 
-to_csv()
+if __name__ == "__main__":
+    to_csv()

@@ -43,5 +43,7 @@ testem.log
 Thumbs.db
 backend/__pycache__/
 ui/node_modules/
-backend/costracjectory.db
+backend/costrajectory.db
 backend/utilities/__pycache__/
+backend/utilities/downloads/
+config.yml
