@@ -10,7 +10,8 @@ from query_signin import *
 from flask_cors import CORS, cross_origin
 from database_functions import *
 import time
-from utilities import *
+from utilities.download import *
+from utilities.upload import *
 import os
 
 
