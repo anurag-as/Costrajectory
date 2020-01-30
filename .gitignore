@@ -46,3 +46,4 @@ ui/node_modules/
 backend/costrajectory.db
 backend/utilities/__pycache__/
 backend/utilities/downloads/
+config.yml
