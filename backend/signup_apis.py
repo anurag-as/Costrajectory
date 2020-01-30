@@ -10,12 +10,10 @@ from query_signin import *
 from flask_cors import CORS, cross_origin
 from database_functions import *
 import time
-from utilities.upload import *
 from utilities.download import *
+from utilities.upload import *
 import os
 
-from backend.database_functions import insert_into_token_table, connection, get_datetime_token
-from backend.utilities.utils import generate_token
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -135,6 +133,7 @@ def upload():
     insert_into_image_table(connection(), request.form['username'],
                                                fileName, request.form['description'])
     return jsonify({'uploadStatus':True})
+
 
 if __name__ == '__main__':
     download()
