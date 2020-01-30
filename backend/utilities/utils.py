@@ -40,3 +40,14 @@ def generate_token():
     :return: Token
     """
     return str(list(token())[0])
+
+
+def get_root_directory():
+    """
+    Function to get root directory"
+    """
+    current_dir = os.getcwd()
+    splits = current_dir.split("\\")
+    index = splits.index("costrajectory")
+    root_directory = "\\".join(splits[:index+1]) + "\\"
+    return root_directory
