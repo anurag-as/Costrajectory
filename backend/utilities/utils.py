@@ -48,6 +48,7 @@ def get_root_directory():
     """
     current_dir = os.getcwd()
     splits = current_dir.split("\\")
-    index = splits.index("costrajectory")
+    #index = splits.rindex("costrajectory")
+    index = len(splits) - splits[-1::-1].index("costrajectory") - 1
     root_directory = "\\".join(splits[:index+1]) + "\\"
     return root_directory
