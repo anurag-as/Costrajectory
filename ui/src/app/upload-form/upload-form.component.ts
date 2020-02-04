@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from './upload.service';
 import {NgForm} from '@angular/forms';
-import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-upload-form',
@@ -10,7 +9,6 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class UploadFormComponent implements OnInit {
   fileToUpload: File = null;
-  public uploader2: FileUploader = new FileUploader({url: 'http://127.0.0.1:8000/test', itemAlias: 'photo'});
   constructor(private uploader: UploadService) { }
 
   ngOnInit() {

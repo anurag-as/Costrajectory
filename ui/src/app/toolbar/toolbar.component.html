@@ -4,12 +4,20 @@
       <span class="example-spacer"></span>
 
       <div *ngIf="Authoriation == true">
-              <p><span style="color:black;" class="glyphicon glyphicon-user"></span>&nbsp; {{userName.username.split('@',1)[0]}}</p>
+        <!--
+              <p><span style="color:black;" class="fa fa-user fa-lg" aria-hidden="true"></span>&nbsp; {{userName.username.split('@',1)[0]}}</p> -->
+              <p style="padding-top: 20px;">
+                 {{userName.username.split('@',1)[0]}}
+                <button style="color:white;width:2px;" class="btn btn-link"><i class="fa fa-user fa-2x" aria-hidden="true" style="color:black;"></i></button>
+                &nbsp;
+                <button href="#" style="color:transparent;width:2px;" title="Logout" (click) = "LogOut()" class="btn btn-link"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color:red;"></i></button>
+              </p>
       </div>
 
       <div *ngIf="Authoriation == false">
-          <a routerLink="/" style="color:white;"><span style="color:black;" class="glyphicon glyphicon-user"></span>&nbsp; LOGIN</a>
+          <a routerLink="/" style="color:white;"><span style="color:black;" class="fa fa-user fa-lg" aria-hidden="true"></span>&nbsp; LOGIN</a>
       </div>
       
     </mat-toolbar-row>
   </mat-toolbar>
+
