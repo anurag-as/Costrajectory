@@ -19,6 +19,12 @@ import { UploadFormComponent } from './upload-form/upload-form.component';
 import { IconbarComponent } from './upload-form/iconbar/iconbar.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddBillsComponent } from './upload-form/add-bills/add-bills.component';
+import { LogoutComponent } from './logout/logout.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
+
 
 @NgModule({
   declarations: [
@@ -30,7 +36,8 @@ import { AddBillsComponent } from './upload-form/add-bills/add-bills.component';
     SigninComponent,
     UploadFormComponent,
     IconbarComponent,
-    AddBillsComponent
+    AddBillsComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +51,10 @@ import { AddBillsComponent } from './upload-form/add-bills/add-bills.component';
     MatSlideToggleModule,
     MatCardModule,
     MatDialogModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

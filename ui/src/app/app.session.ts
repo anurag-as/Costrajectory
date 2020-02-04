@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
+import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {NgZone} from '@angular/core';
 
 interface TokenValidity {
     valid: boolean;
@@ -7,7 +9,7 @@ interface TokenValidity {
 
 @Injectable({providedIn : 'root'} )
 export class SessionStorage {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private Route:Router, private ngZone:NgZone) {}
     hasKey() {
         if (sessionStorage.length > 0) {
             return true;
@@ -38,6 +40,8 @@ export class SessionStorage {
     deleteKey() {
         console.log('DELETED THE KEY');
         sessionStorage.clear();
+        // this.Route.navigate(['/logout']);
+        // this.ngZone.run(() => this.Route.navigateByUrl('login'));
     }
 
     ValidateToken(Token: string, Username: string) {
