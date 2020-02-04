@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from './upload.service';
 import {NgForm} from '@angular/forms';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-upload-form',
@@ -9,6 +10,7 @@ import {NgForm} from '@angular/forms';
 })
 export class UploadFormComponent implements OnInit {
   fileToUpload: File = null;
+  @Input() userName;
   constructor(private uploader: UploadService) { }
 
   ngOnInit() {
@@ -18,18 +20,6 @@ export class UploadFormComponent implements OnInit {
     this.fileToUpload = files.item(0);
     console.log(this.fileToUpload);
 }
-
-
- private uploadFileToActivity(f: NgForm) {
-  this.uploader.postFile(this.fileToUpload, f).subscribe(data => {
-    window.alert('FILE UPLOADED SUCCESSFULLY');
-    }, error => {
-      window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
-    });
-}
-
-
-
 
 
 }

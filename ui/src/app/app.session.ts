@@ -11,7 +11,7 @@ interface TokenValidity {
 export class SessionStorage {
     constructor(private http: HttpClient, private Route:Router, private ngZone:NgZone) {}
     hasKey() {
-        if (sessionStorage.length > 0) {
+        if (localStorage.length > 0) {
             return true;
         } else {
             return false;
@@ -19,10 +19,10 @@ export class SessionStorage {
     }
 
     getKey() {
-        if (sessionStorage.length > 0) {
-            for (let i = 0; i < sessionStorage.length; i++) {
-                const token = sessionStorage.key(i);
-                const value = sessionStorage.getItem(token);
+        if (localStorage.length > 0) {
+            for (let i = 0; i < localStorage.length; i++) {
+                const token = localStorage.key(i);
+                const value = localStorage.getItem(token);
                 console.log('GOT THE KEY');
                 return ({key : token, username : value});
               }
@@ -33,13 +33,13 @@ export class SessionStorage {
 
     setKey(token: string, username: string) {
         const key = token;
-        sessionStorage.setItem(key, username);
+        localStorage.setItem(key, username);
         console.log('SET THE KEY ', token, username);
     }
 
     deleteKey() {
         console.log('DELETED THE KEY');
-        sessionStorage.clear();
+        localStorage.clear();
         // this.Route.navigate(['/logout']);
         // this.ngZone.run(() => this.Route.navigateByUrl('login'));
     }

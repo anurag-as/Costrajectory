@@ -2,11 +2,14 @@
     <form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
     
         <div class="container-fluid">
-            <label>Bill name test:</label>
+            <label>Bill name :</label>
             <input id="name" required type="text" placeholder="Enter name" ngModel name="name" class="form-control" />
     
             <label>Bill Amount:</label>
             <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control"/>
+
+            <label>Description:</label>
+            <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control"/>
     
             <label>File:</label>
             <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill"/>
