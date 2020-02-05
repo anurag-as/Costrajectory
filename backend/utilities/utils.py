@@ -1,6 +1,7 @@
 import binascii
 import hashlib
 import os
+import random
 
 
 def hash_password(password):
@@ -22,3 +23,32 @@ def verify_password(stored_password, provided_password):
                                   100000)
     pwdhash = binascii.hexlify(pwdhash).decode('ascii')
     return pwdhash == stored_password
+
+
+def token():
+    """
+    Function to get a token
+    :return: Token yield seed
+    """
+    seed = random.getrandbits(64)
+    yield seed
+
+
+def generate_token():
+    """
+    Function to generate a unique token
+    :return: Token
+    """
+    return str(list(token())[0])
+
+
+def get_root_directory():
+    """
+    Function to get root directory"
+    """
+    current_dir = os.getcwd()
+    splits = current_dir.split("\\")
+    #index = splits.rindex("costrajectory")
+    index = len(splits) - splits[-1::-1].index("costrajectory") - 1
+    root_directory = "\\".join(splits[:index+1]) + "\\"
+    return root_directory

@@ -2,16 +2,29 @@
 
 import dropbox
 import os
+import yaml
 from dropbox.files import WriteMode
+from utilities.utils import *
 
-token = 'UVXGVWSMloAAAAAAAAAAYH3ZFioGbCYRCJGNDTnYGkFy0-qmsh9AwB-BofQ14gW2'
+root_directory = get_root_directory()
+
+with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
+    cfg = yaml.load(ymlfile,yaml.SafeLoader)
+
+token = cfg['token']['dropbox']
 
 
 def download():
     dbx = dropbox.Dropbox(token)
-    dbx.files_download_to_file(os.getcwd().rstrip('Utilities') + 'backend\\costracjectory_downloaded.db',
-                               '/costracjectory.db')
-    print('Downloaded the db')
+    if cfg['environment']['host'] == 'linux':
+        print("Linux Environment")
+        dbx.files_download_to_file(os.getcwd().rstrip("utilities") + 'costrajectory.db',
+                               '/costrajectory.db')
+    else:
+        print("Windows Environment")
+        dbx.files_download_to_file(os.getcwd() + '\\costrajectory.db',
+                                   '/costrajectory.db')
+    print('DB Successfully updated to remote')
 
 
 if __name__ == "__main__":

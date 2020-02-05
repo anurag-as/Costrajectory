@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionStorage } from './app.session';
 
+interface TokenData {
+  key: string ;
+  username: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -12,16 +16,30 @@ export class AppComponent implements OnInit {
   userdata: any = undefined;
   authorizationDone = false;
   hasKey = false;
+  userTokenData: TokenData;
 
   constructor(private sessionStorageclient: SessionStorage) {}
 
   ngOnInit() {
-    if(this.sessionStorageclient.hasKey() == false) {
-      this.sessionStorageclient.setKey('test','value');
+    if (this.sessionStorageclient.hasKey() === false) {
+      // this.sessionStorageclient.setKey('test', 'value');
       console.log('NO CURRENT SESSIONS');
     } else {
-      this.sessionStorageclient.getKey();
-      this.userdata = {username: 'test@t.com',password: 'test@123'};
+      this.userTokenData = this.sessionStorageclient.getKey();
+      this.sessionStorageclient.ValidateToken(this.userTokenData.key, this.userTokenData.username).subscribe(
+        res => {
+          // res.validity = true;
+          this.userdata = {username: this.userTokenData.username};
+          console.log(',,,,', res);
+          if (res.valid) {
+            console.log('TOKEN AUTHENTICATED');
+            this.authorizationDone = true;
+          } else {
+            return;
+          }
+        }
+      );
+      // this.userdata = {username: 'test@t.com'};
       // this.authorizationDone = true;
       this.authorizationDone = false;
     }

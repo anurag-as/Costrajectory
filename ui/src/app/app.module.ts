@@ -14,7 +14,17 @@ import { SignupinComponent } from './signupin/signupin.component';
 import { SignupComponent } from './signupin/signup/signup.component';
 import { SigninComponent } from './signupin/signin/signin.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatCardModule} from '@angular/material/card'
+import {MatCardModule} from '@angular/material/card';
+import { UploadFormComponent } from './upload-form/upload-form.component';
+import { IconbarComponent } from './upload-form/iconbar/iconbar.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddBillsComponent } from './upload-form/add-bills/add-bills.component';
+import { LogoutComponent } from './logout/logout.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
+
 
 @NgModule({
   declarations: [
@@ -23,7 +33,11 @@ import {MatCardModule} from '@angular/material/card'
     ToolbarComponent,
     SignupinComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    UploadFormComponent,
+    IconbarComponent,
+    AddBillsComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -35,12 +49,18 @@ import {MatCardModule} from '@angular/material/card'
     HttpModule,
     HttpClientModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
-  ]
+  ],
+  entryComponents: [AddBillsComponent],
 })
 export class AppModule { }
