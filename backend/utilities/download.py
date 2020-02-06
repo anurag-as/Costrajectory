@@ -9,7 +9,7 @@ from utilities.utils import *
 root_directory = get_root_directory()
 
 with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
-    cfg = yaml.load(ymlfile,yaml.SafeLoader)
+    cfg = yaml.load(ymlfile, yaml.SafeLoader)
 
 token = cfg['token']['dropbox']
 

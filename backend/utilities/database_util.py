@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-
+import os
 
 # utility function to dump database for analysis
 def to_csv():
@@ -11,7 +11,11 @@ def to_csv():
     for table_name in tables:
         table_name = table_name[0]
         table = pd.read_sql_query("SELECT * from %s" % table_name, db)
-        table.to_csv("./downloads/" + table_name + '.csv', index_label='index')
+        try:
+            table.to_csv(".//downloads//" + table_name + '.csv', index_label='index')
+        except FileNotFoundError:
+            os.mkdir(os.path.join(os.getcwd(), "downloads"))
+            table.to_csv("./downloads/" + table_name + '.csv', index_label='index')
     cursor.close()
     db.close()
 
