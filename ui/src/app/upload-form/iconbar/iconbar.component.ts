@@ -17,7 +17,7 @@ export class IconbarComponent implements OnInit {
 
   addBill(): void {
     const dialogRef = this.dialog.open(AddBillsComponent, {
-      width: '800px'
+      width: '1300px'
     });
     dialogRef.componentInstance.username = this.userName;
 

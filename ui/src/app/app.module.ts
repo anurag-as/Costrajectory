@@ -23,6 +23,7 @@ import { LogoutComponent } from './logout/logout.component';
 import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
 
 
 
@@ -37,7 +38,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     UploadFormComponent,
     IconbarComponent,
     AddBillsComponent,
-    LogoutComponent
+    LogoutComponent,
+    TabularViewComponent
   ],
   imports: [
     BrowserModule,
