@@ -15,9 +15,9 @@ def upload():
     print('Remote database updated successfully.')
 
 
-def uploadFile(file,file_name):
+def uploadFile(file, file_name):
     dbx = dropbox.Dropbox(token)
-    dbx.files_upload(file.read(),"/"+file_name, mode=WriteMode('overwrite'))
+    dbx.files_upload(file.read(), "/"+file_name, mode=WriteMode('overwrite'))
     print(file_name + 'Uploaded')
 
 

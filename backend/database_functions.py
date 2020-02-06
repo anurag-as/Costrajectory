@@ -120,3 +120,14 @@ def get_datetime_token(db_connection, username, token):
             return row[0]
     return False
 
+
+# function to map the file name and image name
+def create_image_mapping_table(db_connection):
+    db_connection.execute('''CREATE TABLE TOKENS
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         username           TEXT    NOT NULL,
+         original_name           TEXT    NOT NULL,
+         mapped_name        TEXT    NOT NULL);''')
+    print("Image mapping Table created successfully")
+    db_connection.commit()
+
