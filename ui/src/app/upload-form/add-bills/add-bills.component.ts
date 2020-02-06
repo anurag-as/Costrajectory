@@ -15,6 +15,7 @@ export class AddBillsComponent implements OnInit {
   currentDate;
   datetoday = new Date();
   imageSrc;
+  uploading = 'not started';
 
   constructor(private uploader: UploadService, private router: Router) {}
 
@@ -34,10 +35,13 @@ export class AddBillsComponent implements OnInit {
 }
 
  private uploadFileToActivity(f: NgForm) {
-  this.uploader.postFile(this.fileToUpload, f, this.username).subscribe(data => {
-    window.alert('FILE UPLOADED SUCCESSFULLY');
+   this.uploading = 'started';
+   this.uploader.postFile(this.fileToUpload, f, this.username).subscribe(data => {
+    this.uploading = 'ended success';
+    // window.alert('FILE UPLOADED SUCCESSFULLY');
     }, error => {
-      window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
+      this.uploading = 'ended fail';
+      // window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
     });
 }
 
