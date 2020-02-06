@@ -14,13 +14,19 @@ export class UploadService {
     constructor(private http: HttpClient) {}
 
     postFile(fileToUpload: File, f: NgForm, username: string) {
-        console.log(f.value, fileToUpload.name);
         const endpoint = 'http://127.0.0.1:5000/uploadBill';
         const formData: FormData = new FormData();
-        // formData.append('body', fileToUpload, fileToUpload.name);
-        formData.append('image', fileToUpload, fileToUpload.name);
         formData.append('username', username);
         formData.append('description', 'des');
+
+        if (fileToUpload === null) {
+            console.log('NO IMAGE');
+        } else {
+            console.log(f.value, fileToUpload.name);
+            formData.append('image', fileToUpload, fileToUpload.name);
+        }
+       
+        // formData.append('body', fileToUpload, fileToUpload.name);
 
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'multipart/form-data');

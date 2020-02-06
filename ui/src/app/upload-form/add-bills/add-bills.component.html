@@ -1,21 +1,37 @@
 <div class="col-md-6 offset-md-3">
     <form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
-    
-        <div class="container-fluid">
-            <label>Bill name :</label>
-            <input id="name" required type="text" placeholder="Enter name" ngModel name="name" class="form-control" />
-    
-            <label>Bill Amount:</label>
-            <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control"/>
+        <div class="row">
+            <div [ngClass]="Image.value ==='' ? 'col-md-12' : 'col-md-6'">
+                <div class="container-fluid">
+                    <label>Bill name :</label>
+                    <input id="name" #Bname required type="text" placeholder="Enter name" ngModel name="name" class="form-control" />
 
-            <label>Description:</label>
-            <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control"/>
-    
-            <label>File:</label>
-            <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill"/>
-            
-            <button type="submit" class="btn-large btn-submit" [disabled]="Image.value=='' || !imageForm.valid"><i
-                    class="material-icons">save</i></button>
+                    <label>Bill Amount:</label>
+                    <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control"/>
+
+                    <label>Description:</label>
+                    <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control"/>
+                    
+                    <label>Date: </label>
+                    <input id="date" required type="date" value="10-02-1996" ngModel name="dateCurrent" class="form-control"/>
+
+                    <label>File:</label>
+                    <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill"/>
+                    
+                    <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid"><i class="material-icons">save</i></button>
+                    
+                    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="container-fluid">
+                    <div class="container-fluid" *ngIf="Image.value !==''">
+                        <img [src]="imageSrc" [alt]="Bname.value" style="max-width: 120%; max-height: 120%; display: block;" >
+                    </div>
+                </div>
+            </div>
+
         </div>
     </form>
     </div>
