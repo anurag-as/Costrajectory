@@ -127,8 +127,11 @@ def upload():
     file = request.files['image']
     fileName = file.filename
     fileExtension = fileName.split('.')[-1]
+    original_file_name = fileName
     presentTime = str(time.time())
     fileName = presentTime + '.' + fileExtension
+    mapped_file_name = fileName
+    insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
     uploadFile(file, fileName)
     insert_into_image_table(connection(), request.form['username'],
                                                fileName, request.form['description'])
