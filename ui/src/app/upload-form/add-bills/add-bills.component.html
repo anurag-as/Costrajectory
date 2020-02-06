@@ -43,10 +43,10 @@
     <p>&nbsp;&nbsp; <b>UPLOADING!!  PLEASE WAIT </b></p>
 </div>
 
-<div class="alert alert-danger" role="alert" *ngIf="uploading == 'ended success'">
+<div class="alert alert-danger" role="alert" *ngIf="uploading == 'ended fail'">
     Something went wrong...try again later
 </div>
 
-<div class="alert alert-success" role="alert" *ngIf="uploading == 'ended fail'">
+<div class="alert alert-success" role="alert" *ngIf="uploading == 'ended success'">
     Image was uploaded successfully
 </div>
