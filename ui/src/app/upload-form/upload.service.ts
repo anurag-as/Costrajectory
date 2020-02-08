@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {HttpParams} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
+import { TabularViewComponent } from './tabular-view/tabular-view.component';
 
 interface Status {
     UploadStatus: boolean;
@@ -11,13 +12,14 @@ interface Status {
 
 @Injectable({providedIn : 'root'} )
 export class UploadService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private TableAdder: TabularViewComponent) {}
 
     postFile(fileToUpload: File, f: NgForm, username: string) {
+        this.TableAdder.AppendEntry(f,username);
         const endpoint = 'http://127.0.0.1:5000/uploadBill';
         const formData: FormData = new FormData();
         formData.append('username', username);
-        formData.append('description', 'des');
+        formData.append('description', f.value.des);
 
         if (fileToUpload === null) {
             console.log('NO IMAGE');

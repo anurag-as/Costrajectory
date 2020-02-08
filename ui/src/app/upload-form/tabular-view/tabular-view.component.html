@@ -14,5 +14,12 @@
         <td>Otto</td>
         <td>@mdo</td>
       </tr>
+
+      <tr *ngFor="let indexobj of BillEntries">
+        <td *ngFor="let val of indexobj">
+            {{val}}
+        </td>
+      </tr>
+
     </tbody>
   </table>
