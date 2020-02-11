@@ -15,12 +15,12 @@ export class UploadService {
     constructor(private http: HttpClient, private TableAdder: TabularViewComponent) {}
 
     postFile(fileToUpload: File, f: NgForm, username: string) {
-        this.TableAdder.AppendEntry(f,username);
+        this.TableAdder.AppendEntry(f, username);
         const endpoint = 'http://127.0.0.1:5000/uploadBill';
         const formData: FormData = new FormData();
         formData.append('username', username);
         formData.append('description', f.value.des);
-
+        console.log('TO check username: ', username);
         if (fileToUpload === null) {
             console.log('NO IMAGE');
         } else {

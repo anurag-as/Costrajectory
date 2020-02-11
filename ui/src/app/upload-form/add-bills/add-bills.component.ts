@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import {formatDate} from '@angular/common';
 import { TabularViewComponent } from '../tabular-view/tabular-view.component';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-bills',
@@ -62,6 +63,7 @@ export class AddBillsComponent implements OnInit {
    this.uploader.postFile(this.fileToUpload, f, this.username).subscribe(data => {
     // this.TableAdder.AppendEntry(this.CurrentForm);
     this.uploading = 'ended success';
+    window.location.reload();
     // window.alert('FILE UPLOADED SUCCESSFULLY');
     }, error => {
       this.uploading = 'ended fail';
