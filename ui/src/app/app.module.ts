@@ -58,7 +58,7 @@ import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.co
     MatInputModule,
     AngularFontAwesomeModule
   ],
-  providers: [],
+  providers: [TabularViewComponent],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
