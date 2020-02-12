@@ -114,8 +114,8 @@ def insert_into_token_table(db_connection, username, datetime, token):
 
 # function to get the hashed password for the particular user
 def get_datetime_token(db_connection, username, token):
-    cursor = db_connection.execute('''SELECT datetime FROM TOKENS where username = "{username}" AND token = "{token} 
-    order by cast(datetime as unsigned) DESC"
+    cursor = db_connection.execute('''SELECT datetime FROM TOKENS where username = "{username}" AND token = "{token}" 
+    order by cast(datetime as unsigned) DESC
     LIMIT 1'''.format(username=username, token=token))
     for row in cursor:
         if row:
