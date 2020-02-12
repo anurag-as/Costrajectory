@@ -131,10 +131,19 @@ def upload():
     presentTime = str(time.time())
     fileName = presentTime + '.' + fileExtension
     mapped_file_name = fileName
+    # adding image mapping for cross referencing later
     insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+
+    # uploading the file to dropbox
     uploadFile(file, fileName)
+
+    # adding the transaction record TODO: Update the function appropriately
     insert_into_image_table(connection(), request.form['username'],
                                                fileName, request.form['description'])
+
+    # refresh the token, needs to be added to other API Calls
+    refresh_token(connection(), request.form['username'])
+
     return jsonify({'uploadStatus':True})
 
 
