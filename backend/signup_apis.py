@@ -122,24 +122,31 @@ def signInUser():
 @app.route('/uploadBill', methods=['POST'])
 @cross_origin()
 def upload():
-    if 'image' not in request.files:
-        return jsonify({'uploadStatus': False})
-    file = request.files['image']
-    fileName = file.filename
-    fileExtension = fileName.split('.')[-1]
-    original_file_name = fileName
-    presentTime = str(time.time())
-    fileName = presentTime + '.' + fileExtension
-    mapped_file_name = fileName
-    # adding image mapping for cross referencing later
-    insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+    if 'image' in request.files:
+        # Image has to be uploaded
+        file = request.files['image']
+        file_name = file.filename
+        file_extension = file_name.split('.')[-1]
+        original_file_name = file_name
+        present_time = str(time.time())
+        file_name = present_time + '.' + file_extension
+        mapped_file_name = file_name
+        # adding image mapping for cross referencing later
+        insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+        # uploading the file to dropbox
+        uploadFile(file, file_name)
+    else:
+        # Image not a part of the transaction
+        file_name = str(False)
 
-    # uploading the file to dropbox
-    uploadFile(file, fileName)
+    user_name = request.form['username']
+    title = request.form['Name']
+    date_time = request.form['Date']
+    description = request.form['Description']
+    amount = request.form['Amount']
 
-    # adding the transaction record TODO: Update the function appropriately
-    insert_into_image_table(connection(), request.form['username'],
-                                               fileName, request.form['description'])
+    # adding the transaction record
+    insert_into_image_table(connection(), user_name, title, date_time, amount, description, file_name)
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
