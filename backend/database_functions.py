@@ -79,16 +79,23 @@ def create_image_uploads(db_connection):
     db_connection.execute('''CREATE TABLE IMAGES
          (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
          username           TEXT    NOT NULL,
+         title              TEXT    NOT NULL,
          datetime           TEXT    NOT NULL,
-         description        TEXT    NOT NULL);''')
+         amount             TEXT    NOT NULL,
+         description        TEXT    NOT NULL,
+         image_name         TEXT    NOT NULL
+         );''')
     print("Image Table created successfully")
     db_connection.commit()
 
 
 # function to add image upload entries into IMAGES table for query and download
-def insert_into_image_table(db_connection, username, datetime, description):
-    db_connection.execute('''INSERT INTO IMAGES (username, datetime, description) VALUES ("{username}","{datetime}",
-    "{description}")'''.format(username=username, datetime=datetime, description=description))
+def insert_into_image_table(db_connection, username, title, datetime, amount, description, image_name):
+    db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name) 
+        VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}")'''
+                          .format(username=username, title=title, datetime=datetime, amount=amount,
+                                  description=description, image_name=image_name,
+                                  ))
     print("Image entry inserted into table")
     db_connection.commit()
 
@@ -177,3 +184,4 @@ def refresh_token(db_connection, username):
         '''.format(username=username, token=latest_token, new_date_time=new_date_time))
     db_connection.commit()
     return True
+
