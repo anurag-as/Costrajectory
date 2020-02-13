@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {ViewContainerRef, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
+import { Getdata } from './GetData.service';
+
+interface BillData {
+  username: string;
+  TableEntries: [];
+  ImageEntries: [];
+}
 
 @Component({
   selector: 'app-tabular-view',
@@ -8,10 +15,22 @@ import {ViewContainerRef, ChangeDetectorRef, AfterContentChecked} from '@angular
   styleUrls: ['./tabular-view.component.css'],
 })
 export class TabularViewComponent implements OnInit {
-  BillEntries = [[2, 'testname', 'test', '20']];
-  constructor() { }
+  BillEntries = [[1, 'testname', 'test', '20']];
+  DataLoading = 'Started';
+  UserName: string;
+  FormData: BillData;
+  constructor( private DataGetter: Getdata) { }
 
   ngOnInit() {
+    this.DataGetter.GetData().subscribe( data => {
+      this.DataLoading = 'Success';
+      this.FormData = data;
+      for ( const entry of data.TableEntries) {
+        this.BillEntries.push([this.BillEntries.length + 1, entry.Name, entry.Description, entry.Date, entry.Amount]);
+      }
+    }, err => {
+      this.DataLoading = 'Fail';
+    });
   }
 
   public AppendEntry(f: NgForm, userName: string) {
