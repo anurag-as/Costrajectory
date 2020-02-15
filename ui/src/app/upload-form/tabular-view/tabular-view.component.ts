@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {ViewContainerRef, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 import { Getdata } from './GetData.service';
+import { GlobalConfigsService } from '../../global-configs.service';
 
 interface BillData {
   username: string;
@@ -19,10 +20,10 @@ export class TabularViewComponent implements OnInit {
   DataLoading = 'Started';
   UserName: string;
   FormData: BillData;
-  constructor( private DataGetter: Getdata) { }
+  constructor( private DataGetter: Getdata, public globals: GlobalConfigsService) { }
 
   ngOnInit() {
-    this.DataGetter.GetData().subscribe( data => {
+    this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
       this.DataLoading = 'Success';
       this.FormData = data;
       for ( const entry of data.TableEntries) {
