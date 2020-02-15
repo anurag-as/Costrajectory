@@ -24,13 +24,13 @@ export class UploadService {
         formData.append('Name', f.value.name);
         formData.append('Date', f.value.date);
         formData.append('Amount', f.value.val);
-        formData.append('FileName', fileToUpload.name);
 
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {
             console.log('NO IMAGE');
         } else {
             console.log(f.value, fileToUpload.name);
+            formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
        
