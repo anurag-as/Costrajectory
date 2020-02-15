@@ -24,7 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
-
+import { GlobalConfigsService } from './global-configs.service';
 
 
 @NgModule({
@@ -58,7 +58,7 @@ import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.co
     MatInputModule,
     AngularFontAwesomeModule
   ],
-  providers: [TabularViewComponent],
+  providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA

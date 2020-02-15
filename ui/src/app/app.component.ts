@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionStorage } from './app.session';
+import { GlobalConfigsService } from './global-configs.service';
 
 interface TokenData {
   key: string ;
@@ -9,7 +10,7 @@ interface TokenData {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'UI';
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   hasKey = false;
   userTokenData: TokenData;
 
-  constructor(private sessionStorageclient: SessionStorage) {}
+  constructor(private sessionStorageclient: SessionStorage, public globals: GlobalConfigsService) {}
 
   ngOnInit() {
     if (this.sessionStorageclient.hasKey() === false) {
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
           console.log(',,,,', res);
           if (res.valid) {
             console.log('TOKEN AUTHENTICATED');
+            this.globals.UserName = this.userdata.username;
             this.authorizationDone = true;
           } else {
             return;
@@ -49,6 +51,7 @@ export class AppComponent implements OnInit {
     // console.log(loginDetails.username, loginDetails.password);
     this.userdata = loginDetails;
     console.log(this.userdata);
+    this.globals.UserName = this.userdata.username;
     this.authorizationDone = true;
  }
 }

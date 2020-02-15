@@ -18,13 +18,19 @@ export class UploadService {
         this.TableAdder.AppendEntry(f, username);
         const endpoint = 'http://127.0.0.1:5000/uploadBill';
         const formData: FormData = new FormData();
+
         formData.append('username', username);
-        formData.append('description', f.value.des);
-        console.log('TO check username: ', username);
+        formData.append('Description', f.value.des);
+        formData.append('Name', f.value.name);
+        formData.append('Date', f.value.date);
+        formData.append('Amount', f.value.val);
+
+        // console.log('TO check username: ', username);
         if (fileToUpload === null) {
             console.log('NO IMAGE');
         } else {
             console.log(f.value, fileToUpload.name);
+            formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
        
