@@ -16,7 +16,7 @@ interface BillData {
   styleUrls: ['./tabular-view.component.css'],
 })
 export class TabularViewComponent implements OnInit {
-  BillEntries = [[1, 'testname', 'test', '20']];
+  BillEntries = [];
   DataLoading = 'Started';
   UserName: string;
   FormData: BillData;
@@ -27,7 +27,9 @@ export class TabularViewComponent implements OnInit {
       this.DataLoading = 'Success';
       this.FormData = data;
       for ( const entry of data.TableEntries) {
-        this.BillEntries.push([this.BillEntries.length + 1, entry.Name, entry.Description, entry.Date, entry.Amount]);
+        for (let i = 0; i < 20; i++) {
+          this.BillEntries.push([this.BillEntries.length + 1, entry.Name, entry.Description, entry.Date, entry.Amount]);
+        }
       }
     }, err => {
       this.DataLoading = 'Fail';
@@ -35,7 +37,7 @@ export class TabularViewComponent implements OnInit {
   }
 
   public AppendEntry(f: NgForm, userName: string) {
-    this.BillEntries.push([this.BillEntries.length + 1, f.value.name, f.value.des, f.value.date, f.value.val]);
+    // this.BillEntries.push([this.BillEntries.length + 1, f.value.name, f.value.des, f.value.date, f.value.val]);
     console.log('===============+', this.BillEntries);
   }
 

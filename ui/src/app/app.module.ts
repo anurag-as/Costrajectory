@@ -25,6 +25,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
 import { GlobalConfigsService } from './global-configs.service';
+import { ViewTableBillComponent } from './view-table-bill/view-table-bill.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { GlobalConfigsService } from './global-configs.service';
     IconbarComponent,
     AddBillsComponent,
     LogoutComponent,
-    TabularViewComponent
+    TabularViewComponent,
+    ViewTableBillComponent
   ],
   imports: [
     BrowserModule,
