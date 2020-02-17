@@ -20,6 +20,10 @@ export class SessionStorage {
         if (localStorage.length > 0) {
             for (let i = 0; i < localStorage.length; i++) {
                 const value = localStorage.key(i);
+                if ( value.indexOf( '@' ) === -1) {
+                    console.log('SKIP');
+                    continue;
+                }
                 const token = localStorage.getItem(value);
                 console.log('GOT THE KEY ', token, value);
                 return ({key : token, username : value});
@@ -27,6 +31,7 @@ export class SessionStorage {
           } else {
             return ({key : undefined, username : undefined});
           }
+        return ({key : undefined, username : undefined});
     }
 
     setKey(token: string, username: string) {
