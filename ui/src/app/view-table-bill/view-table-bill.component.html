@@ -1,0 +1,38 @@
+<div class="card-group">
+    <div class="card">
+        <div class="card-body">
+            {{BillEnum}}
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {{BillName}}
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {{BillDescription}}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {{BillDate}}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body" title='Press to preview'>
+            {{BillAmount}}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 10px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Bill Info" style="background-color:transparent;margin-left: 10px;" (click)="ChangeBill()"><span class="fa fa-info fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Add Image" style="background-color:transparent;margin-left: 10px;" (click)="ChangeBill()"><span class="fa fa-plus fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Delete Bill" style="background-color:transparent;margin-left: 10px;" (click)="ChangeBill()"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
+        </div>
+    </div>
+</div>

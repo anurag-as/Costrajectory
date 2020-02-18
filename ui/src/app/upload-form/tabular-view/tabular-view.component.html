@@ -1,18 +1,21 @@
-<table class="table">
+<table class="table" style="width: 100%">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="bill name">Bill name</th>
-        <th scope="bill description">Bill description</th>
-        <th scope="bill amount" title='Press to preview'>Bill amount</th>
+        <th scope="col" style="width: 16.6%; text-align:left">#</th>
+        <th scope="bill name" style="width: 16.6%; text-align:left">Bill name</th>
+        <th scope="bill description" style="width: 16.6%; text-align:left">Bill description</th>
+        <th scope="bill date" style="width: 16.6%; text-align:left">Bill Date</th>
+        <th scope="bill amount" style="width: 16.6%; text-align:left">Bill amount</th>
+        <th scope="bill amount" style="width: 16.6%; text-align:left"></th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let indexobj of BillEntries">
-        <td *ngFor="let val of indexobj">
-            {{val}}
-        </td>
-      </tr>
-
-    </tbody>
   </table>
+
+<ng-container *ngFor="let indexobj of BillEntries">
+  <app-view-table-bill 
+    [BillEnum]='indexobj[0]'
+    [BillName]='indexobj[1]' 
+    [BillDescription]='indexobj[2]' 
+    [BillDate]='indexobj[3]'
+    [BillAmount]='indexobj[4]'></app-view-table-bill>
+</ng-container>
