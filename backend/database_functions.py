@@ -16,8 +16,8 @@ def connection():
 
 # Closing the connection to a database
 def end_connection(db_connection):
-    db_connection.close()
     db_connection.commit()
+    db_connection.close()
 
 
 # Creating the user and password table

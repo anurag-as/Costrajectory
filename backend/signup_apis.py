@@ -161,10 +161,12 @@ def recentTransactions():
     Api to get the recent transactions of a particular user.
     :return: 5 transactions for now. #TODO need to make it more dynamic and generalized later on.
     """
-    limit_transactions = 5  # limit of the transaction to be retrieved
-    user_name = request.form['username']
-    if request.form['limit']:
-        limit_transactions = request.form['limit']
+    user_name = request.json['username']
+    print(user_name)
+    try:
+        limit_transactions = request.json['limit']
+    except KeyError:
+        limit_transactions = 5 # limit of the transaction to be retrieved
     transactions = query_recent_transaction(connection(), user_name, limit_transactions)
     if not transactions:
         return jsonify({False})
@@ -172,5 +174,5 @@ def recentTransactions():
 
 
 if __name__ == '__main__':
-    download()
+    #download()
     app.run(port=5000, debug=True)
