@@ -12,6 +12,7 @@ from database_functions import *
 import time
 from utilities.download import *
 from utilities.upload import *
+from api_utils import *
 import os
 
 app = Flask(__name__)
@@ -133,10 +134,10 @@ def upload():
         # adding image mapping for cross referencing later
         insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
         # uploading the file to dropbox
-        uploadFile(file, file_name)
+        uploadFile(file, mapped_file_name)
     else:
         # Image not a part of the transaction
-        file_name = str(False)
+        mapped_file_name = str(False)
 
     user_name = request.form['username']
     title = request.form['Name']
@@ -145,7 +146,7 @@ def upload():
     amount = request.form['Amount']
 
     # adding the transaction record
-    insert_into_image_table(connection(), user_name, title, date_time, amount, description, file_name)
+    insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name)
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
@@ -167,7 +168,7 @@ def recentTransactions():
     transactions = query_recent_transaction(connection(), user_name, limit_transactions)
     if not transactions:
         return jsonify({False})
-    build_json(transactions, user_name)
+    return build_json_recent_transactions(transactions, user_name)
 
 
 if __name__ == '__main__':
