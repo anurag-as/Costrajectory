@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
-
 
 @Component({
-  selector: 'app-change-bill',
-  templateUrl: './change-bill.component.html',
-  styleUrls: ['./change-bill.component.css']
+  selector: 'app-view-bill',
+  templateUrl: './view-bill.component.html',
+  styleUrls: ['./view-bill.component.css']
 })
-export class ChangeBillComponent implements OnInit {
+export class ViewBillComponent implements OnInit {
   username = undefined;
   BillName = '';
   BillDescription = '';
@@ -17,11 +15,9 @@ export class ChangeBillComponent implements OnInit {
   BillIdentifier: string = undefined;
   BillImage: any = undefined;
   BillDate: any = undefined;
-
   constructor() { }
 
   ngOnInit() {
   }
 
-  SubmitChanges() {}
 }

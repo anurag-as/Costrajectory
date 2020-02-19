@@ -27,9 +27,7 @@ export class TabularViewComponent implements OnInit {
       this.DataLoading = 'Success';
       this.FormData = data;
       for ( const entry of data.TableEntries) {
-        for (let i = 0; i < 20; i++) {
           this.BillEntries.push([this.BillEntries.length + 1, entry.Name, entry.Description, entry.Date, entry.Amount]);
-        }
       }
     }, err => {
       this.DataLoading = 'Fail';
