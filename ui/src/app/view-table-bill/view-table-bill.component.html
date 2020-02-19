@@ -30,7 +30,7 @@
     <div class="card">
         <div class="card-body">
             <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button>   
-            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button>   
             <button type="button" class="btn" title="Add Image" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-plus fa-2x" aria-hidden="true"></span></button>   
             <button type="button" class="btn" title="Delete Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
         </div>

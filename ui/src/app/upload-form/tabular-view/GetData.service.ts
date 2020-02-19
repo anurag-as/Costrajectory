@@ -19,8 +19,8 @@ interface BillData {
 export class Getdata {
     constructor(private http: HttpClient) {}
 
-    GetData(username: string) {
-        const endpoint = 'http://127.0.0.1:5000/GetData';
-        return this.http.post<BillData>(endpoint, {UserName: username});
+    GetData(UserName: string) {
+        const endpoint = 'http://127.0.0.1:5000/getRecentTransactions';
+        return this.http.post<BillData>(endpoint, {username: UserName});
     }
 }
