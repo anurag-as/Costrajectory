@@ -27,6 +27,7 @@ import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.co
 import { GlobalConfigsService } from './global-configs.service';
 import { ViewTableBillComponent } from './view-table-bill/view-table-bill.component';
 import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.component';
+import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.c
     LogoutComponent,
     TabularViewComponent,
     ViewTableBillComponent,
-    ChangeBillComponent
+    ChangeBillComponent,
+    ViewBillComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,6 @@ import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.c
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [AddBillsComponent, ChangeBillComponent],
+  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent],
 })
 export class AppModule { }
