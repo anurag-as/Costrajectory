@@ -12,8 +12,8 @@ from database_functions import *
 import time
 from utilities.download import *
 from utilities.upload import *
+from api_utils import *
 import os
-
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -85,7 +85,7 @@ def check_validity_token(username, token):
     db = connection()
     date_time = get_datetime_token(db, username, token)
     present_time = time.time()
-    timeout = 120 # seconds
+    timeout = 120  # seconds
     return float(present_time) - float(date_time) < timeout
 
 
@@ -134,10 +134,10 @@ def upload():
         # adding image mapping for cross referencing later
         insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
         # uploading the file to dropbox
-        uploadFile(file, file_name)
+        uploadFile(file, mapped_file_name)
     else:
         # Image not a part of the transaction
-        file_name = str(False)
+        mapped_file_name = str(False)
 
     user_name = request.form['username']
     title = request.form['Name']
@@ -146,12 +146,29 @@ def upload():
     amount = request.form['Amount']
 
     # adding the transaction record
-    insert_into_image_table(connection(), user_name, title, date_time, amount, description, file_name)
+    insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name)
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
 
-    return jsonify({'uploadStatus':True})
+    return jsonify({'uploadStatus': True})
+
+
+@app.route('/getRecentTransactions', methods=['POST'])
+@cross_origin()
+def recentTransactions():
+    """
+    Api to get the recent transactions of a particular user.
+    :return: 5 transactions for now. #TODO need to make it more dynamic and generalized later on.
+    """
+    limit_transactions = 5  # limit of the transaction to be retrieved
+    user_name = request.form['username']
+    if request.form['limit']:
+        limit_transactions = request.form['limit']
+    transactions = query_recent_transaction(connection(), user_name, limit_transactions)
+    if not transactions:
+        return jsonify({False})
+    return build_json_recent_transactions(transactions, user_name)
 
 
 if __name__ == '__main__':
