@@ -184,4 +184,3 @@ def refresh_token(db_connection, username):
         '''.format(username=username, token=latest_token, new_date_time=new_date_time))
     db_connection.commit()
     return True
-
