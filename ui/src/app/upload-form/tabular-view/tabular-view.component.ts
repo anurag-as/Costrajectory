@@ -27,7 +27,29 @@ export class TabularViewComponent implements OnInit {
       this.DataLoading = 'Success';
       this.FormData = data;
       for ( const entry of data.TableEntries) {
-          this.BillEntries.push([this.BillEntries.length + 1, entry.Name, entry.Description, entry.Date, entry.Amount]);
+        if (entry.Identifier !== 'False') {
+          this.BillEntries.push([
+            this.BillEntries.length + 1,
+            entry.Name,
+            entry.Description,
+            entry.Date,
+            entry.Amount,
+            true,
+            entry.Identifier,
+            data.ImageEntries[entry.Identifier]
+          ]);
+        } else {
+          this.BillEntries.push([
+            this.BillEntries.length + 1,
+            entry.Name,
+            entry.Description,
+            entry.Date,
+            entry.Amount,
+            false,
+            undefined,
+            undefined
+          ]);
+        }
       }
     }, err => {
       this.DataLoading = 'Fail';
