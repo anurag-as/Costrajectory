@@ -14,7 +14,6 @@ from utilities.download import *
 from utilities.upload import *
 import os
 
-
 app = Flask(__name__)
 cors = CORS(app)
 api = Api(app)
@@ -85,7 +84,7 @@ def check_validity_token(username, token):
     db = connection()
     date_time = get_datetime_token(db, username, token)
     present_time = time.time()
-    timeout = 120 # seconds
+    timeout = 120  # seconds
     return float(present_time) - float(date_time) < timeout
 
 
@@ -151,7 +150,24 @@ def upload():
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
 
-    return jsonify({'uploadStatus':True})
+    return jsonify({'uploadStatus': True})
+
+
+@app.route('/getRecentTransactions', methods=['POST'])
+@cross_origin()
+def recentTransactions():
+    """
+    Api to get the recent transactions of a particular user.
+    :return: 5 transactions for now. #TODO need to make it more dynamic and generalized later on.
+    """
+    limit_transactions = 5  # limit of the transaction to be retrieved
+    user_name = request.form['username']
+    if request.form['limit']:
+        limit_transactions = request.form['limit']
+    transactions = query_recent_transaction(connection(), user_name, limit_transactions)
+    if not transactions:
+        return jsonify({False})
+    build_json(transactions, user_name)
 
 
 if __name__ == '__main__':
