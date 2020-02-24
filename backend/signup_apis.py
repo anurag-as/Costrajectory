@@ -173,6 +173,20 @@ def recentTransactions():
     return build_json_recent_transactions(transactions, user_name)
 
 
+@app.route('/previewImage', methods=['POST'])
+@cross_origin()
+def previewImage():
+    """
+    API to preview the image for a particular transaction
+    """
+    user_name = request.json['username']
+    mapped_image_name = request.json['mapped_name']
+    original_image_name = request.json['original_name']
+    print(mapped_image_name, original_image_name)
+    download_file(mapped_image_name, original_image_name)
+    return jsonify(True)
+
+
 if __name__ == '__main__':
-    #download()
+    download()
     app.run(port=5000, debug=True)
