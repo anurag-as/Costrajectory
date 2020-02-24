@@ -13,6 +13,7 @@ import time
 from utilities.download import *
 from utilities.upload import *
 from api_utils import *
+from flask import send_file
 import os
 
 app = Flask(__name__)
@@ -182,9 +183,13 @@ def previewImage():
     user_name = request.json['username']
     mapped_image_name = request.json['mapped_name']
     original_image_name = request.json['original_name']
-    print(mapped_image_name, original_image_name)
-    download_file(mapped_image_name, original_image_name)
-    return jsonify(True)
+    try:
+        # downloading the image to cacheable region # TODO implement caching, delete files once signed out
+        download_file(mapped_image_name, original_image_name)
+        file = os.path.join(os.getcwd(), "temp", original_image_name)
+        return send_file(file)
+    except:
+        return jsonify(False)
 
 
 if __name__ == '__main__':
