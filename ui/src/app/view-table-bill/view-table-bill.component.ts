@@ -43,7 +43,7 @@ export class ViewTableBillComponent implements OnInit {
 
   ViewBill(): void {
     const dialogRef = this.dialog.open(ViewBillComponent, {
-      width: '1300px'
+      width: '800px'
     });
     dialogRef.componentInstance.username = this.Globals.GetUsername();
     dialogRef.componentInstance.BillName = this.BillName;
