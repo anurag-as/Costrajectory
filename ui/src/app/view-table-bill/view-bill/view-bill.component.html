@@ -1,1 +1,7 @@
-<p>view-bill works!</p>
+<div class="col-md-6">
+    <div class="container-fluid">
+        <div class="container-fluid" *ngIf="canShowImage === true">
+            <img [src]="'data:image/gif;base64,'+base64Data" [alt]="test" style="max-width: 90%; max-height: 90%; display: block;" >
+        </div>
+    </div>
+</div>

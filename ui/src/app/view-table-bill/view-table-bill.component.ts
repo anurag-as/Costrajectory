@@ -17,8 +17,8 @@ export class ViewTableBillComponent implements OnInit {
   @Input() BillAmount: string = undefined;
   @Input() BillEnum: any = undefined;
   @Input() BillHasImage: boolean = undefined;
-  @Input() BillIdentifier: string = undefined;
-  @Input() BillImage: any = undefined;
+  @Input() BillIdentifier: string = undefined; // mapped filename
+  @Input() BillImage: any = undefined; // actual filename
   @Input() BillDate: any = undefined;
 
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) { }
@@ -30,12 +30,11 @@ export class ViewTableBillComponent implements OnInit {
     const dialogRef = this.dialog.open(ChangeBillComponent, {
       width: '1300px'
     });
-    dialogRef.componentInstance.username = this.Globals.GetUsername;
+    dialogRef.componentInstance.username = this.Globals.GetUsername();
     dialogRef.componentInstance.BillName = this.BillName;
     dialogRef.componentInstance.BillDescription = this.BillDescription;
     dialogRef.componentInstance.BillAmount = this.BillAmount;
     dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
-    // dialogRef.componentInstance.BillImage = 
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -46,11 +45,13 @@ export class ViewTableBillComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewBillComponent, {
       width: '1300px'
     });
-    dialogRef.componentInstance.username = this.Globals.GetUsername;
+    dialogRef.componentInstance.username = this.Globals.GetUsername();
     dialogRef.componentInstance.BillName = this.BillName;
     dialogRef.componentInstance.BillDescription = this.BillDescription;
     dialogRef.componentInstance.BillAmount = this.BillAmount;
     dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -58,9 +59,10 @@ export class ViewTableBillComponent implements OnInit {
   }
 
   ChangeBillFormat(date) {
-    const splitDate = date.split( '/' );
-    const outDate = splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
-    return outDate;
+    console.log('inp date: ', date);
+    // const splitDate = date.split( '/' );
+    // const outDate = splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
+    return date;
   }
 
 }

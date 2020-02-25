@@ -26,7 +26,6 @@ export class GlobalConfigsService {
     }
 
   public GetUsername() {
-    console.log('Urn queries: ', this.username);
     return this.username;
   }
 }

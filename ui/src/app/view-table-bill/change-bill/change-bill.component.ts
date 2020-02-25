@@ -21,6 +21,7 @@ export class ChangeBillComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.BillDate);
   }
 
   SubmitChanges() {}
