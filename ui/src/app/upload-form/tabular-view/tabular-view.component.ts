@@ -24,6 +24,7 @@ export class TabularViewComponent implements OnInit {
 
   ngOnInit() {
     this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
+      console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.FormData = data;
       for ( const entry of data.TableEntries) {
