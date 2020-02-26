@@ -27,16 +27,13 @@ def download():
     print('DB Successfully updated to remote')
 
 
-def download_file(mapped_image_name, original_image_name):
+def download_file(hashed_user_name, mapped_image_name, original_image_name):
     dbx = dropbox.Dropbox(token)
-    if cfg['environment']['host'] == 'linux':
-        # Linux Environment
-        dbx.files_download_to_file(os.path.join(os.getcwd().strip('utilities'), "temp", original_image_name),
-                                   '/'+mapped_image_name)
-    else:
-        # Windows Environment
-        dbx.files_download_to_file(os.getcwd() + '\\utilities\\temp\\' + original_image_name,
-                                   '/' + mapped_image_name)
+    download_path = os.path.join(os.getcwd().strip('utilities'), "temp", hashed_user_name)
+    if not os.path.exists(download_path):
+        os.mkdir(download_path)
+    dbx.files_download_to_file(os.path.join(download_path, mapped_image_name),
+                               '/' + mapped_image_name)
 
 
 if __name__ == "__main__":

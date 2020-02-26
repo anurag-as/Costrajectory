@@ -1,6 +1,8 @@
 # coding: utf-8
 
+# imports
 from flask import Flask, request
+import base64
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 from json import dumps
@@ -10,7 +12,9 @@ from query_signin import *
 from flask_cors import CORS, cross_origin
 from database_functions import *
 import time
+import shutil
 from utilities.download import *
+from utilities.utils import *
 from utilities.upload import *
 from api_utils import *
 from flask import send_file
@@ -184,12 +188,30 @@ def previewImage():
     mapped_image_name = request.json['mapped_name']
     original_image_name = request.json['original_name']
     try:
-        # downloading the image to cacheable region # TODO implement caching, delete files once signed out
-        download_file(mapped_image_name, original_image_name)
-        file = os.path.join(os.getcwd(), "temp", original_image_name)
-        return send_file(file)
+        # downloading the image to cacheable region
+        user_name = str('.' + user_name)
+        file = os.path.join(os.getcwd(), "temp", user_name, mapped_image_name)
+        if not os.path.exists(file):
+            download_file(user_name, mapped_image_name, original_image_name)
+        with open(file, "rb") as f:
+            Image_data = f.read()
+            encoded_string = base64.b64encode(Image_data)
+        return jsonify({'Image': str(encoded_string.decode('utf-8'))})
     except:
         return jsonify(False)
+
+
+@app.route('/signout', methods=['DELETE'])
+@cross_origin()
+def signout():
+    """
+    API when user signs out. Delete all his transaction Data
+    """
+    user_name = request.json['username']
+    user_data_path = os.path.join(os.getcwd(), "temp", "." + user_name)
+    if os.path.exists(user_data_path):
+        shutil.rmtree(user_data_path)
+    return jsonify(True)
 
 
 if __name__ == '__main__':
