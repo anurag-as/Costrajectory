@@ -187,7 +187,10 @@ def previewImage():
         # downloading the image to cacheable region # TODO implement caching, delete files once signed out
         download_file(mapped_image_name, original_image_name)
         file = os.path.join(os.getcwd(), "temp", original_image_name)
-        return send_file(file)
+        with open(file, "rb") as f:
+            Image_data = f.read()
+            encoded_string = base64.b64encode(Image_data)
+        return jsonify({'Image': str(encoded_string.decode('utf-8'))})
     except:
         return jsonify(False)
 

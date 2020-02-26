@@ -35,7 +35,7 @@ def download_file(mapped_image_name, original_image_name):
                                    '/'+mapped_image_name)
     else:
         # Windows Environment
-        dbx.files_download_to_file(os.getcwd() + '\\utilities\\temp\\' + original_image_name,
+        dbx.files_download_to_file(os.getcwd() + '\\temp\\' + original_image_name,
                                    '/' + mapped_image_name)
 
 
