@@ -11,6 +11,7 @@ from query_signin import *
 from flask_cors import CORS, cross_origin
 from database_functions import *
 import time
+import shutil
 from utilities.download import *
 from utilities.utils import *
 from utilities.upload import *
@@ -197,6 +198,19 @@ def previewImage():
         return jsonify({'Image': str(encoded_string.decode('utf-8'))})
     except:
         return jsonify(False)
+
+
+@app.route('/signout', methods=['DELETE'])
+@cross_origin()
+def signout():
+    """
+    API when user signs out. Delete all his transaction Data
+    """
+    user_name = request.json['username']
+    user_data_path = os.path.join(os.getcwd(), "temp", "." + user_name)
+    if os.path.exists(user_data_path):
+        shutil.rmtree(user_data_path)
+    return jsonify(True)
 
 
 if __name__ == '__main__':
