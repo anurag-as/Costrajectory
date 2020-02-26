@@ -53,7 +53,6 @@ api.add_resource(AddUser, '/add_user/<username>/')
 @app.route('/checkUser', methods=['POST'])
 @cross_origin()
 def checkUser():
-    # time.sleep(5)
     signup = SignUp(request.json['username'])
     username = request.json['username']
     password = request.json['password']
@@ -90,7 +89,7 @@ def check_validity_token(username, token):
     db = connection()
     date_time = get_datetime_token(db, username, token)
     present_time = time.time()
-    timeout = 120  # seconds
+    timeout = 3600  # seconds (1 hour)
     return float(present_time) - float(date_time) < timeout
 
 
