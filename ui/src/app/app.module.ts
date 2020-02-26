@@ -23,7 +23,11 @@ import { LogoutComponent } from './logout/logout.component';
 import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
+import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
+import { GlobalConfigsService } from './global-configs.service';
+import { ViewTableBillComponent } from './view-table-bill/view-table-bill.component';
+import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.component';
+import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.component';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     UploadFormComponent,
     IconbarComponent,
     AddBillsComponent,
-    LogoutComponent
+    LogoutComponent,
+    TabularViewComponent,
+    ViewTableBillComponent,
+    ChangeBillComponent,
+    ViewBillComponent
   ],
   imports: [
     BrowserModule,
@@ -56,11 +64,11 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     MatInputModule,
     AngularFontAwesomeModule
   ],
-  providers: [],
+  providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [AddBillsComponent],
+  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent],
 })
 export class AppModule { }

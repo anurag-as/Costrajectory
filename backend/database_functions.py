@@ -1,5 +1,6 @@
 import sqlite3
 from utilities.utils import hash_password
+import time
 
 
 # Connecting to the database
@@ -15,8 +16,8 @@ def connection():
 
 # Closing the connection to a database
 def end_connection(db_connection):
-    db_connection.close()
     db_connection.commit()
+    db_connection.close()
 
 
 # Creating the user and password table
@@ -78,16 +79,23 @@ def create_image_uploads(db_connection):
     db_connection.execute('''CREATE TABLE IMAGES
          (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
          username           TEXT    NOT NULL,
+         title              TEXT    NOT NULL,
          datetime           TEXT    NOT NULL,
-         description        TEXT    NOT NULL);''')
+         amount             TEXT    NOT NULL,
+         description        TEXT    NOT NULL,
+         image_name         TEXT    NOT NULL
+         );''')
     print("Image Table created successfully")
     db_connection.commit()
 
 
 # function to add image upload entries into IMAGES table for query and download
-def insert_into_image_table(db_connection, username, datetime, description):
-    db_connection.execute('''INSERT INTO IMAGES (username, datetime, description) VALUES ("{username}","{datetime}",
-    "{description}")'''.format(username=username, datetime=datetime, description=description))
+def insert_into_image_table(db_connection, username, title, datetime, amount, description, image_name):
+    db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name) 
+        VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}")'''
+                          .format(username=username, title=title, datetime=datetime, amount=amount,
+                                  description=description, image_name=image_name,
+                                  ))
     print("Image entry inserted into table")
     db_connection.commit()
 
@@ -113,10 +121,79 @@ def insert_into_token_table(db_connection, username, datetime, token):
 
 # function to get the hashed password for the particular user
 def get_datetime_token(db_connection, username, token):
-    cursor = db_connection.execute('''SELECT datetime FROM TOKENS where username = "{username}" AND token = "{token}"
+    cursor = db_connection.execute('''SELECT datetime FROM TOKENS where username = "{username}" AND token = "{token}" 
+    order by cast(datetime as unsigned) DESC
     LIMIT 1'''.format(username=username, token=token))
     for row in cursor:
         if row:
             return row[0]
     return False
 
+
+# function to map the file name and image name
+def create_image_mapping_table(db_connection):
+    db_connection.execute('''CREATE TABLE IMAGEMAPPING
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         username           TEXT    NOT NULL,
+         original_name           TEXT    NOT NULL,
+         mapped_name        TEXT    NOT NULL);''')
+    print("Image mapping Table created successfully")
+    db_connection.commit()
+
+
+# function to insert into IMAGEMAPPING into table
+def insert_into_image_mapping_table(db_connection, username, original, mapped):
+    db_connection.execute('''INSERT INTO IMAGEMAPPING (username, original_name, mapped_name) VALUES ("{username}","{original}",
+    "{mapped}")'''.format(username=username, original=original, mapped=mapped))
+    print("Image Mapping entry inserted into table")
+    db_connection.commit()
+
+
+# function to get the original image name from the mapped name
+def get_original_name(db_connection, username, mapped_name):
+    cursor = db_connection.execute('''SELECT original_name FROM IMAGEMAPPING where username = "{username}" AND mapped_name
+     = "{mapped}"
+    LIMIT 1'''.format(username=username, mapped=mapped_name))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False
+
+
+# function to get the latest token for the particular user
+def get_latest_token(db_connection, username):
+    cursor = db_connection.execute('''SELECT token FROM TOKENS where username = "{username}" 
+    order by cast(datetime as unsigned) DESC
+    LIMIT 1'''.format(username=username))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False
+
+
+# function to refresh the token for a particular user
+def refresh_token(db_connection, username):
+    latest_token = get_latest_token(db_connection, username)
+    if not latest_token:
+        return False
+    new_date_time = str(time.time())
+    print(new_date_time)
+    db_connection.execute('''UPDATE TOKENS 
+        set datetime = "{new_date_time}"
+        where username = "{username}" AND token = "{token}" 
+        '''.format(username=username, token=latest_token, new_date_time=new_date_time))
+    db_connection.commit()
+    return True
+
+
+# function to query recent transactions of a particular user
+# limit has also been introduced to enhance the functionality and for future user
+def query_recent_transaction(db_connection, username, limit=5):
+    cursor = db_connection.execute('''SELECT title, datetime, amount, description, image_name
+      FROM IMAGES where username = "{username}"
+    LIMIT {limit}'''.format(username=username, limit=limit))
+    transactions = []  # list of recent transactions
+    for row in cursor:
+        if row:
+            transactions.append(list(row))
+    return transactions if transactions else "False"

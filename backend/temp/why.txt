@@ -1,0 +1,3 @@
+# TODO Caching attributes for the downloaded images
+# When received with a delete request, delete the data in this folder.
+# This folder is used to cache the frequently used data from the dropbox server.

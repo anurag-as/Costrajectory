@@ -27,6 +27,7 @@ speed-measure-plugin*.json
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+ui.vscode/*
 
 # misc
 /.sass-cache
@@ -47,3 +48,4 @@ backend/costrajectory.db
 backend/utilities/__pycache__/
 backend/utilities/downloads/
 config.yml
+backend/temp/

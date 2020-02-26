@@ -1,26 +1,24 @@
-<div class="container-fluid" *ngIf="uploading == 'not started'">
-    <form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
+<div class="container-fluid">
+    <form #imageForm="ngForm" (ngSubmit)="SubmitChanges(imageForm)">
         <div class="row">
             <div [ngClass]="Image.value ==='' ? 'col-md-12' : 'col-md-6'">
                 <div class="container-fluid">
                     <label>Bill name :</label>
-                    <input id="name" #Bname required type="text" placeholder="Enter name" ngModel name="name" class="form-control" />
+                    <input id="name" #Bname required type="text" placeholder="Enter name" [(ngModel)]="BillName" name="name" class="form-control" value="test"/>
 
                     <label>Bill Amount:</label>
-                    <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control"/>
+                    <input id="val" required type="number" placeholder="Enter amount" [(ngModel)]="BillAmount" name="val" class="form-control"/>
 
                     <label>Description:</label>
-                    <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control"/>
+                    <input id="des" required type="test" placeholder="Enter Description" [(ngModel)]="BillDescription" name="des" class="form-control"/>
                     
                     <label>Date: </label>
-                    <input id="date" required type="date" value="10-02-1996" ngModel name="date" class="form-control"/>
+                    <input id="date" required type="date" value="10-02-1996" [(ngModel)]="BillDate" name="date" class="form-control"/>
 
                     <label>File:</label>
                     <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill"/>
                     
                     <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid"><i class="material-icons">save</i></button>
-                    
-                    
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UploadService } from './upload.service';
 import {NgForm} from '@angular/forms';
 import { Input } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-upload-form',
@@ -11,9 +12,10 @@ import { Input } from '@angular/core';
 export class UploadFormComponent implements OnInit {
   fileToUpload: File = null;
   @Input() userName;
-  constructor(private uploader: UploadService) { }
+  constructor(private uploader: UploadService, private route: Router) { }
 
   ngOnInit() {
+    this.route.navigate(['']);
   }
 
   private handleFileInput(files: FileList) {
