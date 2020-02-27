@@ -32,6 +32,7 @@ export class ChangeBillComponent implements OnInit {
   fileToUpload =  null;
   imgfromServer = true;
   canShowImageUploaded = false;
+  imageUploaded = false;
   imageSrc;
 
   constructor(private http: HttpClient, private uploader: UploadService) { }
@@ -62,6 +63,7 @@ export class ChangeBillComponent implements OnInit {
     reader.onload = e => this.imageSrc = reader.result;
 
     reader.readAsDataURL(this.fileToUpload);
+    this.imageUploaded = true;
 }
 
 

@@ -24,7 +24,10 @@
 
             <div class="col-md-6">
                 <div class="container-fluid">
-                    <div class="container-fluid" *ngIf="(BillHasImage || canShowImageUploaded)">
+                    <div class="container-fluid" *ngIf="(BillHasImage && imageUploaded)">
+                        <img [src]="imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
+                    </div>
+                    <div class="container-fluid" *ngIf="(BillHasImage && !imageUploaded)">
                         <img [src]="'data:image/gif;base64,'+imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
                     </div>
                 </div>
