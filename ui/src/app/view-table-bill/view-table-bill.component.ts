@@ -79,8 +79,12 @@ export class ViewTableBillComponent implements OnInit {
     });
   }
 
-  togglePreviewImage() {
-    this.ViewImage = !this.ViewImage;
+  openImage() {
+    this.ViewImage = true;
+  }
+
+  closeImage() {
+    this.ViewImage = false;
   }
 
   DeleteBillFromThisComponent(): void {
