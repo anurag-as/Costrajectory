@@ -28,6 +28,7 @@ import { GlobalConfigsService } from './global-configs.service';
 import { ViewTableBillComponent } from './view-table-bill/view-table-bill.component';
 import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.component';
 import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.component';
+import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.compone
     TabularViewComponent,
     ViewTableBillComponent,
     ChangeBillComponent,
-    ViewBillComponent
+    ViewBillComponent,
+    DeleteBillComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,6 @@ import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.compone
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent],
+  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent, DeleteBillComponent],
 })
 export class AppModule { }
