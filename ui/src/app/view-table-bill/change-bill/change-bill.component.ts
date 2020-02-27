@@ -29,7 +29,7 @@ export class ChangeBillComponent implements OnInit {
   canShowImage = true;
   base64Data = undefined;
   uploading = 'not started';
-  fileToUpload =  this.ActualImageName;
+  fileToUpload =  null;
   imgfromServer = true;
   canShowImageUploaded = false;
   imageSrc;
