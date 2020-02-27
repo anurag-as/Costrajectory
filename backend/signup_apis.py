@@ -142,7 +142,6 @@ def upload():
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)
-
     user_name = request.form['username']
     title = request.form['Name']
     date_time = request.form['Date']
@@ -166,15 +165,17 @@ def recentTransactions():
     :return: 5 transactions for now. #TODO need to make it more dynamic and generalized later on.
     """
     user_name = request.json['username']
-    print(user_name)
     try:
         limit_transactions = request.json['limit']
     except KeyError:
         limit_transactions = 5 # limit of the transaction to be retrieved
-    transactions = query_recent_transaction(connection(), user_name, limit_transactions)
-    if not transactions:
-        return jsonify({False})
-    return build_json_recent_transactions(transactions, user_name)
+    try:
+        transactions = query_recent_transaction(connection(), user_name, limit_transactions)
+        if not transactions:
+            return jsonify({False})
+        return build_json_recent_transactions(transactions, user_name)
+    except:
+        return jsonify(False)
 
 
 @app.route('/previewImage', methods=['POST'])
