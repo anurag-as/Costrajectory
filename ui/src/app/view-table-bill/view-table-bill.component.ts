@@ -5,6 +5,7 @@ import { ChangeBillComponent } from './change-bill/change-bill.component';
 import { GlobalConfigsService } from '../global-configs.service';
 import { ViewBillComponent } from './view-bill/view-bill.component';
 import { DeleteBillComponent } from './delete-bill/delete-bill.component';
+import { EditBillComponent } from './edit-bill/edit-bill.component';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -31,6 +32,24 @@ export class ViewTableBillComponent implements OnInit {
 
   ChangeBill(): void {
     const dialogRef = this.dialog.open(ChangeBillComponent, {
+      width: '1300px'
+    });
+    dialogRef.componentInstance.username = this.Globals.GetUsername();
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.BillDescription = this.BillDescription;
+    dialogRef.componentInstance.BillAmount = this.BillAmount;
+    dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillHasImage = this.BillHasImage;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  EditBill(): void {
+    const dialogRef = this.dialog.open(EditBillComponent, {
       width: '1300px'
     });
     dialogRef.componentInstance.username = this.Globals.GetUsername();
