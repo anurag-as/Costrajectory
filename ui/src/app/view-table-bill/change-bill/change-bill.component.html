@@ -1,7 +1,7 @@
-<div class="container-fluid">
-    <form #imageForm="ngForm" (ngSubmit)="SubmitChanges(imageForm)">
+<div class="container-fluid" *ngIf="uploading == 'not started'">
+    <form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
         <div class="row">
-            <div [ngClass]="Image.value ==='' ? 'col-md-12' : 'col-md-6'">
+            <div [ngClass]="!(BillHasImage || canShowImageUploaded) ? 'col-md-12' : 'col-md-6'">
                 <div class="container-fluid">
                     <label>Bill name :</label>
                     <input id="name" #Bname required type="text" placeholder="Enter name" [(ngModel)]="BillName" name="name" class="form-control" value="test"/>
@@ -24,8 +24,8 @@
 
             <div class="col-md-6">
                 <div class="container-fluid">
-                    <div class="container-fluid" *ngIf="Image.value !==''">
-                        <img [src]="imageSrc" [alt]="imageForm.value.name" style="max-width: 90%; max-height: 90%; display: block;" >
+                    <div class="container-fluid" *ngIf="(BillHasImage || canShowImageUploaded)">
+                        <img [src]="'data:image/gif;base64,'+imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
                     </div>
                 </div>
             </div>

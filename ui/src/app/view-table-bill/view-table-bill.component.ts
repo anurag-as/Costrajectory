@@ -38,6 +38,9 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillDescription = this.BillDescription;
     dialogRef.componentInstance.BillAmount = this.BillAmount;
     dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillHasImage = this.BillHasImage;
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
