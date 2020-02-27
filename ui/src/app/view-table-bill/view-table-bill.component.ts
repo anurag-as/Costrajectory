@@ -88,7 +88,7 @@ export class ViewTableBillComponent implements OnInit {
   }
 
   DeleteBillFromThisComponent(): void {
-    const endpoint = 'http://127.0.0.1:5000/previewImage';
+    const endpoint = 'http://127.0.0.1:5000/deleteTransaction';
     const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername()};
     console.log('Deleting the entry');
     this.http.post(endpoint, QueryPayload).subscribe(data => {

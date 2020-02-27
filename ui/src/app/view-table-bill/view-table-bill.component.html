@@ -29,11 +29,11 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button> 
-            <!--  
-            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button> 
-            -->  
+            <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button>  
+            <!-- 
             <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="openImage()" data-toggle="modal" data-target="#PreviewBill"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button> 
+            -->
             <button type="button" class="btn" title="Add Image" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-plus fa-2x" aria-hidden="true"></span></button>   
             <button type="button" class="btn" title="Delete Bill" style="background-color:transparent;margin-left: 3px;" data-toggle="modal" data-target="#DeleteBill"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
         </div>
@@ -65,7 +65,7 @@
 
   <!-- Procedure to VIEW THE BILL -->
   <div class="modal fade" id="PreviewBill" tabindex="-1" role="dialog" aria-labelledby="PreviewBill" aria-hidden="false">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Preview Bill</h5>
@@ -77,6 +77,7 @@
                 <app-view-bill *ngIf="ViewImage"
                 [MappedImageName]="this.BillIdentifier"
                 [ActualImageName]="this.BillImage"
+                onchange="ngOnInit()"
                 ></app-view-bill>
           </div>
           <div class="modal-footer">
