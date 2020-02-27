@@ -29,10 +29,59 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button>   
-            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button> 
+            <!--  
+            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button> 
+            -->  
+            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="togglePreviewImage()" data-toggle="modal" data-target="#PreviewBill"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button> 
             <button type="button" class="btn" title="Add Image" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-plus fa-2x" aria-hidden="true"></span></button>   
-            <button type="button" class="btn" title="Delete Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
+            <button type="button" class="btn" title="Delete Bill" style="background-color:transparent;margin-left: 3px;" data-toggle="modal" data-target="#DeleteBill"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
         </div>
     </div>
 </div>
+
+
+  
+  <!-- Procedure to DELETE THE BILL -->
+  <div class="modal fade" id="DeleteBill" tabindex="-1" role="dialog" aria-labelledby="DeleteBill" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Bill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Do You Really want to delete the bill?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO, Close</button>
+            <button type="button" class="btn btn-primary" (click)="DeleteBillFromThisComponent()">Yes! Delete</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- Procedure to VIEW THE BILL -->
+  <div class="modal fade" id="PreviewBill" tabindex="-1" role="dialog" aria-labelledby="PreviewBill" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Preview Bill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                <app-view-bill *ngIf="ViewImage"
+                [MappedImageName]="this.BillIdentifier"
+                [ActualImageName]="this.BillImage"
+                ></app-view-bill>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+  </div>
