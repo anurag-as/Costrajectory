@@ -29,6 +29,7 @@ import { ViewTableBillComponent } from './view-table-bill/view-table-bill.compon
 import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.component';
 import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.component';
 import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.component';
+import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.c
     ViewTableBillComponent,
     ChangeBillComponent,
     ViewBillComponent,
-    DeleteBillComponent
+    DeleteBillComponent,
+    EditBillComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,6 @@ import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.c
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent, DeleteBillComponent],
+  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent, DeleteBillComponent, EditBillComponent],
 })
 export class AppModule { }

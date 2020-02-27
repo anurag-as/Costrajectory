@@ -42,4 +42,35 @@ export class UploadService {
 
         return this.http.post<Status>(endpoint, formData, {headers});
     }
+
+
+    postEditFile(fileToUpload: File, f: NgForm, username: string) {
+        this.TableAdder.AppendEntry(f, username);
+        const endpoint = 'http://127.0.0.1:5000/editBill';
+        const formData: FormData = new FormData();
+
+        formData.append('username', username);
+        formData.append('Description', f.value.des);
+        formData.append('Name', f.value.name);
+        formData.append('Date', f.value.date);
+        formData.append('Amount', f.value.val);
+
+        // console.log('TO check username: ', username);
+        if (fileToUpload === null) {
+            console.log('NO IMAGE');
+        } else {
+            console.log(f.value, fileToUpload.name);
+            formData.append('FileName', fileToUpload.name);
+            formData.append('image', fileToUpload, fileToUpload.name);
+        }
+       
+        // formData.append('body', fileToUpload, fileToUpload.name);
+
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'multipart/form-data');
+        headers.append('Accept', 'application/json');
+
+        return this.http.post<Status>(endpoint, formData, {headers});
+    }
+
 }
