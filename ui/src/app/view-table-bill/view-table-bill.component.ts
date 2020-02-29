@@ -60,6 +60,7 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
     dialogRef.componentInstance.ActualImageName = this.BillImage;
     dialogRef.componentInstance.BillHasImage = this.BillHasImage;
+    dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
