@@ -16,6 +16,7 @@ import shutil
 from utilities.download import *
 from utilities.utils import *
 from utilities.upload import upload as upload_db
+from utilities.upload import uploadFile
 from api_utils import *
 from flask import send_file
 import os
