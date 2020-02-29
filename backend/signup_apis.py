@@ -252,17 +252,17 @@ def edit_transaction():
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)
-    user_name = request.json['username']
-    uid = request.json['uid']
-    title = request.json['Name']
-    date_time = request.json['Date']
-    description = request.json['Description']
-    amount = request.json['Amount']
+    user_name = request.form['username']
+    uid = request.form['uid']
+    title = request.form['Name']
+    date_time = request.form['Date']
+    description = request.form['Description']
+    amount = request.form['Amount']
 
     # adding the transaction record
     edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description, mapped_file_name)
     # refresh the token, needs to be added to other API Calls
-    refresh_token(connection(), request.json['username'])
+    refresh_token(connection(), request.form['username'])
 
     return jsonify({'editStatus': True})
 
