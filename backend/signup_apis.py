@@ -15,7 +15,7 @@ import time
 import shutil
 from utilities.download import *
 from utilities.utils import *
-from utilities.upload import *
+from utilities.upload import upload as upload_db
 from api_utils import *
 from flask import send_file
 import os
@@ -207,6 +207,7 @@ def signout():
     """
     API when user signs out. Delete all his transaction Data
     """
+    upload_db() # upload the dropbox server to the latest code (automation)
     user_name = request.json['username']
     user_data_path = os.path.join(os.getcwd(), "temp", "." + user_name)
     if os.path.exists(user_data_path):
