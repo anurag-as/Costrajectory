@@ -168,7 +168,7 @@ def recentTransactions():
     try:
         limit_transactions = request.json['limit']
     except KeyError:
-        limit_transactions = 5 # limit of the transaction to be retrieved
+        limit_transactions = 5  # limit of the transaction to be retrieved
     try:
         transactions = query_recent_transaction(connection(), user_name, limit_transactions)
         if not transactions:
@@ -212,6 +212,20 @@ def signout():
     if os.path.exists(user_data_path):
         shutil.rmtree(user_data_path)
     return jsonify(True)
+
+
+@app.route('/deleteTransaction', methods=['DELETE'])
+@cross_origin()
+def deleteTransaction():
+    """
+    API to delete a particular transaction
+    """
+    uid = request.json['uid']
+    try:
+        message = delete_from_image(connection(), uid)
+        return jsonify(message)
+    except:
+        return jsonify("Deleting the transaction failed.")
 
 
 if __name__ == '__main__':
