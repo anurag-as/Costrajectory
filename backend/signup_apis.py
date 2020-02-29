@@ -165,6 +165,7 @@ def recentTransactions():
     :return: 5 transactions for now. #TODO need to make it more dynamic and generalized later on.
     """
     user_name = request.json['username']
+    refresh_token(connection(), user_name)
     try:
         limit_transactions = request.json['limit']
     except KeyError:
@@ -187,6 +188,7 @@ def previewImage():
     user_name = request.json['username']
     mapped_image_name = request.json['mapped_name']
     original_image_name = request.json['original_name']
+    refresh_token(connection(), user_name)
     try:
         # downloading the image to cacheable region
         user_name = str('.' + user_name)
@@ -223,6 +225,7 @@ def deleteTransaction():
     """
     user_name = request.json['username']
     uid = request.json['uid']
+    refresh_token(connection(), user_name)
     try:
         message = delete_from_image_table(connection(), uid, user_name)
         return jsonify(message)
