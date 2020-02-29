@@ -205,3 +205,4 @@ def delete_from_image_table(db_connection, uid, username):
                                    format(username=username,uid=uid))
     db_connection.commit()
     return "Transaction successfully deleted"
+
