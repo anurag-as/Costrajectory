@@ -220,9 +220,10 @@ def deleteTransaction():
     """
     API to delete a particular transaction
     """
+    user_name = request.form['username']
     uid = request.json['uid']
     try:
-        message = delete_from_image(connection(), uid)
+        message = delete_from_image(connection(), uid, user_name)
         return jsonify(message)
     except:
         return jsonify("Deleting the transaction failed.")

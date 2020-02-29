@@ -200,7 +200,8 @@ def query_recent_transaction(db_connection, username, limit=5):
 
 
 # function to delete a particular transaction
-def delete_from_image_table(db_connection, uid):
-    cursor = db_connection.execute('''DELETE from IMAGES where ID = "{uid}"'''.format(uid=uid))
+def delete_from_image_table(db_connection, uid, username):
+    cursor = db_connection.execute('''DELETE from IMAGES where ID = "{uid}" AND username = "{username}"'''.
+                                   format(username=username,uid=uid))
     db_connection.commit()
     return "Transaction successfully deleted"
