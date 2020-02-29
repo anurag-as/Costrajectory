@@ -19,6 +19,7 @@ export class EditBillComponent implements OnInit {
   BillAmount: string = undefined;
   BillEnum: any = undefined;
   BillHasImage: boolean = undefined;
+  BillID = undefined;
   BillIdentifier: string = undefined;
   BillImage: any = undefined;
   BillDate: any = undefined;
@@ -80,7 +81,7 @@ export class EditBillComponent implements OnInit {
     }
     this.uploading = 'started';
     console.log('CAME');
-    this.uploader.postEditFile(this.fileToUpload, f, this.username).subscribe(data => {
+    this.uploader.postEditFile(this.fileToUpload, f, this.username, this.BillID).subscribe(data => {
      // this.TableAdder.AppendEntry(this.CurrentForm);
      this.uploading = 'ended success';
      window.location.reload();
