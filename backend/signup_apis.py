@@ -230,7 +230,40 @@ def deleteTransaction():
         return jsonify("Deleting the transaction failed.")
 
 
+@app.route('/editTransaction', methods=['POST'])
+@cross_origin()
+def upload():
+    if 'image' in request.files:
+        # Image has to be uploaded
+        file = request.files['image']
+        file_name = file.filename
+        file_extension = file_name.split('.')[-1]
+        original_file_name = file_name
+        present_time = str(time.time())
+        file_name = present_time + '.' + file_extension
+        mapped_file_name = file_name
+        # adding image mapping for cross referencing later
+        insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+        # uploading the file to dropbox
+        uploadFile(file, mapped_file_name)
+    else:
+        # Image not a part of the transaction
+        mapped_file_name = str(False)
+    user_name = request.form['username']
+    title = request.form['Name']
+    date_time = request.form['Date']
+    description = request.form['Description']
+    amount = request.form['Amount']
+
+    # adding the transaction record
+    insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name)
+
+    # refresh the token, needs to be added to other API Calls
+    refresh_token(connection(), request.form['username'])
+
+    return jsonify({'editStatus': True})
+
+
 if __name__ == '__main__':
     download()
     app.run(port=5000, debug=True)
-
