@@ -4,7 +4,9 @@ import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { ChangeBillComponent } from './change-bill/change-bill.component';
 import { GlobalConfigsService } from '../global-configs.service';
 import { ViewBillComponent } from './view-bill/view-bill.component';
-
+import { DeleteBillComponent } from './delete-bill/delete-bill.component';
+import { EditBillComponent } from './edit-bill/edit-bill.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-view-table-bill',
@@ -20,8 +22,10 @@ export class ViewTableBillComponent implements OnInit {
   @Input() BillIdentifier: string = undefined; // mapped filename
   @Input() BillImage: any = undefined; // actual filename
   @Input() BillDate: any = undefined;
+  @Input() BillId: any = undefined;
+  ViewImage = false;
 
-  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) { }
+  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -35,6 +39,28 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillDescription = this.BillDescription;
     dialogRef.componentInstance.BillAmount = this.BillAmount;
     dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillHasImage = this.BillHasImage;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  EditBill(): void {
+    const dialogRef = this.dialog.open(EditBillComponent, {
+      width: '1300px'
+    });
+    dialogRef.componentInstance.username = this.Globals.GetUsername();
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.BillDescription = this.BillDescription;
+    dialogRef.componentInstance.BillAmount = this.BillAmount;
+    dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillHasImage = this.BillHasImage;
+    dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -43,6 +69,24 @@ export class ViewTableBillComponent implements OnInit {
 
   ViewBill(): void {
     const dialogRef = this.dialog.open(ViewBillComponent, {
+      width: '800px'
+    });
+    dialogRef.componentInstance.username = this.Globals.GetUsername();
+    /*
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.BillDescription = this.BillDescription;
+    dialogRef.componentInstance.BillAmount = this.BillAmount;
+    dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);*/
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  DeleteBill(): void {
+    const dialogRef = this.dialog.open(DeleteBillComponent, {
       width: '800px'
     });
     dialogRef.componentInstance.username = this.Globals.GetUsername();
@@ -55,6 +99,30 @@ export class ViewTableBillComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  openImage() {
+    this.ViewImage = true;
+  }
+
+  closeImage() {
+    this.ViewImage = false;
+  }
+
+  DeleteBillFromThisComponent(): void {
+    const endpoint = 'http://127.0.0.1:5000/deleteTransaction';
+    const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername()};
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: QueryPayload
+    };
+
+    console.log('Deleting the entry :',QueryPayload);
+    this.http.delete(endpoint, options).subscribe(data => {
+      window.location.reload();
     });
   }
 

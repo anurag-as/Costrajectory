@@ -7,19 +7,19 @@ import { UploadService } from '../../upload-form/upload.service';
 interface ReturnImage {
   Image: any;
 }
-
 @Component({
-  selector: 'app-change-bill',
-  templateUrl: './change-bill.component.html',
-  styleUrls: ['./change-bill.component.css']
+  selector: 'app-edit-bill',
+  templateUrl: './edit-bill.component.html',
+  styleUrls: ['./edit-bill.component.css']
 })
-export class ChangeBillComponent implements OnInit {
+export class EditBillComponent implements OnInit {
   username = undefined;
   BillName = '';
   BillDescription = '';
   BillAmount: string = undefined;
   BillEnum: any = undefined;
   BillHasImage: boolean = undefined;
+  BillID = undefined;
   BillIdentifier: string = undefined;
   BillImage: any = undefined;
   BillDate: any = undefined;
@@ -29,10 +29,9 @@ export class ChangeBillComponent implements OnInit {
   canShowImage = true;
   base64Data = undefined;
   uploading = 'not started';
-  fileToUpload =  null;
+  fileToUpload =  this.ActualImageName;
   imgfromServer = true;
   canShowImageUploaded = false;
-  imageUploaded = false;
   imageSrc;
 
   constructor(private http: HttpClient, private uploader: UploadService) { }
@@ -63,7 +62,6 @@ export class ChangeBillComponent implements OnInit {
     reader.onload = e => this.imageSrc = reader.result;
 
     reader.readAsDataURL(this.fileToUpload);
-    this.imageUploaded = true;
 }
 
 
@@ -83,7 +81,7 @@ export class ChangeBillComponent implements OnInit {
     }
     this.uploading = 'started';
     console.log('CAME');
-    this.uploader.postFile(this.fileToUpload, f, this.username).subscribe(data => {
+    this.uploader.postEditFile(this.fileToUpload, f, this.username, this.BillID).subscribe(data => {
      // this.TableAdder.AppendEntry(this.CurrentForm);
      this.uploading = 'ended success';
      window.location.reload();
