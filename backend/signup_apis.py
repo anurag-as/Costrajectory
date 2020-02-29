@@ -235,7 +235,7 @@ def deleteTransaction():
 
 @app.route('/editTransaction', methods=['POST'])
 @cross_origin()
-def upload():
+def edit_transaction():
     if 'image' in request.files:
         # Image has to be uploaded
         file = request.files['image']
@@ -252,17 +252,17 @@ def upload():
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)
-    user_name = request.form['username']
-    title = request.form['Name']
-    date_time = request.form['Date']
-    description = request.form['Description']
-    amount = request.form['Amount']
+    user_name = request.json['username']
+    uid = request.json['uid']
+    title = request.json['Name']
+    date_time = request.json['Date']
+    description = request.json['Description']
+    amount = request.json['Amount']
 
     # adding the transaction record
-    insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name)
-
+    edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description, mapped_file_name)
     # refresh the token, needs to be added to other API Calls
-    refresh_token(connection(), request.form['username'])
+    refresh_token(connection(), request.json['username'])
 
     return jsonify({'editStatus': True})
 
