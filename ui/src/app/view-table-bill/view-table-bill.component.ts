@@ -6,7 +6,7 @@ import { GlobalConfigsService } from '../global-configs.service';
 import { ViewBillComponent } from './view-bill/view-bill.component';
 import { DeleteBillComponent } from './delete-bill/delete-bill.component';
 import { EditBillComponent } from './edit-bill/edit-bill.component';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-view-table-bill',
@@ -112,8 +112,15 @@ export class ViewTableBillComponent implements OnInit {
   DeleteBillFromThisComponent(): void {
     const endpoint = 'http://127.0.0.1:5000/deleteTransaction';
     const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername()};
-    console.log('Deleting the entry');
-    this.http.post(endpoint, QueryPayload).subscribe(data => {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: QueryPayload
+    };
+
+    console.log('Deleting the entry :',QueryPayload);
+    this.http.delete(endpoint, options).subscribe(data => {
       window.location.reload();
     });
   }
