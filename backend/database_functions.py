@@ -206,3 +206,18 @@ def delete_from_image_table(db_connection, uid, username):
     db_connection.commit()
     return "Transaction successfully deleted"
 
+
+# function to edit the transactions
+def edit_transactions_image_table(db_connection, uid, username, title, datetime, amount, description, image_name):
+    db_connection.execute('''UPDATE IMAGES SET  title="{title}",
+                                                datetime="{datetime}",
+                                                amount="{amount}",
+                                                description="{description}",
+                                                image_name="{image_name}"
+                            WHERE username="{username}" AND
+                                  ID="{uid}"'''
+                          .format(uid=uid, username=username, title=title, datetime=datetime, amount=amount,
+                                  description=description, image_name=image_name,
+                                  ))
+    db_connection.commit()
+    return "Transaction Updated Successfully"

@@ -15,7 +15,7 @@ import time
 import shutil
 from utilities.download import *
 from utilities.utils import *
-from utilities.upload import *
+from utilities.upload import upload as upload_db
 from api_utils import *
 from flask import send_file
 import os
@@ -165,6 +165,7 @@ def recentTransactions():
     :return: 5 transactions for now. #TODO need to make it more dynamic and generalized later on.
     """
     user_name = request.json['username']
+    refresh_token(connection(), user_name)
     try:
         limit_transactions = request.json['limit']
     except KeyError:
@@ -187,6 +188,7 @@ def previewImage():
     user_name = request.json['username']
     mapped_image_name = request.json['mapped_name']
     original_image_name = request.json['original_name']
+    refresh_token(connection(), user_name)
     try:
         # downloading the image to cacheable region
         user_name = str('.' + user_name)
@@ -207,6 +209,7 @@ def signout():
     """
     API when user signs out. Delete all his transaction Data
     """
+    upload_db() # upload the dropbox server to the latest code (automation)
     user_name = request.json['username']
     user_data_path = os.path.join(os.getcwd(), "temp", "." + user_name)
     if os.path.exists(user_data_path):
@@ -222,11 +225,46 @@ def deleteTransaction():
     """
     user_name = request.json['username']
     uid = request.json['uid']
+    refresh_token(connection(), user_name)
     try:
         message = delete_from_image_table(connection(), uid, user_name)
         return jsonify(message)
     except:
         return jsonify("Deleting the transaction failed.")
+
+
+@app.route('/editTransaction', methods=['POST'])
+@cross_origin()
+def edit_transaction():
+    if 'image' in request.files:
+        # Image has to be uploaded
+        file = request.files['image']
+        file_name = file.filename
+        file_extension = file_name.split('.')[-1]
+        original_file_name = file_name
+        present_time = str(time.time())
+        file_name = present_time + '.' + file_extension
+        mapped_file_name = file_name
+        # adding image mapping for cross referencing later
+        insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+        # uploading the file to dropbox
+        uploadFile(file, mapped_file_name)
+    else:
+        # Image not a part of the transaction
+        mapped_file_name = str(False)
+    user_name = request.form['username']
+    uid = request.form['uid']
+    title = request.form['Name']
+    date_time = request.form['Date']
+    description = request.form['Description']
+    amount = request.form['Amount']
+
+    # adding the transaction record
+    edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description, mapped_file_name)
+    # refresh the token, needs to be added to other API Calls
+    refresh_token(connection(), request.form['username'])
+
+    return jsonify({'editStatus': True})
 
 
 if __name__ == '__main__':
