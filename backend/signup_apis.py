@@ -51,6 +51,8 @@ api.add_resource(CheckUser, '/check_user/<username>')
 api.add_resource(AddUser, '/add_user/<username>/')
 
 
+
+# API to check a username is available for signup
 @app.route('/checkUser', methods=['POST'])
 @cross_origin()
 def checkUser():
@@ -62,6 +64,7 @@ def checkUser():
     return x
 
 
+# Api to register a new user
 @app.route('/registerUser', methods=['POST'])
 @cross_origin()
 def registerUser():
@@ -94,6 +97,7 @@ def check_validity_token(username, token):
     return float(present_time) - float(date_time) < timeout
 
 
+# API to check the validity of a token for a particular username (<timeout)
 @app.route('/checkValidity', methods=['POST'])
 @cross_origin()
 def checkValid():
@@ -104,6 +108,7 @@ def checkValid():
     return x
 
 
+# API to signin a user after authentication
 @app.route('/signin', methods=['POST'])
 @cross_origin()
 def signInUser():
@@ -124,6 +129,9 @@ def signInUser():
     return jsonify({'valid': valid, 'token': token, 'username': username})
 
 
+# API to add a new transaction
+# Legacy version - Uploading a bill, hence the name
+# Later version - Adding a new transaction
 @app.route('/uploadBill', methods=['POST'])
 @cross_origin()
 def upload():
@@ -158,6 +166,7 @@ def upload():
     return jsonify({'uploadStatus': True})
 
 
+# API to return the most recent transactions
 @app.route('/getRecentTransactions', methods=['POST'])
 @cross_origin()
 def recentTransactions():
@@ -180,6 +189,7 @@ def recentTransactions():
         return jsonify(False)
 
 
+# API to return an image in b'64 format for preview(large view/downloading)
 @app.route('/previewImage', methods=['POST'])
 @cross_origin()
 def previewImage():
@@ -204,6 +214,8 @@ def previewImage():
         return jsonify(False)
 
 
+# API to signal that a particular user signed out
+# Used to delete his data, also updating the db to remote
 @app.route('/signout', methods=['DELETE'])
 @cross_origin()
 def signout():
@@ -218,6 +230,7 @@ def signout():
     return jsonify(True)
 
 
+# API to delete a particular transaction based on uid
 @app.route('/deleteTransaction', methods=['DELETE'])
 @cross_origin()
 def deleteTransaction():
@@ -234,6 +247,7 @@ def deleteTransaction():
         return jsonify("Deleting the transaction failed.")
 
 
+# API to edit a particular transaction based on uid
 @app.route('/editTransaction', methods=['POST'])
 @cross_origin()
 def edit_transaction():
