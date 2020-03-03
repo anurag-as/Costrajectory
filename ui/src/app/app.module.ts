@@ -30,6 +30,10 @@ import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.c
 import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.component';
 import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.component';
 import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -49,7 +53,8 @@ import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.compone
     ChangeBillComponent,
     ViewBillComponent,
     DeleteBillComponent,
-    EditBillComponent
+    EditBillComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,9 @@ import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.compone
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MatProgressBarModule,
+    NgbModule
   ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],

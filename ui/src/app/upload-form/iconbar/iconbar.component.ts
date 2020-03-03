@@ -2,6 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AddBillsComponent } from '../add-bills/add-bills.component';
 import { Input } from '@angular/core';
+import {Router} from '@angular/router';
+import {ThemePalette} from '@angular/material/core';
+
 
 @Component({
   selector: 'app-iconbar',
@@ -10,9 +13,12 @@ import { Input } from '@angular/core';
 })
 export class IconbarComponent implements OnInit {
   @Input() userName;
-  constructor(public dialog: MatDialog) {}
+  usageQuota = undefined;
+  color: ThemePalette = 'accent';
+  constructor(public dialog: MatDialog, private route: Router) {}
 
   ngOnInit() {
+    this.usageQuota = 50;
   }
 
   addBill(): void {
@@ -24,6 +30,14 @@ export class IconbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  analytics(): void {
+    this.route.navigate(['/analytics']);
+  }
+
+  GoHome(): void {
+    this.route.navigate(['']);
   }
 
 }
