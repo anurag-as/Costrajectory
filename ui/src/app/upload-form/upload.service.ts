@@ -24,6 +24,7 @@ export class UploadService {
         formData.append('Name', f.value.name);
         formData.append('Date', f.value.date);
         formData.append('Amount', f.value.val);
+        formData.append('category', f.value.cat);
 
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {
@@ -56,6 +57,8 @@ export class UploadService {
         formData.append('Date', f.value.date);
         formData.append('Amount', f.value.val);
         formData.append('uid', BillId);
+        formData.append('category', f.value.cat);
+
         
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {

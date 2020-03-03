@@ -1,5 +1,9 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row> 
+        <button type="button" class="btn" title="Home" style="background-color:transparent" (click)="GoHome()"><span class="fa fa-home fa-lg" aria-hidden="true"></span></button>   
         <button type="button" class="btn" title="Add Bill" style="background-color:transparent" (click)="addBill()"><span class="fa fa-plus fa-lg" aria-hidden="true"></span></button>   
+        <button type="button" class="btn" title="Analytics" style="background-color:transparent" (click)="analytics()"><span class="fa fa-bar-chart fa-lg" aria-hidden="true"></span></button> 
+        <span class="example-spacer"></span>
+        <mat-progress-bar mode="determinate" [value]="usageQuota" [color]="color"></mat-progress-bar>
     </mat-toolbar-row>
 </mat-toolbar>

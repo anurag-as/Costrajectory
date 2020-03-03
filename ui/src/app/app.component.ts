@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   authorizationDone = false;
   hasKey = false;
   userTokenData: TokenData;
+  progress = 78;
 
   constructor(private sessionStorageclient: SessionStorage, public globals: GlobalConfigsService) {}
 

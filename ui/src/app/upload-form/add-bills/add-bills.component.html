@@ -12,6 +12,20 @@
                     <label>Description:</label>
                     <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control"/>
                     
+                    <label>Category:</label>
+                    <select class="custom-select" input id="cat" required ngModel name="cat">
+                        <option value="" disabled>Choose the category</option>
+                        <option>Travel</option>
+                        <option>Shopping</option>
+                        <option>Investments</option>
+                        <option>Food</option>
+                        <option>Utilities</option>
+                        <option>Medical</option>
+                        <option>Entertainment</option>
+                        <option>Housing</option>
+                        <option>Others</option>
+                     </select>
+
                     <label>Date: </label>
                     <input id="date" required type="date" value="10-02-1996" ngModel name="date" class="form-control"/>
 
