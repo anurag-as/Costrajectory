@@ -23,6 +23,7 @@ export class ViewTableBillComponent implements OnInit {
   @Input() BillImage: any = undefined; // actual filename
   @Input() BillDate: any = undefined;
   @Input() BillId: any = undefined;
+  @Input() BillCategory: any = undefined;
   ViewImage = false;
 
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) { }

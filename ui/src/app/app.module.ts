@@ -32,6 +32,8 @@ import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.c
 import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 @NgModule({
@@ -71,6 +73,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatInputModule,
     AngularFontAwesomeModule,
     MatProgressBarModule,
+    MatMenuModule
   ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],
