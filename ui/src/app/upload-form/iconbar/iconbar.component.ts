@@ -14,11 +14,11 @@ import {ThemePalette} from '@angular/material/core';
 export class IconbarComponent implements OnInit {
   @Input() userName;
   usageQuota = undefined;
-  color: ThemePalette = 'accent';
+  color: ThemePalette = 'warn';
   constructor(public dialog: MatDialog, private route: Router) {}
 
   ngOnInit() {
-    this.usageQuota = 50;
+    this.usageQuota = 90;
   }
 
   addBill(): void {
