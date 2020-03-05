@@ -25,7 +25,6 @@ export class UploadService {
         formData.append('Date', f.value.date);
         formData.append('Amount', f.value.val);
         formData.append('category', f.value.cat);
-
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {
             console.log('NO IMAGE');
@@ -48,9 +47,9 @@ export class UploadService {
     postEditFile(fileToUpload: File, f: NgForm, username: string, BillId: any) {
         this.TableAdder.AppendEntry(f, username);
         const endpoint = 'http://127.0.0.1:5000/editTransaction';
-        console.log('PATH TAKEN TO EDIT: ',endpoint);
+        console.log('PATH TAKEN TO EDIT: ', endpoint);
         const formData: FormData = new FormData();
-
+        
         formData.append('username', username);
         formData.append('Description', f.value.des);
         formData.append('Name', f.value.name);

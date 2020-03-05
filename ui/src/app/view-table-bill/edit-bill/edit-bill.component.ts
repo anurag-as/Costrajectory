@@ -23,6 +23,7 @@ export class EditBillComponent implements OnInit {
   BillIdentifier: string = undefined;
   BillImage: any = undefined;
   BillDate: any = undefined;
+  BillCategory: any = undefined;
   MappedImageName = undefined;
   ActualImageName = undefined;
   imageToShow = undefined;

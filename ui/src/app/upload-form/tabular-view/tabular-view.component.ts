@@ -38,7 +38,8 @@ export class TabularViewComponent implements OnInit {
             true,
             entry.Identifier,
             data.ImageEntries[entry.Identifier],
-            entry.uid
+            entry.uid,
+            entry.category
           ]);
         } else {
           this.BillEntries.push([
@@ -50,7 +51,8 @@ export class TabularViewComponent implements OnInit {
             false,
             undefined,
             undefined,
-            entry.uid
+            entry.uid,
+            entry.category
           ]);
         }
       }

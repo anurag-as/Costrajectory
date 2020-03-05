@@ -8,6 +8,11 @@
     width: 10em;
   }
 
+  .progressbar {
+    height: 1em;
+    width: 10em;
+  }
+
   .example-spacer {
     flex: 1 1 auto;
   }
