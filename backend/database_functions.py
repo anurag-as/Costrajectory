@@ -83,18 +83,18 @@ def create_image_uploads(db_connection):
          datetime           TEXT    NOT NULL,
          amount             TEXT    NOT NULL,
          description        TEXT    NOT NULL,
-         image_name         TEXT    NOT NULL
-         );''')
+         image_name         TEXT    NOT NULL,
+         category           TEXT    NOT NULL);''')
     print("Image Table created successfully")
     db_connection.commit()
 
 
 # function to add image upload entries into IMAGES table for query and download
-def insert_into_image_table(db_connection, username, title, datetime, amount, description, image_name):
-    db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name) 
-        VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}")'''
+def insert_into_image_table(db_connection, username, title, datetime, amount, description, image_name, category):
+    db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name, category) 
+        VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}","{category}")'''
                           .format(username=username, title=title, datetime=datetime, amount=amount,
-                                  description=description, image_name=image_name,
+                                  description=description, image_name=image_name,category=category
                                   ))
     print("Image entry inserted into table")
     db_connection.commit()
@@ -189,7 +189,7 @@ def refresh_token(db_connection, username):
 # function to query recent transactions of a particular user
 # limit has also been introduced to enhance the functionality and for future user
 def query_recent_transaction(db_connection, username, limit=5):
-    cursor = db_connection.execute('''SELECT title, datetime, amount, description, image_name, ID
+    cursor = db_connection.execute('''SELECT title, datetime, amount, description, image_name, ID, category
       FROM IMAGES where username = "{username}"
     LIMIT {limit}'''.format(username=username, limit=limit))
     transactions = []  # list of recent transactions
@@ -202,22 +202,24 @@ def query_recent_transaction(db_connection, username, limit=5):
 # function to delete a particular transaction
 def delete_from_image_table(db_connection, uid, username):
     cursor = db_connection.execute('''DELETE from IMAGES where ID = "{uid}" AND username = "{username}"'''.
-                                   format(username=username,uid=uid))
+                                   format(username=username, uid=uid))
     db_connection.commit()
     return "Transaction successfully deleted"
 
 
 # function to edit the transactions
-def edit_transactions_image_table(db_connection, uid, username, title, datetime, amount, description, image_name):
+def edit_transactions_image_table(db_connection, uid, username, title, datetime, amount, description, image_name,
+                                  category):
     db_connection.execute('''UPDATE IMAGES SET  title="{title}",
                                                 datetime="{datetime}",
                                                 amount="{amount}",
                                                 description="{description}",
-                                                image_name="{image_name}"
+                                                image_name="{image_name}",
+                                                category="{category}"
                             WHERE username="{username}" AND
                                   ID="{uid}"'''
                           .format(uid=uid, username=username, title=title, datetime=datetime, amount=amount,
-                                  description=description, image_name=image_name,
+                                  description=description, image_name=image_name, category=category
                                   ))
     db_connection.commit()
     return "Transaction Updated Successfully"

@@ -51,7 +51,6 @@ api.add_resource(CheckUser, '/check_user/<username>')
 api.add_resource(AddUser, '/add_user/<username>/')
 
 
-
 # API to check a username is available for signup
 @app.route('/checkUser', methods=['POST'])
 @cross_origin()
@@ -156,9 +155,9 @@ def upload():
     date_time = request.form['Date']
     description = request.form['Description']
     amount = request.form['Amount']
-
+    category = request.form['category']
     # adding the transaction record
-    insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name)
+    insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name, category)
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
@@ -273,9 +272,10 @@ def edit_transaction():
     date_time = request.form['Date']
     description = request.form['Description']
     amount = request.form['Amount']
-
+    category = request.form['category']
     # adding the transaction record
-    edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description, mapped_file_name)
+    edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description,
+                                  mapped_file_name, category)
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
 
