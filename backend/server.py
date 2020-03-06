@@ -138,6 +138,8 @@ def upload():
         # Image has to be uploaded
         file = request.files['image']
         file_name = file.filename
+        file.seek(0, os.SEEK_END)
+        file_size = file.tell()/(10**6) # file_size in mb
         file_extension = file_name.split('.')[-1]
         original_file_name = file_name
         present_time = str(time.time())
@@ -145,6 +147,10 @@ def upload():
         mapped_file_name = file_name
         # adding image mapping for cross referencing later
         insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+
+        # adding entry to image size table
+        insert_into_image_size_table(connection(), mapped_file_name, file_size)
+
         # uploading the file to dropbox
         uploadFile(file, mapped_file_name)
     else:
@@ -261,6 +267,10 @@ def edit_transaction():
         mapped_file_name = file_name
         # adding image mapping for cross referencing later
         insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+
+        # adding entry to image size table
+        insert_into_image_size_table(connection(), mapped_file_name, file_size)
+
         # uploading the file to dropbox
         uploadFile(file, mapped_file_name)
     else:
