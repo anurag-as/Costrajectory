@@ -247,7 +247,6 @@ def space_usage(db_connection, username):
     sizes = []  # list of image sizes
     for row in cursor:
         if row[0] != "False":
-            print(row[0])
             cursor1 = db_connection.execute('''SELECT file_size
                       FROM IMAGE_SIZE where mapped_name = "{image_name}"
                 '''.format(image_name=row[0]))
