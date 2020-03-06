@@ -18,7 +18,7 @@ def download():
     dbx = dropbox.Dropbox(token)
     if cfg['environment']['host'] == 'linux':
         print("Linux Environment")
-        dbx.files_download_to_file(os.path.join(os.getcwd().strip('utilities'),'costrajectory.db'),
+        dbx.files_download_to_file(os.path.join(os.getcwd().strip('utilities'), 'costrajectory.db'),
                                '/costrajectory.db')
     else:
         print("Windows Environment")

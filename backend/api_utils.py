@@ -10,7 +10,7 @@ def build_json_recent_transactions(transactions, user_name):
     for each_transaction in transactions:
         intermediate_json = {'Name': each_transaction[0], 'Description': each_transaction[3],
                              'Date': each_transaction[1], 'Amount': each_transaction[2],
-                             'uid': each_transaction[5]}
+                             'uid': each_transaction[5],   'category': each_transaction[6]}
         if each_transaction[4]:
             intermediate_json['HasImage'] = True
             intermediate_json['Identifier'] = each_transaction[4]
