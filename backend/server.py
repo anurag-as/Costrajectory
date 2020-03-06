@@ -250,7 +250,7 @@ def deleteTransaction():
     try:
 
         message = delete_from_image_table(connection(), uid, user_name)
-        delete_file(mapped_name)
+        delete_file(mapped_name)    # deleting that image from dropbox
         return jsonify(message)
     except:
         return jsonify("Deleting the transaction failed.")
