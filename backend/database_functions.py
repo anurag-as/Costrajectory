@@ -177,7 +177,6 @@ def refresh_token(db_connection, username):
     if not latest_token:
         return False
     new_date_time = str(time.time())
-    print(new_date_time)
     db_connection.execute('''UPDATE TOKENS 
         set datetime = "{new_date_time}"
         where username = "{username}" AND token = "{token}" 
