@@ -3,8 +3,15 @@
 import dropbox
 import os
 from dropbox.files import WriteMode
+from utils import *
+import yaml
 
-token = 'UVXGVWSMloAAAAAAAAAAYH3ZFioGbCYRCJGNDTnYGkFy0-qmsh9AwB-BofQ14gW2'
+root_directory = get_root_directory()
+
+with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
+    cfg = yaml.load(ymlfile, yaml.SafeLoader)
+
+token = cfg['token']['dropbox']
 
 
 def upload():
@@ -18,7 +25,6 @@ def upload():
 def uploadFile(file, file_name):
     dbx = dropbox.Dropbox(token)
     dbx.files_upload(file.read(), "/"+file_name, mode=WriteMode('overwrite'))
-    print(file_name + 'Uploaded')
 
 
 if __name__ == "__main__":
