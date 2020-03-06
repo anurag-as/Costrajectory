@@ -2,6 +2,7 @@ import binascii
 import hashlib
 import os
 import random
+import yaml
 
 
 def hash_password(password):
@@ -53,3 +54,11 @@ def get_root_directory():
         current_path = head
     current_path = os.path.join(current_path, "costrajectory")
     return current_path
+
+
+def get_total_size():
+    root_directory = get_root_directory()
+    with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
+        cfg = yaml.load(ymlfile, yaml.SafeLoader)
+        total_quota = cfg['server']['limit']
+        return total_quota

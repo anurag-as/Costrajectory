@@ -295,17 +295,18 @@ def edit_transaction():
 # API to get usage details for a particular user
 @app.route('/usage', methods=['POST'])
 @cross_origin()
-def deleteTransaction():
+def user_space_usage():
     """
     API for usage details
     """
     user_name = request.json['username']
     refresh_token(connection(), user_name)
-    try:
-        message = delete_from_image_table(connection(), uid, user_name)
-        return jsonify(message)
-    except:
-        return jsonify("Deleting the transaction failed.")
+    #try:
+    size = space_usage(connection(), user_name)
+    total_quota = get_total_size()
+    return jsonify({'TotalQuota': total_quota, 'UsedQuota': size})
+    #except:
+    #    return jsonify("Getting Size Failed")
 
 
 if __name__ == '__main__':
