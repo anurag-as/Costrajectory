@@ -301,12 +301,9 @@ def user_space_usage():
     """
     user_name = request.json['username']
     refresh_token(connection(), user_name)
-    #try:
     size = space_usage(connection(), user_name)
     total_quota = get_total_size()
     return jsonify({'TotalQuota': total_quota, 'UsedQuota': size})
-    #except:
-    #    return jsonify("Getting Size Failed")
 
 
 if __name__ == '__main__':
