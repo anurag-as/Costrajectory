@@ -17,6 +17,7 @@ from utilities.download import *
 from utilities.utils import *
 from utilities.upload import upload as upload_db
 from utilities.upload import uploadFile
+from utilities.delete_file import delete_file
 from api_utils import *
 from flask import send_file
 import os
@@ -245,8 +246,11 @@ def deleteTransaction():
     user_name = request.json['username']
     uid = request.json['uid']
     refresh_token(connection(), user_name)
+    mapped_name = request.json['mapped_name']
     try:
+
         message = delete_from_image_table(connection(), uid, user_name)
+        delete_file(mapped_name)
         return jsonify(message)
     except:
         return jsonify("Deleting the transaction failed.")
