@@ -26,7 +26,6 @@ def create_user_table(db_connection):
          (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
          username           TEXT    NOT NULL,
          password           TEXT     NOT NULL);''')
-    print("User Table created successfully")
     db_connection.commit()
 
 
@@ -35,7 +34,6 @@ def insert_into_user_table(db_connection, username, password):
     password = hash_password(password)
     db_connection.execute('''INSERT INTO USERS (username, password) VALUES ("{username}","{password}")'''
                           .format(username=username, password=password))
-    print("User entry inserted into table")
     db_connection.commit()
 
 
@@ -43,7 +41,6 @@ def insert_into_user_table(db_connection, username, password):
 def query_all_records(db_connection):
     cursor = db_connection.execute("SELECT * FROM USERS")
     for row in cursor:
-        print(row[1])
     db_connection.commit()
 
 
@@ -85,7 +82,6 @@ def create_image_uploads(db_connection):
          description        TEXT    NOT NULL,
          image_name         TEXT    NOT NULL,
          category           TEXT    NOT NULL);''')
-    print("Image Table created successfully")
     db_connection.commit()
 
 
@@ -96,7 +92,6 @@ def insert_into_image_table(db_connection, username, title, datetime, amount, de
                           .format(username=username, title=title, datetime=datetime, amount=amount,
                                   description=description, image_name=image_name,category=category
                                   ))
-    print("Image entry inserted into table")
     db_connection.commit()
 
 
@@ -107,7 +102,6 @@ def create_token_table(db_connection):
          username           TEXT    NOT NULL,
          datetime           TEXT    NOT NULL,
          token        TEXT    NOT NULL);''')
-    print("Token Table created successfully")
     db_connection.commit()
 
 
@@ -115,7 +109,6 @@ def create_token_table(db_connection):
 def insert_into_token_table(db_connection, username, datetime, token):
     db_connection.execute('''INSERT INTO TOKENS (username, datetime, token) VALUES ("{username}","{datetime}",
     "{token}")'''.format(username=username, datetime=datetime, token=token))
-    print("Token entry inserted into table")
     db_connection.commit()
 
 
@@ -137,7 +130,6 @@ def create_image_mapping_table(db_connection):
          username           TEXT    NOT NULL,
          original_name           TEXT    NOT NULL,
          mapped_name        TEXT    NOT NULL);''')
-    print("Image mapping Table created successfully")
     db_connection.commit()
 
 
@@ -145,7 +137,6 @@ def create_image_mapping_table(db_connection):
 def insert_into_image_mapping_table(db_connection, username, original, mapped):
     db_connection.execute('''INSERT INTO IMAGEMAPPING (username, original_name, mapped_name) VALUES ("{username}","{original}",
     "{mapped}")'''.format(username=username, original=original, mapped=mapped))
-    print("Image Mapping entry inserted into table")
     db_connection.commit()
 
 
@@ -237,7 +228,6 @@ def create_image_size_table(db_connection):
          (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
          mapped_name           TEXT    NOT NULL,
          file_size           TEXT    NOT NULL);''')
-    print("Image size Table created successfully")
     db_connection.commit()
 
 
@@ -245,7 +235,10 @@ def create_image_size_table(db_connection):
 def insert_into_image_size_table(db_connection, mapped, size):
     db_connection.execute('''INSERT INTO IMAGE_SIZE (mapped_name, file_size) VALUES ("{mapped}","{size}")'''
                           .format(size=size, mapped=mapped))
-    print("Image size entry inserted into table")
     db_connection.commit()
 
 
+# function to calculate total space consumed by user in server
+def space_usage(db_connection, username):
+    db_connection.execute('''INSERT INTO IMAGE_SIZE (mapped_name, file_size) VALUES ("{mapped}","{size}")'''
+                          .format(size=size, mapped=mapped))

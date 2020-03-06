@@ -292,6 +292,22 @@ def edit_transaction():
     return jsonify({'editStatus': True})
 
 
+# API to get usage details for a particular user
+@app.route('/usage', methods=['POST'])
+@cross_origin()
+def deleteTransaction():
+    """
+    API for usage details
+    """
+    user_name = request.json['username']
+    refresh_token(connection(), user_name)
+    try:
+        message = delete_from_image_table(connection(), uid, user_name)
+        return jsonify(message)
+    except:
+        return jsonify("Deleting the transaction failed.")
+
+
 if __name__ == '__main__':
     download()
     app.run(port=5000, debug=True)
