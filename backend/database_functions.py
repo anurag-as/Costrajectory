@@ -243,7 +243,9 @@ def create_image_size_table(db_connection):
 
 # function to insert into image_size into table
 def insert_into_image_size_table(db_connection, mapped, size):
-    db_connection.execute('''INSERT INTO IMAGEMAPPING (mapped_name, file_size) VALUES ("{mapped}","{size}")'''
+    db_connection.execute('''INSERT INTO IMAGE_SIZE (mapped_name, file_size) VALUES ("{mapped}","{size}")'''
                           .format(size=size, mapped=mapped))
     print("Image size entry inserted into table")
     db_connection.commit()
+
+
