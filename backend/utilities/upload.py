@@ -3,7 +3,7 @@
 import dropbox
 import os
 from dropbox.files import WriteMode
-from utils import *
+from utilities.utils import *
 import yaml
 
 root_directory = get_root_directory()
