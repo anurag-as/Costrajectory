@@ -33,8 +33,7 @@ import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.compone
 import { AnalyticsComponent } from './analytics/analytics.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
-
-
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   declarations: [
@@ -73,7 +72,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     AngularFontAwesomeModule,
     MatProgressBarModule,
-    MatMenuModule
+    MatMenuModule,
+    ProgressbarModule.forRoot()
   ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],

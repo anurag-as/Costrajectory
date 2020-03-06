@@ -18,7 +18,7 @@ export class IconbarComponent implements OnInit {
   constructor(public dialog: MatDialog, private route: Router) {}
 
   ngOnInit() {
-    this.usageQuota = 90;
+    this.usageQuota = 10;
   }
 
   addBill(): void {
