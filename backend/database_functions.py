@@ -221,3 +221,10 @@ def edit_transactions_image_table(db_connection, uid, username, title, datetime,
                                   ))
     db_connection.commit()
     return "Transaction Updated Successfully"
+
+
+# function to add a column to IMAGES table
+def add_category(db_connection):
+    db_connection.execute('''ALTER TABLE IMAGES ADD
+                             category TEXT;''')
+    db_connection.commit()
