@@ -103,7 +103,9 @@ def check_validity_token(username, token):
 def checkValid():
     username = request.json['username']
     token = request.json['token']
+    print("Username: ", username, "Token", token)
     valid = check_validity_token(username, token)
+    print(valid)
     x = jsonify({'valid': valid})
     return x
 
@@ -139,8 +141,7 @@ def upload():
         # Image has to be uploaded
         file = request.files['image']
         file_name = file.filename
-        file.seek(0, os.SEEK_END)
-        file_size = file.tell()/(10**6) # file_size in mb
+        
         file_extension = file_name.split('.')[-1]
         original_file_name = file_name
         present_time = str(time.time())
@@ -149,11 +150,15 @@ def upload():
         # adding image mapping for cross referencing later
         insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
 
-        # adding entry to image size table
-        insert_into_image_size_table(connection(), mapped_file_name, file_size)
-
         # uploading the file to dropbox
         uploadFile(file, mapped_file_name)
+
+        #file.seek(0, os.SEEK_END)
+        #file_size = file.tell()/(10**6) # file_size in mb
+        # adding entry to image size table
+        file_size = 100.0
+        insert_into_image_size_table(connection(), mapped_file_name, file_size)
+        
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)
@@ -272,11 +277,14 @@ def edit_transaction():
         # adding image mapping for cross referencing later
         insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
 
+        # uploading the file to dropbox
+        uploadFile(file, mapped_file_name)
+
+        file.seek(0, os.SEEK_END)
+        file_size = file.tell()/(10**6) # file_size in mb
         # adding entry to image size table
         insert_into_image_size_table(connection(), mapped_file_name, file_size)
 
-        # uploading the file to dropbox
-        uploadFile(file, mapped_file_name)
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)

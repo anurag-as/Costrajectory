@@ -4,7 +4,7 @@ import dropbox
 import os
 import yaml
 from dropbox.files import WriteMode
-from utils import *
+from utilities.utils import *
 
 root_directory = get_root_directory()
 
