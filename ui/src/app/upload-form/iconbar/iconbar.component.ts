@@ -4,7 +4,12 @@ import { AddBillsComponent } from '../add-bills/add-bills.component';
 import { Input } from '@angular/core';
 import {Router} from '@angular/router';
 import {ThemePalette} from '@angular/material/core';
+import {HttpClient} from '@angular/common/http';
 
+interface usageStats {
+  TotalQuota: Number,
+  UsedQuota: Number;
+}
 
 @Component({
   selector: 'app-iconbar',
@@ -14,11 +19,24 @@ import {ThemePalette} from '@angular/material/core';
 export class IconbarComponent implements OnInit {
   @Input() userName;
   usageQuota = undefined;
+  maxQuota = undefined;
   color: ThemePalette = 'warn';
-  constructor(public dialog: MatDialog, private route: Router) {}
+  constructor(public dialog: MatDialog, private route: Router, private http: HttpClient) {}
+
+  getUsageQuota() {
+    const endpoint = 'http://127.0.0.1:5000/usage';
+    const QueryPayload = {username:this.userName};
+    console.log('USAGE:',QueryPayload);
+    return this.http.post<usageStats>(endpoint, QueryPayload);
+  }
 
   ngOnInit() {
     this.usageQuota = 10;
+    this.getUsageQuota().subscribe(data => {
+      this.maxQuota = data.TotalQuota; 
+      this.usageQuota = data.UsedQuota;
+      this.usageQuota = Math.round((this.usageQuota + Number.EPSILON) * 100) / 100
+    })
   }
 
   addBill(): void {

@@ -49,7 +49,7 @@ export class TabularViewComponent implements OnInit {
             entry.Date,
             entry.Amount,
             false,
-            undefined,
+            entry.Identifier,
             undefined,
             entry.uid,
             entry.category

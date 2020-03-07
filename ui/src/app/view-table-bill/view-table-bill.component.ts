@@ -114,7 +114,7 @@ export class ViewTableBillComponent implements OnInit {
 
   DeleteBillFromThisComponent(): void {
     const endpoint = 'http://127.0.0.1:5000/deleteTransaction';
-    const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername()};
+    const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername(), mapped_name:this.BillIdentifier};
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
