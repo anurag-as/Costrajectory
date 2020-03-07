@@ -103,9 +103,7 @@ def check_validity_token(username, token):
 def checkValid():
     username = request.json['username']
     token = request.json['token']
-    print("Username: ", username, "Token", token)
     valid = check_validity_token(username, token)
-    print(valid)
     x = jsonify({'valid': valid})
     return x
 
@@ -153,10 +151,9 @@ def upload():
         # uploading the file to dropbox
         uploadFile(file, mapped_file_name)
 
-        #file.seek(0, os.SEEK_END)
-        #file_size = file.tell()/(10**6) # file_size in mb
+        file.seek(0, os.SEEK_END)
+        file_size = file.tell()/(10**6) # file_size in mb
         # adding entry to image size table
-        file_size = 100.0
         insert_into_image_size_table(connection(), mapped_file_name, file_size)
         
     else:
