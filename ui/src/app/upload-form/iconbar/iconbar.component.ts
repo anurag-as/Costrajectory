@@ -35,6 +35,7 @@ export class IconbarComponent implements OnInit {
     this.getUsageQuota().subscribe(data => {
       this.maxQuota = data.TotalQuota; 
       this.usageQuota = data.UsedQuota;
+      this.usageQuota = Math.round((this.usageQuota + Number.EPSILON) * 100) / 100
     })
   }
 
