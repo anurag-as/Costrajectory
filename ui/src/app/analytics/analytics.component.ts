@@ -45,6 +45,7 @@ export class AnalyticsComponent implements OnInit {
   ValueArray = [];
   ConsolidatedValue: any = [];
   ConsolidatedPecent: any = [];
+  ConsolidatedDate: any =[];
 
   TotalSum: any;
   constructor(private DataGather: GetAllTransactionDetails, public globals: GlobalConfigsService) { }
@@ -58,6 +59,7 @@ export class AnalyticsComponent implements OnInit {
       for ( const entry of data.TableEntries) {
         this.DatainValue[entry.category] += parseInt(entry.Amount);
         this.ValueArray.push(parseInt(entry.Amount));
+        this.ConsolidatedDate.push({y: parseInt(entry.Amount), x:this.ConvertDatetoDateObj(entry.Date)})
       }
 
       this.TotalSum = this.SumArray(this.ValueArray)
@@ -69,6 +71,7 @@ export class AnalyticsComponent implements OnInit {
 
       this.BarChartRender(this.ConsolidatedValue, this.Categories);
       this.PieChartRender(this.ConsolidatedPecent, this.Categories);
+      this.LineChartrender(this.ConsolidatedDate);
 
     }, err => {
       this.DataLoading = 'Fail';
@@ -78,6 +81,10 @@ export class AnalyticsComponent implements OnInit {
 
   SumArray(arr): Number {
     return(arr.reduce((a, b) => a + b, 0))
+  }
+
+  ConvertDatetoDateObj(DateStr:string): Date {
+    return new Date(parseInt(DateStr.split('-')[0]),parseInt(DateStr.split('-')[1]),parseInt(DateStr.split('-')[2]))
   }
 
   BarChartRender(ConsolidatedValue, Categories) {
@@ -97,7 +104,7 @@ export class AnalyticsComponent implements OnInit {
       }
 
     PieChartRender(ConsolidatedPecent, Categories) {
-      // console.log('DATAPOINTS : ',ConsolidatedPecent, Categories, this.DatainValue, this.TotalSum );
+      console.log('DATAPOINTS : ',this.ConsolidatedDate);
       var chart = new CanvasJS.Chart("chartContainerPie", {
         animationEnabled: true,
         title: {
@@ -113,5 +120,49 @@ export class AnalyticsComponent implements OnInit {
       });
       chart.render();
     }
+
+    LineChartrender(DateList) {
+      console.log('DATELIST: ',DateList);
+      var chart = new CanvasJS.Chart("chartContainerline", {
+        animationEnabled: true,
+        theme: "light2",
+        title:{
+          text: ""
+        },
+        axisX:{
+          valueFormatString: "DD MMM",
+          crosshair: {
+            enabled: true,
+            snapToDataPoint: true
+          }
+        },
+        axisY: {
+          title: "",
+          crosshair: {
+            enabled: true
+          }
+        },
+        toolTip:{
+          shared:true
+        },  
+        legend:{
+          cursor:"pointer",
+          verticalAlign: "bottom",
+          horizontalAlign: "left",
+          dockInsidePlotArea: true,
+        },
+        data: [{
+          type: "line",
+          showInLegend: true,
+          name: "",
+          markerType: "square",
+          xValueFormatString: "DD MMM, YYYY",
+          color: "#F08080",
+          dataPoints: DateList
+        }],
+    });
+    chart.render();
+  }
+
 
 }
