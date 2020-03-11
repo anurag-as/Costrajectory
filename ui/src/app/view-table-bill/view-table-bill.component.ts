@@ -29,6 +29,7 @@ export class ViewTableBillComponent implements OnInit {
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) { }
 
   ngOnInit() {
+    console.log('Transaction component: ', this.BillId, this.BillIdentifier);
   }
 
   ChangeBill(): void {
@@ -89,7 +90,7 @@ export class ViewTableBillComponent implements OnInit {
 
   DeleteBill(): void {
     const dialogRef = this.dialog.open(DeleteBillComponent, {
-      width: '800px'
+      width: '300px'
     });
     dialogRef.componentInstance.username = this.Globals.GetUsername();
     dialogRef.componentInstance.BillName = this.BillName;
@@ -98,6 +99,7 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);
     dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
     dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -114,7 +116,7 @@ export class ViewTableBillComponent implements OnInit {
 
   DeleteBillFromThisComponent(): void {
     const endpoint = 'http://127.0.0.1:5000/deleteTransaction';
-    const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername(), mapped_name:this.BillIdentifier};
+    const QueryPayload = {uid: this.BillId, username: this.Globals.GetUsername(), mapped_name: this.BillIdentifier};
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -122,7 +124,7 @@ export class ViewTableBillComponent implements OnInit {
       body: QueryPayload
     };
 
-    console.log('Deleting the entry :',QueryPayload);
+    console.log('Deleting the entry :', QueryPayload);
     this.http.delete(endpoint, options).subscribe(data => {
       window.location.reload();
     });
