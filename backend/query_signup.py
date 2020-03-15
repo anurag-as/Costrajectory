@@ -1,4 +1,4 @@
-from database_functions import *
+from database_functions import connection, user_exists, insert_into_user_table
 
 
 class SignUp:
@@ -34,5 +34,3 @@ class SignUp:
             return True
         except:
             return False
-
-
