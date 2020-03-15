@@ -41,8 +41,14 @@
                     <div class="container-fluid" *ngIf="(imageUploaded)">
                         <img [src]="imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
                     </div>
-                    <div class="container-fluid" *ngIf="(BillHasImage && !imageUploaded)">
+                    <div class="container-fluid" *ngIf="(BillHasImage && !imageUploaded && (imageSrc !== undefined))">
                         <img [src]="'data:image/gif;base64,'+imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
+                    </div>
+                    <div class="container-fluid" style="text-align: center;" *ngIf="(BillHasImage && !imageUploaded && (imageSrc === undefined))">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-grow text-success" role="status"></div>
+                            <p>&nbsp;&nbsp; <b>Loading Image!!  PLEASE WAIT </b></p>
+                        </div>                    
                     </div>
                 </div>
             </div>
