@@ -22,47 +22,15 @@ from api_utils import *
 from flask import send_file
 import os
 
+############ API Migration Imports
+from flask import Flask
+from api.auth.checkUser import checkUserAPI
+
 app = Flask(__name__)
 cors = CORS(app)
 api = Api(app)
 
-
-# Api to check if user exists
-# Exposed API to check if user exists
-# Route /check_user/<username
-# Returns true if user exists, false if user does not exists
-class CheckUser(Resource):
-    def get(self, username):
-        signup = SignUp(username)
-        return jsonify(signup.check_user())
-
-
-# Api to Add a user
-# Route /add_user/<username>/<password>
-class AddUser(Resource):
-    def post(self):
-        json_data = request.get_json(force=True)
-        username = json_data['username']
-        password = json_data['password']
-        signup = SignUp(username, password)
-        return jsonify(signup.add_user())
-
-
-api.add_resource(CheckUser, '/check_user/<username>')
-api.add_resource(AddUser, '/add_user/<username>/')
-
-
-# API to check a username is available for signup
-@app.route('/checkUser', methods=['POST'])
-@cross_origin()
-def checkUser():
-    signup = SignUp(request.json['username'])
-    username = request.json['username']
-    password = request.json['password']
-    x = jsonify(
-        {'username': request.json['username'], 'password': request.json['password'], 'available': signup.check_user()})
-    return x
-
+app.register_blueprint(checkUserAPI)
 
 # Api to register a new user
 @app.route('/registerUser', methods=['POST'])
@@ -139,7 +107,7 @@ def upload():
         # Image has to be uploaded
         file = request.files['image']
         file_name = file.filename
-        
+
         file_extension = file_name.split('.')[-1]
         original_file_name = file_name
         present_time = str(time.time())
@@ -152,10 +120,10 @@ def upload():
         uploadFile(file, mapped_file_name)
 
         file.seek(0, os.SEEK_END)
-        file_size = file.tell()/(10**6) # file_size in mb
+        file_size = file.tell() / (10 ** 6)  # file_size in mb
         # adding entry to image size table
         insert_into_image_size_table(connection(), mapped_file_name, file_size)
-        
+
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)
@@ -230,7 +198,7 @@ def signout():
     """
     API when user signs out. Delete all his transaction Data
     """
-    upload_db() # upload the dropbox server to the latest code (automation)
+    upload_db()  # upload the dropbox server to the latest code (automation)
     user_name = request.json['username']
     user_data_path = os.path.join(os.getcwd(), "temp", "." + user_name)
     if os.path.exists(user_data_path):
@@ -252,7 +220,7 @@ def deleteTransaction():
     try:
 
         message = delete_from_image_table(connection(), uid, user_name)
-        delete_file(mapped_name)    # deleting that image from dropbox
+        delete_file(mapped_name)  # deleting that image from dropbox
         return jsonify(message)
     except:
         return jsonify("Deleting the transaction failed.")
@@ -278,7 +246,7 @@ def edit_transaction():
         uploadFile(file, mapped_file_name)
 
         file.seek(0, os.SEEK_END)
-        file_size = file.tell()/(10**6) # file_size in mb
+        file_size = file.tell() / (10 ** 6)  # file_size in mb
         # adding entry to image size table
         insert_into_image_size_table(connection(), mapped_file_name, file_size)
 
@@ -318,5 +286,3 @@ def user_space_usage():
 if __name__ == '__main__':
     download()
     app.run(port=5000, debug=True)
-
-# TODO Migrate APIs
