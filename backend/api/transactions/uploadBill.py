@@ -1,11 +1,23 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from time import time
-from database_functions import connection, insert_into_image_table, insert_into_image_mapping_table, insert_into_image_size_table, refresh_token
+from database_functions import connection, insert_into_image_table, insert_into_image_mapping_table, insert_into_image_size_table, refresh_token, space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
+from utilities.utils import get_total_size
+
 
 uploadBillAPI = Blueprint('uploadBillAPI', __name__)
+
+
+def quota_exceeded(size, total_quota):
+    """
+    Function to check if quota has been exceeded
+    :param size: Current Usage
+    :param total_quota: Total Quota for that user
+    :return: If user has exceeded his quota
+    """
+    return int(size) >= int(total_quota)
 
 # API to add a new transaction
 # Legacy version - Uploading a bill, hence the name
@@ -13,26 +25,34 @@ uploadBillAPI = Blueprint('uploadBillAPI', __name__)
 @uploadBillAPI.route('/uploadBill', methods=['POST'])
 @cross_origin()
 def upload():
+    usage_exceeded = None
     if 'image' in request.files:
         # Image has to be uploaded
         file = request.files['image']
         file_name = file.filename
 
-        file_extension = file_name.split('.')[-1]
-        original_file_name = file_name
-        present_time = str(time())
-        file_name = present_time + '.' + file_extension
-        mapped_file_name = file_name
-        # adding image mapping for cross referencing later
-        insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+        # If user quota has been exceeded
+        user_name = request.form['username']
+        size = space_usage(connection(), user_name)
+        total_quota = get_total_size()
+        usage_exceeded = quota_exceeded(size, total_quota)
+        if not usage_exceeded:  # Upload image if user has not exceeded his quota
+            file_extension = file_name.split('.')[-1]
+            original_file_name = file_name
+            present_time = str(time())
+            file_name = present_time + '.' + file_extension
+            mapped_file_name = file_name
 
-        # uploading the file to dropbox
-        uploadFile(file, mapped_file_name)
+            # adding image mapping for cross referencing later
+            insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
 
-        file.seek(0, SEEK_END)
-        file_size = file.tell() / (10 ** 6)  # file_size in mb
-        # adding entry to image size table
-        insert_into_image_size_table(connection(), mapped_file_name, file_size)
+            # uploading the file to dropbox
+            uploadFile(file, mapped_file_name)
+
+            file.seek(0, SEEK_END)
+            file_size = file.tell() / (10 ** 6)  # file_size in mb
+            # adding entry to image size table
+            insert_into_image_size_table(connection(), mapped_file_name, file_size)
 
     else:
         # Image not a part of the transaction
@@ -48,5 +68,7 @@ def upload():
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
-
+    if usage_exceeded is not None and usage_exceeded:
+        message = "User Quota Exceeded"
+        return jsonify({'uploadStatus': True, 'message': message})
     return jsonify({'uploadStatus': True})
