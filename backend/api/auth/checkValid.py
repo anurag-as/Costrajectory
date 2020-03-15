@@ -23,8 +23,11 @@ def check_validity_token(username, token):
 @checkValidTokenAPI.route('/checkValidity', methods=['POST'])
 @cross_origin()
 def checkValid():
-    username = request.json['username']
-    token = request.json['token']
-    valid = check_validity_token(username, token)
+    try:
+        username = request.json['username']
+        token = request.json['token']
+        valid = check_validity_token(username, token)
+    except:
+        valid = False
     x = jsonify({'valid': valid})
     return x
