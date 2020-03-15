@@ -15,7 +15,6 @@ import time
 import shutil
 from utilities.download import *
 from utilities.utils import *
-from utilities.upload import upload as upload_db
 from utilities.upload import uploadFile
 from utilities.delete_file import delete_file
 from api_utils import *
@@ -33,7 +32,7 @@ from api.transactions.recentTransactions import recentTransactionsAPI
 from api.transactions.previewImage import previewImageAPI
 from api.auth.signOut import signOutAPI
 from api.transactions.deleteTransaction import deleteTransactionsAPI
-
+from api.transactions.editTransaction import editBillAPI
 app = Flask(__name__)
 cors = CORS(app)
 api = Api(app)
@@ -47,6 +46,7 @@ app.register_blueprint(recentTransactionsAPI)
 app.register_blueprint(previewImageAPI)
 app.register_blueprint(signOutAPI)
 app.register_blueprint(deleteTransactionsAPI)
+app.register_blueprint(editBillAPI)
 
 
 # API to edit a particular transaction based on uid
