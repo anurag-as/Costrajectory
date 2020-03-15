@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_cors import CORS, cross_origin
-from backend.query_signup import SignUp
+from query_signup import SignUp
 
 checkUserAPI = Blueprint('checkUserAPI', __name__)
 
@@ -12,5 +12,5 @@ def checkUser():
     username = request.json['username']
     password = request.json['password']
     x = jsonify(
-        {'username': request.json['username'], 'password': request.json['password'], 'available': signup.check_user()})
+        {'username': username, 'password': password, 'available': signup.check_user()})
     return x
