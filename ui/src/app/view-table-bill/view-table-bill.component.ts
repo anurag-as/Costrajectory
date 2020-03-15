@@ -29,7 +29,7 @@ export class ViewTableBillComponent implements OnInit {
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) { }
 
   ngOnInit() {
-    console.log('Transaction component: ', this.BillId, this.BillIdentifier);
+    // console.log('Transaction component: ', this.BillId, this.BillIdentifier);
   }
 
   ChangeBill(): void {
@@ -124,14 +124,14 @@ export class ViewTableBillComponent implements OnInit {
       body: QueryPayload
     };
 
-    console.log('Deleting the entry :', QueryPayload);
+    // console.log('Deleting the entry :', QueryPayload);
     this.http.delete(endpoint, options).subscribe(data => {
       window.location.reload();
     });
   }
 
   ChangeBillFormat(date) {
-    console.log('inp date: ', date);
+    // console.log('inp date: ', date);
     // const splitDate = date.split( '/' );
     // const outDate = splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
     return date;

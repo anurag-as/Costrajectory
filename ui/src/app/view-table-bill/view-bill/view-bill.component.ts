@@ -48,7 +48,7 @@ export class ViewBillComponent implements OnInit {
   ngOnInit() {
     const endpoint = 'http://127.0.0.1:5000/previewImage';
     const QueryPayload = {username: this.username, mapped_name : this.MappedImageName, original_name: this.ActualImageName};
-    console.log(QueryPayload);
+    // console.log(QueryPayload);
     this.receiveImage(endpoint, QueryPayload).subscribe(data => {
       this.canShowImage = true;
       this.base64Data = data.Image;
