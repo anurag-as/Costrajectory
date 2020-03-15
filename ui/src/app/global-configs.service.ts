@@ -9,19 +9,19 @@ export class GlobalConfigsService {
   constructor() { }
 
   get GetUserName() {
-    console.log('Urn queries: ', this.username);
+    // console.log('Urn queries: ', this.username);
     return this.username;
   }
 
   set UserName(USERNAME: string) {
     this.username = USERNAME;
-    console.log('GLOBAL SET USERNAME: ', this.username);
+    // console.log('GLOBAL SET USERNAME: ', this.username);
   }
 
 
   public SetUserNamePassword(USERNAME: string, PASSWORD ?: string) {
     this.username = USERNAME;
-    console.log('GLOBAL SET USERNAME: ', this.username);
+    // console.log('GLOBAL SET USERNAME: ', this.username);
     this.password = PASSWORD;
     }
 

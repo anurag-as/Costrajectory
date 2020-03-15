@@ -52,7 +52,7 @@ export class AnalyticsComponent implements OnInit {
 
   ngOnInit() {
     this.DataGather.GetData( this.globals.GetUserName ).subscribe( data => {
-      console.log('MAIN DATA : ', data);
+      // console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.FormData = data;
 
@@ -101,7 +101,7 @@ export class AnalyticsComponent implements OnInit {
     return arr;
   }
   BarChartRender(ConsolidatedValue, Categories) {
-    console.log('DATAPOINTS BAR : ', ConsolidatedValue);
+    // console.log('DATAPOINTS BAR : ', ConsolidatedValue);
     const chart = new CanvasJS.Chart('chartContainerBar', {
       animationEnabled: true,
       exportEnabled: true,
@@ -118,7 +118,7 @@ export class AnalyticsComponent implements OnInit {
       }
 
     PieChartRender(ConsolidatedPecent, Categories) {
-      console.log('DATAPOINTS PIE : ', ConsolidatedPecent);
+      // console.log('DATAPOINTS PIE : ', ConsolidatedPecent);
       const chart = new CanvasJS.Chart('chartContainerPie', {
         animationEnabled: true,
         title: {
@@ -136,7 +136,7 @@ export class AnalyticsComponent implements OnInit {
     }
 
     LineChartrender(DateList) {
-      console.log('DATELIST: ', DateList);
+      // console.log('DATELIST: ', DateList);
       const chart = new CanvasJS.Chart('chartContainerline', {
         animationEnabled: true,
         theme: 'light2',
