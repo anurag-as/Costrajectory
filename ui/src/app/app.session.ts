@@ -49,7 +49,7 @@ export class SessionStorage {
     }
 
     ValidateToken(Token: string, Username: string) {
-        console.log('VALIDATION CHECKING');
+        // console.log('VALIDATION CHECKING');
         const endpoint = 'http://127.0.0.1:5000/checkValidity';
         return this.http.post<TokenValidity>(endpoint, {username: Username, token: Token});
     }

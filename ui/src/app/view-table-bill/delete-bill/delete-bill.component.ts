@@ -27,11 +27,11 @@ export class DeleteBillComponent implements OnInit {
   base64Data = undefined;
   BillID: any = undefined;
 
-  constructor(private http: HttpClient, private domSanitizer: DomSanitizer, private Globals: GlobalConfigsService, 
+  constructor(private http: HttpClient, private domSanitizer: DomSanitizer, private Globals: GlobalConfigsService,
               private dialogRef: MatDialogRef<DeleteBillComponent>) { }
 
   ngOnInit() {
-    console.log('Transaction component delete: ', this.BillID, this.MappedImageName);
+    // console.log('Transaction component delete: ', this.BillID, this.MappedImageName);
     const r = confirm('Are you sure you want to delete the Bill? ');
     if (r === true) {
       this.DeleteBillFromThisComponent();
@@ -51,7 +51,7 @@ export class DeleteBillComponent implements OnInit {
       body: QueryPayload
     };
 
-    console.log('Deleting the entry :', QueryPayload);
+    // console.log('Deleting the entry :', QueryPayload);
     this.http.delete(endpoint, options).subscribe(data => {
       window.location.reload();
     });
