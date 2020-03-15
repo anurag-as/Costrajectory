@@ -1,31 +1,31 @@
 # Uploads costracjectory.db to dropbox
 
-import dropbox
-import os
 from dropbox.files import WriteMode
-from utilities.utils import *
-import yaml
+from dropbox import Dropbox
+from os import path, getcwd
+from yaml import load, SafeLoader
+from utilities.utils import get_root_directory
 
 root_directory = get_root_directory()
 
-with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
-    cfg = yaml.load(ymlfile, yaml.SafeLoader)
+with open(path.join(root_directory, "config.yml"), 'r') as ymlfile:
+    cfg = load(ymlfile, SafeLoader)
 
 token = cfg['token']['dropbox']
 
 
-def upload():
-    dbx = dropbox.Dropbox(token)
-    file_name = os.getcwd().rstrip('utilities') + '/costrajectory.db'
+def upload_db():
+    dbx = Dropbox(token)
+    file_name = getcwd().rstrip('utilities') + '/costrajectory.db'
     f = open(file_name, 'rb')
     dbx.files_upload(f.read(), '/costrajectory.db', mode=WriteMode('overwrite'))
     print('Remote database updated successfully.')
 
 
 def uploadFile(file, file_name):
-    dbx = dropbox.Dropbox(token)
+    dbx = Dropbox(token)
     dbx.files_upload(file.read(), "/"+file_name, mode=WriteMode('overwrite'))
 
 
 if __name__ == "__main__":
-    upload()
+    upload_db()

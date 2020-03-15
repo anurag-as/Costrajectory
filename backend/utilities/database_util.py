@@ -1,11 +1,11 @@
-import sqlite3
+from sqlite3 import connect
 import pandas as pd
-import os
+from os import mkdir, path, getcwd
 
 
 # utility function to dump database for analysis
 def to_csv():
-    db = sqlite3.connect('..//costrajectory.db')
+    db = connect('..//costrajectory.db')
     cursor = db.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = cursor.fetchall()
@@ -15,7 +15,7 @@ def to_csv():
         try:
             table.to_csv(".//downloads//" + table_name + '.csv', index_label='index')
         except FileNotFoundError:
-            os.mkdir(os.path.join(os.getcwd(), "downloads"))
+            mkdir(path.join(getcwd(), "downloads"))
             table.to_csv("./downloads/" + table_name + '.csv', index_label='index')
     cursor.close()
     db.close()

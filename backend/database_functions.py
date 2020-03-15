@@ -1,11 +1,10 @@
-import sqlite3
+from sqlite3 import connect
 from utilities.utils import hash_password
-import time
-
+from time import time
 
 # Connecting to the database
 def connection():
-    db_connection = sqlite3.connect('costrajectory.db')
+    db_connection = connect('costrajectory.db')
     db_connection.commit()
     try:
         create_user_table(db_connection)
@@ -168,7 +167,7 @@ def refresh_token(db_connection, username):
     latest_token = get_latest_token(db_connection, username)
     if not latest_token:
         return False
-    new_date_time = str(time.time())
+    new_date_time = str(time())
     db_connection.execute('''UPDATE TOKENS 
         set datetime = "{new_date_time}"
         where username = "{username}" AND token = "{token}" 
