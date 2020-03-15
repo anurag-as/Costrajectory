@@ -30,6 +30,8 @@ from api.auth.checkValid import checkValidTokenAPI
 from api.auth.signIn import signInAPI
 from api.transactions.uploadBill import uploadBillAPI
 from api.transactions.recentTransactions import recentTransactionsAPI
+from api.transactions.previewImage import previewImageAPI
+
 app = Flask(__name__)
 cors = CORS(app)
 api = Api(app)
@@ -40,31 +42,7 @@ app.register_blueprint(checkValidTokenAPI)
 app.register_blueprint(signInAPI)
 app.register_blueprint(uploadBillAPI)
 app.register_blueprint(recentTransactionsAPI)
-
-
-# API to return an image in b'64 format for preview(large view/downloading)
-@app.route('/previewImage', methods=['POST'])
-@cross_origin()
-def previewImage():
-    """
-    API to preview the image for a particular transaction
-    """
-    user_name = request.json['username']
-    mapped_image_name = request.json['mapped_name']
-    original_image_name = request.json['original_name']
-    refresh_token(connection(), user_name)
-    try:
-        # downloading the image to cacheable region
-        user_name = str('.' + user_name)
-        file = os.path.join(os.getcwd(), "temp", user_name, mapped_image_name)
-        if not os.path.exists(file):
-            download_file(user_name, mapped_image_name, original_image_name)
-        with open(file, "rb") as f:
-            Image_data = f.read()
-            encoded_string = base64.b64encode(Image_data)
-        return jsonify({'Image': str(encoded_string.decode('utf-8'))})
-    except:
-        return jsonify(False)
+app.register_blueprint(previewImageAPI)
 
 
 # API to signal that a particular user signed out
