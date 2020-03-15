@@ -16,5 +16,3 @@ token = cfg['token']['dropbox']
 def delete_file(mapped_image_name):
     dbx = Dropbox(token)
     dbx.files_delete_v2('/' + mapped_image_name)
-
-
