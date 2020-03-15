@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 from query_signup import SignUp
 from utilities.utils import generate_token
 from time import time
