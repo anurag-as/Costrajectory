@@ -33,7 +33,6 @@ export class UploadService {
             formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
-       
         // formData.append('body', fileToUpload, fileToUpload.name);
 
         const headers = new HttpHeaders();
@@ -49,7 +48,6 @@ export class UploadService {
         const endpoint = 'http://127.0.0.1:5000/editTransaction';
         console.log('PATH TAKEN TO EDIT: ', endpoint);
         const formData: FormData = new FormData();
-        
         formData.append('username', username);
         formData.append('Description', f.value.des);
         formData.append('Name', f.value.name);
@@ -58,7 +56,6 @@ export class UploadService {
         formData.append('uid', BillId);
         formData.append('category', f.value.cat);
 
-        
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {
             console.log('NO IMAGE');
@@ -67,7 +64,6 @@ export class UploadService {
             formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
-       
         // formData.append('body', fileToUpload, fileToUpload.name);
 
         const headers = new HttpHeaders();

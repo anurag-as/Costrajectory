@@ -6,9 +6,9 @@ import {Router} from '@angular/router';
 import {ThemePalette} from '@angular/material/core';
 import {HttpClient} from '@angular/common/http';
 
-interface usageStats {
-  TotalQuota: Number,
-  UsedQuota: Number;
+interface UsageStats {
+  TotalQuota: number;
+  UsedQuota: number;
 }
 
 @Component({
@@ -25,18 +25,18 @@ export class IconbarComponent implements OnInit {
 
   getUsageQuota() {
     const endpoint = 'http://127.0.0.1:5000/usage';
-    const QueryPayload = {username:this.userName};
-    console.log('USAGE:',QueryPayload);
-    return this.http.post<usageStats>(endpoint, QueryPayload);
+    const QueryPayload = {username: this.userName};
+    // console.log('USAGE:',QueryPayload);
+    return this.http.post<UsageStats>(endpoint, QueryPayload);
   }
 
   ngOnInit() {
     this.usageQuota = 10;
     this.getUsageQuota().subscribe(data => {
-      this.maxQuota = data.TotalQuota; 
+      this.maxQuota = data.TotalQuota;
       this.usageQuota = data.UsedQuota;
-      this.usageQuota = Math.round((this.usageQuota + Number.EPSILON) * 100) / 100
-    })
+      this.usageQuota = Math.round((this.usageQuota + Number.EPSILON) * 100) / 100;
+    });
   }
 
   addBill(): void {
