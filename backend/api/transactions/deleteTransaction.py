@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from database_functions import connection, refresh_token, delete_from_image_table
-from delete_file import delete_file
+from utilities.delete_file import delete_file
 
 deleteTransactionsAPI = Blueprint('deleteTransactionsAPI', __name__)
 
@@ -17,7 +17,6 @@ def deleteTransaction():
     refresh_token(connection(), user_name)
     mapped_name = request.json['mapped_name']
     try:
-
         message = delete_from_image_table(connection(), uid, user_name)
         delete_file(mapped_name)  # deleting that image from dropbox
         return jsonify(message)

@@ -14,7 +14,7 @@ with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
 token = cfg['token']['dropbox']
 
 
-def download():
+def download_db():
     dbx = dropbox.Dropbox(token)
     if cfg['environment']['host'] == 'linux':
         print("Linux Environment")
@@ -37,4 +37,4 @@ def download_file(hashed_user_name, mapped_image_name, original_image_name):
 
 
 if __name__ == "__main__":
-    download()
+    download_db()
