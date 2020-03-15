@@ -26,6 +26,7 @@ import os
 from flask import Flask
 from api.auth.checkUser import checkUserAPI
 from api.auth.registerUser import registerUserAPI
+from api.auth.checkValid import checkValidTokenAPI
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -33,31 +34,7 @@ api = Api(app)
 
 app.register_blueprint(checkUserAPI)
 app.register_blueprint(registerUserAPI)
-
-
-def check_validity_token(username, token):
-    """
-    Function to check validity of a token
-    :param username: Username
-    :param token: Token
-    :return: Validity of a token
-    """
-    db = connection()
-    date_time = get_datetime_token(db, username, token)
-    present_time = time.time()
-    timeout = 3600  # seconds (1 hour)
-    return float(present_time) - float(date_time) < timeout
-
-
-# API to check the validity of a token for a particular username (<timeout)
-@app.route('/checkValidity', methods=['POST'])
-@cross_origin()
-def checkValid():
-    username = request.json['username']
-    token = request.json['token']
-    valid = check_validity_token(username, token)
-    x = jsonify({'valid': valid})
-    return x
+app.register_blueprint(checkValidTokenAPI)
 
 
 # API to signin a user after authentication

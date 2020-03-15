@@ -1,8 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_cors import CORS, cross_origin
 from query_signup import SignUp
 from utilities.utils import generate_token
-from flask import jsonify
 import time
 from database_functions import connection, insert_into_token_table
 
