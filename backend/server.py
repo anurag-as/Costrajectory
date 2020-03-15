@@ -31,6 +31,7 @@ from api.auth.signIn import signInAPI
 from api.transactions.uploadBill import uploadBillAPI
 from api.transactions.recentTransactions import recentTransactionsAPI
 from api.transactions.previewImage import previewImageAPI
+from api.auth.signOut import signOutAPI
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -43,22 +44,7 @@ app.register_blueprint(signInAPI)
 app.register_blueprint(uploadBillAPI)
 app.register_blueprint(recentTransactionsAPI)
 app.register_blueprint(previewImageAPI)
-
-
-# API to signal that a particular user signed out
-# Used to delete his data, also updating the db to remote
-@app.route('/signout', methods=['DELETE'])
-@cross_origin()
-def signout():
-    """
-    API when user signs out. Delete all his transaction Data
-    """
-    upload_db()  # upload the dropbox server to the latest code (automation)
-    user_name = request.json['username']
-    user_data_path = os.path.join(os.getcwd(), "temp", "." + user_name)
-    if os.path.exists(user_data_path):
-        shutil.rmtree(user_data_path)
-    return jsonify(True)
+app.register_blueprint(signOutAPI)
 
 
 # API to delete a particular transaction based on uid

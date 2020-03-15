@@ -14,7 +14,7 @@ with open(os.path.join(root_directory, "config.yml"), 'r') as ymlfile:
 token = cfg['token']['dropbox']
 
 
-def upload():
+def upload_db():
     dbx = dropbox.Dropbox(token)
     file_name = os.getcwd().rstrip('utilities') + '/costrajectory.db'
     f = open(file_name, 'rb')
