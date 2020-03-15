@@ -51,4 +51,5 @@ config.yml
 backend/temp/
 *.pyc
 *.pyo
-**/__pycache__/ 
+**/__pycache__/
+**/.vs/ 

@@ -34,7 +34,7 @@ export class ChangeBillComponent implements OnInit {
   imgfromServer = true;
   canShowImageUploaded = false;
   imageUploaded = false;
-  imageSrc;
+  imageSrc = undefined;
 
   constructor(private http: HttpClient, private uploader: UploadService) { }
 
