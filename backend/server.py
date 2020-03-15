@@ -32,6 +32,7 @@ from api.transactions.uploadBill import uploadBillAPI
 from api.transactions.recentTransactions import recentTransactionsAPI
 from api.transactions.previewImage import previewImageAPI
 from api.auth.signOut import signOutAPI
+from api.transactions.deleteTransaction import deleteTransactionsAPI
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -45,26 +46,7 @@ app.register_blueprint(uploadBillAPI)
 app.register_blueprint(recentTransactionsAPI)
 app.register_blueprint(previewImageAPI)
 app.register_blueprint(signOutAPI)
-
-
-# API to delete a particular transaction based on uid
-@app.route('/deleteTransaction', methods=['DELETE'])
-@cross_origin()
-def deleteTransaction():
-    """
-    API to delete a particular transaction
-    """
-    user_name = request.json['username']
-    uid = request.json['uid']
-    refresh_token(connection(), user_name)
-    mapped_name = request.json['mapped_name']
-    try:
-
-        message = delete_from_image_table(connection(), uid, user_name)
-        delete_file(mapped_name)  # deleting that image from dropbox
-        return jsonify(message)
-    except:
-        return jsonify("Deleting the transaction failed.")
+app.register_blueprint(deleteTransactionsAPI)
 
 
 # API to edit a particular transaction based on uid
