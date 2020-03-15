@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS, cross_origin
 from database_functions import connection, get_datetime_token
-import time
+from time import time
 checkValidTokenAPI = Blueprint('checkValidTokenAPI', __name__)
 
 
@@ -14,7 +14,7 @@ def check_validity_token(username, token):
     """
     db = connection()
     date_time = get_datetime_token(db, username, token)
-    present_time = time.time()
+    present_time = time()
     timeout = 3600  # seconds (1 hour)
     return float(present_time) - float(date_time) < timeout
 

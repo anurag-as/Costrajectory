@@ -27,6 +27,7 @@ from flask import Flask
 from api.auth.checkUser import checkUserAPI
 from api.auth.registerUser import registerUserAPI
 from api.auth.checkValid import checkValidTokenAPI
+from api.auth.signIn import signInAPI
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -35,27 +36,7 @@ api = Api(app)
 app.register_blueprint(checkUserAPI)
 app.register_blueprint(registerUserAPI)
 app.register_blueprint(checkValidTokenAPI)
-
-
-# API to signin a user after authentication
-@app.route('/signin', methods=['POST'])
-@cross_origin()
-def signInUser():
-    username = request.json['username']
-    password = request.json['password']
-    signin = SignIn(username, password)
-    if signin.check_user():
-        valid = signin.check_password()
-    else:
-        valid = "User does not exist"
-    if valid == "User successfully authenticated":
-        token = str(generate_token())
-        db = connection()
-        presentTime = str(time.time())
-        insert_into_token_table(db, username, presentTime, token)
-    else:
-        token = False
-    return jsonify({'valid': valid, 'token': token, 'username': username})
+app.register_blueprint(signInAPI)
 
 
 # API to add a new transaction
