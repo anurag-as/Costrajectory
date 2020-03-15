@@ -8,7 +8,7 @@ from query_signin import SignIn
 signInAPI = Blueprint('signInAPI', __name__)
 
 # API to signin a user after authentication
-@signInAPI.route('/sign_in', methods=['POST'])
+@signInAPI.route('/signin', methods=['POST'])
 @cross_origin()
 def signInUser():
     username = request.json['username']
