@@ -88,6 +88,9 @@ uploadFileToActivity(f: NgForm) {
   // console.log('CAME');
   this.uploader.postEditFile(this.fileToUpload, f, this.username, this.BillID).subscribe(data => {
    // this.TableAdder.AppendEntry(this.CurrentForm);
+   if (data.message === 'User Quota Exceeded') {
+    window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
+   }
    this.uploading = 'ended success';
    window.location.reload();
    // window.alert('FILE UPLOADED SUCCESSFULLY');

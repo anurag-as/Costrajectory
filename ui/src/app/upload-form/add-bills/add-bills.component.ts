@@ -62,6 +62,9 @@ export class AddBillsComponent implements OnInit {
    this.uploading = 'started';
    this.uploader.postFile(this.fileToUpload, f, this.username).subscribe(data => {
     // this.TableAdder.AppendEntry(this.CurrentForm);
+    if (data.message === 'User Quota Exceeded') {
+      window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
+     }
     this.uploading = 'ended success';
     window.location.reload();
     // window.alert('FILE UPLOADED SUCCESSFULLY');

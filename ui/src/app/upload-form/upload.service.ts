@@ -8,6 +8,7 @@ import { TabularViewComponent } from './tabular-view/tabular-view.component';
 
 interface Status {
     UploadStatus: boolean;
+    message: string;
 }
 
 @Injectable({providedIn : 'root'} )
