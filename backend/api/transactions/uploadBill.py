@@ -53,7 +53,8 @@ def upload():
             file_size = file.tell() / (10 ** 6)  # file_size in mb
             # adding entry to image size table
             insert_into_image_size_table(connection(), mapped_file_name, file_size)
-
+        else:
+            mapped_file_name = str(False)
     else:
         # Image not a part of the transaction
         mapped_file_name = str(False)
