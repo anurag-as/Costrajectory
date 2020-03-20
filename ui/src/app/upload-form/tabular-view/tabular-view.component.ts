@@ -24,7 +24,7 @@ export class TabularViewComponent implements OnInit {
 
   ngOnInit() {
     this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
-      console.log('MAIN DATA : ', data);
+      // console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.FormData = data;
       for ( const entry of data.TableEntries) {
@@ -38,7 +38,8 @@ export class TabularViewComponent implements OnInit {
             true,
             entry.Identifier,
             data.ImageEntries[entry.Identifier],
-            entry.uid
+            entry.uid,
+            entry.category
           ]);
         } else {
           this.BillEntries.push([
@@ -48,9 +49,10 @@ export class TabularViewComponent implements OnInit {
             entry.Date,
             entry.Amount,
             false,
+            entry.Identifier,
             undefined,
-            undefined,
-            entry.uid
+            entry.uid,
+            entry.category
           ]);
         }
       }

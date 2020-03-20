@@ -23,6 +23,7 @@ export class EditBillComponent implements OnInit {
   BillIdentifier: string = undefined;
   BillImage: any = undefined;
   BillDate: any = undefined;
+  BillCategory: any = undefined;
   MappedImageName = undefined;
   ActualImageName = undefined;
   imageToShow = undefined;
@@ -32,6 +33,7 @@ export class EditBillComponent implements OnInit {
   fileToUpload =  this.ActualImageName;
   imgfromServer = true;
   canShowImageUploaded = false;
+  imageUploaded = false;
   imageSrc;
 
   constructor(private http: HttpClient, private uploader: UploadService) { }
@@ -50,47 +52,54 @@ export class EditBillComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('00000000 :', this.BillHasImage);
+    // console.log('00000000 :', this.BillHasImage);
     this.getImage();
   }
 
   private handleFileInput(files: FileList) {
-    console.log(this.fileToUpload);
+    // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 
     const reader = new FileReader();
     reader.onload = e => this.imageSrc = reader.result;
 
     reader.readAsDataURL(this.fileToUpload);
+    this.imageUploaded = true;
 }
 
 
- dataURLtoFile(arr, filename) {
-      const bstr = atob(arr);
-      let n = bstr.length;
-      const u8arr = new Uint8Array(n);
-      while (n--) {
-          u8arr[n] = bstr.charCodeAt(n);
-      }
-      return new File([u8arr], filename);
+
+dataURLtoFile(arr, filename) {
+  const bstr = atob(arr);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename);
+}
+
+
+uploadFileToActivity(f: NgForm) {
+  if (this.fileToUpload == null && this.BillHasImage) {
+    this.fileToUpload = this.dataURLtoFile(this.imageSrc, this.ActualImageName);
+  }
+  this.uploading = 'started';
+  // console.log('CAME');
+  this.uploader.postEditFile(this.fileToUpload, f, this.username, this.BillID).subscribe(data => {
+   // this.TableAdder.AppendEntry(this.CurrentForm);
+   if (data.message === 'User Quota Exceeded') {
+    window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
+   }
+   this.uploading = 'ended success';
+   window.location.reload();
+   // window.alert('FILE UPLOADED SUCCESSFULLY');
+   }, error => {
+     this.uploading = 'ended fail';
+     // window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
+   });
   }
 
-  uploadFileToActivity(f: NgForm) {
-    if (this.fileToUpload == null && this.BillHasImage) {
-      this.fileToUpload = this.dataURLtoFile(this.imageSrc, this.ActualImageName);
-    }
-    this.uploading = 'started';
-    console.log('CAME');
-    this.uploader.postEditFile(this.fileToUpload, f, this.username, this.BillID).subscribe(data => {
-     // this.TableAdder.AppendEntry(this.CurrentForm);
-     this.uploading = 'ended success';
-     window.location.reload();
-     // window.alert('FILE UPLOADED SUCCESSFULLY');
-     }, error => {
-       this.uploading = 'ended fail';
-       // window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
-     });
-    }
 
 
   SubmitChanges() {}

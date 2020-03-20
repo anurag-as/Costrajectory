@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngIf="uploading == 'not started'">
     <form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
         <div class="row">
-            <div [ngClass]="!(BillHasImage || canShowImageUploaded) ? 'col-md-12' : 'col-md-6'">
+            <div [ngClass]="!(BillHasImage || imageUploaded) ? 'col-md-12' : 'col-md-6'">
                 <div class="container-fluid">
                     <label>Bill name :</label>
                     <input id="name" #Bname required type="text" placeholder="Enter name" [(ngModel)]="BillName" name="name" class="form-control" value="test"/>
@@ -12,6 +12,20 @@
                     <label>Description:</label>
                     <input id="des" required type="test" placeholder="Enter Description" [(ngModel)]="BillDescription" name="des" class="form-control"/>
                     
+                    <label>Category:</label>
+                    <select class="custom-select" id="cat" required [(ngModel)]="BillCategory" name="cat">
+                        <option value="" disabled>Choose the category</option>
+                        <option>Travel</option>
+                        <option>Shopping</option>
+                        <option>Investments</option>
+                        <option>Food</option>
+                        <option>Utilities</option>
+                        <option>Medical</option>
+                        <option>Entertainment</option>
+                        <option>Housing</option>
+                        <option>Others</option>
+                     </select>
+                     
                     <label>Date: </label>
                     <input id="date" required type="date" value="10-02-1996" [(ngModel)]="BillDate" name="date" class="form-control"/>
 
@@ -24,8 +38,17 @@
 
             <div class="col-md-6">
                 <div class="container-fluid">
-                    <div class="container-fluid" *ngIf="(BillHasImage || canShowImageUploaded)">
+                    <div class="container-fluid" *ngIf="(imageUploaded)">
+                        <img [src]="imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
+                    </div>
+                    <div class="container-fluid" *ngIf="(BillHasImage && !imageUploaded && (imageSrc !== undefined))">
                         <img [src]="'data:image/gif;base64,'+imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
+                    </div>
+                    <div class="container-fluid" style="text-align: center;" *ngIf="(BillHasImage && !imageUploaded && (imageSrc === undefined))">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-grow text-success" role="status"></div>
+                            <p>&nbsp;&nbsp; <b>Loading Image!!  PLEASE WAIT </b></p>
+                        </div>                    
                     </div>
                 </div>
             </div>

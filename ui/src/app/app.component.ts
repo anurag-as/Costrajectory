@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   authorizationDone = false;
   hasKey = false;
   userTokenData: TokenData;
+  progress = 78;
 
   constructor(private sessionStorageclient: SessionStorage, public globals: GlobalConfigsService) {}
 
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit {
         res => {
           // res.validity = true;
           this.userdata = {username: this.userTokenData.username};
-          console.log(',,,,', res);
+          // console.log(',,,,', res);
           if (res.valid) {
             console.log('TOKEN AUTHENTICATED');
             this.globals.UserName = this.userdata.username;

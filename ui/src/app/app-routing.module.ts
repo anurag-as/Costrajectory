@@ -5,10 +5,12 @@ import { UploadFormComponent } from './upload-form/upload-form.component';
 import {AppComponent} from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 const routes: Routes = [
    { path: 'logout', component: SignupinComponent},
-   { path: '', component: TabularViewComponent}
+   { path: '', component: TabularViewComponent},
+   { path: 'analytics', component: AnalyticsComponent}
   ];
 
 @NgModule({

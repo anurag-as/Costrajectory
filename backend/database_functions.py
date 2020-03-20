@@ -1,11 +1,10 @@
-import sqlite3
+from sqlite3 import connect
 from utilities.utils import hash_password
-import time
-
+from time import time
 
 # Connecting to the database
 def connection():
-    db_connection = sqlite3.connect('costrajectory.db')
+    db_connection = connect('costrajectory.db')
     db_connection.commit()
     try:
         create_user_table(db_connection)
@@ -26,7 +25,6 @@ def create_user_table(db_connection):
          (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
          username           TEXT    NOT NULL,
          password           TEXT     NOT NULL);''')
-    print("User Table created successfully")
     db_connection.commit()
 
 
@@ -35,7 +33,6 @@ def insert_into_user_table(db_connection, username, password):
     password = hash_password(password)
     db_connection.execute('''INSERT INTO USERS (username, password) VALUES ("{username}","{password}")'''
                           .format(username=username, password=password))
-    print("User entry inserted into table")
     db_connection.commit()
 
 
@@ -83,20 +80,18 @@ def create_image_uploads(db_connection):
          datetime           TEXT    NOT NULL,
          amount             TEXT    NOT NULL,
          description        TEXT    NOT NULL,
-         image_name         TEXT    NOT NULL
-         );''')
-    print("Image Table created successfully")
+         image_name         TEXT    NOT NULL,
+         category           TEXT    NOT NULL);''')
     db_connection.commit()
 
 
 # function to add image upload entries into IMAGES table for query and download
-def insert_into_image_table(db_connection, username, title, datetime, amount, description, image_name):
-    db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name) 
-        VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}")'''
+def insert_into_image_table(db_connection, username, title, datetime, amount, description, image_name, category):
+    db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name, category) 
+        VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}","{category}")'''
                           .format(username=username, title=title, datetime=datetime, amount=amount,
-                                  description=description, image_name=image_name,
+                                  description=description, image_name=image_name,category=category
                                   ))
-    print("Image entry inserted into table")
     db_connection.commit()
 
 
@@ -107,7 +102,6 @@ def create_token_table(db_connection):
          username           TEXT    NOT NULL,
          datetime           TEXT    NOT NULL,
          token        TEXT    NOT NULL);''')
-    print("Token Table created successfully")
     db_connection.commit()
 
 
@@ -115,7 +109,6 @@ def create_token_table(db_connection):
 def insert_into_token_table(db_connection, username, datetime, token):
     db_connection.execute('''INSERT INTO TOKENS (username, datetime, token) VALUES ("{username}","{datetime}",
     "{token}")'''.format(username=username, datetime=datetime, token=token))
-    print("Token entry inserted into table")
     db_connection.commit()
 
 
@@ -137,7 +130,6 @@ def create_image_mapping_table(db_connection):
          username           TEXT    NOT NULL,
          original_name           TEXT    NOT NULL,
          mapped_name        TEXT    NOT NULL);''')
-    print("Image mapping Table created successfully")
     db_connection.commit()
 
 
@@ -145,7 +137,6 @@ def create_image_mapping_table(db_connection):
 def insert_into_image_mapping_table(db_connection, username, original, mapped):
     db_connection.execute('''INSERT INTO IMAGEMAPPING (username, original_name, mapped_name) VALUES ("{username}","{original}",
     "{mapped}")'''.format(username=username, original=original, mapped=mapped))
-    print("Image Mapping entry inserted into table")
     db_connection.commit()
 
 
@@ -176,8 +167,7 @@ def refresh_token(db_connection, username):
     latest_token = get_latest_token(db_connection, username)
     if not latest_token:
         return False
-    new_date_time = str(time.time())
-    print(new_date_time)
+    new_date_time = str(time())
     db_connection.execute('''UPDATE TOKENS 
         set datetime = "{new_date_time}"
         where username = "{username}" AND token = "{token}" 
@@ -189,7 +179,7 @@ def refresh_token(db_connection, username):
 # function to query recent transactions of a particular user
 # limit has also been introduced to enhance the functionality and for future user
 def query_recent_transaction(db_connection, username, limit=5):
-    cursor = db_connection.execute('''SELECT title, datetime, amount, description, image_name, ID
+    cursor = db_connection.execute('''SELECT title, datetime, amount, description, image_name, ID, category
       FROM IMAGES where username = "{username}"
     LIMIT {limit}'''.format(username=username, limit=limit))
     transactions = []  # list of recent transactions
@@ -202,22 +192,63 @@ def query_recent_transaction(db_connection, username, limit=5):
 # function to delete a particular transaction
 def delete_from_image_table(db_connection, uid, username):
     cursor = db_connection.execute('''DELETE from IMAGES where ID = "{uid}" AND username = "{username}"'''.
-                                   format(username=username,uid=uid))
+                                   format(username=username, uid=uid))
     db_connection.commit()
     return "Transaction successfully deleted"
 
 
 # function to edit the transactions
-def edit_transactions_image_table(db_connection, uid, username, title, datetime, amount, description, image_name):
+def edit_transactions_image_table(db_connection, uid, username, title, datetime, amount, description, image_name,
+                                  category):
     db_connection.execute('''UPDATE IMAGES SET  title="{title}",
                                                 datetime="{datetime}",
                                                 amount="{amount}",
                                                 description="{description}",
-                                                image_name="{image_name}"
+                                                image_name="{image_name}",
+                                                category="{category}"
                             WHERE username="{username}" AND
                                   ID="{uid}"'''
                           .format(uid=uid, username=username, title=title, datetime=datetime, amount=amount,
-                                  description=description, image_name=image_name,
+                                  description=description, image_name=image_name, category=category
                                   ))
     db_connection.commit()
     return "Transaction Updated Successfully"
+
+
+# function to add a column to IMAGES table
+def add_category(db_connection):
+    db_connection.execute('''ALTER TABLE IMAGES ADD
+                             category TEXT;''')
+    db_connection.commit()
+
+
+# function to map the file name and file_size
+def create_image_size_table(db_connection):
+    db_connection.execute('''CREATE TABLE IMAGE_SIZE
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         mapped_name           TEXT    NOT NULL,
+         file_size           TEXT    NOT NULL);''')
+    db_connection.commit()
+
+
+# function to insert into image_size into table
+def insert_into_image_size_table(db_connection, mapped, size):
+    db_connection.execute('''INSERT INTO IMAGE_SIZE (mapped_name, file_size) VALUES ("{mapped}","{size}")'''
+                          .format(size=size, mapped=mapped))
+    db_connection.commit()
+
+
+# function to calculate total space consumed by user in server
+def space_usage(db_connection, username):
+    cursor = db_connection.execute('''SELECT image_name
+          FROM IMAGES where username = "{username}"
+    '''.format(username=username))
+    sizes = []  # list of image sizes
+    for row in cursor:
+        if row[0] != "False":
+            cursor1 = db_connection.execute('''SELECT file_size
+                      FROM IMAGE_SIZE where mapped_name = "{image_name}"
+                '''.format(image_name=row[0]))
+            for row1 in cursor1:
+                sizes.append(float(row1[0]))
+    return sum(sizes) if sizes else 0
