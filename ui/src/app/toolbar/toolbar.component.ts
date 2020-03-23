@@ -27,7 +27,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   receiveImage(URL: string) {
-    return this.http.get<ReturnImage>(URL);
+    return this.http.post<ReturnImage>(URL, {});
   }
 
   private GetDP() {
