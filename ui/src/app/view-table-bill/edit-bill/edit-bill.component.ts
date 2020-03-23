@@ -68,6 +68,11 @@ export class EditBillComponent implements OnInit {
 }
 
 
+clearImage() {
+  this.fileToUpload = null;
+  this.BillHasImage = false;
+  this.imageUploaded = false;
+}
 
 dataURLtoFile(arr, filename) {
   const bstr = atob(arr);

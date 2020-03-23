@@ -67,6 +67,11 @@ export class ChangeBillComponent implements OnInit {
     this.imageUploaded = true;
 }
 
+clearImage() {
+  this.fileToUpload = null;
+  this.BillHasImage = false;
+  this.imageUploaded = false;
+}
 
  dataURLtoFile(arr, filename) {
       const bstr = atob(arr);
