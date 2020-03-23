@@ -6,10 +6,12 @@
       <div *ngIf="Authoriation == true">
         <!--
               <p><span style="color:black;" class="fa fa-user fa-lg" aria-hidden="true"></span>&nbsp; {{userName.username.split('@',1)[0]}}</p> -->
+
               <p style="padding-top: 20px;">
+                <img id="crown" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTw4_JpJJQX7rUIHxThn30iwDl8CzLIHjV-Pov2WMYUiB-zt9YS" height="60" width="60" style="transform:rotate(-30deg); position: absolute;"/>
                  {{userName.username.split('@',1)[0]}}
-                <button style="color:white;width:2px;" class="btn btn-link"><i class="fa fa-user fa-2x" aria-hidden="true" style="color:black;"></i></button>
-                &nbsp;
+                 <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="max-height: 60; max-width: 60;" />
+                 &nbsp;
                 <button href="#" style="color:transparent;width:2px;" title="Logout" (click) = "LogOut()" class="btn btn-link"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color:red;"></i></button>
               </p>
       </div>
