@@ -18,6 +18,7 @@ from api.auth.signOut import signOutAPI
 from api.transactions.deleteTransaction import deleteTransactionsAPI
 from api.transactions.editTransaction import editBillAPI
 from api.analytics.usage import usageAPI
+from api.auth.profile_pic import profilePicApi
 
 # Flask APP
 app = Flask(__name__)
@@ -36,6 +37,7 @@ app.register_blueprint(signOutAPI)
 app.register_blueprint(deleteTransactionsAPI)
 app.register_blueprint(editBillAPI)
 app.register_blueprint(usageAPI)
+app.register_blueprint(profilePicApi)
 
 
 if __name__ == '__main__':
