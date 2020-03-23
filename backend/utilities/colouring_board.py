@@ -1,7 +1,11 @@
+from io import BytesIO
 from random import randint, sample
-
 from PIL import Image
+from flask import send_file
 from numpy import zeros, uint8
+from shutil import copyfileobj
+from tempfile import NamedTemporaryFile
+from os import remove
 
 """
 Colour list
@@ -158,5 +162,8 @@ def generate_image():
     blocks = particular_blocks(number, resolution)
     block_coordinate = block_coordinates(blocks, resolution)
     coloured_data = colour_board(data, block_coordinate, board_size, intervals)
-    return form_image(coloured_data)
-
+    formed_image = form_image(coloured_data)
+    img_io = BytesIO()
+    formed_image.save(img_io, 'JPEG', quality=70)
+    img_io.seek(0)
+    return send_file(img_io, mimetype='image/jpeg')
