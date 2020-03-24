@@ -12,8 +12,9 @@
 
   #crown {
     mix-blend-mode: multiply;
-    top: 9px;
-    left: 1583px;
+    top:  -9px;
+    left: 130px;
+    overflow: hidden;
   }
 
   
