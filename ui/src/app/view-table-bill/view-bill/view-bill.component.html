@@ -1,13 +1,18 @@
-<div class="container-fluid">
-        <div class="container-fluid" *ngIf="canShowImage === true">
-            <!--
-            <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="max-width: 60%; max-height: 60%; display: block;">
-            -->
-            <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="margin-top:10px; margin-bottom:10px; max-height: 90vh; max-width: 90vh;" />
-        </div>
-        <div class="d-flex justify-content-center" *ngIf="canShowImage === false">
-            <div class="spinner-grow text-success" role="status">
+<div class="grid">
+    <div class="grid-item">
+        <div class="container-fluid">
+            <div class="container-fluid" *ngIf="canShowImage === true">
+                <!--
+                <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="max-width: 60%; max-height: 60%; display: block;">
+                -->
+                <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="margin-top:10px; margin-bottom:10px; max-height: 90vh; max-width: 90vh;" />
             </div>
-            <p>&nbsp;&nbsp; <b>Loading Image!!  PLEASE WAIT </b></p>
+            <div class="d-flex justify-content-center" *ngIf="canShowImage === false">
+                <div class="spinner-grow text-success" role="status">
+                </div>
+                <p>&nbsp;&nbsp; <b>Loading Image!!  PLEASE WAIT </b></p>
+            </div>
         </div>
+    </div>
+    
 </div>

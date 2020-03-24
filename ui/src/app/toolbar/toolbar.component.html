@@ -8,7 +8,7 @@
               <p><span style="color:black;" class="fa fa-user fa-lg" aria-hidden="true"></span>&nbsp; {{userName.username.split('@',1)[0]}}</p> -->
 
               <p style="padding-top: 20px;">
-                <img id="crown" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTw4_JpJJQX7rUIHxThn30iwDl8CzLIHjV-Pov2WMYUiB-zt9YS" height="60" width="60" style="transform:rotate(0deg); position: absolute;"/>
+                <img id="crown" *ngIf="isPremium" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTw4_JpJJQX7rUIHxThn30iwDl8CzLIHjV-Pov2WMYUiB-zt9YS" height="60" width="60" style="transform:rotate(45deg); position: absolute;"/>
                  {{userName.username.split('@',1)[0]}}
                  <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="max-height: 35px; max-width: 35px;" />
                  &nbsp;

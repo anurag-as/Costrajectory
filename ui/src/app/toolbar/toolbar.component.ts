@@ -18,6 +18,7 @@ export class ToolbarComponent implements OnInit {
   @Input() Authoriation;
   canShowImage = false;
   base64Data = '';
+  isPremium = true;
 
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router) {}
 
