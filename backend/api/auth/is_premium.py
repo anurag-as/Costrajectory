@@ -10,11 +10,12 @@ isPremiumAPI = Blueprint('isPremiumAPI', __name__)
 @cross_origin()
 def api_is_user_premium():
     try:
-        refresh_token(connection(), request.form['username'])
         username = request.json['username']
+        refresh_token(connection(), request.json['username'])
         bool_is_user_premium = is_user_premium(connection(), username)
         if bool_is_user_premium == -1:
+            print("Here")
             bool_is_user_premium = 'Username not found'
-    except:
+    except KeyError:
         bool_is_user_premium = 'Username not found'
     return jsonify({'isPremium': bool_is_user_premium})
