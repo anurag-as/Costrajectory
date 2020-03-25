@@ -8,7 +8,7 @@ import { Output } from '@angular/core';
   styleUrls: ['./signupin.component.css']
 })
 export class SignupinComponent implements OnInit {
-  signup = true;
+  signup = false;
   @Output() userdata = new EventEmitter<{username: string, password: string}>();
 
   constructor() { }

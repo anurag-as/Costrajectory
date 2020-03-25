@@ -1,10 +1,7 @@
-<app-toolbar [userName]="userdata" [Authoriation]="authorizationDone"></app-toolbar>
+<app-toolbar [userName]="userdata" [Authoriation]="authorizationDone" id="Toolbar"></app-toolbar>
 
-<div *ngIf="authorizationDone == false">
-    <app-signupin (userdata)="authorization($event)"></app-signupin>
-</div>
+<app-signupin (userdata)="authorization($event)" *ngIf="authorizationDone == false"></app-signupin>
 
-<div *ngIf="authorizationDone == true">
-    <app-upload-form [userName]="userdata.username"></app-upload-form>
-</div>
+<app-upload-form [userName]="userdata.username" *ngIf="authorizationDone == true"></app-upload-form>
+
 
