@@ -41,7 +41,7 @@ export class ToolbarComponent implements OnInit {
     this.http.post<PremiumStatus>(endpoint, {username: this.userName}).subscribe(data => {
       this.isPremium = data.isPremium;
     }, err => {
-      this.isPremium = true;
+      this.isPremium = false;
     });
   }
 
