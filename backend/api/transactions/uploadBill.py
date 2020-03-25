@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from time import time
-from database_functions import connection, insert_into_image_table, insert_into_image_mapping_table, insert_into_image_size_table, refresh_token, space_usage
+from database_functions import connection, is_user_premium, insert_into_image_table, insert_into_image_mapping_table, insert_into_image_size_table, refresh_token, space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
 from utilities.utils import get_total_size
@@ -34,7 +34,12 @@ def upload():
         # If user quota has been exceeded
         user_name = request.form['username']
         size = space_usage(connection(), user_name)
-        total_quota = get_total_size()
+        bool_is_user_premium = is_user_premium(connection(), user_name)
+        premium = False
+        if bool_is_user_premium == 'True':
+            premium = True
+        total_quota = get_total_size(premium)
+
         usage_exceeded = quota_exceeded(size, total_quota)
         if not usage_exceeded:  # Upload image if user has not exceeded his quota
             file_extension = file_name.split('.')[-1]
