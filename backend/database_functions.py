@@ -2,6 +2,7 @@ from sqlite3 import connect
 from utilities.utils import hash_password
 from time import time
 
+
 # Connecting to the database
 def connection():
     db_connection = connect('costrajectory.db')
@@ -29,10 +30,11 @@ def create_user_table(db_connection):
 
 
 # Inserting Entry into User Table
-def insert_into_user_table(db_connection, username, password):
+def insert_into_user_table(db_connection, username, password, premium):
     password = hash_password(password)
-    db_connection.execute('''INSERT INTO USERS (username, password) VALUES ("{username}","{password}")'''
-                          .format(username=username, password=password))
+    db_connection.execute('''INSERT INTO USERS (username, password, premium) VALUES ("{username}","{password}",
+    "{premium}") '''
+                          .format(username=username, password=password, premium=premium))
     db_connection.commit()
 
 
@@ -90,7 +92,7 @@ def insert_into_image_table(db_connection, username, title, datetime, amount, de
     db_connection.execute('''INSERT INTO IMAGES (username, title, datetime, amount, description, image_name, category) 
         VALUES ("{username}","{title}","{datetime}","{amount}","{description}","{image_name}","{category}")'''
                           .format(username=username, title=title, datetime=datetime, amount=amount,
-                                  description=description, image_name=image_name,category=category
+                                  description=description, image_name=image_name, category=category
                                   ))
     db_connection.commit()
 
@@ -252,3 +254,30 @@ def space_usage(db_connection, username):
             for row1 in cursor1:
                 sizes.append(float(row1[0]))
     return sum(sizes) if sizes else 0
+
+
+# function to add a column premium to users table
+def add_premium(db_connection):
+    db_connection.execute('''ALTER TABLE USERS ADD
+                             category premium;''')
+    db_connection.commit()
+
+
+# function to check if a particular user is Premium
+def is_user_premium(db_connection, username):
+    cursor = db_connection.execute('''SELECT premium FROM USERS where username = "{username}"
+     LIMIT 1'''.format(username=username))
+    for row in cursor:
+        if row:
+            return row[0]
+    return -1
+
+
+# function to make a user premium
+def user_go_premium(db_connection, username):
+    db_connection.execute('''UPDATE USERS 
+        set premium = "True"
+        where username = "{username}"
+        '''.format(username=username, ))
+    db_connection.commit()
+    return True

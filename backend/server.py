@@ -19,6 +19,8 @@ from api.transactions.deleteTransaction import deleteTransactionsAPI
 from api.transactions.editTransaction import editBillAPI
 from api.analytics.usage import usageAPI
 from api.auth.profile_pic import profilePicApi
+from api.auth.is_premium import isPremiumAPI
+from api.auth.go_premium import goPremiumAPI
 
 # Flask APP
 app = Flask(__name__)
@@ -38,6 +40,8 @@ app.register_blueprint(deleteTransactionsAPI)
 app.register_blueprint(editBillAPI)
 app.register_blueprint(usageAPI)
 app.register_blueprint(profilePicApi)
+app.register_blueprint(isPremiumAPI)
+app.register_blueprint(goPremiumAPI)
 
 
 if __name__ == '__main__':

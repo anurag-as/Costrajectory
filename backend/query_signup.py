@@ -4,10 +4,11 @@ from database_functions import connection, user_exists, insert_into_user_table
 class SignUp:
 
     # Initializing the connection
-    def __init__(self, username, password=None):
+    def __init__(self, username, password=None, is_premium=False):
         self.db = connection()
         self.user = username
         self.password = password
+        self.premium = is_premium
 
     # check if user exists
     def check_user(self):
@@ -24,13 +25,13 @@ class SignUp:
     # add a user into user table
     def add_user(self):
         if not self.check_user() and self.check_password():
-            insert_into_user_table(self.db, self.user, self.password)
+            insert_into_user_table(self.db, self.user, self.password, self.premium)
             return True
         return False
 
     def add_user_after_authentication(self):    
         try:
-            insert_into_user_table(self.db, self.user, self.password)
+            insert_into_user_table(self.db, self.user, self.password, self.premium)
             return True
         except:
             return False
