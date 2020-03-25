@@ -271,3 +271,13 @@ def is_user_premium(db_connection, username):
         if row:
             return row[0]
     return -1
+
+
+# function to make a user premium
+def user_go_premium(db_connection, username):
+    db_connection.execute('''UPDATE USERS 
+        set premium = "True"
+        where username = "{username}"
+        '''.format(username=username, ))
+    db_connection.commit()
+    return True
