@@ -3,13 +3,14 @@ import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionStorage } from '../app.session';
+import { GlobalConfigsService } from '../global-configs.service';
 
 interface ReturnImage {
   Image: any;
 }
 
 interface PremiumStatus {
-  isPremium: boolean;
+  isPremium: string;
 }
 
 @Component({
@@ -24,12 +25,22 @@ export class ToolbarComponent implements OnInit {
   base64Data = '';
   isPremium = false;
 
-  constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router) {}
+  constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService) {}
 
   ngOnInit() {
     // To get the random DP
     this.GetDP();
-    this.GetUserPremiumStatus();
+    // this.GetUserPremiumStatus();
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnChanges(chg) {
+    if (chg.Authoriation === undefined) {
+      return;
+    }
+    if (chg.Authoriation.currentValue === true) {
+        this.GetUserPremiumStatus();
+    }
   }
 
   receiveImage(URL: string) {
@@ -37,12 +48,21 @@ export class ToolbarComponent implements OnInit {
   }
 
   private GetUserPremiumStatus() {
-    const endpoint = 'http://127.0.0.1:5000/isUserPremium';
-    this.http.post<PremiumStatus>(endpoint, {username: this.userName}).subscribe(data => {
-      this.isPremium = data.isPremium;
+    const endpoint = 'http://127.0.0.1:5000/isPremium';
+    this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
+      // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
+      if (data.isPremium === 'True') {
+        this.isPremium = true;
+        this.Globals.premium = this.isPremium;
+      } else {
+        this.isPremium = false;
+        this.Globals.premium = this.isPremium;
+      }
     }, err => {
       this.isPremium = false;
+      this.Globals.premium = this.isPremium;
     });
+    // return this.isPremium;
   }
 
   private GetDP() {
