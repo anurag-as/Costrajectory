@@ -33,13 +33,13 @@ export class SignupComponent {
       }
 
       this.loading = true;
-      this.Authserviceclient.signup(f.value.email, f.value.password).subscribe(result => {
+      this.Authserviceclient.signup(f.value.email, f.value.password, f.value.isPremium).subscribe(result => {
           // result = this.isUserexisting;
           // console.log('FROM BASE', result);
           // this.loading = false;
           if (!result.available) {
               // this.isUserexisting = result;
-              this.Authserviceclient.register(result.username, result.password).subscribe(res => {
+              this.Authserviceclient.register(result.username, result.password, result.Premium).subscribe(res => {
                 // console.log('FROM BASE 2', res);
                 this.loading = false;
                 if (res.registered) {

@@ -1,65 +1,71 @@
-<mat-card>
-<div class="container-fluid">
-    <div class="container">
-        <div class="row"  *ngIf="loading == false">
-            <div class="col-md-6">
 
-                <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
-                        <label>Email:</label>
-                        <input 
-                            type="email"
-                            id="email" 
-                            class="form-control" 
-                            required
-                            email 
-                            placeholder="Enter email"
-                            ngModel
-                            name="email"           
-                         />
 
-                        
-                        <label>Password:</label>
-                        <input 
-                            type="password"                         
-                            id="password"
-                            class="form-control" 
-                            placeholder="Enter password" 
-                            minlength="6"
-                            required
-                            ngModel
-                            name="password"
-                        />
+<div class="container">
+    <div class="login"  *ngIf="loading == false">
 
-                        
-                        <label>Retype Password:</label>
-                        <input 
-                            type="password"                         
-                            id="cpassword"
-                            class="form-control" 
-                            placeholder="Retype password" 
-                            minlength="6"
-                            required
-                            ngModel
-                            name="cpassword"
-                        />
+            <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
                     
-                    <div>
-                        <button
-                            class = "btn btn-primary"
-                            type = "submit"
-                            [disabled]="!signupForm.valid">
-                            Signup
-                        </button>
-                    </div>
-                </form>
-            </div>
+                    <input 
+                        type="email"
+                        id="email" 
+                        class="form-control" 
+                        required
+                        email 
+                        placeholder="Enter email"
+                        ngModel
+                        name="email"           
+                        />
 
-            <div class="col-md-6">
-                <img src='https://static.thenounproject.com/png/736683-200.png' style="width:250px;height:250px;">
-            </div>
-        </div>
-        
-        <div class="loaderContainer"><div class="loader" *ngIf="loading == true"></div></div>
+                    
+                    
+                    <input 
+                        type="password"                         
+                        id="password"
+                        class="form-control" 
+                        placeholder="Enter password" 
+                        minlength="6"
+                        required
+                        ngModel
+                        name="password"
+                    />
+
+                    
+                    
+                    <input 
+                        type="password"                         
+                        id="cpassword"
+                        class="form-control" 
+                        placeholder="Retype password" 
+                        minlength="6"
+                        required
+                        ngModel
+                        name="cpassword"
+                    />
+
+
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input 
+                            type="checkbox" 
+                            class="form-control custom-control-input" 
+                            id="customControlAutosizing"
+                            ngModel
+                            name="isPremium"/>
+
+                        <label class="custom-control-label" for="customControlAutosizing" id="gridCheck1">Want a premium Account?</label>
+                      </div>
+                    
+                
+                <div>
+                    <button id = "but"
+                        class = "btn btn-primary"
+                        type = "submit"
+                        [disabled]="!signupForm.valid">
+                        Signup
+                    </button>
+                </div>
+            </form>
     </div>
+    
+    <div class="loaderContainer"><div class="loader" *ngIf="loading == true"></div></div>
 </div>
-</mat-card>
+

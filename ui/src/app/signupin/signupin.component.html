@@ -1,20 +1,33 @@
+<!--
 <mat-card>
     <div id="toggler">
         <h3>SignUp <mat-slide-toggle (change) = "changeState()"></mat-slide-toggle>&nbsp; SignIn</h3>
     </div>
 </mat-card>
+-->
 
-
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div><span>Cost</span>trajectory</div>
+</div>
 <div class="container">
-                    <div class="fluid-container">
-                        <div *ngIf="signup == true">
-                            <div class="img"></div>
-                            <app-signup (userdata)="authorization($event)"></app-signup>
-                        </div>
-                        <div *ngIf="signup == false">
-                            <div class="img"></div>
-                            <app-signin (userdata)="authorization($event)"></app-signin>
-                        </div>
-                    </div>  
+        <div class="fluid-container">
+
+            <div *ngIf="signup == true">
+                <app-signup (userdata)="authorization($event)"></app-signup>
+                <button id="StateTogglerRegister" (click) = "changeState()">
+                    Already Registered? Login Here
+                </button>
+            </div>
+
+            <div *ngIf="signup == false">
+                <app-signin (userdata)="authorization($event)"></app-signin>
+                <button id="StateTogglerLogin" (click) = "changeState()">
+                    Not Registered? Register Here
+                </button>
+            </div>
+
+        </div>  
 </div>
 

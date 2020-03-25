@@ -8,6 +8,10 @@ interface ReturnImage {
   Image: any;
 }
 
+interface PremiumStatus {
+  isPremium: boolean;
+}
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -18,16 +22,27 @@ export class ToolbarComponent implements OnInit {
   @Input() Authoriation;
   canShowImage = false;
   base64Data = '';
+  isPremium = false;
 
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router) {}
 
   ngOnInit() {
     // To get the random DP
     this.GetDP();
+    this.GetUserPremiumStatus();
   }
 
   receiveImage(URL: string) {
-    return this.http.get<ReturnImage>(URL);
+    return this.http.post<ReturnImage>(URL, {});
+  }
+
+  private GetUserPremiumStatus() {
+    const endpoint = 'http://127.0.0.1:5000/isUserPremium';
+    this.http.post<PremiumStatus>(endpoint, {username: this.userName}).subscribe(data => {
+      this.isPremium = data.isPremium;
+    }, err => {
+      this.isPremium = false;
+    });
   }
 
   private GetDP() {
