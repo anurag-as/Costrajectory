@@ -9,7 +9,8 @@
 
               <p style="padding-top: 20px;">
                 <img id="crown" *ngIf="isPremium" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTw4_JpJJQX7rUIHxThn30iwDl8CzLIHjV-Pov2WMYUiB-zt9YS" height="60" width="60" style="transform:rotate(45deg); position: absolute;"/>
-                 {{userName.username.split('@',1)[0]}}
+                <button id="premium" class = "btn btn-primary" *ngIf="!isPremium" (click)="GoPremium()"><img class="img-responsive"  id="premImg" src="assets\images\premium.png" height="30px" width="25px" /> &nbsp; &nbsp;Go Premium!</button> 
+                {{userName.username.split('@',1)[0]}}
                  <img class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="max-height: 35px; max-width: 35px;" />
                  &nbsp;
                 <button href="#" style="color:transparent;width:2px;" title="Logout" (click) = "LogOut()" class="btn btn-link"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color:red;"></i></button>

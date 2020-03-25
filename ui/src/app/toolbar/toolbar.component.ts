@@ -91,4 +91,22 @@ export class ToolbarComponent implements OnInit {
     this.logout.deleteKey();
     window.location.reload();
   }
+
+  GoPremium() {
+    const endpoint = 'http://127.0.0.1:5000/goPremium';
+    this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
+      // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
+      if (data.isPremium === 'True') {
+        this.isPremium = true;
+        this.Globals.premium = this.isPremium;
+        window.location.reload();
+      } else {
+        this.Globals.premium = this.isPremium;
+        window.alert('SOMETHING WENT WRONG! TRY AGAIN LATER');
+      }
+    }, err => {
+      this.Globals.premium = this.isPremium;
+      window.alert('SOMETHING WENT WRONG! TRY AGAIN LATER');
+    });
+  }
 }
