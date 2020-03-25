@@ -6,11 +6,24 @@ import { Injectable } from '@angular/core';
 export class GlobalConfigsService {
   username: string;
   password: string;
+  isPremium = false;
   constructor() { }
 
   get GetUserName() {
     // console.log('Urn queries: ', this.username);
     return this.username;
+  }
+
+  set premium(isPremium: boolean) {
+    this.isPremium = isPremium;
+  }
+
+  get premium() {
+    return this.isPremium;
+  }
+
+  public setPremiumStatus(isPremium: boolean) {
+    this.isPremium = isPremium;
   }
 
   set UserName(USERNAME: string) {
