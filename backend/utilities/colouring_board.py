@@ -3,9 +3,8 @@ from random import randint, sample
 from PIL import Image
 from flask import send_file
 from numpy import zeros, uint8
-from shutil import copyfileobj
-from tempfile import NamedTemporaryFile
-from os import remove
+from base64 import b64encode
+from flask import jsonify
 
 """
 Colour list
@@ -165,5 +164,6 @@ def generate_image():
     formed_image = form_image(coloured_data)
     img_io = BytesIO()
     formed_image.save(img_io, 'JPEG', quality=70)
-    img_io.seek(0)
-    return send_file(img_io, mimetype='image/jpeg')
+    img_io = img_io.getvalue()
+    encoded_string = b64encode(img_io)
+    return jsonify({'Image': str(encoded_string.decode('utf-8'))})
