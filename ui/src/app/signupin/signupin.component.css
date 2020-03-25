@@ -96,6 +96,8 @@ body{
 
 .header div span{
 	color: green !important;
+	font-weight: bold;
+
 }
 
 
@@ -138,4 +140,18 @@ body{
 	border: 0ch;
 }
 
+.header2{
+	position: absolute;
+	top: calc(50% - 40px);
+	left: calc(50% - 300px);
+	z-index: 2;
+}
 
+.header2 img{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+	background: transparent;
+}
