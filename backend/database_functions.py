@@ -261,3 +261,13 @@ def add_premium(db_connection):
     db_connection.execute('''ALTER TABLE USERS ADD
                              category premium;''')
     db_connection.commit()
+
+
+# function to check if a particular user is Premium
+def is_user_premium(db_connection, username):
+    cursor = db_connection.execute('''SELECT premium FROM USERS where username = "{username}"
+     LIMIT 1'''.format(username=username))
+    for row in cursor:
+        if row:
+            return row[0]
+    return -1
