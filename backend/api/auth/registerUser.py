@@ -13,7 +13,8 @@ registerUserAPI = Blueprint('registerUserAPI', __name__)
 def registerUser():
     username = request.json['username']
     password = request.json['password']
-    signup = SignUp(username, password)
+    is_premium = request.json['premium']
+    signup = SignUp(username, password, is_premium)
     registered = signup.add_user_after_authentication()
     token = False
     if registered:
