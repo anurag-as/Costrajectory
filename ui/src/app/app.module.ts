@@ -34,6 +34,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     AngularFontAwesomeModule,
     MatProgressBarModule,
     MatMenuModule,
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],
