@@ -16,6 +16,10 @@ def node_library():
     node_modules_install = Popen(['npm', 'install'], cwd=node_directory, shell=True)
     node_modules_install.wait()
 
+    # Node audit fix
+    node_audit_fix = Popen(['npm', 'audit', 'fix'], cwd=node_directory, shell=True)
+    node_audit_fix.wait()
+
 
 def get_params():
     params = list(uname())[:2]
