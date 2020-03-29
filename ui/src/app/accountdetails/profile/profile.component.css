@@ -66,8 +66,8 @@
 
 }
 
-.a:active {
-  color: red;
+#test {
+  background-color: red;
 }
 
 #sidebar-wrapper .sidebar-heading {

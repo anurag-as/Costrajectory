@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accountdetails.component.css']
 })
 export class AccountdetailsComponent implements OnInit {
-
+  selected = 'profile';
   constructor() { }
 
   ngOnInit() {
   }
+
+  ChangeMode(Mode: string) {
+    this.selected = Mode;
+  }
+
 
 }
