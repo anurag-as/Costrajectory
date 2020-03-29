@@ -35,6 +35,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ViewBillComponent,
     DeleteBillComponent,
     EditBillComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    AccountdetailsComponent
   ],
   imports: [
     BrowserModule,
