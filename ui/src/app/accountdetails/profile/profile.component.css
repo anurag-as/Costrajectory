@@ -101,3 +101,35 @@
     margin-left: -15rem;
   }
 }
+
+#saveNotifier {
+  height: 100px;
+  width: 200px;
+  position: absolute;
+  bottom: -500px;
+  left: 200px;
+  background-color: rgb(18, 240, 30);
+  z-index: 2;
+  border-radius: 10px;
+  box-shadow: 5px 10px #dbdbdb;
+  animation-name: example;
+  animation-duration: 4s;
+
+}
+
+#save {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+}
+
+#saveT {
+  position: absolute;
+  top: 30px;
+  left: 80px;
+}
+
+@keyframes example {
+  0%   {background-color:rgb(18, 240, 30); left:0px; bottom: -500px;}
+  25%  {background-color:rgb(18, 240, 30); left:200px; bottom: -500px;}
+}

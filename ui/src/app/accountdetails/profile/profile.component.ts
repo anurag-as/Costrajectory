@@ -12,47 +12,50 @@ import { Profileservice } from './profiledata.service';
 })
 export class ProfileComponent implements OnInit {
   usrname = '';
-  alternateEmail = '';
-  DOB: Date;
-  Gender = '';
-  Fname = '';
-  Lname = '';
-  Addr1 = '';
-  Addr2 = '';
-  Country = '';
-  State = '';
-  Zip: number;
+  email = '';
+  dob: Date;
+  gender = '';
+  first_name = '';
+  last_name = '';
+  address = '';
+  address2 = '';
+  country = '';
+  state = '';
+  zip_code: number;
   AllCountries;
   cityInfo;
   stateInfo;
   originalData: any;
+  edited = false;
 
   constructor(private Globals: GlobalConfigsService, private Route: Router, private cs: CountriesService, private proser: Profileservice) {
     this.usrname = Globals.GetUserName;
-  }
-
-  ngOnInit() {
     this.getCountries();
     this.proser.GetData(this.usrname).subscribe( data => {
       this.originalData = data;
       this.MapForForm(this.originalData);
+      console.log('GETTING USER INFO SUCCESSFUL:', data);
     }, err => {
       console.log('GETTING USER INFO UNSUCCESSFUL');
     }
     );
   }
 
+  ngOnInit() {
+  }
+
   MapForForm(JSONdata) {
-    this.alternateEmail = JSONdata.email;
-    this.DOB = JSONdata.dob;
-    this.Gender = JSONdata.gender;
-    this.Fname = JSONdata.first_name;
-    this.Lname = JSONdata.last_name;
-    this.Addr1 = JSONdata.address;
-    this.Addr2 = JSONdata.address2;
-    this.Country = JSONdata.country;
-    this.State = JSONdata.state;
-    this.Zip = JSONdata.zip_code;
+    // console.log('TEST: ', JSONdata.body.address);
+    this.email = JSONdata.body.email;
+    this.dob = JSONdata.body.dob;
+    this.gender = JSONdata.body.gender;
+    this.first_name = JSONdata.body.first_name;
+    this.last_name = JSONdata.body.last_name;
+    this.address = JSONdata.body.address;
+    this.address2 = JSONdata.body.address2;
+    this.country = JSONdata.body.country;
+    this.state = JSONdata.body.state;
+    this.zip_code = JSONdata.body.zip_code;
   }
 
   getCountries() {
@@ -72,6 +75,8 @@ export class ProfileComponent implements OnInit {
   }
 
   submit(form: NgForm) {
+    this.saveTodos();
+    this.edited = true;
     this.proser.SetData(this.usrname, form).subscribe( data => {
       console.log('DATA UPLOADED SUCCESSFULLY');
     });
@@ -83,21 +88,30 @@ export class ProfileComponent implements OnInit {
      form.resetForm({
       username : this.usrname,
       email : this.originalData.email,
-      DOB : this.originalData.dob,
-      Gender : this.originalData.gender,
-      firstName: this.originalData.first_name,
-      lastName: this.originalData.last_name,
+      dob : this.originalData.dob,
+      gender : this.originalData.gender,
+      first_name: this.originalData.first_name,
+      last_name: this.originalData.last_name,
       address : this.originalData.address,
       address2 : this.originalData.address2,
       country : this.originalData.country,
       state : this.originalData.state,
-      zip : this.originalData.zip_code,
+      zip_code : this.originalData.zip_code,
      });
-     this.stateInfo = [];
     }
 
     onChangeCountry(countryValue) {
       this.stateInfo = this.AllCountries[countryValue].States;
     }
+
+    saveTodos(): void {
+      // show box msg
+      this.edited = true;
+      // wait 3 Seconds and hide
+      setTimeout(function() {
+          this.edited = false;
+          console.log(this.edited);
+      }.bind(this), 6000);
+     }
 
 }
