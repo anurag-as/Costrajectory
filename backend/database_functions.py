@@ -339,6 +339,7 @@ def insert_into_profile_details(db_connection, username, first_name, last_name, 
                                   zip_code=zip_code
                                   ))
     db_connection.commit()
+    return "Profile details updated successfully"
 
 
 # function to query profile details of a particular user
