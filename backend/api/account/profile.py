@@ -36,5 +36,32 @@ def profile_details():
     else:
         user_name = request.args.get('user_name')
         if not query_profile_details(connection(), user_name):  # User entry does not exist
-            return jsonify(user_name, first_name, last_name, email, address, address2,
-                               dob, gender, country, state, zip_code)
+            response = {
+                'user_name': user_name,
+                'first_name': '',
+                'last_name': '',
+                'email': '',
+                'address': '',
+                'address2': '',
+                'dob': '',
+                'gender': '',
+                'country': '',
+                'state': '',
+                'zip_code': None
+            }
+        else:
+            data = query_profile_details(connection(), user_name)
+            response = {
+                'user_name': user_name,
+                'first_name': data[1],
+                'last_name': data[2],
+                'email': data[3],
+                'address': data[4],
+                'address2': data[5],
+                'dob': data[6],
+                'gender': data[7],
+                'country': data[8],
+                'state': data[9],
+                'zip_code': data[10]
+            }
+        return jsonify(response)
