@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     subscribe(
       data2 => {
         this.AllCountries = data2.Countries;
-        console.log('Data:', this.AllCountries);
+        // console.log('Data:', this.AllCountries);
       },
       err => console.log(err),
       () => console.log('complete')
@@ -54,19 +54,26 @@ export class ProfileComponent implements OnInit {
   }
 
   reset(form: NgForm) {
-    form.resetForm();
-    this.usrname = this.Globals.GetUserName;
+     // form.resetForm();
+    // this.usrname = this.Globals.GetUserName;
+     form.resetForm({
+      username : this.usrname,
+      email : '',
+      DOB : '',
+      Gender : '',
+      firstName: '',
+      lastName: '',
+      address : '',
+      address2 : '',
+      country : '',
+      state : '',
+      zip : undefined,
+     });
+     this.stateInfo = [];
     }
 
     onChangeCountry(countryValue) {
       this.stateInfo = this.AllCountries[countryValue].States;
-      this.cityInfo = this.stateInfo[0].Cities;
-      console.log(this.cityInfo);
-    }
-
-    onChangeState(stateValue) {
-      this.cityInfo = this.stateInfo[stateValue].Cities;
-      // console.log(this.cityInfo);
     }
 
 }

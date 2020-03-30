@@ -12,14 +12,14 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" required="">
+                <input type="text" class="form-control" id="firstName" placeholder="" name="firstName" [(ngModel)]="Fname">
                 <div class="invalid-feedback">
                     Valid first name is required.
                 </div>
                 </div>
                 <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder=""  required="">
+                <input type="text" class="form-control" id="lastName" placeholder=""  name="lastName" [(ngModel)]="Lname">
                 <div class="invalid-feedback">
                     Valid last name is required.
                 </div>
@@ -41,33 +41,33 @@
 
             <div class="mb-3">
                 <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com"   >
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" [(ngModel)]="alternateEmail">
                 <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                Please enter a valid alternate email address 
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="1234 Main St"    required="">
+                <input type="text" class="form-control" id="address" placeholder="07, 23c block ... "  name="address" [(ngModel)]="Addr1">
                 <div class="invalid-feedback">
-                Please enter your shipping address.
+                Please enter address.
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"   >
+                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" name="address2" [(ngModel)]="Addr2">
             </div>
 
             <div class="row">
                 <div class="col-md-5 mb-3">
                     <label for="date">Date Of Birth</label>
-                    <input type="date" class="form-control" id="date">
+                    <input type="date" class="form-control" id="date" name="DOB" [(ngModel)]="DOB">
                 </div>
                 <div class="col-md-5 mb-3">
                     <label for="gender">Gender</label>
-                    <select class="custom-select d-block w-100" required="">
+                    <select class="custom-select d-block w-100" name="Gender" [(ngModel)]="Gender">
                         <option value="">Choose...</option>
                         <option>Male</option>
                         <option>Female</option>
@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col-md-5 mb-3">
                 <label for="country">Country</label>
-                <select class="custom-select d-block w-100" required=""  name= "country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="Country">
+                <select class="custom-select d-block w-100" name= "country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="Country">
                     <option value="">Choose...</option>
                     <option *ngFor="let country of AllCountries; let i = index" value="{{i}}">{{country.CountryName}}</option>
                     <!-- <option *ngFor="let Country of ['a','b']">{{Country}}</option>  [(ngModel)]="Country"-->
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                 <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required=""   >
+                <input type="number" class="form-control" id="zip" placeholder="" name="zip" [(ngModel)]="Zip">
                 <div class="invalid-feedback">
                     Zip code required.
                 </div>
