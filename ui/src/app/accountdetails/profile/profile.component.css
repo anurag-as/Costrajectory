@@ -1,0 +1,103 @@
+ 
+.sidenav {
+    width: 200px;
+    height: 150%;
+    position: absolute;
+    z-index: 1;
+    top: 127px;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    overflow-y: visible;
+  }
+  
+  .sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  #Go {
+      position: absolute;
+      top: -11px;
+      left: 100px;
+      overflow: hidden;
+  }
+
+  #Home {
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    overflow: hidden;
+}
+
+#Name {
+    position: absolute;
+    top: -10px;
+    left: 120px;
+}
+
+#Save {
+    position: absolute;
+    top: -15px;
+    left: 50px;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+  left: 0;
+  position: absolute;
+  width: 200px;
+  height: 150%;
+  z-index: 1;
+
+
+}
+
+#test {
+  background-color: red;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 198px;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}

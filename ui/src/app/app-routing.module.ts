@@ -6,11 +6,13 @@ import {AppComponent} from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
+import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
 
 const routes: Routes = [
    { path: 'logout', component: SignupinComponent},
    { path: '', component: TabularViewComponent},
-   { path: 'analytics', component: AnalyticsComponent}
+   { path: 'analytics', component: AnalyticsComponent},
+   { path: 'AccDetails', component: AccountdetailsComponent}
   ];
 
 @NgModule({

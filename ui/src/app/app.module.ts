@@ -35,6 +35,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
+import { ProfileComponent } from './accountdetails/profile/profile.component';
+import { AboutComponent } from './accountdetails/about/about.component';
+import { LogsComponent } from './accountdetails/logs/logs.component';
+import { ContactComponent } from './accountdetails/contact/contact.component';
+import { StatusComponent } from './accountdetails/status/status.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -54,7 +61,13 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ViewBillComponent,
     DeleteBillComponent,
     EditBillComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    AccountdetailsComponent,
+    ProfileComponent,
+    AboutComponent,
+    LogsComponent,
+    ContactComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +88,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     MatProgressBarModule,
     MatMenuModule,
     ProgressbarModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    DragDropModule
   ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],

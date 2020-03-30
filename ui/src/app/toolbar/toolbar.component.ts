@@ -109,4 +109,9 @@ export class ToolbarComponent implements OnInit {
       window.alert('SOMETHING WENT WRONG! TRY AGAIN LATER');
     });
   }
+
+  GoToAccountDetails() {
+    this.Route.navigate(['/AccDetails']);
+  }
+
 }

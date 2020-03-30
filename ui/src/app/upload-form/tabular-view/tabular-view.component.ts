@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import {ViewContainerRef, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 import { Getdata } from './GetData.service';
 import { GlobalConfigsService } from '../../global-configs.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 interface BillData {
   username: string;
@@ -64,6 +65,17 @@ export class TabularViewComponent implements OnInit {
   public AppendEntry(f: NgForm, userName: string) {
     // this.BillEntries.push([this.BillEntries.length + 1, f.value.name, f.value.des, f.value.date, f.value.val]);
     console.log('===============+', this.BillEntries);
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 
 }
