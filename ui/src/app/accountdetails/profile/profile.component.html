@@ -11,15 +11,15 @@
             <form class="needs-validation" #imageForm="ngForm" (ngSubmit)="submit(imageForm)">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" name="firstName" [(ngModel)]="Fname">
+                <label for="first_name">First name</label>
+                <input type="text" class="form-control" id="first_name" placeholder="" name="first_name" [(ngModel)]="first_name">
                 <div class="invalid-feedback">
                     Valid first name is required.
                 </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder=""  name="lastName" [(ngModel)]="Lname">
+                <label for="last_name">Last name</label>
+                <input type="text" class="form-control" id="last_name" placeholder=""  name="last_name" [(ngModel)]="last_name">
                 <div class="invalid-feedback">
                     Valid last name is required.
                 </div>
@@ -41,7 +41,7 @@
 
             <div class="mb-3">
                 <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" [(ngModel)]="alternateEmail">
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" [(ngModel)]="email">
                 <div class="invalid-feedback">
                 Please enter a valid alternate email address 
                 </div>
@@ -49,7 +49,7 @@
 
             <div class="mb-3">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="07, 23c block ... "  name="address" [(ngModel)]="Addr1">
+                <input type="text" class="form-control" id="address" placeholder="07, 23c block ... "  name="address" [(ngModel)]="address">
                 <div class="invalid-feedback">
                 Please enter address.
                 </div>
@@ -57,17 +57,17 @@
 
             <div class="mb-3">
                 <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" name="address2" [(ngModel)]="Addr2">
+                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" name="address2" [(ngModel)]="address2">
             </div>
 
             <div class="row">
                 <div class="col-md-5 mb-3">
-                    <label for="date">Date Of Birth</label>
-                    <input type="date" class="form-control" id="date" name="DOB" [(ngModel)]="DOB">
+                    <label for="dob">Date Of Birth</label>
+                    <input type="date" class="form-control" id="dob" name="dob" [(ngModel)]="dob">
                 </div>
                 <div class="col-md-5 mb-3">
                     <label for="gender">Gender</label>
-                    <select class="custom-select d-block w-100" name="Gender" [(ngModel)]="Gender">
+                    <select class="custom-select d-block w-100" name="gender" [(ngModel)]="gender">
                         <option value="">Choose...</option>
                         <option>Male</option>
                         <option>Female</option>
@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col-md-5 mb-3">
                 <label for="country">Country</label>
-                <select class="custom-select d-block w-100" name= "country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="Country">
+                <select class="custom-select d-block w-100" name= "country" (change)="onChangeCountry($event.target.value)" [(ngModel)]="country">
                     <option value="">Choose...</option>
                     <option *ngFor="let country of AllCountries; let i = index" value="{{i}}">{{country.CountryName}}</option>
                     <!-- <option *ngFor="let Country of ['a','b']">{{Country}}</option>  [(ngModel)]="Country"-->
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                 <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required="" name="state" [(ngModel)]="State" >
+                <select class="custom-select d-block w-100" id="state" required="" name="state" [(ngModel)]="state" >
                     <option value="">Choose...</option>
                     <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}</option>
                 </select>
@@ -99,8 +99,8 @@
                 </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
-                <input type="number" class="form-control" id="zip" placeholder="" name="zip" [(ngModel)]="Zip">
+                <label for="zip_code">Zip</label>
+                <input type="number" class="form-control" id="zip_code" placeholder="" name="zip_code" [(ngModel)]="zip_code">
                 <div class="invalid-feedback">
                     Zip code required.
                 </div>
@@ -109,7 +109,7 @@
             
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" style="height:50px; background-color: orange;"  (click)="GoHome()">
+                    <button class="btn btn-primary btn-lg btn-block" style="height:50px; background-color: orange;"  (click)="GoHome()">
                         <div class="row">
                             <div class="col-md-4">
                                 <span class="fa fa-home fa-lg" aria-hidden="true"  id="Go"></span>
@@ -133,7 +133,7 @@
                     </button>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" style="height:50px; background-color: red;" (click)="reset(imageForm)">
+                    <button class="btn btn-primary btn-lg btn-block" type="button" style="height:50px; background-color: red;" (click)="reset(imageForm)">
                         <div class="row">
                             <div class="col-md-4">
                                 <span class="fa fa-trash fa-lg" aria-hidden="true" id="Name"></span>
@@ -150,3 +150,10 @@
     </div>
 
 </div>
+
+
+<div id="saveNotifier" *ngIf="edited" class="alert alert-success box-msg" role="alert">
+    <i class="fa fa-check fa-2x" aria-hidden="true" id="save"></i>
+    <h3 id="saveT">Saved</h3>
+</div>
+

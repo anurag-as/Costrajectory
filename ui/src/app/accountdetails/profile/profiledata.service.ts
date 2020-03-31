@@ -30,7 +30,7 @@ export class Profileservice {
   constructor(private http: HttpClient) { }
 
   GetData(UserName: string) {
-    const endpoint = 'http://127.0.0.1:5000/account/profile';
+    const endpoint = 'http://127.0.0.1:5000/profileDetails';
     return this.http.get<ProfileDetails>(endpoint, {
         params: {
           user_name : UserName,
@@ -40,21 +40,21 @@ export class Profileservice {
   }
 
   SetData(UserName: string, f: NgForm) {
-
+    console.log('FORM: ', f);
     const formData: FormData = new FormData();
-    const endpoint = 'http://127.0.0.1:5000/account/profile';
+    const endpoint = 'http://127.0.0.1:5000/profileDetails';
 
-    formData.append('firstName', f.value.Fname);
-    formData.append('lastName', f.value.Lname);
-    formData.append('userName', UserName);
-    formData.append('email', f.value.alternateEmail);
-    formData.append('address', f.value.Addr1);
-    formData.append('address2', f.value.Addr2);
-    formData.append('dob', f.value.DOB);
-    formData.append('gender', f.value.Gender);
-    formData.append('country', f.value.Country);
-    formData.append('state', f.value.State);
-    formData.append('zip_code', f.value.Zip);
+    formData.append('first_name', f.value.first_name);
+    formData.append('last_name', f.value.last_name);
+    formData.append('user_name', UserName);
+    formData.append('email', f.value.email);
+    formData.append('address', f.value.address);
+    formData.append('address2', f.value.address2);
+    formData.append('dob', f.value.dob);
+    formData.append('gender', f.value.gender);
+    formData.append('country', f.value.country);
+    formData.append('state', f.value.state);
+    formData.append('zip_code', f.value.zip_code);
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
