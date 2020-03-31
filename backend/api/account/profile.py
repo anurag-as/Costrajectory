@@ -14,7 +14,6 @@ def profile_details():
     """
     # Post request for updating the details
     if request.method == 'POST':
-        print("Here")
         user_name = request.form['user_name']
         first_name = request.form['first_name']
         last_name = request.form['last_name']
