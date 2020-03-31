@@ -29,7 +29,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
     // To get the random DP
-    this.GetDP();
+    // this.GetDP();
     // this.GetUserPremiumStatus();
   }
 
@@ -40,7 +40,9 @@ export class ToolbarComponent implements OnInit {
     }
     if (chg.Authoriation.currentValue === true) {
         this.GetUserPremiumStatus();
+        this.GetDP();
     }
+
   }
 
   receiveImage(URL: string, username: string) {
