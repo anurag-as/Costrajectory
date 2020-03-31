@@ -43,8 +43,8 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  receiveImage(URL: string) {
-    return this.http.post<ReturnImage>(URL, {});
+  receiveImage(URL: string, username: string) {
+    return this.http.post<ReturnImage>(URL, {user_name: username});
   }
 
   private GetUserPremiumStatus() {
@@ -69,7 +69,7 @@ export class ToolbarComponent implements OnInit {
     const endpoint = 'http://127.0.0.1:5000/profilePic';
     // const QueryPayload = {username: this.username, mapped_name : this.MappedImageName, original_name: this.ActualImageName};
     // console.log(QueryPayload);
-    this.receiveImage(endpoint).subscribe(data => {
+    this.receiveImage(endpoint, this.userName.username).subscribe(data => {
       this.canShowImage = true;
       this.base64Data = data.Image;
     });
