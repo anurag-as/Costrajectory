@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, query_profile_details, insert_into_profile_details, edit_profile_table
+from database_functions import connection, query_profile_details, insert_into_profile_details, edit_profile_table,\
+    refresh_token
 
 profileDetailsAPI = Blueprint('profileDetailsAPI', __name__)
 
@@ -15,6 +16,7 @@ def profile_details():
     # Post request for updating the details
     if request.method == 'POST':
         user_name = request.form['user_name']
+        refresh_token(connection(), user_name)
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         email = request.form['email']
@@ -35,6 +37,7 @@ def profile_details():
 
     else:
         user_name = request.args.get('user_name')
+        refresh_token(connection(), user_name)
         if not query_profile_details(connection(), user_name):  # User entry does not exist
             response = {
                 'user_name': user_name,
