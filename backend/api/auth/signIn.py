@@ -4,7 +4,7 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_flow import insert_into_token_table
 from time import time
 from utilities.utils import generate_token
-from query_signin import SignIn
+from utilities.query_signin import SignIn
 
 signInAPI = Blueprint('signInAPI', __name__)
 
