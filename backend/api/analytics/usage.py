@@ -1,6 +1,10 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, refresh_token, space_usage, is_user_premium
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.account.space_flow import space_usage
+from database_functions.account.premium_flow import is_user_premium
+
 from utilities.utils import get_total_size
 
 usageAPI = Blueprint('usageAPI', __name__)

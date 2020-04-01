@@ -1,7 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, query_profile_details, insert_into_profile_details, edit_profile_table,\
-    refresh_token
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.account.profile_details_flow import query_profile_details, insert_into_profile_details, \
+    edit_profile_table
 
 profileDetailsAPI = Blueprint('profileDetailsAPI', __name__)
 

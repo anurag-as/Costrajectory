@@ -21,6 +21,7 @@ def insert_into_image_table(db_connection, username, title, datetime, amount, de
                                   ))
     db_connection.commit()
 
+
 # function to delete a particular transaction
 def delete_from_image_table(db_connection, uid, username):
     cursor = db_connection.execute('''DELETE from IMAGES where ID = "{uid}" AND username = "{username}"'''.

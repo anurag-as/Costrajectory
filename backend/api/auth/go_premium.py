@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, is_user_premium, refresh_token, user_go_premium
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.db_connection.connection import connection
+from database_functions.account.premium_flow import is_user_premium, user_go_premium
 
 goPremiumAPI = Blueprint('goPremiumAPI', __name__)
 
