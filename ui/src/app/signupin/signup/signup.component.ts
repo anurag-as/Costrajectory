@@ -22,6 +22,7 @@ export class SignupComponent {
   allusers: any;
   isUserexisting: any = undefined;
   loading = false;
+  Premium = false;
   @Output() userdata = new EventEmitter<{username: string, password: string}>();
 
   constructor(private http: HttpClient, private Authserviceclient: AuthService, private sessionKey: SessionStorage) {}
@@ -33,13 +34,14 @@ export class SignupComponent {
       }
 
       this.loading = true;
+      this.Premium = f.value.isPremium;
       this.Authserviceclient.signup(f.value.email, f.value.password, f.value.isPremium).subscribe(result => {
           // result = this.isUserexisting;
           // console.log('FROM BASE', result);
           // this.loading = false;
           if (!result.available) {
               // this.isUserexisting = result;
-              this.Authserviceclient.register(result.username, result.password, result.Premium).subscribe(res => {
+              this.Authserviceclient.register(result.username, result.password, this.Premium).subscribe(res => {
                 // console.log('FROM BASE 2', res);
                 this.loading = false;
                 if (res.registered) {

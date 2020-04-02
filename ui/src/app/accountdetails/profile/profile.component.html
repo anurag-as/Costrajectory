@@ -152,8 +152,14 @@
 </div>
 
 
-<div id="saveNotifier" *ngIf="edited" class="alert alert-success box-msg" role="alert">
+<div id="saveNotifieratl" *ngIf="edited && !error" class="alert alert-success box-msg" role="alert">
     <i class="fa fa-check fa-2x" aria-hidden="true" id="save"></i>
     <h3 id="saveT">Saved</h3>
 </div>
+
+<div id="saveNotifieratlFault" *ngIf="edited && error" class="alert alert-warning box-msg" role="alert">
+    <i class="fa fa-times fa-2x" aria-hidden="true" id="save"></i>
+    <h3 id="saveT">Error!</h3>
+</div>
+
 

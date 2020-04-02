@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   stateInfo;
   originalData: any;
   edited = false;
+  error = false;
 
   constructor(private Globals: GlobalConfigsService, private Route: Router, private cs: CountriesService, private proser: Profileservice) {
     this.usrname = Globals.GetUserName;
@@ -79,6 +80,8 @@ export class ProfileComponent implements OnInit {
     this.edited = true;
     this.proser.SetData(this.usrname, form).subscribe( data => {
       console.log('DATA UPLOADED SUCCESSFULLY');
+    }, err => {
+      this.error = true;
     });
   }
 
@@ -110,6 +113,7 @@ export class ProfileComponent implements OnInit {
       // wait 3 Seconds and hide
       setTimeout(function() {
           this.edited = false;
+          this.error = false;
           console.log(this.edited);
       }.bind(this), 6000);
      }
