@@ -1,5 +1,6 @@
 from utilities.utils import verify_password
-from database_functions import connection, user_exists, get_password
+from database_functions.db_connection.connection import connection
+from database_functions.account.sign_up_flow import user_exists, get_password
 
 
 class SignIn:

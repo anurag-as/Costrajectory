@@ -1,7 +1,13 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from time import time
-from database_functions import connection, is_user_premium, insert_into_image_table, insert_into_image_mapping_table, insert_into_image_size_table, refresh_token, space_usage
+from database_functions.db_connection.connection import connection
+from database_functions.account.premium_flow import is_user_premium
+from database_functions.transactions.create_bill import insert_into_image_table
+from database_functions.transactions.image_mapping_flow import insert_into_image_mapping_table
+from database_functions.transactions.image_size_flow import insert_into_image_size_table
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.account.space_flow import space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
 from utilities.utils import get_total_size

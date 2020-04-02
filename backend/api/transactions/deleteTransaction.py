@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, refresh_token, delete_from_image_table
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.transactions.create_bill import delete_from_image_table
 from utilities.delete_file import delete_file
 
 deleteTransactionsAPI = Blueprint('deleteTransactionsAPI', __name__)

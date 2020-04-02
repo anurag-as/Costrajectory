@@ -1,7 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, refresh_token, query_recent_transaction
-from api_utils import build_json_recent_transactions
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.transactions.query_transactions import query_recent_transaction
+from utilities.api_utils import build_json_recent_transactions
 
 recentTransactionsAPI = Blueprint('recentTransactionsAPI', __name__)
 

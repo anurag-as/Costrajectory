@@ -1,4 +1,6 @@
-from database_functions import connection, user_exists, insert_into_user_table
+from database_functions.db_connection.connection import connection
+from database_functions.account.sign_up_flow import user_exists
+from database_functions.account.user_table import insert_into_user_table
 
 
 class SignUp:

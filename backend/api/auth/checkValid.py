@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, get_datetime_token
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_flow import get_datetime_token
+
 from time import time
 checkValidTokenAPI = Blueprint('checkValidTokenAPI', __name__)
 

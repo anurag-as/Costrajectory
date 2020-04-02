@@ -1,7 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from utilities.colouring_board import generate_image
-from database_functions import connection, refresh_token
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_auth_flow import refresh_token
+
 from os import getcwd, path, makedirs
 from pickle import dump, load
 

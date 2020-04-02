@@ -1,5 +1,6 @@
 from flask import jsonify
-from database_functions import connection, get_original_name
+from database_functions.db_connection.connection import connection
+from database_functions.transactions.image_mapping_flow import get_original_name
 
 
 # function to build the required json payload for the recent transactions
