@@ -42,6 +42,12 @@ import { LogsComponent } from './accountdetails/logs/logs.component';
 import { ContactComponent } from './accountdetails/contact/contact.component';
 import { StatusComponent } from './accountdetails/status/status.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { TermsComponent } from './accountdetails/terms/terms.component';
+import { PrivacyComponent } from './accountdetails/privacy/privacy.component';
+import { SupportComponent } from './accountdetails/support/support.component';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +73,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     AboutComponent,
     LogsComponent,
     ContactComponent,
-    StatusComponent
+    StatusComponent,
+    TermsComponent,
+    PrivacyComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -89,8 +98,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatMenuModule,
     ProgressbarModule.forRoot(),
     BsDropdownModule.forRoot(),
-    DragDropModule
-  ],
+    DragDropModule,
+    MonacoEditorModule.forRoot(),
+    MatTableModule
+    ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],
   schemas : [

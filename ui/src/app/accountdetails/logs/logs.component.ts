@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./logs.component.css']
 })
 export class LogsComponent implements OnInit {
+  editorOptions = {theme: 'vs-dark', language: 'text', readOnly: true};
+  code  = 'wsws';
 
   constructor() { }
 

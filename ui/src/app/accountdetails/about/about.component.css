@@ -1,0 +1,32 @@
+p {
+    font-size:xx-large;  
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;   
+    padding-top: 60px;
+    font-family: 'Exo', sans-serif;
+	font-weight: bold;
+
+}
+
+.grad{
+	position: absolute;
+	top: 65px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 0;
+	opacity: 0.7;
+}
+
+#right {
+    padding-left: 55px;
+}
+
+#left {
+    padding-right: 25px;
+}
+
