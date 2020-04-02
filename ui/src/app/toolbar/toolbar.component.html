@@ -24,10 +24,10 @@
                       </button>
                       <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                           role="menu" aria-labelledby="button-split">
-                        <li role="menuitem"><a class="dropdown-item" (click) = "GoToAccountDetails()">Account Settings</a></li>
+                        <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Account Settings</a></li>
                          <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-                         <li class="divider dropdown-divider"></li>
-                         <li role="menuitem" id="logoutdropdown"><a class="dropdown-item" (click) = "LogOut()" href=""><i class="fa fa-sign-out fa-2x" aria-hidden="true" style="color:red;"></i><div id="Logout">Logout</div></a>
+                         <li class="divider dropdown-divider" type="button"></li>
+                         <li role="menuitem" id="logoutdropdown" type="button"><a class="dropdown-item" (click) = "LogOut()"><i class="fa fa-sign-out fa-2x" aria-hidden="true" style="color:red;"></i><div id="Logout">Logout</div></a>
                         </li> 
                       </ul>
                   </div>
