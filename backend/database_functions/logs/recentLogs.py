@@ -1,3 +1,6 @@
+from utilities.api_utils import get_readable_date_time
+
+
 # function to create recent logs database
 def create_recent_logs_table(db_connection):
     db_connection.execute('''CREATE TABLE RECENTS
@@ -18,11 +21,13 @@ def insert_into_recent_table(db_connection, username, datetime, type_of_transact
 
 # function to get the hashed password for the particular user
 def get_recent_logs(db_connection, username, limit=10):
-    cursor = db_connection.execute('''SELECT datetime, type, title FROM TOKENS where username = "{username}"  
+    cursor = db_connection.execute('''SELECT datetime, type, title FROM RECENTS where username = "{username}"  
     order by cast(datetime as unsigned) DESC
     LIMIT "{limit}"'''.format(username=username, limit=limit))
     transactions = []
     for row in cursor:
         if row:
-            transactions.append(list(row))
+            transaction = list(row)
+            transaction[0] = get_readable_date_time(transaction[0])
+            transactions.append(transaction)
     return transactions if transactions else "False"
