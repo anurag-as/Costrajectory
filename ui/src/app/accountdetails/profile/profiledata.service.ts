@@ -40,7 +40,7 @@ export class Profileservice {
   }
 
   SetData(UserName: string, f: NgForm) {
-    console.log('FORM: ', f);
+    // console.log('FORM: ', f);
     const formData: FormData = new FormData();
     const endpoint = 'http://127.0.0.1:5000/profileDetails';
 
