@@ -5,6 +5,7 @@ from database_functions.account.token_flow import insert_into_token_table
 from time import time
 from utilities.utils import generate_token
 from utilities.query_signin import SignIn
+from database_functions.logs.recentLogs import insert_into_recent_table
 
 signInAPI = Blueprint('signInAPI', __name__)
 
@@ -24,6 +25,9 @@ def signInUser():
         db = connection()
         presentTime = str(time())
         insert_into_token_table(db, username, presentTime, token)
+
+        insert_into_recent_table(connection(), username, str(time()), "Signed In", "")
+
     else:
         token = False
     return jsonify({'valid': valid, 'token': token, 'username': username})

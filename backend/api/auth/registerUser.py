@@ -5,6 +5,7 @@ from utilities.utils import generate_token
 from time import time
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_flow import insert_into_token_table
+from database_functions.logs.recentLogs import insert_into_recent_table
 
 
 registerUserAPI = Blueprint('registerUserAPI', __name__)
@@ -23,6 +24,10 @@ def registerUser():
         token = str(generate_token())
         db = connection()
         presentTime = str(time())
+
+        # adding transaction to logs
+        insert_into_recent_table(connection(), username, presentTime, "Registered Profile", "")
+
         insert_into_token_table(db, username, presentTime, token)
     x = jsonify({'username': request.json['username'], 'password': request.json['password'],
                  'registered': registered, 'token': token})

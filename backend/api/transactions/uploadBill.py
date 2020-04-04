@@ -11,6 +11,7 @@ from database_functions.account.space_flow import space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
 from utilities.utils import get_total_size
+from database_functions.logs.recentLogs import insert_into_recent_table
 
 
 uploadBillAPI = Blueprint('uploadBillAPI', __name__)
@@ -77,6 +78,9 @@ def upload():
     category = request.form['category']
     # adding the transaction record
     insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name, category)
+
+    # adding transaction to logs
+    insert_into_recent_table(connection(), user_name, str(time()), "Added Transaction", title)
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
