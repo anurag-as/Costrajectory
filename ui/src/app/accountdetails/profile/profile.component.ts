@@ -35,9 +35,9 @@ export class ProfileComponent implements OnInit {
     this.proser.GetData(this.usrname).subscribe( data => {
       this.originalData = data;
       this.MapForForm(this.originalData);
-      console.log('GETTING USER INFO SUCCESSFUL:', data);
+      // console.log('GETTING USER INFO SUCCESSFUL:', data);
     }, err => {
-      console.log('GETTING USER INFO UNSUCCESSFUL');
+      // console.log('GETTING USER INFO UNSUCCESSFUL');
     }
     );
   }
@@ -66,8 +66,8 @@ export class ProfileComponent implements OnInit {
         this.AllCountries = data2.Countries;
         // console.log('Data:', this.AllCountries);
       },
-      err => console.log(err),
-      () => console.log('complete')
+      err => {}
+      // () => console.log('complete')
     );
   }
 
@@ -79,7 +79,7 @@ export class ProfileComponent implements OnInit {
     this.saveTodos();
     this.edited = true;
     this.proser.SetData(this.usrname, form).subscribe( data => {
-      console.log('DATA UPLOADED SUCCESSFULLY');
+      // console.log('DATA UPLOADED SUCCESSFULLY');
     }, err => {
       this.error = true;
     });
@@ -114,7 +114,7 @@ export class ProfileComponent implements OnInit {
       setTimeout(function() {
           this.edited = false;
           this.error = false;
-          console.log(this.edited);
+          // console.log(this.edited);
       }.bind(this), 6000);
      }
 

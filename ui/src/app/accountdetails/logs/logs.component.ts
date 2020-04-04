@@ -9,12 +9,18 @@ import { GlobalConfigsService } from '../../global-configs.service';
 })
 export class LogsComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'text', readOnly: true, fontSize: 20};
-  code  = 'wsws';
+  code  = undefined;
 
   constructor(private Logger: LoggingService, private Globals: GlobalConfigsService) { }
 
   ngOnInit() {
-    this.code = this.Logger.ReturnLogs(this.Globals.GetUserName);
+    this.code = undefined;
+    this.Logger.GetLogs(this.Globals.GetUserName).subscribe(data => {
+      this.code = this.Logger.ConvertArrayTolog(data.body);
+      // console.log('INISDE LOG : ', this.code);
+    }, err => {
+      this.code = undefined;
+    });
   }
 
 }
