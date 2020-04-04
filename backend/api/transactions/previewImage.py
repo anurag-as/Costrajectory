@@ -5,7 +5,8 @@ from database_functions.account.token_auth_flow import refresh_token
 from os import path, getcwd
 from utilities.download import download_file
 from base64 import b64encode
-
+from database_functions.logs.recentLogs import insert_into_recent_table
+from time import time
 
 previewImageAPI = Blueprint('previewImageAPI', __name__)
 
@@ -20,6 +21,10 @@ def previewImage():
     user_name = request.json['username']
     mapped_image_name = request.json['mapped_name']
     original_image_name = request.json['original_name']
+
+    # adding transaction to logs
+    insert_into_recent_table(connection(), user_name, str(time()), "Previewed Bill", original_image_name)
+
     refresh_token(connection(), user_name)
     try:
         # downloading the image to cacheable region

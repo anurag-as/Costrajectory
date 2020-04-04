@@ -1,6 +1,7 @@
 from flask import jsonify
 from database_functions.db_connection.connection import connection
 from database_functions.transactions.image_mapping_flow import get_original_name
+from datetime import datetime
 
 
 # function to build the required json payload for the recent transactions
@@ -25,3 +26,8 @@ def build_json_recent_transactions(transactions, user_name):
     response_json['TableEntries'] = table_entries
     response_json['ImageEntries'] = image_intermediate_json
     return jsonify(response_json)
+
+
+def get_readable_date_time(timestamp):
+    value = datetime.fromtimestamp(float(timestamp))
+    return f"{value:%Y-%m-%d %H:%M:%S}"

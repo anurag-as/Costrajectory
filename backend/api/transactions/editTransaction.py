@@ -6,7 +6,7 @@ from database_functions.transactions.create_bill import edit_transactions_image_
 from database_functions.transactions.image_mapping_flow import insert_into_image_mapping_table
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.transactions.image_size_flow import insert_into_image_size_table
-
+from database_functions.logs.recentLogs import insert_into_recent_table
 
 from utilities.upload import uploadFile
 from os import SEEK_END
@@ -52,4 +52,8 @@ def edit_transaction():
                                   mapped_file_name, category)
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
+
+    # adding transaction to logs
+    insert_into_recent_table(connection(), user_name, str(time()), "Edit Transaction", title)
+
     return jsonify({'editStatus': True})

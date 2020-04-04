@@ -1,3 +1,6 @@
+from time import time
+
+
 # function to get the latest token for the particular user
 def get_latest_token(db_connection, username):
     cursor = db_connection.execute('''SELECT token FROM TOKENS where username = "{username}" 

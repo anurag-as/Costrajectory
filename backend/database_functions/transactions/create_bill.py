@@ -46,3 +46,14 @@ def edit_transactions_image_table(db_connection, uid, username, title, datetime,
                                   ))
     db_connection.commit()
     return "Transaction Updated Successfully"
+
+
+# function to get the bill title from uid
+def get_bill_name(db_connection, uid):
+    cursor = db_connection.execute('''SELECT title FROM IMAGES where where ID = "{uid}"
+    order by cast(datetime as unsigned) DESC
+    LIMIT 1'''.format(uid=uid))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False
