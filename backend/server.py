@@ -22,6 +22,7 @@ from api.auth.profile_pic import profilePicApi
 from api.auth.is_premium import isPremiumAPI
 from api.auth.go_premium import goPremiumAPI
 from api.account.profile import profileDetailsAPI
+from api.transactions.logs import recentLogsAPI
 
 # Flask APP
 app = Flask(__name__)
@@ -44,6 +45,7 @@ app.register_blueprint(profilePicApi)
 app.register_blueprint(isPremiumAPI)
 app.register_blueprint(goPremiumAPI)
 app.register_blueprint(profileDetailsAPI)
+app.register_blueprint(recentLogsAPI)
 
 
 if __name__ == '__main__':

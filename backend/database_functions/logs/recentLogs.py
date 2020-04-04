@@ -17,7 +17,7 @@ def insert_into_recent_table(db_connection, username, datetime, type_of_transact
 
 
 # function to get the hashed password for the particular user
-def get_recent_transactions(db_connection, username, limit=10):
+def get_recent_logs(db_connection, username, limit=10):
     cursor = db_connection.execute('''SELECT datetime, type, title FROM TOKENS where username = "{username}"  
     order by cast(datetime as unsigned) DESC
     LIMIT "{limit}"'''.format(username=username, limit=limit))
