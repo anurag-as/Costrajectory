@@ -1,7 +1,7 @@
 from flask import jsonify
 from database_functions.db_connection.connection import connection
 from database_functions.transactions.image_mapping_flow import get_original_name
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # function to build the required json payload for the recent transactions
@@ -29,5 +29,6 @@ def build_json_recent_transactions(transactions, user_name):
 
 
 def get_readable_date_time(timestamp):
-    value = datetime.fromtimestamp(float(timestamp))
-    return f"{value:%Y-%m-%d %H:%M:%S}"
+    utc_time = datetime.fromtimestamp(float(timestamp), timezone.utc)
+    local_time = utc_time.astimezone()
+    return str(local_time.strftime("%Y-%m-%d %H:%M:%S.%f%z (%Z)"))
