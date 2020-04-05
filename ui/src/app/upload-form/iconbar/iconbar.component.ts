@@ -58,5 +58,9 @@ export class IconbarComponent implements OnInit {
     this.route.navigate(['']);
   }
 
+  CostSharing(): void {
+    this.route.navigate(['CostSharing']);
+  }
+
 }
 

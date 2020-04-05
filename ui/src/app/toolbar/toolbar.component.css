@@ -109,11 +109,10 @@
 }
 
 .grid-container {
-  position: absolute;
+  position: relative;
   display: grid;
   grid-template-columns: 70px 20px;
-  padding: 10px;
-  left: 1500px;
-  top: 5px;
+  /*left: 1500px;*/
+  top: 2px;
 }
 
