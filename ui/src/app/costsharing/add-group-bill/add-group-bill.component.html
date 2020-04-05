@@ -89,7 +89,7 @@
 
                     
 
-                    <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid"><i class="material-icons">save</i></button>
+                    <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid || !valid[divs[divs.length - 1]]"><i class="material-icons">save</i></button>
 
                     
                 </div>
