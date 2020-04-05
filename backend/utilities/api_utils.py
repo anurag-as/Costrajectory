@@ -31,4 +31,4 @@ def build_json_recent_transactions(transactions, user_name):
 def get_readable_date_time(timestamp):
     utc_time = datetime.fromtimestamp(float(timestamp), timezone.utc)
     local_time = utc_time.astimezone()
-    return str(local_time.strftime("%Y-%m-%d %H:%M:%S.%f%z (%Z)"))
+    return str(local_time.strftime("%Y-%m-%d %H:%M:%S"))
