@@ -25,7 +25,7 @@ def recentLogs():
     try:
         transactions = get_recent_logs(connection(), user_name, limit_transactions)
         if not transactions:
-            return jsonify({False})
+            return jsonify(False)
         return jsonify(transactions)
     except:
         return jsonify(False)

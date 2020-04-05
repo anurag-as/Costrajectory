@@ -50,7 +50,7 @@ def edit_transactions_image_table(db_connection, uid, username, title, datetime,
 
 # function to get the bill title from uid
 def get_bill_name(db_connection, uid):
-    cursor = db_connection.execute('''SELECT title FROM IMAGES where where ID = "{uid}"
+    cursor = db_connection.execute('''SELECT title FROM IMAGES where ID = "{uid}"
     order by cast(datetime as unsigned) DESC
     LIMIT 1'''.format(uid=uid))
     for row in cursor:
