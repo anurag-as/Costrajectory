@@ -1,0 +1,9 @@
+/* Define an animation behavior */
+@keyframes spinner {
+    to { transform: rotate(360deg); }
+  }
+  /* This is the class name given by the Font Awesome component when icon contains 'spinner' */
+  #spinner {
+    /* Apply 'spinner' keyframes looping once every second (1s)  */
+    animation: spinner 1s linear infinite;
+  }

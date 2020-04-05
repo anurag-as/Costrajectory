@@ -47,6 +47,9 @@ import { TermsComponent } from './accountdetails/terms/terms.component';
 import { PrivacyComponent } from './accountdetails/privacy/privacy.component';
 import { SupportComponent } from './accountdetails/support/support.component';
 import {MatTableModule} from '@angular/material/table';
+import { CostsharingComponent } from './costsharing/costsharing.component';
+import { AddGroupBillComponent } from './costsharing/add-group-bill/add-group-bill.component';
+import { AddGroupContainerComponent } from './costsharing/add-group-container/add-group-container.component';
 
 
 @NgModule({
@@ -76,7 +79,10 @@ import {MatTableModule} from '@angular/material/table';
     StatusComponent,
     TermsComponent,
     PrivacyComponent,
-    SupportComponent
+    SupportComponent,
+    CostsharingComponent,
+    AddGroupBillComponent,
+    AddGroupContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +113,13 @@ import {MatTableModule} from '@angular/material/table';
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent, DeleteBillComponent, EditBillComponent],
+  entryComponents: [
+    AddBillsComponent,
+    ChangeBillComponent,
+    ViewBillComponent,
+    DeleteBillComponent,
+    EditBillComponent,
+    AddGroupBillComponent,
+    AddGroupContainerComponent],
 })
 export class AppModule { }

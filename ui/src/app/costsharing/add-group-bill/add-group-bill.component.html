@@ -1,0 +1,114 @@
+<div class="container-fluid">
+    <form #imageForm="ngForm" (ngSubmit)="AddBillGroup(imageForm)">
+        <div class="grid">
+            <div class="grid-item">
+                <div class="container-fluid">
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Group name</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-users fa-lg" aria-hidden="true" style="color:orange"></i></span>
+                                </div>
+                                <input id="name" required type="text" placeholder="Enter Group Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
+                              </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Description:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3"><i class="fa fa-list fa-lg" aria-hidden="true" style="color:black"></i></span>
+                                </div>
+                                <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control" aria-describedby="basic-addon3"/>
+                            </div>
+                        </div>
+                    </div>
+<!-- 
+                      <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Category:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon4"><i class="fa fa-id-card-o fa-lg" aria-hidden="true" style="color:blueviolet"></i></span>
+                                </div>
+                                <select class="custom-select" id="cat" required ngModel name="cat" aria-describedby="basic-addon4">
+                                    <option value="" disabled>Choose the category</option>
+                                    <option>Travel</option>
+                                    <option>Shopping</option>
+                                    <option>Investments</option>
+                                    <option>Food</option>
+                                    <option>Utilities</option>
+                                    <option>Medical</option>
+                                    <option>Entertainment</option>
+                                    <option>Housing</option>
+                                    <option>Others</option>
+                                 </select>
+                            </div>
+                        </div>
+                      </div> -->
+                    <div class="form-group row" *ngFor="let div of divs" id="div{{div}}">
+                        <div class="col-sm-2" *ngIf = "div == divs[0]">
+                            <label for="staticEmail" class="col-form-label">Participant</label>
+                        </div>
+                        <div class="col-sm-2" *ngIf = "div !== divs[0]">
+                            <label for="staticEmail" class="col-form-label"></label>
+                        </div>
+
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon6"><i class="fa fa-user-o fa-lg" aria-hidden="true" style="color:green"></i></span>
+                                </div>
+                                <input id="file-input" #Participant type="email" ngModel name="{{div}}" class="form-control" placeholder="Add participant email ID" aria-describedby="basic-addon6" [readonly]="valid[div]" required/>
+
+                                <div class="input-group-append">
+
+                                    <button class="btn-large" *ngIf = '!valid[div]' type="button" [disabled]="Participant.value ==''" (click) = "Verify(div,Participant.value)"><i class="fa fa-user-plus fa-lg" title = "Verify user" style="color:red"></i></button>
+<!--                                     <button class="btn-large" type="button" [disabled]="Participant.value ==''" (click) = "deleteDiv(div)"><i id= "spinner" class="fa fa-spinner fa-lg" title = "Delete Participant" style="color:rgb(148, 53, 236)"></i></button>
+ -->
+                                    <button class="btn-large" *ngIf = 'valid[div]' type="button" [disabled]="Participant.value =='' || !valid[div] || valid[div]"><i class="fa fa-user-plus fa-lg" title = "User Verified" style="color:green"></i></button>
+
+                                    <button class="btn-large" type="button" [disabled]="div == divs[0]" (click) = "deleteDiv(div)"><i class="fa fa-trash fa-lg" title = "Delete Participant" style="color:red"></i></button>
+                                    
+                                    <button *ngIf = "div == divs[divs.length - 1]" type="button" class="btn-large" [disabled]="Participant.value ==''" (click) = "createDiv()"><i class="fa fa-plus fa-lg" title = "Add Participant" style="color:green"></i></button>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid"><i class="material-icons">save</i></button>
+
+                    
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="uploading == 'started'">
+    <div class="spinner-border" role="status">
+    </div>
+    <p>&nbsp;&nbsp; <b>UPLOADING!!  PLEASE WAIT </b></p>
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="uploading == 'ended fail'">
+    Something went wrong...try again later
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="uploading == 'ended success'">
+    Image was uploaded successfully
+</div>
