@@ -1,0 +1,19 @@
+div {
+    padding-right: 0%;
+}  
+
+div {
+    padding-left: 5px;
+}  
+
+div {
+    column-gap: 2px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 2px;
+  }
+
