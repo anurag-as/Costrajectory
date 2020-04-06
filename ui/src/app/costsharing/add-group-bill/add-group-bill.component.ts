@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
+import { MatDialogRef } from '@angular/material/dialog';
 
 interface Validity {
   username: string;
@@ -26,7 +27,7 @@ export class AddGroupBillComponent implements OnInit {
   currentDiv: number;
   currentUsername: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dialogRef: MatDialogRef<AddGroupBillComponent>) {
    }
 
   ngOnInit() {
@@ -57,8 +58,10 @@ export class AddGroupBillComponent implements OnInit {
     // console.log('GROUP : ', f, this.valid);
     this.CreateGroup(f.value.name, f.value.des, this.ConvertParticipantsToArray(f)).subscribe( data => {
       console.log('GROUP CREATED');
+      this.dialogRef.close();
     }, err => {
       console.log('GROUP CREATION FAILED');
+      this.dialogRef.close();
     }
     );
   }

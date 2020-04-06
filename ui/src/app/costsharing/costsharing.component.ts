@@ -24,6 +24,11 @@ export class CostsharingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if ( result ) {
+        console.log('RERENDER THE PAGE');
+      } else {
+        console.log('FAILED');
+      }
     });
   }
 
