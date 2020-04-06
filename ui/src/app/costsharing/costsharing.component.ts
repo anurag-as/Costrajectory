@@ -10,10 +10,11 @@ import { AddGroupContainerComponent } from './add-group-container/add-group-cont
   styleUrls: ['./costsharing.component.css']
 })
 export class CostsharingComponent implements OnInit {
-  
+  GroupList: any[];
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) { }
 
   ngOnInit() {
+    this.GroupList = [['Admin', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
   }
 
   addGroupBill(): void {
