@@ -3,6 +3,7 @@ from flask_cors import cross_origin
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.insertion_functions import insert_into_group_table
+from ast import literal_eval
 
 createGroupApi = Blueprint('createGroupApi', __name__)
 
@@ -14,10 +15,11 @@ def create_sharing_group():
     group_admin = request.json['user_name']
     refresh_token(connection(), request.json['user_name'])
     group_title = request.json['group_title']
-    group_description = request.json['group_title']
+    group_description = request.json['group_description']
     users = request.json['users']
-    current_users = str([group_admin])
+
+    users = list(set(literal_eval(users)))  # Avoid adding same users multiple times to the groups
+
+    current_users = str([group_admin])  # only adding admin to the group
     insert_into_group_table(connection(), group_admin, current_users, group_title, group_description)
     return jsonify(True)
-
-
