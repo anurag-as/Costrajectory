@@ -12,9 +12,11 @@ export class GroupWellComponent implements OnInit {
   @Input() Bills: any[];
   @Input() GroupName: string;
   @Input() GroupId: number;
+  @Input() Username: string;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.Username, this.Admin);
   }
 
 }

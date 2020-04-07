@@ -11,10 +11,13 @@ import { AddGroupContainerComponent } from './add-group-container/add-group-cont
 })
 export class CostsharingComponent implements OnInit {
   GroupList: any[];
-  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) { }
+  username: string;
+  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) {
+    this.username = this.Globals.GetUserName;
+   }
 
   ngOnInit() {
-    this.GroupList = [['Admin', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
+    this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
   }
 
   addGroupBill(): void {

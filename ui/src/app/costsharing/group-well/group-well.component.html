@@ -16,12 +16,17 @@
                         <a class="nav-link" type='button' (click)="addGroupBill()">Add Group</a>
                         </li>
                     </ul>
-                    <span class="navbar-text">
+
+                    <span class="navbar-text" *ngIf="Username !== Admin">
                         <span type="button" title="Make others Admin" class="fa fa-level-up fa-lg" aria-hidden="true" style="color:chartreuse;"></span>&nbsp;
                         <span type="button" title="Add users to group" class="fa fa-user-plus fa-lg" aria-hidden="true" style="color: black;"></span>&nbsp;
                         <span type="button" title="Delete Users From Group" class="fa fa-user-times fa-lg" aria-hidden="true" style="color: orange;"></span>&nbsp;
                         <span type="button" title="Delete the Group" class="fa fa-trash fa-lg" aria-hidden="true" style="color: red;"></span>&nbsp;
                     </span>
+
+                    <span class="navbar-text" *ngIf="Username == Admin">
+                    </span>
+                    
                     </div>
                 </nav>
             </div>
