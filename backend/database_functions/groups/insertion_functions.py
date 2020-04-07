@@ -6,7 +6,7 @@ def insert_into_group_table(db_connection, group_admin, users, title, descriptio
     db_cursor = db_connection.cursor()
     db_cursor.execute('''INSERT INTO GROUPS (group_admin, users, title, description) 
         VALUES ("{group_admin}","{users}","{title}","{description}")'''
-                          .format(group_admin=group_admin, users=users, title=title, description=description))
+                      .format(group_admin=group_admin, users=users, title=title, description=description))
 
     group_id = str(db_cursor.lastrowid)
     db_connection.commit()
