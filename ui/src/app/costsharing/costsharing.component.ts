@@ -10,10 +10,14 @@ import { AddGroupContainerComponent } from './add-group-container/add-group-cont
   styleUrls: ['./costsharing.component.css']
 })
 export class CostsharingComponent implements OnInit {
-  
-  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) { }
+  GroupList: any[];
+  username: string;
+  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) {
+    this.username = this.Globals.GetUserName;
+   }
 
   ngOnInit() {
+    this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
   }
 
   addGroupBill(): void {
@@ -24,6 +28,11 @@ export class CostsharingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if ( result ) {
+        console.log('RERENDER THE PAGE');
+      } else {
+        console.log('FAILED');
+      }
     });
   }
 

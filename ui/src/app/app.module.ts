@@ -50,6 +50,7 @@ import {MatTableModule} from '@angular/material/table';
 import { CostsharingComponent } from './costsharing/costsharing.component';
 import { AddGroupBillComponent } from './costsharing/add-group-bill/add-group-bill.component';
 import { AddGroupContainerComponent } from './costsharing/add-group-container/add-group-container.component';
+import { GroupWellComponent } from './costsharing/group-well/group-well.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { AddGroupContainerComponent } from './costsharing/add-group-container/ad
     SupportComponent,
     CostsharingComponent,
     AddGroupBillComponent,
-    AddGroupContainerComponent
+    AddGroupContainerComponent,
+    GroupWellComponent
   ],
   imports: [
     BrowserModule,
