@@ -19,4 +19,14 @@ export class GroupWellComponent implements OnInit {
     console.log(this.Username, this.Admin);
   }
 
+  DeleteGroup() {}
+
+  AddUsersToGroup() {}
+
+  DeleteUsersFromGroup() {}
+
+  MakeOthersAdmin() {}
+
+  ExitGroup() {}
+
 }
