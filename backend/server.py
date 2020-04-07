@@ -23,6 +23,8 @@ from api.auth.is_premium import isPremiumAPI
 from api.auth.go_premium import goPremiumAPI
 from api.account.profile import profileDetailsAPI
 from api.transactions.logs import recentLogsAPI
+from api.groups.create_group import createGroupApi
+from api.groups.change_group_admin import changeGroupAdminApi
 
 # Flask APP
 app = Flask(__name__)
@@ -46,6 +48,8 @@ app.register_blueprint(isPremiumAPI)
 app.register_blueprint(goPremiumAPI)
 app.register_blueprint(profileDetailsAPI)
 app.register_blueprint(recentLogsAPI)
+app.register_blueprint(createGroupApi)
+app.register_blueprint(changeGroupAdminApi)
 
 
 if __name__ == '__main__':
