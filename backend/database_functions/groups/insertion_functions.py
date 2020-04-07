@@ -1,9 +1,14 @@
+import sqlite3
+
+
 # function to create new groups and returning group id
 def insert_into_group_table(db_connection, group_admin, users, title, description):
-    db_connection.execute('''INSERT INTO GROUPS (group_admin, users, title, description) 
+    db_cursor = db_connection.cursor()
+    db_cursor.execute('''INSERT INTO GROUPS (group_admin, users, title, description) 
         VALUES ("{group_admin}","{users}","{title}","{description}")'''
                           .format(group_admin=group_admin, users=users, title=title, description=description))
-    group_id = db_connection.lastrowid
+
+    group_id = str(db_cursor.lastrowid)
     db_connection.commit()
     return group_id
 

@@ -20,13 +20,11 @@ def create_sharing_group():
         users = request.json['users']
 
         users = list(set(literal_eval(users)))  # Avoid adding same users multiple times to the groups
-
         current_users = str([group_admin])  # only adding admin to the group
         group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description)
-
+        print(group_id)
         for user in users:
-            insert_into_pending_requests_table(group_id, user, "pending")
-
+            insert_into_pending_requests_table(connection(), group_id, user, "pending")
         return jsonify(True)
     except:
-        False
+        return jsonify(False)
