@@ -125,7 +125,8 @@ export class ToolbarComponent implements OnInit {
   GetAllGroupData() {
     this.GetAllGroupDataFromServer(this.userName).subscribe(data => {
       this.GroupData = data.body.body;
-      this.GroupData = [['3', 'delhi']];
+      // this.GroupData = [['3', 'delhi']];
+      // console.log('ALL GROUP DATA: ', this.GroupData);
     });
   }
 
