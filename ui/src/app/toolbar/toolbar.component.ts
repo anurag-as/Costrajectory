@@ -124,13 +124,14 @@ export class ToolbarComponent implements OnInit {
 
   GetAllGroupData() {
     this.GetAllGroupDataFromServer(this.userName).subscribe(data => {
-      this.GroupData = data.body;
+      this.GroupData = data.body.body;
+      this.GroupData = [['3', 'delhi']];
     });
   }
 
   GetAllGroupDataFromServer(UserName: string) {
     const endpoint = 'http://127.0.0.1:5000/pendingRequests';
-    return this.http.get(endpoint, {
+    return this.http.get<GetG>(endpoint, {
         params: {
             user_name : UserName,
         },
@@ -139,6 +140,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   DecisionPoster(DecisionDetails: {GroupId: number, Decision: string}) {
+    console.log('DECISION GOT : ', DecisionDetails);
     this.PostDecision(DecisionDetails.GroupId, DecisionDetails.Decision);
   }
 
@@ -148,6 +150,10 @@ export class ToolbarComponent implements OnInit {
     this.http.post(endpoint, {payload: templatePayload}).subscribe(data => {
       this.GetAllGroupData();
     });
+}
+
+ParseInt(a, b) {
+  return parseInt(a, b);
 }
 
 }

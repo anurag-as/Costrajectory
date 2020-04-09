@@ -90,10 +90,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <app-group-accept (decision)="DecisionPoster($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "parseInt(Group[0], 10)"></app-group-accept>
+        <app-group-accept (decision)="DecisionPoster($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)"></app-group-accept>
+        <!-- <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
         <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
-        <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
-        <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
+        <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
