@@ -4,7 +4,7 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.insertion_functions import insert_into_group_table, insert_into_pending_requests_table
 from database_functions.logs.recentLogs import insert_into_recent_table
-from database_functions.groups.querying_functions import get_rejected_for_group
+from database_functions.groups.querying_functions import get_status_for_group
 from database_functions.groups.updation_functions import update_group_status
 
 from ast import literal_eval
@@ -32,10 +32,13 @@ def create_sharing_group():
         insert_into_pending_requests_table(connection(), group_id, group_admin, "accepted")
 
         for user in users:
-            if not get_rejected_for_group(connection(), group_id, user, "rejected"):  # if user has not rejected
-                # group, add him
-                update_group_status(connection(), group_id, user, "pending")
-            else:  # if user has rejected group, change rejected to pending, later enhance for spam control
+            if get_status_for_group(connection(), group_id, user, "rejected"):  # if user has rejected
+                if get_status_for_group(connection(), group_id, user, "removed"):  # if user has been removed
+                    # change to pending
+                    update_group_status(connection(), group_id, user, "pending")
+                else:  # if user new, add him to group
+                    insert_into_pending_requests_table(connection(), group_id, user, "pending")
+            else:  # if user new, add him to group
                 insert_into_pending_requests_table(connection(), group_id, user, "pending")
 
         # adding transaction to logs
