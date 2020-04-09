@@ -13,6 +13,10 @@ interface PremiumStatus {
   isPremium: string;
 }
 
+interface GetG {
+  body: [];
+}
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -24,6 +28,7 @@ export class ToolbarComponent implements OnInit {
   canShowImage = false;
   base64Data = '';
   isPremium = false;
+  GroupData: any;
 
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService) {}
 
@@ -41,6 +46,7 @@ export class ToolbarComponent implements OnInit {
     if (chg.Authoriation.currentValue === true) {
         this.GetUserPremiumStatus();
         this.GetDP();
+        this.GetAllGroupData();
     }
 
   }
@@ -115,5 +121,33 @@ export class ToolbarComponent implements OnInit {
   GoToAccountDetails() {
     this.Route.navigate(['/AccDetails']);
   }
+
+  GetAllGroupData() {
+    this.GetAllGroupDataFromServer(this.userName).subscribe(data => {
+      this.GroupData = data.body;
+    });
+  }
+
+  GetAllGroupDataFromServer(UserName: string) {
+    const endpoint = 'http://127.0.0.1:5000/pendingRequests';
+    return this.http.get(endpoint, {
+        params: {
+            user_name : UserName,
+        },
+        observe: 'response'
+      });
+  }
+
+  DecisionPoster(DecisionDetails: {GroupId: number, Decision: string}) {
+    this.PostDecision(DecisionDetails.GroupId, DecisionDetails.Decision);
+  }
+
+  PostDecision(GroupId: number, Decision: string) {
+    const endpoint = 'http://127.0.0.1:5000/groupStatus';
+    const templatePayload = [[String(GroupId), Decision]];
+    this.http.post(endpoint, {payload: templatePayload}).subscribe(data => {
+      this.GetAllGroupData();
+    });
+}
 
 }

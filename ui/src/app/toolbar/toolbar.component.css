@@ -116,3 +116,16 @@
   top: 2px;
 }
 
+.grid2 {
+  display: grid;
+  grid-template-columns: 25fr 2fr 2fr;
+  grid-template-rows: 5fr;
+  grid-auto-rows: minmax(150px, auto);
+  grid-gap: 3px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+  font-family: 'Exo', sans-serif;
+  color: green;
+  font-size: 16px;
+  font-weight: 400;
+}

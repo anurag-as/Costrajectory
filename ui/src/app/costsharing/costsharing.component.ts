@@ -22,12 +22,12 @@ export class CostsharingComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
-    this.ReloadPage().subscribe(data => {
+    this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
+    /* this.ReloadPage().subscribe(data => {
       this.GroupList = data.Groups;
     }, err => {
       this.GroupList = [];
-    });
+    }); */
   }
 
   addGroupBill(): void {
