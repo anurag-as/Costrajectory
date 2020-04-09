@@ -17,3 +17,4 @@ def change_admin():
         return jsonify(pending_groups)
     except:
         return jsonify(False)
+

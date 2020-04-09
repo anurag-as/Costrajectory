@@ -7,10 +7,10 @@ def change_group_admin(db_connection, group_id, group_admin):
     return True
 
 
-# function to change group rejected status to pending for a username and group_id
-def update_rejected_to_pending(db_connection, group_id, username):
-    db_connection.execute('''UPDATE PENDING_REQUESTS SET status="pending"
-                            WHERE ID="{group_id}" AND username="{username}"'''
-                          .format(group_id=group_id, username=username))
+# function to change group status for a username and group_id
+def update_group_status(db_connection, group_id, username, status):
+    db_connection.execute('''UPDATE PENDING_REQUESTS SET status="{status}"
+                            WHERE group_id="{group_id}" AND username="{username}"'''
+                          .format(group_id=group_id, username=username, status=status))
     db_connection.commit()
     return True
