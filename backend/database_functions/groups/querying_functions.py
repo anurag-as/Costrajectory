@@ -27,8 +27,18 @@ def get_pending_groups(db_connection, username):
 def get_rejected_for_group(db_connection, group_id, username, status):
     cursor = db_connection.execute('''SELECT group_id FROM PENDING_REQUESTS where username = "{username}" 
     AND status = "rejected" and ID="{group_id}"
-    '''.format(username=username, status=status,group_id=group_id))
+    '''.format(username=username, status=status, group_id=group_id))
     for row in cursor:
         if row:
             return True
+    return False
+
+
+# function to get the current users of the group
+def get_group_current_users(db_connection, group_id):
+    cursor = db_connection.execute('''SELECT users FROM GROUPS where ID = "{group_id}"  
+    '''.format(group_id=group_id))
+    for row in cursor:
+        if row:
+            return row[0]
     return False

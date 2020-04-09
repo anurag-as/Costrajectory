@@ -14,3 +14,12 @@ def update_group_status(db_connection, group_id, username, status):
                           .format(group_id=group_id, username=username, status=status))
     db_connection.commit()
     return True
+
+
+# function to add new users to the group
+def add_new_users_group(db_connection, group_id, users):
+    db_connection.execute('''UPDATE GROUPS SET  users="{users}"
+                            WHERE ID="{group_id}"'''
+                          .format(group_id=group_id, users=users))
+    db_connection.commit()
+    return True
