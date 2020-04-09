@@ -32,3 +32,10 @@ def get_readable_date_time(timestamp):
     utc_time = datetime.fromtimestamp(float(timestamp), timezone.utc)
     local_time = utc_time.astimezone()
     return str(local_time.strftime("%Y-%m-%d %H:%M:%S"))
+
+
+def get_alias(username):
+    if len(username) == 1:
+        return username * 2
+    return str(username[:2])
+
