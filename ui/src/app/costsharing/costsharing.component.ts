@@ -3,7 +3,12 @@ import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { GlobalConfigsService } from '../global-configs.service';
 import { AddGroupBillComponent } from './add-group-bill/add-group-bill.component';
 import { AddGroupContainerComponent } from './add-group-container/add-group-container.component';
+import {HttpClient} from '@angular/common/http';
 
+interface Billdata {
+  Groups: any[];
+  Username: string;
+}
 @Component({
   selector: 'app-costsharing',
   templateUrl: './costsharing.component.html',
@@ -12,12 +17,17 @@ import { AddGroupContainerComponent } from './add-group-container/add-group-cont
 export class CostsharingComponent implements OnInit {
   GroupList: any[];
   username: string;
-  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService) {
+  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) {
     this.username = this.Globals.GetUserName;
    }
 
   ngOnInit() {
     this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
+    /* this.ReloadPage().subscribe(data => {
+      this.GroupList = data.Groups;
+    }, err => {
+      this.GroupList = [];
+    }); */
   }
 
   addGroupBill(): void {
@@ -27,13 +37,29 @@ export class CostsharingComponent implements OnInit {
     dialogRef.componentInstance.username = this.Globals.GetUserName;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed ', result);
       if ( result ) {
         console.log('RERENDER THE PAGE');
+        this.ReloadPage().subscribe(data => {
+          this.GroupList = data.Groups;
+        }, err => {
+          this.GroupList = [];
+        });
       } else {
         console.log('FAILED');
+        this.ReloadPage().subscribe(data => {
+          this.GroupList = data.Groups;
+        }, err => {
+          this.GroupList = [];
+        });
       }
     });
+  }
+
+  ReloadPage() {
+    const endpoint = 'http://127.0.0.1:5000/';
+    const QueryPayload = {username : this.username};
+    return this.http.post<Billdata>(endpoint, QueryPayload);
   }
 
   addGroupContainer(): void {
