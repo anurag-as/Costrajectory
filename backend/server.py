@@ -25,6 +25,11 @@ from api.account.profile import profileDetailsAPI
 from api.transactions.logs import recentLogsAPI
 from api.groups.create_group import createGroupApi
 from api.groups.change_group_admin import changeGroupAdminApi
+from api.groups.pending_group_requests import pendingRequestsApi
+from api.groups.group_status_request import groupStatusAPI
+from api.groups.delete_group import deleteGroupAPI
+from api.groups.exit_group import exitGroupApi
+
 
 # Flask APP
 app = Flask(__name__)
@@ -50,6 +55,10 @@ app.register_blueprint(profileDetailsAPI)
 app.register_blueprint(recentLogsAPI)
 app.register_blueprint(createGroupApi)
 app.register_blueprint(changeGroupAdminApi)
+app.register_blueprint(pendingRequestsApi)
+app.register_blueprint(groupStatusAPI)
+app.register_blueprint(deleteGroupAPI)
+app.register_blueprint(exitGroupApi)
 
 
 if __name__ == '__main__':

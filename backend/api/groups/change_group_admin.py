@@ -4,7 +4,7 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.updation_functions import change_group_admin
 from database_functions.logs.recentLogs import insert_into_recent_table
-from time import time()
+from time import time
 
 changeGroupAdminApi = Blueprint('changeGroupAdminApi', __name__)
 

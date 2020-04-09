@@ -4,6 +4,9 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.insertion_functions import insert_into_group_table, insert_into_pending_requests_table
 from database_functions.logs.recentLogs import insert_into_recent_table
+from database_functions.groups.querying_functions import get_status_for_group
+from database_functions.groups.updation_functions import update_group_status
+
 from ast import literal_eval
 from time import time
 
@@ -24,6 +27,10 @@ def create_sharing_group():
         users = list(set(literal_eval(users)))  # Avoid adding same users multiple times to the groups
         current_users = str([group_admin])  # only adding admin to the group
         group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description)
+
+        # adding admin to accepted list
+        insert_into_pending_requests_table(connection(), group_id, group_admin, "accepted")
+
         for user in users:
             insert_into_pending_requests_table(connection(), group_id, user, "pending")
 

@@ -14,7 +14,7 @@ def insert_into_group_table(db_connection, group_admin, users, title, descriptio
 
 
 # function to add the users to pending requests table
-def insert_into_pending_requests_table(db_connection, username, group_id, status):
+def insert_into_pending_requests_table(db_connection, group_id, username, status):
     db_connection.execute('''INSERT INTO PENDING_REQUESTS (username, group_id, status) 
         VALUES ("{username}","{group_id}","{status}")'''
                           .format(username=username, group_id=group_id, status=status))
