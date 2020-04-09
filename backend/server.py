@@ -27,6 +27,7 @@ from api.groups.create_group import createGroupApi
 from api.groups.change_group_admin import changeGroupAdminApi
 from api.groups.pending_group_requests import pendingRequestsApi
 from api.groups.group_status_request import groupStatusAPI
+from api.groups.delete_group import deleteGroupAPI
 
 
 # Flask APP
@@ -55,6 +56,7 @@ app.register_blueprint(createGroupApi)
 app.register_blueprint(changeGroupAdminApi)
 app.register_blueprint(pendingRequestsApi)
 app.register_blueprint(groupStatusAPI)
+app.register_blueprint(deleteGroupAPI)
 
 
 if __name__ == '__main__':
