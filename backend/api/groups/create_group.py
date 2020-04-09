@@ -32,14 +32,7 @@ def create_sharing_group():
         insert_into_pending_requests_table(connection(), group_id, group_admin, "accepted")
 
         for user in users:
-            if get_status_for_group(connection(), group_id, user, "rejected"):  # if user has rejected
-                if get_status_for_group(connection(), group_id, user, "removed"):  # if user has been removed
-                    # change to pending
-                    update_group_status(connection(), group_id, user, "pending")
-                else:  # if user new, add him to group
-                    insert_into_pending_requests_table(connection(), group_id, user, "pending")
-            else:  # if user new, add him to group
-                insert_into_pending_requests_table(connection(), group_id, user, "pending")
+            insert_into_pending_requests_table(connection(), group_id, user, "pending")
 
         # adding transaction to logs
         insert_into_recent_table(connection(), group_admin, str(time()), "Created Group", group_title)

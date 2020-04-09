@@ -29,6 +29,7 @@ accepted
 rejected
 removed
 pending
+exited
 '''
 
 
