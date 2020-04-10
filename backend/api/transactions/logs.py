@@ -9,7 +9,7 @@ recentLogsAPI = Blueprint('recentLogsAPI', __name__)
 
 
 # API to return the most recent transactions
-@recentLogsAPI.route('/getRecentLogsAPI', methods=['GET'])
+@recentLogsAPI.route('/getRecentLogs', methods=['GET'])
 @cross_origin()
 def recentLogs():
     """
@@ -20,7 +20,7 @@ def recentLogs():
     refresh_token(connection(), user_name)
     try:
         limit_transactions = request.args.get['limit']
-    except KeyError:
+    except TypeError:
         limit_transactions = 10  # limit of the transaction to be retrieved
     try:
         transactions = get_recent_logs(connection(), user_name, limit_transactions)
