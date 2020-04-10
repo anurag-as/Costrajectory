@@ -28,7 +28,7 @@ export class ToolbarComponent implements OnInit {
   canShowImage = false;
   base64Data = '';
   isPremium = false;
-  GroupData: any;
+  GroupData = [];
 
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService) {}
 
@@ -123,14 +123,17 @@ export class ToolbarComponent implements OnInit {
   }
 
   GetAllGroupData() {
-    this.GetAllGroupDataFromServer(this.userName).subscribe(data => {
-      this.GroupData = data.body;
+    this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
+      this.GroupData = data.body.body;
+      // this.GroupData = [['3', 'delhi'], ['3', 'delhi']];
+      // console.log('ALL GROUP DATA: ', this.GroupData);
     });
   }
 
   GetAllGroupDataFromServer(UserName: string) {
     const endpoint = 'http://127.0.0.1:5000/pendingRequests';
-    return this.http.get(endpoint, {
+    // console.log('(((( ', UserName);
+    return this.http.get<GetG>(endpoint, {
         params: {
             user_name : UserName,
         },
@@ -139,15 +142,21 @@ export class ToolbarComponent implements OnInit {
   }
 
   DecisionPoster(DecisionDetails: {GroupId: number, Decision: string}) {
+    console.log('DECISION GOT : ', DecisionDetails);
+    // this.GetAllGroupData();
     this.PostDecision(DecisionDetails.GroupId, DecisionDetails.Decision);
   }
 
   PostDecision(GroupId: number, Decision: string) {
     const endpoint = 'http://127.0.0.1:5000/groupStatus';
     const templatePayload = [[String(GroupId), Decision]];
-    this.http.post(endpoint, {payload: templatePayload}).subscribe(data => {
+    this.http.post(endpoint, {group_status: templatePayload, user_name: this.userName.username}).subscribe(data => {
       this.GetAllGroupData();
     });
+}
+
+ParseInt(a, b) {
+  return parseInt(a, b);
 }
 
 }

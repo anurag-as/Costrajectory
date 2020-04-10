@@ -100,6 +100,7 @@ export class AddGroupBillComponent implements OnInit {
 
   CreateGroup( Groupname: string, description: string, participants: string[]) {
     const endpoint = 'http://127.0.0.1:5000/createGroup';
+    // tslint:disable-next-line:max-line-length
     const QueryPayload = {group_title : Groupname, group_description: description, users: participants, user_name: this.username};
     return this.http.post(endpoint, QueryPayload);
   }
