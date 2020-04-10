@@ -6,8 +6,7 @@ import { AddGroupContainerComponent } from './add-group-container/add-group-cont
 import {HttpClient} from '@angular/common/http';
 
 interface Billdata {
-  Groups: any[];
-  Username: string;
+  body: any[];
 }
 @Component({
   selector: 'app-costsharing',
@@ -25,7 +24,8 @@ export class CostsharingComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
    // this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ['a', 'b', 'c', 'rohitp2512@gmail.com']], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
     this.ReloadPage().subscribe(data => {
-      this.GroupList = data.Groups;
+      console.log('GROUP DATA: ', data);
+      this.GroupList = data.body;
     }, err => {
       this.GroupList = [];
     });
@@ -38,29 +38,28 @@ export class CostsharingComponent implements OnInit {
     dialogRef.componentInstance.username = this.Globals.GetUserName;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed ', result);
-      if ( result ) {
-        console.log('RERENDER THE PAGE');
-        this.ReloadPage().subscribe(data => {
-          this.GroupList = data.Groups;
-        }, err => {
-          this.GroupList = [];
-        });
-      } else {
-        console.log('FAILED');
-        this.ReloadPage().subscribe(data => {
-          this.GroupList = data.Groups;
-        }, err => {
-          this.GroupList = [];
-        });
-      }
+      console.log('The dialog was closed ');
+      this.ReloadPage().subscribe(data => {
+        this.GroupList = data.body;
+      }, err => {
+        this.GroupList = [];
+      });
     });
   }
 
   ReloadPage() {
-    const endpoint = 'http://127.0.0.1:5000/';
-    const QueryPayload = {username : this.username};
+    const endpoint = 'http://127.0.0.1:5000/viewGroup';
+    const QueryPayload = {user_name : this.username};
     return this.http.post<Billdata>(endpoint, QueryPayload);
+  }
+
+  ReloadAllData() {
+    console.log('CHANGE DATA');
+    this.ReloadPage().subscribe(data => {
+      this.GroupList = data.body;
+    }, err => {
+      this.GroupList = [];
+    });
   }
 
   addGroupContainer(): void {

@@ -76,7 +76,7 @@
                                     <button class="btn-large" *ngIf = '!valid[div]' type="button" [disabled]="Participant.value ==''" (click) = "Verify(div,Participant.value)"><i class="fa fa-user-plus fa-lg" title = "Verify user" style="color:red"></i></button>
 <!--                                     <button class="btn-large" type="button" [disabled]="Participant.value ==''" (click) = "deleteDiv(div)"><i id= "spinner" class="fa fa-spinner fa-lg" title = "Delete Participant" style="color:rgb(148, 53, 236)"></i></button>
  -->
-                                    <button class="btn-large" *ngIf = 'valid[div]' type="button" [disabled]="Participant.value =='' || !valid[div] || valid[div]"><i class="fa fa-user-plus fa-lg" title = "User Verified" style="color:green"></i></button>
+                                    <button class="btn-large" *ngIf = 'valid[div]' type="button" [disabled]="Participant.value =='' || !valid[div]"><i class="fa fa-user-plus fa-lg" title = "User Verified" style="color:green"></i></button>
 
                                     <button class="btn-large" type="button" [disabled]="div == divs[0]" (click) = "deleteDiv(div)"><i class="fa fa-trash fa-lg" title = "Delete Participant" style="color:red"></i></button>
                                     
