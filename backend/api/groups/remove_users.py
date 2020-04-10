@@ -28,9 +28,8 @@ def remove_users_from_group():
             update_group_status(connection(), group_id, user, "removed")
             current_users = get_group_current_users(connection(), group_id)
             new_users = literal_eval(current_users)
-            new_users.remove(user_name)
+            new_users.remove(user)
             add_new_users_group(connection(), group_id, str(new_users))
-
         # adding transaction to logs
         insert_into_recent_table(connection(), user_name, str(time()), "Removed users from group", group_title)
 
