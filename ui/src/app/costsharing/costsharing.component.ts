@@ -22,7 +22,8 @@ export class CostsharingComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ''], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
+    // tslint:disable-next-line:max-line-length
+    this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ['a', 'b', 'c', 'rohitp2512@gmail.com']], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
     /* this.ReloadPage().subscribe(data => {
       this.GroupList = data.Groups;
     }, err => {
@@ -72,5 +73,6 @@ export class CostsharingComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
 
 }
