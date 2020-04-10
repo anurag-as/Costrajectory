@@ -9,6 +9,6 @@ def create_user_table(db_connection):
 
 #  adding an alias to a username
 def add_alias(db_connection, username, alias):
-    db_connection.execute('''INSERT INTO USERNAME_ALIAS (username, alisa) VALUES ("{username}","{alias}")'''
+    db_connection.execute('''INSERT INTO USERNAME_ALIAS (username, alias) VALUES ("{username}","{alias}")'''
                           .format(username=username, alias=alias))
     db_connection.commit()

@@ -28,7 +28,6 @@ def group_status_update():
                 new_users = literal_eval(current_users)
                 new_users.append(user_name)
                 add_new_users_group(connection(), group_id, str(new_users))
-
             # adding transaction to logs
             insert_into_recent_table(connection(), user_name, str(time()), "Changed group status", status)
         return jsonify(True)
