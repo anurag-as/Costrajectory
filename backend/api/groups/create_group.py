@@ -24,7 +24,7 @@ def create_sharing_group():
         group_description = request.json['group_description']
         users = request.json['users']
 
-        users = list(set(literal_eval(users)))  # Avoid adding same users multiple times to the groups
+        users = list(set(users))  # Avoid adding same users multiple times to the groups
         current_users = str([group_admin])  # only adding admin to the group
         group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description)
 
