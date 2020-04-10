@@ -2,6 +2,7 @@ from flask import jsonify
 from database_functions.db_connection.connection import connection
 from database_functions.transactions.image_mapping_flow import get_original_name
 from datetime import datetime, timezone
+from re import compile, search
 
 
 # function to build the required json payload for the recent transactions
@@ -37,5 +38,7 @@ def get_readable_date_time(timestamp):
 def get_alias(username):
     if len(username) == 1:
         return username * 2
-    return str(username[:2])
-
+    regex = compile('[@_!#$%^&*()<>?/|}{~:]')
+    if regex.search(username) is None:
+        return str(username[:2])
+    return str(username[0])*2
