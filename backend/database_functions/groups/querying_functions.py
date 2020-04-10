@@ -1,3 +1,6 @@
+from ast import literal_eval
+
+
 # function to get the pending groups for a particular username
 def get_group_title(db_connection, group_id):
     cursor = db_connection.execute('''SELECT title FROM GROUPS where ID = "{group_id}"  
@@ -71,7 +74,8 @@ def get_group_info(db_connection, group_id):
         '''.format(group_id=group_id))
     for row in cursor:
         if row:
+            list_users = literal_eval(row[2])
             group_info = {'group_id': row[0], 'group_admin': row[1],
-                          'users': row[2], 'title': row[3], 'description': row[4]}
+                          'users': list_users, 'title': row[3], 'description': row[4]}
             return group_info
     return False
