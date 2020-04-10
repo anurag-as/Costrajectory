@@ -102,7 +102,7 @@
       </div>
 
         <div class="modal-footer">
-          <button *ngIf="Participants.length >=2" type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="(NEXTADMIN == '' || NEXTADMIN== Username)" (click)="ExitGroup()">OK!</button>
+          <button *ngIf="Participants.length >=2" type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="(NEXTADMIN == '' || NEXTADMIN== Username)" (click)="ExitGroupAdmin()">OK!</button>
           <button *ngIf="Participants.length <= 1" type="button" class="btn btn-primary" data-dismiss="modal" (click)="ExitGroupNonAdmin()">OK!</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
         </div>
@@ -143,12 +143,56 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" *ngIf="GroupData != 'False'">
+        <form #imageForm="ngForm" (ngSubmit)="AddUsersToGroup(imageForm)">
+        <div class="modal-body">
+
+          
+            <div class="grid">
+                <div class="grid-item">
+                    <div class="container-fluid">
+
+                        <div class="form-group row" *ngFor="let div of divs" id="div{{div}}">
+                          <div class="col-sm-2" *ngIf = "div == divs[0]">
+                              <label for="staticEmail" class="col-form-label">Participant</label>
+                          </div>
+                          <div class="col-sm-2" *ngIf = "div !== divs[0]">
+                              <label for="staticEmail" class="col-form-label"></label>
+                          </div>
+
+                          <div class="col-sm-9">
+                              <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon6"><i class="fa fa-user-o fa-lg" aria-hidden="true" style="color:green"></i></span>
+                                  </div>
+                                  <input id="file-input" #Participant type="email" ngModel name="{{div}}" class="form-control" placeholder="Add participant email ID" aria-describedby="basic-addon6" [readonly]="valid[div]" required/>
+
+                                  <div class="input-group-append">
+
+                                      <button class="btn-large" *ngIf = '!valid[div]' type="button" [disabled]="Participant.value ==''" (click) = "Verify(div,Participant.value)"><i class="fa fa-user-plus fa-lg" title = "Verify user" style="color:red"></i></button>
+              <!--                                     <button class="btn-large" type="button" [disabled]="Participant.value ==''" (click) = "deleteDiv(div)"><i id= "spinner" class="fa fa-spinner fa-lg" title = "Delete Participant" style="color:rgb(148, 53, 236)"></i></button>
+              -->
+                                      <button class="btn-large" *ngIf = 'valid[div]' type="button" [disabled]="Participant.value =='' || !valid[div]"><i class="fa fa-user-plus fa-lg" title = "User Verified" style="color:green"></i></button>
+
+                                      <button class="btn-large" type="button" [disabled]="div == divs[0]" (click) = "deleteDiv(div)"><i class="fa fa-trash fa-lg" title = "Delete Participant" style="color:red"></i></button>
+                                      
+                                      <button *ngIf = "div == divs[divs.length - 1]" type="button" class="btn-large" [disabled]="Participant.value ==''" (click) = "createDiv()"><i class="fa fa-plus fa-lg" title = "Add Participant" style="color:green"></i></button>
+                                  
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+          
+
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK!</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!imageForm.valid || !valid[divs[divs.length - 1]]">OK!</button>
+          <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancel</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
@@ -159,7 +203,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle"> Delete People from Group? </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="ResetParticipants()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -202,7 +246,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="DeleteUsersFromGroup()" [disabled]="deletedParticipants.length == 0">OK!</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ResetParticipants()">Cancel</button>
         </div>
       </div>
     </div>
