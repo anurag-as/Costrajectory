@@ -23,12 +23,12 @@ export class CostsharingComponent implements OnInit {
 
   ngOnInit() {
     // tslint:disable-next-line:max-line-length
-    this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ['a', 'b', 'c', 'rohitp2512@gmail.com']], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
-    /* this.ReloadPage().subscribe(data => {
+   // this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ['a', 'b', 'c', 'rohitp2512@gmail.com']], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
+    this.ReloadPage().subscribe(data => {
       this.GroupList = data.Groups;
     }, err => {
       this.GroupList = [];
-    }); */
+    });
   }
 
   addGroupBill(): void {
