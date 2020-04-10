@@ -3,8 +3,8 @@ from flask_cors import cross_origin
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.insertion_functions import insert_into_group_table, insert_into_pending_requests_table
-from database_functions.logs.recentLogs import insert_into_recent_table, get_group_title
-from database_functions.groups.querying_functions import get_status_for_group
+from database_functions.logs.recentLogs import insert_into_recent_table
+from database_functions.groups.querying_functions import get_status_for_group, get_group_title
 from database_functions.groups.updation_functions import update_group_status
 
 from time import time
@@ -23,7 +23,8 @@ def add_users_to_group():
         users = list(set(users))  # Avoid adding same users multiple times to the groups
         group_id = request.json['group_id']
         group_title = get_group_title(connection(), group_id)
-
+        if not group_title:
+            return jsonify(False)
         for user in users:
             #  if user has rejected the group, or exited, or has been removed, update the status to pending
             if get_status_for_group(connection(), group_id, user, "rejected") or \
