@@ -31,6 +31,7 @@ from api.groups.delete_group import deleteGroupAPI
 from api.groups.exit_group import exitGroupApi
 from api.groups.add_users import addUsersGroupApi
 from api.groups.remove_users import removeUsersGroupApi
+from api.groups.view_group import viewGroupApi
 
 
 # Flask APP
@@ -63,6 +64,7 @@ app.register_blueprint(deleteGroupAPI)
 app.register_blueprint(exitGroupApi)
 app.register_blueprint(addUsersGroupApi)
 app.register_blueprint(removeUsersGroupApi)
+app.register_blueprint(viewGroupApi)
 
 
 if __name__ == '__main__':
