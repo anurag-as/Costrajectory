@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
-from database_functions.groups.insertion_functions import insert_into_group_table, insert_into_pending_requests_table
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.updation_functions import update_group_status, add_new_users_group
 from database_functions.groups.querying_functions import get_group_current_users
