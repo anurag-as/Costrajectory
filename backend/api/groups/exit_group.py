@@ -27,7 +27,8 @@ def exit_group():
         refresh_token(connection(), request.json['user_name'])
         group_id = request.json['group_id']
         group_title = get_group_title(connection(), group_id)
-
+        if not group_title:
+            return jsonify(False)
         current_users = get_group_current_users(connection(), group_id)
         new_users = literal_eval(current_users)
         new_users.remove(user_name)

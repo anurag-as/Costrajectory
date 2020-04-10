@@ -19,6 +19,8 @@ def group_status_update():
         refresh_token(connection(), request.json['user_name'])
         group_id = request.json['group_id']
         group_title = get_group_title(connection(), group_id)
+        if not group_title:
+            return jsonify(False)
         delete_group(connection(), group_id)
         delete_users_in_group(connection(), group_id)
 
