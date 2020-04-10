@@ -18,4 +18,4 @@
     </div>
   </nav>
 
-<app-group-well *ngFor="let Group of GroupList; let i = index" [Username]="username" [Admin]= "Group[0]" [GroupName]="Group[1]" [GroupId]="Group[2]" [Bills]="Group[3]" [Participants]="Group[4]"></app-group-well>
+<app-group-well *ngFor="let Group of GroupList; let i = index" [Username]="username" [Admin]= "Group[0]" [GroupName]="Group[1]" [GroupId]="Group[2]" [Bills]="Group[3]" [Participants]="Group[4]" (ChangeEvent)="ReloadPage()"></app-group-well>
