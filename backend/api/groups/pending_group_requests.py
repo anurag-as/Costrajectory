@@ -14,7 +14,7 @@ def change_admin():
     try:
         user_name = request.args.get('user_name')
         pending_groups = get_pending_groups(connection(), user_name)
-        return jsonify(pending_groups)
+        return jsonify({'body':pending_groups})
     except:
         return jsonify(False)
 

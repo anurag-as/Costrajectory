@@ -19,8 +19,7 @@ def group_status_update():
     try:
         user_name = request.json['user_name']
         refresh_token(connection(), request.json['user_name'])
-        status = request.json['group_status']
-        all_status = literal_eval(status)
+        all_status = request.json['group_status']
         for each_status in all_status:
             status = each_status[1]
             group_id = each_status[0]
