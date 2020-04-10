@@ -31,7 +31,7 @@ export class GroupWellComponent implements OnInit {
   NEXTADMIN = '';
   NEXTADMINVALID = false;
   IntermediateArray: string[];
-  ParticipantsCopy = this.Participants;
+  @Input() ParticipantsCopy: string[];
 
 
   divs: number[] = [0];
@@ -116,7 +116,9 @@ export class GroupWellComponent implements OnInit {
   }
 
   ResetParticipants() {
-    this.Participants = this.ParticipantsCopy;
+    this.Participants = [ ...this.Participants, ...this.deletedParticipants];
+    this.deletedParticipants = [];
+    console.log('RESET: ', this.Participants);
   }
 
   createDiv(): void {
