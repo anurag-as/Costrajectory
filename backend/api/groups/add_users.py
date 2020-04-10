@@ -12,7 +12,7 @@ from time import time
 addUsersGroupApi = Blueprint('addUsersGroupApi', __name__)
 
 
-# API to create a group for cost sharing
+# API to add users to a group
 @addUsersGroupApi.route('/addUsersGroup', methods=['POST'])
 @cross_origin()
 def add_users_to_group():
