@@ -353,9 +353,7 @@
           
 
         <div class="modal-footer">
-          <button *ngIf="Participants.length >=2" type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="(NEXTADMIN == '' || NEXTADMIN== Username)" (click)="ExitGroupAdmin()">OK!</button>
-          <button *ngIf="Participants.length <= 1" type="button" class="btn btn-primary" data-dismiss="modal" (click)="ExitGroupNonAdmin()">OK!</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK!</button>
         </div>
       </div>
     </div>
