@@ -162,7 +162,7 @@ export class GroupWellComponent implements OnInit {
     const index = this.DivIdtoIndex(divId);
     this.VerifyUser(name).subscribe(data => {
       this.StartVerification = true;
-      this.valid[this.currentDiv] = data.available && (this.currentUsername !== this.Username);
+      this.valid[this.currentDiv] = data.available && (this.currentUsername !== this.Username) && (!this.Participants.includes(name));
       this.StartVerification = false;
     });
   }
