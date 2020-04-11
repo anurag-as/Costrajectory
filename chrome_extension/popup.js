@@ -1,5 +1,4 @@
 $(function(){
-
     chrome.storage.sync.get(['total', 'username'],function(cost_obj){
         $('#total').text(cost_obj.total);
 		$('#username').text(cost_obj.username);
@@ -38,8 +37,16 @@ $(function(){
         });
 	});
 	
+	#importing webshot is not working
 	$('#snipBill').click(function(){
-		
+		const webshot = require('webshot');
+		var url = window.location.href
+		webshot(url, './screenshots/recent.jpg', function(err) {
+			if (!err) {
+				console.log('Screenshot taken!')
+	}
+});
 	});
+		
 		
 });

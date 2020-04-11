@@ -53,3 +53,9 @@ backend/temp/
 *.pyo
 **/__pycache__/
 **/.vs/ 
+
+#Chrome extension
+chrome_extension/screenshots/
+chrome_extension/node_modules/
+chrome_extension/package.json
+chrome_extension/package-lock.json
