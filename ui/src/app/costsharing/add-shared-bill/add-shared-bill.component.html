@@ -1,0 +1,150 @@
+<div class="modal-header" style="background-color: rgb(19, 179, 165); color: #000;">
+    <h4 class="modal-title" id="exampleModalLongTitle"> Add Bill </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form #SharedBill="ngForm">
+    <div class="modal-body" style="height: 650px;">
+        
+        <div class="card card-body bg-light" id="ImageShare">
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Bill name :</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope fa-lg" aria-hidden="true" style="color:orange"></i></span>
+                        </div>
+                        <input id="name" #Bname required type="text" placeholder="Enter Bill Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
+                      </div>
+                </div>
+            </div>
+            
+              <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Description:</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3"><i class="fa fa-list fa-lg" aria-hidden="true" style="color:black"></i></span>
+                        </div>
+                        <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control" aria-describedby="basic-addon3"/>
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Category:</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon4"><i class="fa fa-id-card-o fa-lg" aria-hidden="true" style="color:blueviolet"></i></span>
+                        </div>
+                        <select class="custom-select" id="cat" required ngModel name="cat" aria-describedby="basic-addon4">
+                            <option value="" disabled>Choose the category</option>
+                            <option>Travel</option>
+                            <option>Shopping</option>
+                            <option>Investments</option>
+                            <option>Food</option>
+                            <option>Utilities</option>
+                            <option>Medical</option>
+                            <option>Entertainment</option>
+                            <option>Housing</option>
+                            <option>Others</option>
+                         </select>
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Bill Date:</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon5"><i class="fa fa-calendar fa-lg" aria-hidden="true" style="color:blue"></i></span>
+                        </div>
+                        <input id="date" required type="date" value="10-02-1996" ngModel name="date" class="form-control" aria-describedby="basic-addon5" />
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Bill Image:</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon6"><i class="fa fa-file-image-o fa-lg" aria-hidden="true" style="color:green"></i></span>
+                        </div>
+                        <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" aria-describedby="basic-addon6" />
+                        <div class="input-group-append">
+                            <button class="btn-large" [disabled]="Image.value ==''" (click) = "Image.value =''"><i class="fa fa-trash fa-lg" style="color:red"></i></button>                                </div>
+                        </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Bill Amount:</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon2"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
+                        </div>
+                        <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control" aria-describedby="basic-addon2"/>
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="staticEmail" class="col-form-label">Paid By :</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-user fa-lg" aria-hidden="true" style="color:black"></i></span>
+                        </div>
+                        <input id="name" #Bname required type="email" placeholder="Enter Bill Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
+                      </div>
+                </div>
+              </div>
+
+              
+
+        </div>
+
+        <div class="card card-body bg-light" id="BillDetails">
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+            <p>well</p>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK!</button>
+    </div>
+</form>

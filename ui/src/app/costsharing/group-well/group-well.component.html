@@ -21,7 +21,7 @@
                         </li>
 
                         <li class="nav-item">
-                        <a class="nav-link" type='button' (click)="addGroupBill()">Add Bill</a>
+                        <a class="nav-link" type='button' data-toggle="modal" data-target="#AllSharedBill">Add Bill</a>
                         </li>
 
                         
@@ -355,6 +355,15 @@
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">OK!</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal For Adding Group Bill-->
+  <div class="modal fade" id="AllSharedBill" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <app-add-shared-bill></app-add-shared-bill>
       </div>
     </div>
   </div>
