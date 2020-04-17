@@ -101,7 +101,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon2"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
                         </div>
-                        <input id="val" required type="number" placeholder="Enter amount" ngModel name="val" class="form-control" aria-describedby="basic-addon2"/>
+                        <input id="val" required type="number" placeholder="Enter amount" [ngModel]="Value" (input)="ResetValues($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
                     </div>
                 </div>
               </div>
@@ -115,33 +115,57 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-user fa-lg" aria-hidden="true" style="color:black"></i></span>
                         </div>
-                        <input id="name" #Bname required type="email" placeholder="Enter Bill Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
+                        <input id="Payeename" #Bname required type="email" placeholder="Enter Bill Payer's Name" ngModel name="Payeename" class="form-control" aria-describedby="basic-addon1" />
                       </div>
                 </div>
               </div>
-
-              
-
         </div>
 
-        <div class="card card-body bg-light" id="BillDetails">
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
-            <p>well</p>
+        <div class="card card-body bg-light" id="BillDetails" *ngIf="IsShowingSharing">
+            <div class="row" style="height: 50px;">
+              <div class="col-sm-5"><p align="right"> Bill Sharing <i class="fa fa-users fa-lg" aria-hidden="true" style="color: green;"></i></p></div>
+              <div class="col-sm-1" style="padding-right: 50px;">
+                <mat-slide-toggle
+                    class="example-margin"
+                    [color]="color"
+                    (click)="ChangeMode()"
+                    [checked]="!IsShowingSharing">
+                </mat-slide-toggle>
+              </div>
+              <div class="col-sm-5"><p align="left"> <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: coral;"></i> Image</p></div>
+            </div>
+            <div *ngFor="let item of Participants; let i = index">
+                <div class="form-group row">
+                  <div class="col-sm-5">
+                    <app-bill-counter [ParticipantIndex]="i" [ParticipantValue]="ValueMapper[i]" (ChangeValue)="ChangeArrayValue($event)"></app-bill-counter>
+                  </div>
+                  <div class="col-sm-7">
+                        <label for="staticEmail" class="col-form-label"><b>{{item}}</b>'s Share</label>
+                  </div>  
+                </div>
+            </div>
         </div>
+
+        <div class="card-body" id="BillDetails" *ngIf="!IsShowingSharing">
+          <div class="row" style="height: 50px;">
+            <div class="col-sm-5"><p align="right"> Bill Sharing <i class="fa fa-users fa-lg" aria-hidden="true" style="color: green;"></i></p></div>
+            <div class="col-sm-1" style="padding-right: 50px;">
+              <mat-slide-toggle
+                  class="example-margin"
+                  [color]="color"
+                  (click)="ChangeMode()"
+                  [checked]="!IsShowingSharing">
+              </mat-slide-toggle>
+            </div>
+            <div class="col-sm-5"><p align="left"> <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: coral;"></i> Image</p></div>
+          </div>
+          <div class="grid-item" >
+            <div class="container-fluid">
+                <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png" style="max-width: 80%; max-height: 80%; display: block;" >
+            </div>
+          </div>
+        </div>
+
     </div>
 
     <div class="modal-footer">
