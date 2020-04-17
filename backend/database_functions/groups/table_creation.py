@@ -24,3 +24,20 @@ def add_bill_ids(db_connection):
     db_connection.execute('''ALTER TABLE GROUPS ADD COLUMN
                               bill_ids TEXT;''')
     db_connection.commit()
+
+
+# Creating the group bills table
+def create_group_bills_table(db_connection):
+    db_connection.execute('''CREATE TABLE GROUP_BILLS
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         uploader           TEXT    NOT NULL,
+         title              TEXT    NOT NULL,
+         datetime           TEXT    NOT NULL,
+         amount             TEXT    NOT NULL,
+         description        TEXT    NOT NULL,
+         image_name         TEXT    NOT NULL,
+         category           TEXT    NOT NULL,
+         share              TEXT    NOT NULL,
+         payer              TEXT    NOT NULL,
+         group_id           TEXT    NOT NULL);''')
+    db_connection.commit()
