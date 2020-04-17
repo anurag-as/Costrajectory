@@ -17,3 +17,10 @@ def create_pending_requests_table(db_connection):
          username              TEXT    NOT NULL,
          status                TEXT    NOT NULL);''')
     db_connection.commit()
+
+
+# function to add a column bill ids to groups table
+def add_bill_ids(db_connection):
+    db_connection.execute('''ALTER TABLE GROUPS ADD COLUMN
+                              bill_ids TEXT;''')
+    db_connection.commit()
