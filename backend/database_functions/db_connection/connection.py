@@ -3,7 +3,7 @@ from sqlite3 import connect
 
 # Connecting to the database
 def connection():
-    db_connection = connect('../../costrajectory.db')
+    db_connection = connect('costrajectory.db')
     db_connection.commit()
     return db_connection
 
