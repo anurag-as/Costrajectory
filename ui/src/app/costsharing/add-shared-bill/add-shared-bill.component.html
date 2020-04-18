@@ -5,7 +5,7 @@
     </button>
 </div>
 
-<form #SharedBill="ngForm">
+<form #SharedBill="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
     <div class="modal-body" style="height: 650px;">
         
         <div class="card card-body bg-light" id="ImageShare">
@@ -16,9 +16,9 @@
                 <div class="col-sm-9">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope fa-lg" aria-hidden="true" style="color:orange"></i></span>
+                          <span class="input-group-text"><i class="fa fa-envelope fa-lg" aria-hidden="true" style="color:orange"></i></span>
                         </div>
-                        <input id="name" #Bname required type="text" placeholder="Enter Bill Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
+                        <input #Bname required type="text" placeholder="Enter Bill Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
                       </div>
                 </div>
             </div>
@@ -30,9 +30,9 @@
                 <div class="col-sm-9">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon3"><i class="fa fa-list fa-lg" aria-hidden="true" style="color:black"></i></span>
+                          <span class="input-group-text"><i class="fa fa-list fa-lg" aria-hidden="true" style="color:black"></i></span>
                         </div>
-                        <input id="des" required type="test" placeholder="Enter Description" ngModel name="des" class="form-control" aria-describedby="basic-addon3"/>
+                        <input required type="test" placeholder="Enter Description" ngModel name="des" class="form-control" aria-describedby="basic-addon3"/>
                     </div>
                 </div>
               </div>
@@ -44,9 +44,9 @@
                 <div class="col-sm-9">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon4"><i class="fa fa-id-card-o fa-lg" aria-hidden="true" style="color:blueviolet"></i></span>
+                          <span class="input-group-text"><i class="fa fa-id-card-o fa-lg" aria-hidden="true" style="color:blueviolet"></i></span>
                         </div>
-                        <select class="custom-select" id="cat" required ngModel name="cat" aria-describedby="basic-addon4">
+                        <select class="custom-select" required ngModel name="cat" aria-describedby="basic-addon4">
                             <option value="" disabled>Choose the category</option>
                             <option>Travel</option>
                             <option>Shopping</option>
@@ -69,9 +69,9 @@
                 <div class="col-sm-9">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon5"><i class="fa fa-calendar fa-lg" aria-hidden="true" style="color:blue"></i></span>
+                          <span class="input-group-text"><i class="fa fa-calendar fa-lg" aria-hidden="true" style="color:blue"></i></span>
                         </div>
-                        <input id="date" required type="date" value="10-02-1996" ngModel name="date" class="form-control" aria-describedby="basic-addon5" />
+                        <input required type="date" value="10-02-1996" ngModel name="date" class="form-control" aria-describedby="basic-addon5" />
                     </div>
                 </div>
               </div>
@@ -85,10 +85,11 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon6"><i class="fa fa-file-image-o fa-lg" aria-hidden="true" style="color:green"></i></span>
                         </div>
-                        <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" aria-describedby="basic-addon6" />
+                        <input #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" aria-describedby="basic-addon6" />
                         <div class="input-group-append">
-                            <button class="btn-large" [disabled]="Image.value ==''" (click) = "Image.value =''"><i class="fa fa-trash fa-lg" style="color:red"></i></button>                                </div>
+                            <button class="btn-large" [disabled]="Image.value ==''" (click) = "Image.value =''"><i class="fa fa-trash fa-lg" style="color:red"></i></button>                                
                         </div>
+                    </div>
                 </div>
               </div>
 
@@ -99,9 +100,9 @@
                 <div class="col-sm-9">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon2"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
+                          <span class="input-group-text"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
                         </div>
-                        <input id="val" required type="number" placeholder="Enter amount" [ngModel]="Value" (input)="ResetValues($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
+                        <input required type="number" placeholder="Enter amount" [ngModel]="Value" (input)="ResetValues($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
                     </div>
                 </div>
               </div>
@@ -113,9 +114,9 @@
                 <div class="col-sm-9">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-user fa-lg" aria-hidden="true" style="color:black"></i></span>
+                          <span class="input-group-text"><i class="fa fa-user fa-lg" aria-hidden="true" style="color:black"></i></span>
                         </div>
-                        <input id="Payeename" #Bname required type="email" placeholder="Enter Bill Payer's Name" ngModel name="Payeename" class="form-control" aria-describedby="basic-addon1" />
+                        <input #Bname required type="email" placeholder="Enter Bill Payer's Name" ngModel name="Payeename" class="form-control" aria-describedby="basic-addon1" />
                       </div>
                 </div>
               </div>
@@ -160,8 +161,11 @@
             <div class="col-sm-5"><p align="left"> <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: coral;"></i> Image</p></div>
           </div>
           <div class="grid-item" >
-            <div class="container-fluid">
+            <div class="container-fluid" *ngIf="Image.value ==''">
                 <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png" style="max-width: 80%; max-height: 80%; display: block;" >
+            </div>
+            <div class="container-fluid" *ngIf="Image.value !==''">
+              <img [src]="imageSrc" [alt]="SharedBill.value.name" style="max-width: 80%; max-height: 80%; display: block;" >
             </div>
           </div>
         </div>
@@ -169,6 +173,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK!</button>
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal" [disabled]="!SharedBill.valid">OK!</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel!</button>
     </div>
 </form>
