@@ -116,7 +116,10 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-user fa-lg" aria-hidden="true" style="color:black"></i></span>
                         </div>
-                        <input #Bname required type="email" placeholder="Enter Bill Payer's Name" ngModel name="Payeename" class="form-control" aria-describedby="basic-addon1" />
+                        <select class="custom-select" required ngModel name="Payee" aria-describedby="basic-addon4">
+                          <option value="" disabled>Choose the Payer</option>
+                          <option *ngFor="let member of Participants;">{{member}}</option>
+                       </select>
                       </div>
                 </div>
               </div>

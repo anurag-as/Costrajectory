@@ -32,7 +32,7 @@ export class AddSharedBillComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.Participants = ['rohitp2512@gmail.com', 'b', 'c', 'd'];
+    // this.Participants = ['rohitp2512@gmail.com', 'b', 'c', 'd'];
     for (const par of this.Participants) {
       this.ValueMapper.push(this.Value / this.Participants.length);
     }
