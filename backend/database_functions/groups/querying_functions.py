@@ -70,13 +70,15 @@ def get_groups_user(db_connection, username, status):
 
 # function to get all the group information for a particular group
 def get_group_info(db_connection, group_id):
-    cursor = db_connection.execute('''SELECT ID,group_admin,users,title,description FROM GROUPS where ID = "{group_id}"  
+    cursor = db_connection.execute('''SELECT ID,group_admin,users,title,description, bill_ids, creation_time FROM GROUPS where ID = "{group_id}"  
         '''.format(group_id=group_id))
     for row in cursor:
         if row:
             list_users = literal_eval(row[2])
+            list_bills = literal_eval(row[5])
             group_info = {'group_id': row[0], 'group_admin': row[1],
-                          'users': list_users, 'title': row[3], 'description': row[4]}
+                          'users': list_users, 'title': row[3], 'description': row[4],
+                          'bills': list_bills, 'creation_time': row[6]}
             return group_info
     return False
 
