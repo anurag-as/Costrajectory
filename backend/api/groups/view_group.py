@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
-from database_functions.groups.querying_functions import get_groups_user, get_group_info
+from database_functions.groups.querying_functions import get_groups_user, get_group_info, get_bill_data
 
 viewGroupApi = Blueprint('viewGroupApi', __name__)
 
@@ -22,8 +22,12 @@ def viewing_group():
         for group in groups:
             group_info = get_group_info(connection(), group)
             if group_info:
-                bill_data = ''
-                group_payload = {'group_info': group_info, 'bill_data': bill_data}
+                bills = []
+                for bill_id in group_info['bills']:
+                    bill_data = get_bill_data(connection(), bill_id)
+                    if bill_data:
+                        bills.append(bill_data)
+                group_payload = {'group_info': group_info, 'bill_data': bills}
                 all_group_info.append(group_payload)
 
         return jsonify({'body': all_group_info})

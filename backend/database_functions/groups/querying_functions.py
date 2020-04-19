@@ -70,7 +70,8 @@ def get_groups_user(db_connection, username, status):
 
 # function to get all the group information for a particular group
 def get_group_info(db_connection, group_id):
-    cursor = db_connection.execute('''SELECT ID,group_admin,users,title,description, bill_ids, creation_time FROM GROUPS where ID = "{group_id}"  
+    cursor = db_connection.execute('''SELECT ID,group_admin,users,title,description, bill_ids, creation_time FROM 
+    GROUPS where ID = "{group_id}"  
         '''.format(group_id=group_id))
     for row in cursor:
         if row:
@@ -90,5 +91,23 @@ def get_groups_bills(db_connection, group_id):
     for row in cursor:
         if row:
             return row[0]
+    db_connection.commit()
+    return False
+
+
+# function to get data of a bill
+def get_bill_data(db_connection, bill_id):
+    cursor = db_connection.execute('''SELECT ID,uploader,title,datetime,amount,description,image_name,category,share,
+    payer,group_id FROM GROUP_BILLS where ID="{bill_id}" 
+        '''.format(bill_id=bill_id))
+    for row in cursor:
+        if row:
+            share = row[8].strip('][').split(', ')
+            bill_info = {'bill_id': row[0], 'uploader': row[1],
+                         'title': row[2], 'datetime': row[3], 'amount': row[4],
+                         'description': row[5], 'image_name': row[6],
+                         'category': row[7], 'share': share,
+                         'payer': row[9], 'group_id': row[10]}
+            return bill_info
     db_connection.commit()
     return False
