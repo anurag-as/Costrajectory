@@ -31,7 +31,7 @@ def delete_from_image_table(db_connection, uid, username):
 
 
 # function to edit the transactions
-def edit_transactions_image_table(db_connection, uid, username, title, datetime, amount, description, image_name,
+def edit_transactions_image_table(db_connection, uid, uploader, title, datetime, amount, description, image_name,
                                   category):
     db_connection.execute('''UPDATE IMAGES SET  title="{title}",
                                                 datetime="{datetime}",
