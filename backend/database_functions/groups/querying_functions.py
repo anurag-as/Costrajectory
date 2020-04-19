@@ -1,4 +1,5 @@
 from ast import literal_eval
+from yaml import safe_load
 
 
 # function to get the pending groups for a particular username
@@ -102,7 +103,7 @@ def get_bill_data(db_connection, bill_id):
         '''.format(bill_id=bill_id))
     for row in cursor:
         if row:
-            share = row[8].strip('][').split(', ')
+            share = safe_load(row[8])
             bill_info = {'bill_id': row[0], 'uploader': row[1],
                          'title': row[2], 'datetime': row[3], 'amount': row[4],
                          'description': row[5], 'image_name': row[6],
