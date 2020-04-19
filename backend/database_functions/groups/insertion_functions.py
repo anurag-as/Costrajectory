@@ -19,3 +19,21 @@ def insert_into_pending_requests_table(db_connection, group_id, username, status
         VALUES ("{username}","{group_id}","{status}")'''
                           .format(username=username, group_id=group_id, status=status))
     db_connection.commit()
+
+
+# function to add entries to group bills table
+def insert_into_group_bills_table(db_connection, uploader, title, datetime, amount, description,
+                                  image_name, category, share, payer, group_id):
+    db_cursor = db_connection.cursor()
+    db_cursor.execute('''INSERT INTO GROUP_BILLS (uploader, title, datetime, amount, description, image_name, 
+    category, share, payer, group_id) 
+        VALUES ("{uploader}","{title}","{datetime}","{amount}","{description}","{image_name}","{category}"
+        ,"{share}", "{payer}", "{group_id}")'''
+                      .format(uploader=uploader, title=title, datetime=datetime, amount=amount,
+                              description=description, image_name=image_name, category=category,
+                              share=share, payer=payer, group_id=group_id
+                              ))
+    bill_id = str(db_cursor.lastrowid)
+    db_connection.commit()
+    return bill_id
+

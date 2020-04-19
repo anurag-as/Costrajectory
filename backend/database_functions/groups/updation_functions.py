@@ -23,3 +23,12 @@ def add_new_users_group(db_connection, group_id, users):
                           .format(group_id=group_id, users=users))
     db_connection.commit()
     return True
+
+
+# function to add a new bill id to a group
+def add_new_bill_id(db_connection, group_id, bill_ids):
+    db_connection.execute('''UPDATE GROUPS SET  bill_ids="{bill_ids}"
+                            WHERE ID="{group_id}"'''
+                          .format(group_id=group_id, bill_ids=bill_ids))
+    db_connection.commit()
+    return True
