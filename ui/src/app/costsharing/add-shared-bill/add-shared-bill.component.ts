@@ -3,6 +3,7 @@ import { Input, Output } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { GlobalConfigsService } from '../../global-configs.service';
 import {HttpClient} from '@angular/common/http';
+import { BillPostUtilityService } from './bill-post-utility.service';
 
 interface ReturnImage {
   Image: any;
@@ -29,7 +30,7 @@ export class AddSharedBillComponent implements OnInit {
   username = undefined;
   currentDate;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private BIllUitlity: BillPostUtilityService) { }
 
   ngOnInit() {
     // this.Participants = ['rohitp2512@gmail.com', 'b', 'c', 'd'];
@@ -77,6 +78,13 @@ export class AddSharedBillComponent implements OnInit {
     this.ValueMapper[Index] =  NewValue;
     this.Value = this.ValueMapper.reduce((a, b) => a + b);
     console.log('NEW VALUES: ', this.ValueMapper, this.Value);
+  }
+
+  UploadBill(f: NgForm) {
+    // tslint:disable-next-line:max-line-length
+    this.BIllUitlity.UploadBillToServer(f, this.username, this.fileToUpload, this.BillId, this.Participants, this.ValueMapper).subscribe( data => {
+      console.log(data);
+    });
   }
 
 }
