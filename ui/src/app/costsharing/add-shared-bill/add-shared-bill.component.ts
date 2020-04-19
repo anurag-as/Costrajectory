@@ -18,7 +18,7 @@ export class AddSharedBillComponent implements OnInit {
   @Input() Username;
   @Input() BillId;
   @Input() Participants;
-  Value = 100;
+  Value = undefined;
   ValueMapper = Array();
   IsShowingSharing = true;
 

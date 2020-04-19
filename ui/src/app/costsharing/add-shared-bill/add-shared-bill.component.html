@@ -5,7 +5,7 @@
     </button>
 </div>
 
-<form #SharedBill="ngForm" (ngSubmit)="UploadBill(imageForm)">
+<form #SharedBill="ngForm" (ngSubmit)="UploadBill(SharedBill)">
     <div class="modal-body" style="height: 650px;">
         
         <div class="card card-body bg-light" id="ImageShare">
@@ -176,7 +176,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-dismiss="modal" [disabled]="!SharedBill.valid">OK!</button>
+        <button type="submit" class="btn btn-secondary btn-submit" data-dismiss="modal" (click)="UploadBill(SharedBill)" [disabled]="!SharedBill.valid">OK!</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel!</button>
     </div>
 </form>

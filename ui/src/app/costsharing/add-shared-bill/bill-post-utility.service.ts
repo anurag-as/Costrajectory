@@ -16,7 +16,7 @@ export class BillPostUtilityService {
   constructor(private http: HttpClient) { }
 
   UploadBillToServer(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[]) {
-    console.log('SHARED BILL :', f);
+    console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue);
     const Endpoint = 'http://127.0.0.1:5000/addGroupBill';
     const formData: FormData = new FormData();
     formData.append('username', username);
