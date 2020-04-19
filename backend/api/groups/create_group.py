@@ -26,7 +26,9 @@ def create_sharing_group():
 
         users = list(set(users))  # Avoid adding same users multiple times to the groups
         current_users = str([group_admin])  # only adding admin to the group
-        group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description)
+        group_creation_time = str(time())
+        group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description,
+                                           group_creation_time)
 
         # adding admin to accepted list
         insert_into_pending_requests_table(connection(), group_id, group_admin, "accepted")

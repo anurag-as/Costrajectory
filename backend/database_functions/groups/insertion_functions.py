@@ -2,11 +2,12 @@ import sqlite3
 
 
 # function to create new groups and returning group id
-def insert_into_group_table(db_connection, group_admin, users, title, description):
+def insert_into_group_table(db_connection, group_admin, users, title, description, creation_time):
     db_cursor = db_connection.cursor()
-    db_cursor.execute('''INSERT INTO GROUPS (group_admin, users, title, description, bill_ids) 
-        VALUES ("{group_admin}","{users}","{title}","{description}", "[]")'''
-                      .format(group_admin=group_admin, users=users, title=title, description=description))
+    db_cursor.execute('''INSERT INTO GROUPS (group_admin, users, title, description, bill_ids, creation_time) 
+        VALUES ("{group_admin}","{users}","{title}","{description}", "[]", "{creation_time}")'''
+                      .format(group_admin=group_admin, users=users, title=title, description=description,
+                              creation_time=creation_time))
 
     group_id = str(db_cursor.lastrowid)
     db_connection.commit()

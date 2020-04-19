@@ -41,3 +41,10 @@ def create_group_bills_table(db_connection):
          payer              TEXT    NOT NULL,
          group_id           TEXT    NOT NULL);''')
     db_connection.commit()
+
+
+# function to add a column group_creation_time to groups table
+def add_group_creation_time(db_connection):
+    db_connection.execute('''ALTER TABLE GROUPS ADD COLUMN
+                              creation_time TEXT;''')
+    db_connection.commit()
