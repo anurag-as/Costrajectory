@@ -1,0 +1,9 @@
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon2" (click)="DecrementValue()" type="button" style="background-color: red; color: black;" ><i class="fa fa-minus fa-lg" aria-hidden="true"></i></span>
+    </div>
+  <input required type="number" placeholder="Enter amount" name="val" [ngModel]="ParticipantValue" (input)="SetValue($event.target.value)" class="form-control" aria-describedby="basic-addon2"/>
+  <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2" type="button" (click)="IncrementValue()" style="background-color: green; color: black;"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></span>
+  </div>
+</div>

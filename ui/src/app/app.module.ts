@@ -52,6 +52,9 @@ import { AddGroupBillComponent } from './costsharing/add-group-bill/add-group-bi
 import { AddGroupContainerComponent } from './costsharing/add-group-container/add-group-container.component';
 import { GroupWellComponent } from './costsharing/group-well/group-well.component';
 import { GroupAcceptComponent } from './toolbar/group-accept/group-accept.component';
+import { AddSharedBillComponent } from './costsharing/add-shared-bill/add-shared-bill.component';
+import { BillCounterComponent } from './costsharing/AddSharedBill/bill-counter/bill-counter.component';
+import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bill/indivisual-bill.component';
 
 
 @NgModule({
@@ -86,7 +89,10 @@ import { GroupAcceptComponent } from './toolbar/group-accept/group-accept.compon
     AddGroupBillComponent,
     AddGroupContainerComponent,
     GroupWellComponent,
-    GroupAcceptComponent
+    GroupAcceptComponent,
+    AddSharedBillComponent,
+    BillCounterComponent,
+    IndivisualBillComponent
   ],
   imports: [
     BrowserModule,
