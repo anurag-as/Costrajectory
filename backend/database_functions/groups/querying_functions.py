@@ -83,7 +83,7 @@ def get_group_info(db_connection, group_id):
 
 # function to get the bill_ids for a group_id
 def get_groups_bills(db_connection, group_id):
-    cursor = db_connection.execute('''SELECT bill_ids FROM GROUPS where group_id="{group_id}" 
+    cursor = db_connection.execute('''SELECT bill_ids FROM GROUPS where ID="{group_id}" 
     '''.format(group_id=group_id))
     for row in cursor:
         if row:

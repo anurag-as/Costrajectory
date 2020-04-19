@@ -85,13 +85,14 @@ def group_bill():
     shares = str(request.form['shares'])
 
     # adding the transaction record
+
     bill_id = insert_into_group_bills_table(connection(), uploader, title, date_time, amount, description,
                                             mapped_file_name, category, shares, payer, group_id)
 
     # add the bill_id to the groups table
     current_bills = get_groups_bills(connection(), group_id)
     new_bills = literal_eval(current_bills)
-    new_bills.append(group_id)
+    new_bills.append(bill_id)
     add_new_bill_id(connection(), group_id, str(new_bills))
 
     # adding transaction to logs
