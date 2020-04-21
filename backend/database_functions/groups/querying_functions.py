@@ -112,3 +112,14 @@ def get_bill_data(db_connection, bill_id):
             return bill_info
     db_connection.commit()
     return False
+
+
+# function to get bill name
+def get_bill_name(db_connection, bill_id):
+    cursor = db_connection.execute('''SELECT title FROM GROUP_BILLS where ID="{bill_id}" 
+        '''.format(bill_id=bill_id))
+    for row in cursor:
+        if row:
+            return row[0]
+    db_connection.commit()
+    return False
