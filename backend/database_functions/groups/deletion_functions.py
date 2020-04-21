@@ -28,13 +28,12 @@ def delete_from_group_bills_table(db_connection, bill_id):
 
 # function to delete bill entry from groups table
 def delete_from_groups_table(db_connection, bill_id, group_id):
-    cursor = db_connection.execute('''SELECT bills FROM GROUP_BILLS where ID="{group_id}" 
+    cursor = db_connection.execute('''SELECT bill_ids FROM GROUPS where ID="{group_id}" 
             '''.format(group_id=group_id))
     for row in cursor:
         if row:
             list_bills = literal_eval(row[0])
             break
-
     if list_bills:
         list_bills.remove(bill_id)
         add_new_bill_id(db_connection, group_id, list_bills)

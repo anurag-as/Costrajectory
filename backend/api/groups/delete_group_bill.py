@@ -27,10 +27,10 @@ def deleteTransaction():
         # adding transaction to logs
         insert_into_recent_table(connection(), user_name, str(time()), "Deleted group bill", title)
 
-        delete_from_group_bills_table(connection(), bill_id, user_name)
+        delete_from_group_bills_table(connection(), bill_id)
         delete_from_groups_table(connection(), bill_id, group_id)
-
-        delete_file(mapped_name)  # deleting that image from dropbox
+        if mapped_name:
+            delete_file(mapped_name)  # deleting that image from dropbox
 
         return jsonify(True)
     except:
