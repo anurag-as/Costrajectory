@@ -33,6 +33,7 @@ from api.groups.add_users import addUsersGroupApi
 from api.groups.remove_users import removeUsersGroupApi
 from api.groups.view_group import viewGroupApi
 from api.groups.add_group_bill import addGroupBillAPI
+from api.groups.delete_group_bill import deleteGroupBillAPI
 
 
 # Flask APP
@@ -67,6 +68,7 @@ app.register_blueprint(addUsersGroupApi)
 app.register_blueprint(removeUsersGroupApi)
 app.register_blueprint(viewGroupApi)
 app.register_blueprint(addGroupBillAPI)
+app.register_blueprint(deleteGroupBillAPI)
 
 if __name__ == '__main__':
     download_db()

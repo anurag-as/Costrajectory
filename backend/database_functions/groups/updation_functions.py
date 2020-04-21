@@ -32,3 +32,5 @@ def add_new_bill_id(db_connection, group_id, bill_ids):
                           .format(group_id=group_id, bill_ids=bill_ids))
     db_connection.commit()
     return True
+
+
