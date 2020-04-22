@@ -1,1 +1,20 @@
-<p>indivisual-bill works!</p>
+<div class="card bg-light">
+    <nav class="navbar navbar-expand-sm" id="topHalf">
+        <a class="navbar-brand"> <b> {{BillName}} </b></a>
+        <span class="example-spacer"></span>
+        <a class="navbar-brand"> <b>Rs {{Amount}}</b></a>
+    </nav>
+    <nav class="navbar navbar-expand-sm" id="BottomHalf">
+        <a class="navbar-brand"> {{category}}</a>
+        <span class="example-spacer"></span>
+        <div class="navbar-nav" id="buttonGroup">
+            <a class="nav-link" type='button'  data-toggle="modal" data-target="#ViewBillInfo" title="Bill info"><i style="color: rgb(102, 84, 2);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" data-target="#CopyBill" title="Copy Bill"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" data-target="#ViewBill" title="View Bill"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" data-target="#EditBill" title="Edit Bill"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" data-target="#DeleteBill" title="Delete the Bill"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+        </div>
+    </nav>
+</div>
+
+

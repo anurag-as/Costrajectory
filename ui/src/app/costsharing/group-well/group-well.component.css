@@ -1,5 +1,5 @@
 .card {
-    height: 200px;
+    height: 250px;
     overflow: auto;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
 }
@@ -17,6 +17,7 @@
     top: 0px;
     left: -20px;
     width: 100%;
+    z-index: 1;
 }
 
 .example-container {
@@ -92,4 +93,17 @@ p {
 
 #ViewGroupInfo {
   max-width: 100% !important;
+}
+
+.IndivisualSharedBill {
+  height: 75px; 
+  width: 450px; 
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  display: inline-block ;
+}
+
+mwlResizable {
+  box-sizing: border-box; 
 }

@@ -1,0 +1,32 @@
+.card {
+    height: 75px; 
+    width: 450px;
+    margin-left: 0px;
+    background-image: linear-gradient(to bottom right, #86DDEE, #10C6A3);
+}
+
+#lineHouse {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#topHalf {
+    width: 100%;
+    height:35px;
+}
+
+#Middle {
+    height:3px;
+}
+
+#BottomHalf {
+    width: 100%;
+    height: 35px;
+}
+
+#buttonGroup {
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }

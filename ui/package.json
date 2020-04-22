@@ -26,6 +26,7 @@
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
     "angular-font-awesome": "^3.1.2",
     "angular-google-charts": "^0.1.6",
+    "angular-resizable-element": "^3.3.0",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "countrycitystatejson": "^0.2.16",

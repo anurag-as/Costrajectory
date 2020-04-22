@@ -5,6 +5,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { GroupOperationsService } from './group-operations.service';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import { ResizeEvent } from 'angular-resizable-element';
+import { ResizableModule } from 'angular-resizable-element';
 
 
 interface Validity {

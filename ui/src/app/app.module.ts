@@ -55,7 +55,9 @@ import { GroupAcceptComponent } from './toolbar/group-accept/group-accept.compon
 import { AddSharedBillComponent } from './costsharing/add-shared-bill/add-shared-bill.component';
 import { BillCounterComponent } from './costsharing/AddSharedBill/bill-counter/bill-counter.component';
 import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bill/indivisual-bill.component';
-
+import { ResizableModule } from 'angular-resizable-element';
+import { CopyBillComponent } from './costsharing/group-well/indivisual-bill/copy-bill/copy-bill.component';
+import { BillInfoComponent } from './costsharing/group-well/indivisual-bill/bill-info/bill-info.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,9 @@ import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bil
     GroupAcceptComponent,
     AddSharedBillComponent,
     BillCounterComponent,
-    IndivisualBillComponent
+    IndivisualBillComponent,
+    CopyBillComponent,
+    BillInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +120,8 @@ import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bil
     BsDropdownModule.forRoot(),
     DragDropModule,
     MonacoEditorModule.forRoot(),
-    MatTableModule
+    MatTableModule,
+    ResizableModule
     ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],
