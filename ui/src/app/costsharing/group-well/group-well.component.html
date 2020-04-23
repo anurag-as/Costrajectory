@@ -56,7 +56,9 @@
                 [share]="Bill.share"
                 [uploader]="Bill.uploader"
                 [Username]="Username"
-                [BillName]="Bill.title"></app-indivisual-bill>
+                [BillName]="Bill.title"
+                [Participants]="Participants"
+                (refreshCopy)="RefreshData()"></app-indivisual-bill>
               </div>
             </div>            
        </div>
@@ -373,7 +375,7 @@
   <div class="modal fade" id="AllSharedBill" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
-        <app-add-shared-bill [Participants]="Participants" [Username]="Username" [BillId]="GroupId"></app-add-shared-bill>
+        <app-add-shared-bill [Participants]="Participants" [Username]="Username" [BillId]="GroupId" (RefreshData)="RefreshData()"></app-add-shared-bill>
       </div>
     </div>
   </div>

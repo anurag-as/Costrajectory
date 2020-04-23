@@ -8,13 +8,89 @@
         <a class="navbar-brand"> {{category}}</a>
         <span class="example-spacer"></span>
         <div class="navbar-nav" id="buttonGroup">
-            <a class="nav-link" type='button'  data-toggle="modal" data-target="#ViewBillInfo" title="Bill info"><i style="color: rgb(102, 84, 2);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </a>
-            <a class="nav-link" type='button'  data-toggle="modal" data-target="#CopyBill" title="Copy Bill"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
-            <a class="nav-link" type='button'  data-toggle="modal" data-target="#ViewBill" title="View Bill"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
-            <a class="nav-link" type='button'  data-toggle="modal" data-target="#EditBill" title="Edit Bill"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
-            <a class="nav-link" type='button'  data-toggle="modal" data-target="#DeleteBill" title="Delete the Bill"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#ViewBillInfo'+FormattedStringId" title="Bill info"><i style="color: rgb(102, 84, 2);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#CopyBill'+FormattedStringId" title="Copy Bill"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#ViewBill'+FormattedStringId" title="View Bill"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#EditBill'+FormattedStringId" title="Edit Bill"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#DeleteBill'+FormattedStringId" title="Delete the Bill"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
         </div>
     </nav>
 </div>
 
 
+
+<!-- --------------------------------------ALL MODALS BELOW -------------------------------->
+
+
+<!-- Copy Bill Modal -->
+<div class="modal fade" [attr.id]="'CopyBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+            <app-copy-bill
+            [BillId]="BillId"
+            [Amount]="Amount"
+            [category]="category"
+            [dateTime]="dateTime"
+            [Discription]="Discription"
+            [GroupId]="GroupId"
+            [payer]="payer"
+            [share]="share"
+            [uploader]="uploader"
+            [Username]="Username"
+            [BillName]="BillName"
+            [Participants]="Participants"
+            [ShareCopy]="share"></app-copy-bill>
+      </div>
+    </div>
+</div>
+
+<!-- Edit Bill Modal -->
+<div class="modal fade" [attr.id]="'EditBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+            <!-- <app-edit-bill></app-edit-bill> -->
+      </div>
+    </div>
+</div>
+
+<!-- View Bill Modal -->
+<div class="modal fade" [attr.id]="'ViewBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+            <!-- <app-view-bill></app-view-bill> -->
+      </div>
+    </div>
+</div>
+
+<!-- Delete Bill Modal -->
+<div class="modal fade" [attr.id]="'DeleteBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+            <!-- <app-delete-bill></app-delete-bill> -->
+            <app-delete-group-indivisual-bill
+            [BillId]="BillId"
+            [Amount]="Amount"
+            [category]="category"
+            [dateTime]="dateTime"
+            [Discription]="Discription"
+            [GroupId]="GroupId"
+            [payer]="payer"
+            [share]="share"
+            [uploader]="uploader"
+            [Username]="Username"
+            [BillName]="BillName"
+            [Participants]="Participants"
+            [ShareCopy]="share"
+            (RefreshCopy)="refreshcopy()"></app-delete-group-indivisual-bill>
+      </div>
+    </div>
+</div>
+
+<!-- View Bill Info Modal -->
+<div class="modal fade" [attr.id]="'ViewBillInfo'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+            <!-- <app-bill-info></app-bill-info> -->
+      </div>
+    </div>
+</div>

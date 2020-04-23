@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Input, Output } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-indivisual-bill',
@@ -19,9 +19,18 @@ export class IndivisualBillComponent implements OnInit {
   @Input() Username: string;
   @Input() ImageName: string;
   @Input() BillName: string;
+  @Input() Participants: string[];
+  @Output() refreshCopy = new EventEmitter();
+  FormattedStringId: string;
   constructor() { }
 
   ngOnInit() {
+    this.FormattedStringId = String(this.BillId);
+    console.log('OPENED', );
+  }
+
+  refreshcopy() {
+    this.refreshCopy.emit();
   }
 
 }

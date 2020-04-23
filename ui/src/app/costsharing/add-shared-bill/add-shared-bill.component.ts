@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import { GlobalConfigsService } from '../../global-configs.service';
 import {HttpClient} from '@angular/common/http';
 import { BillPostUtilityService } from './bill-post-utility.service';
+import { EventEmitter } from '@angular/core';
 
 interface ReturnImage {
   Image: any;
@@ -18,6 +19,7 @@ export class AddSharedBillComponent implements OnInit {
   @Input() Username;
   @Input() BillId;
   @Input() Participants;
+  @Output() RefreshData = new EventEmitter();
   Value = undefined;
   ValueMapper = Array();
   IsShowingSharing = true;
@@ -84,6 +86,7 @@ export class AddSharedBillComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.BIllUitlity.UploadBillToServer(f, this.username, this.fileToUpload, this.BillId, this.Participants, this.ValueMapper).subscribe( data => {
       console.log(data);
+      this.RefreshData.emit();
     });
   }
 

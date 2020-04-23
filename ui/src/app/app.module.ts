@@ -58,6 +58,12 @@ import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bil
 import { ResizableModule } from 'angular-resizable-element';
 import { CopyBillComponent } from './costsharing/group-well/indivisual-bill/copy-bill/copy-bill.component';
 import { BillInfoComponent } from './costsharing/group-well/indivisual-bill/bill-info/bill-info.component';
+// tslint:disable-next-line:max-line-length
+import { DeleteGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/delete-group-indivisual-bill/delete-group-indivisual-bill.component';
+// tslint:disable-next-line:max-line-length
+import { ViewGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/view-group-indivisual-bill/view-group-indivisual-bill.component';
+// tslint:disable-next-line:max-line-length
+import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/edit-group-indivisual-bill/edit-group-indivisual-bill.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +102,10 @@ import { BillInfoComponent } from './costsharing/group-well/indivisual-bill/bill
     BillCounterComponent,
     IndivisualBillComponent,
     CopyBillComponent,
-    BillInfoComponent
+    BillInfoComponent,
+    DeleteGroupIndivisualBillComponent,
+    ViewGroupIndivisualBillComponent,
+    EditGroupIndivisualBillComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +130,7 @@ import { BillInfoComponent } from './costsharing/group-well/indivisual-bill/bill
     DragDropModule,
     MonacoEditorModule.forRoot(),
     MatTableModule,
-    ResizableModule
+    ResizableModule,
     ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],

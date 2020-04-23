@@ -175,5 +175,9 @@ export class GroupWellComponent implements OnInit {
     return this.http.post<Validity>(endpoint, QueryPayload);
   }
 
+  RefreshData() {
+    this.ChangeEvent.emit();
+  }
+
 
 }
