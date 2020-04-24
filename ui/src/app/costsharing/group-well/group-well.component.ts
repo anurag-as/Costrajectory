@@ -5,6 +5,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { GroupOperationsService } from './group-operations.service';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import { ResizeEvent } from 'angular-resizable-element';
+import { ResizableModule } from 'angular-resizable-element';
 
 
 interface Validity {
@@ -171,6 +173,10 @@ export class GroupWellComponent implements OnInit {
     const endpoint = 'http://127.0.0.1:5000/checkUser';
     const QueryPayload = {username : user, password: 'NOTHING'};
     return this.http.post<Validity>(endpoint, QueryPayload);
+  }
+
+  RefreshData() {
+    this.ChangeEvent.emit();
   }
 
 

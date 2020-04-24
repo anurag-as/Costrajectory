@@ -1,0 +1,15 @@
+<div class="modal-header" style="background-color: red; color: #000;">
+    <h4 class="modal-title" id="exampleModalLongTitle"> Delete Bill </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <p>Do you want to delete the Bill {{BillName}}</p>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="DeleteBill()">Yes!</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel!</button>
+</div>

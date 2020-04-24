@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Input, Output, EventEmitter } from '@angular/core';
+import { Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-indivisual-bill',
-  templateUrl: './indivisual-bill.component.html',
-  styleUrls: ['./indivisual-bill.component.css']
+  selector: 'app-copy-bill',
+  templateUrl: './copy-bill.component.html',
+  styleUrls: ['./copy-bill.component.css']
 })
-export class IndivisualBillComponent implements OnInit {
+export class CopyBillComponent implements OnInit {
   @Input() BillId: number;
   @Input() Amount: string;
   @Input() category: string;
@@ -20,17 +20,10 @@ export class IndivisualBillComponent implements OnInit {
   @Input() ImageName: string;
   @Input() BillName: string;
   @Input() Participants: string[];
-  @Output() refreshCopy = new EventEmitter();
-  FormattedStringId: string;
+  @Input() ShareCopy: string[];
   constructor() { }
 
   ngOnInit() {
-    this.FormattedStringId = String(this.BillId);
-    console.log('OPENED', );
-  }
-
-  refreshcopy() {
-    this.refreshCopy.emit();
   }
 
 }

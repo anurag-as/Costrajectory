@@ -43,15 +43,27 @@
                     </div>
                 </nav>
             </div>
-            <p>Well</p>
-
+            <div class="container-fluid">
+              <div class="IndivisualSharedBill" *ngFor="let Bill of Bills; let i = index">
+                <app-indivisual-bill
+                [BillId]="Bill.bill_id"
+                [Amount]="Bill.amount"
+                [category]="Bill.category"
+                [dateTime]="Bill.datetime"
+                [Discription]="Bill.description"
+                [GroupId]="Bill.group_id"
+                [payer]="Bill.payer"
+                [share]="Bill.share"
+                [uploader]="Bill.uploader"
+                [Username]="Username"
+                [BillName]="Bill.title"
+                [Participants]="Participants"
+                (refreshCopy)="RefreshData()"></app-indivisual-bill>
+              </div>
+            </div>            
        </div>
     </div>
 </div>
-
-
-
-
 
 <!-- Modal For Exiting Group when not an admin -->
 <div class="modal fade" id="ExitGroupNotAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -363,7 +375,7 @@
   <div class="modal fade" id="AllSharedBill" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
-        <app-add-shared-bill [Participants]="Participants" [Username]="Username" [BillId]="GroupId"></app-add-shared-bill>
+        <app-add-shared-bill [Participants]="Participants" [Username]="Username" [BillId]="GroupId" (RefreshData)="RefreshData()"></app-add-shared-bill>
       </div>
     </div>
   </div>

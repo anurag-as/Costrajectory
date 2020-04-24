@@ -55,7 +55,15 @@ import { GroupAcceptComponent } from './toolbar/group-accept/group-accept.compon
 import { AddSharedBillComponent } from './costsharing/add-shared-bill/add-shared-bill.component';
 import { BillCounterComponent } from './costsharing/AddSharedBill/bill-counter/bill-counter.component';
 import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bill/indivisual-bill.component';
-
+import { ResizableModule } from 'angular-resizable-element';
+import { CopyBillComponent } from './costsharing/group-well/indivisual-bill/copy-bill/copy-bill.component';
+import { BillInfoComponent } from './costsharing/group-well/indivisual-bill/bill-info/bill-info.component';
+// tslint:disable-next-line:max-line-length
+import { DeleteGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/delete-group-indivisual-bill/delete-group-indivisual-bill.component';
+// tslint:disable-next-line:max-line-length
+import { ViewGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/view-group-indivisual-bill/view-group-indivisual-bill.component';
+// tslint:disable-next-line:max-line-length
+import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/edit-group-indivisual-bill/edit-group-indivisual-bill.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +100,12 @@ import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bil
     GroupAcceptComponent,
     AddSharedBillComponent,
     BillCounterComponent,
-    IndivisualBillComponent
+    IndivisualBillComponent,
+    CopyBillComponent,
+    BillInfoComponent,
+    DeleteGroupIndivisualBillComponent,
+    ViewGroupIndivisualBillComponent,
+    EditGroupIndivisualBillComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +129,8 @@ import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bil
     BsDropdownModule.forRoot(),
     DragDropModule,
     MonacoEditorModule.forRoot(),
-    MatTableModule
+    MatTableModule,
+    ResizableModule,
     ],
   providers: [TabularViewComponent, GlobalConfigsService],
   bootstrap: [AppComponent],

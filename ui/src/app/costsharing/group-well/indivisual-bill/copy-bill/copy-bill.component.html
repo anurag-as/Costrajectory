@@ -1,5 +1,5 @@
 <div class="modal-header" style="background-color: rgb(19, 179, 165); color: #000;">
-    <h4 class="modal-title" id="exampleModalLongTitle"> Add Bill </h4>
+    <h4 class="modal-title" id="exampleModalLongTitle"> Copy Bill </h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -18,7 +18,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-envelope fa-lg" aria-hidden="true" style="color:orange"></i></span>
                         </div>
-                        <input #Bname required type="text" placeholder="Enter Bill Name" ngModel name="name" class="form-control" aria-describedby="basic-addon1" />
+                        <input #Bname required type="text" placeholder="Enter Bill Name" [(ngModel)]="BillName" name="name" class="form-control" aria-describedby="basic-addon1" />
                       </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-list fa-lg" aria-hidden="true" style="color:black"></i></span>
                         </div>
-                        <input required type="test" placeholder="Enter Description" ngModel name="des" class="form-control" aria-describedby="basic-addon3"/>
+                        <input required type="test" placeholder="Enter Description" [(ngModel)]="Discription" name="des" class="form-control" aria-describedby="basic-addon3"/>
                     </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-id-card-o fa-lg" aria-hidden="true" style="color:blueviolet"></i></span>
                         </div>
-                        <select class="custom-select" required ngModel name="cat" aria-describedby="basic-addon4">
+                        <select class="custom-select" required [(ngModel)]="category" name="cat" aria-describedby="basic-addon4">
                             <option value="" disabled>Choose the category</option>
                             <option>Travel</option>
                             <option>Shopping</option>
@@ -71,7 +71,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-calendar fa-lg" aria-hidden="true" style="color:blue"></i></span>
                         </div>
-                        <input required type="date" value="10-02-1996" ngModel name="date" class="form-control" aria-describedby="basic-addon5" />
+                        <input required type="date" value="10-02-1996" [(ngModel)]="dateTime" name="date" class="form-control" aria-describedby="basic-addon5" />
                     </div>
                 </div>
               </div>
@@ -102,7 +102,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
                         </div>
-                        <input required type="number" placeholder="Enter amount" [ngModel]="Value" (input)="ResetValues($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
+                        <input required type="number" placeholder="Enter amount" [ngModel]="Amount" (input)="ResetValues($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
                     </div>
                 </div>
               </div>
