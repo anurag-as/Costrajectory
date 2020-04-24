@@ -25,7 +25,7 @@ def recentTransactions():
     try:
         transactions = query_recent_transaction(connection(), user_name, limit_transactions)
         if not transactions:
-            return jsonify({False})
+            return jsonify([])
         return build_json_recent_transactions(transactions, user_name)
     except:
         return jsonify(False)
