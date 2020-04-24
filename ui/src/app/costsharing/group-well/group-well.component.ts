@@ -34,7 +34,7 @@ export class GroupWellComponent implements OnInit {
   NEXTADMINVALID = false;
   IntermediateArray: string[];
   @Input() ParticipantsCopy: string[];
-
+  FormattedStringId: string;
 
   divs: number[] = [0];
   valid: boolean[] = new Array(100).fill(false);
@@ -48,7 +48,7 @@ export class GroupWellComponent implements OnInit {
   constructor(private GroupOperations: GroupOperationsService, private http: HttpClient) { }
 
   ngOnInit() {
-    console.log('CHILD: ', this.Username, this.Admin, this.deletedParticipants, this.Participants);
+    this.FormattedStringId = String(this.GroupId);
   }
 
   ResetAddUsersData() {

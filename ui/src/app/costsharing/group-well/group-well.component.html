@@ -29,15 +29,15 @@
                     </ul>
 
                     <span class="navbar-text" *ngIf="Username == Admin">
-                        <span type="button" title="Exit the group" class="fa fa-sign-out fa-lg" aria-hidden="true" style="color: whitesmoke;" data-toggle="modal" data-target="#ExitGroupAdmin"></span>&nbsp;
-                        <span type="button" title="Make others Admin" class="fa fa-level-up fa-lg" aria-hidden="true" style="color:chartreuse;" data-toggle="modal" data-target="#MakeGroupAdmin"></span>&nbsp;
-                        <span type="button" title="Add users to group" class="fa fa-user-plus fa-lg" aria-hidden="true" style="color: black;" data-toggle="modal" data-target="#AddPeopleToGroupAdmin"></span>&nbsp;
-                        <span type="button" title="Delete Users From Group" class="fa fa-user-times fa-lg" aria-hidden="true" style="color: grey;" data-toggle="modal" data-target="#DeletePeopleFromGroupAdmin"></span>&nbsp;
-                        <span type="button" title="Delete the Group" class="fa fa-trash fa-lg" aria-hidden="true" style="color: red;" data-toggle="modal" data-target="#DeleteGroupAdmin"></span>&nbsp;
+                        <span type="button" title="Exit the group" class="fa fa-sign-out fa-lg" aria-hidden="true" style="color: whitesmoke;" data-toggle="modal" [attr.data-target]="'#ExitGroupAdmin'+FormattedStringId"></span>&nbsp;
+                        <span type="button" title="Make others Admin" class="fa fa-level-up fa-lg" aria-hidden="true" style="color:chartreuse;" data-toggle="modal" [attr.data-target]="'#MakeGroupAdmin'+FormattedStringId"></span>&nbsp;
+                        <span type="button" title="Add users to group" class="fa fa-user-plus fa-lg" aria-hidden="true" style="color: black;" data-toggle="modal" [attr.data-target]="'#AddPeopleToGroupAdmin'+FormattedStringId"></span>&nbsp;
+                        <span type="button" title="Delete Users From Group" class="fa fa-user-times fa-lg" aria-hidden="true" style="color: grey;" data-toggle="modal" [attr.data-target]="'#DeletePeopleFromGroupAdmin'+FormattedStringId"></span>&nbsp;
+                        <span type="button" title="Delete the Group" class="fa fa-trash fa-lg" aria-hidden="true" style="color: red;" data-toggle="modal" [attr.data-target]="'#DeleteGroupAdmin'+FormattedStringId"></span>&nbsp;
                     </span>
 
                     <span class="navbar-text" *ngIf="Username != Admin">
-                        <span type="button" title="Exit the group" class="fa fa-sign-out fa-lg" aria-hidden="true" style="color:whitesmoke;" data-toggle="modal" data-target="#ExitGroupNotAdmin"></span>&nbsp;
+                        <span type="button" title="Exit the group" class="fa fa-sign-out fa-lg" aria-hidden="true" style="color:whitesmoke;" data-toggle="modal" [attr.data-target]="'#ExitGroupNotAdmin'+FormattedStringId"></span>&nbsp;
                     </span>
 
                     </div>
@@ -58,6 +58,7 @@
                 [Username]="Username"
                 [BillName]="Bill.title"
                 [Participants]="Participants"
+                [ImageName]="Bill.image_name"
                 (refreshCopy)="RefreshData()"></app-indivisual-bill>
               </div>
             </div>            
@@ -66,7 +67,7 @@
 </div>
 
 <!-- Modal For Exiting Group when not an admin -->
-<div class="modal fade" id="ExitGroupNotAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" [attr.id]="'ExitGroupNotAdmin'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -88,7 +89,7 @@
 
 
   <!-- Modal For Exiting Group when an admin-->
-<div class="modal fade" id="ExitGroupAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" [attr.id]="'ExitGroupAdmin'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -129,7 +130,7 @@
 
 
   <!-- Modal For Deleting Group when an admin-->
-<div class="modal fade" id="DeleteGroupAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" [attr.id]="'DeleteGroupAdmin'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -151,7 +152,7 @@
   </div>
 
   <!-- Modal For Adding people to Group when an admin-->
-  <div class="modal fade" id="AddPeopleToGroupAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" [attr.id]="'AddPeopleToGroupAdmin'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -181,7 +182,7 @@
                                   <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon6"><i class="fa fa-user-o fa-lg" aria-hidden="true" style="color:green"></i></span>
                                   </div>
-                                  <input id="file-input" #Participant type="email" ngModel name="{{div}}" class="form-control" placeholder="Add participant email ID" aria-describedby="basic-addon6" [readonly]="valid[div]" required/>
+                                  <input #Participant type="email" ngModel name="{{div}}" class="form-control" placeholder="Add participant email ID" aria-describedby="basic-addon6" [readonly]="valid[div]" required/>
 
                                   <div class="input-group-append">
 
@@ -215,7 +216,7 @@
   </div>
 
   <!-- Modal For Deleting people from Group when an admin-->
-  <div class="modal fade" id="DeletePeopleFromGroupAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" [attr.id]="'DeletePeopleFromGroupAdmin'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -271,7 +272,7 @@
 
 
   <!-- Modal For Making other people admin-->
-  <div class="modal fade" id="MakeGroupAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" [attr.id]="'MakeGroupAdmin'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -306,7 +307,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="ViewGroupInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" [attr.id]="'ViewGroupInfo'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -372,7 +373,7 @@
   </div>
 
 <!-- Modal For Adding Group Bill-->
-  <div class="modal fade" id="AllSharedBill" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" [attr.id]="'AllSharedBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
         <app-add-shared-bill [Participants]="Participants" [Username]="Username" [BillId]="GroupId" (RefreshData)="RefreshData()"></app-add-shared-bill>
