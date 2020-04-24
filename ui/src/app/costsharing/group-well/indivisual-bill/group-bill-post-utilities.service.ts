@@ -15,6 +15,7 @@ export class GroupBillPostUtilitiesService {
   constructor(private http: HttpClient) { }
 
   DeleteRequestToServer(USERNAME: string, GID: string, BID: string, MAPPEDNAME: string) {
+    console.log('delete bill');
     const endpoint = 'http://127.0.0.1:5000/deleteGroupBill';
     const query = {
       username : USERNAME,

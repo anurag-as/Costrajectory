@@ -29,7 +29,7 @@ export class DeleteGroupIndivisualBillComponent implements OnInit {
   }
 
   DeleteBill() {
-    this.PosterService.DeleteRequestToServer(this.Username, this.GroupId, String(this.BillId), 't').subscribe( data => {
+    this.PosterService.DeleteRequestToServer(this.Username, this.GroupId, String(this.BillId), this.ImageName).subscribe( data => {
       this.RefreshCopy.emit();
     });
   }
