@@ -82,7 +82,7 @@ def group_bill():
     uploader = user_name
     payer = request.form['payer']
     group_id = request.form['group_id']
-    shares = str(request.form['shares'])
+    shares = literal_eval(request.form['shares'])
 
     # adding the transaction record
 
