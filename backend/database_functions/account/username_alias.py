@@ -12,3 +12,13 @@ def add_alias(db_connection, username, alias):
     db_connection.execute('''INSERT INTO USERNAME_ALIAS (username, alias) VALUES ("{username}","{alias}")'''
                           .format(username=username, alias=alias))
     db_connection.commit()
+
+
+# function to update alias based on when profile details is updated
+def update_alias(db_connection, username, alias):
+    db_connection.execute('''UPDATE USERNAME_ALIAS 
+        set alias = "{alias}"
+        where username = "{username}"  
+        '''.format(username=username, alias=alias))
+    db_connection.commit()
+    return True
