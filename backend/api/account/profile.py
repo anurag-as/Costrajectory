@@ -5,9 +5,29 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.account.profile_details_flow import query_profile_details, insert_into_profile_details, \
     edit_profile_table
+from database_functions.account.username_alias import update_alias
 from database_functions.logs.recentLogs import insert_into_recent_table
 
 profileDetailsAPI = Blueprint('profileDetailsAPI', __name__)
+
+
+# function to update the username alias
+def form_username_alias(first_name, last_name):
+    if len(first_name) > 0 and len(last_name) > 0:
+        return first_name[0] + last_name[0]
+    try:
+        return first_name[0] + first_name[1]
+    except IndexError:
+        try:
+            return first_name[0]*2
+        except IndexError:
+            try:
+                return last_name[0] + last_name[1]
+            except IndexError:
+                try:
+                    return last_name[0]*2
+                except IndexError:
+                    return False
 
 
 # API to get usage details for a particular user
@@ -29,6 +49,11 @@ def profile_details():
 
         first_name = request.form['first_name']
         last_name = request.form['last_name']
+
+        alias = form_username_alias(first_name, last_name)
+        if alias:
+            update_alias(connection(), user_name, alias)
+
         email = request.form['email']
         address = request.form['address']
         address2 = request.form['address2']
