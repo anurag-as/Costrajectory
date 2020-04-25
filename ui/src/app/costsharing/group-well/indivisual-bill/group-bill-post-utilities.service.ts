@@ -7,6 +7,10 @@ interface Status {
   uploadStatus: boolean;
 }
 
+interface ReturnImage {
+  Image: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +36,10 @@ export class GroupBillPostUtilitiesService {
     return this.http.delete<Status>(endpoint, options);
   }
 
+  receiveImage(MappedImageName , BillName) {
+    const endpoint = 'http://127.0.0.1:5000/previewImage_';
+    const QueryPayload = {mapped_name : MappedImageName, bill_name: BillName};
+    return this.http.post<ReturnImage>(endpoint, QueryPayload);
+  }
 
 }

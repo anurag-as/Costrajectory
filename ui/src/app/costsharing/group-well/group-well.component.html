@@ -8,7 +8,7 @@
                     <ul class="navbar-nav mr-auto">
 
                         <li class="nav-item">
-                          <a class="nav-link" type='button'  data-toggle="modal" data-target="#ViewGroupInfo" title="Group Info"><i style="color: rgb(4, 53, 34);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+                          <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#ViewGroupInfo'+FormattedStringId" title="Group Info"><i style="color: rgb(4, 53, 34);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
                           </a>
                         </li>
 
@@ -21,7 +21,7 @@
                         </li>
 
                         <li class="nav-item">
-                        <a class="nav-link" type='button' data-toggle="modal" data-target="#AllSharedBill">Add Bill</a>
+                        <a class="nav-link" type='button' data-toggle="modal" [attr.data-target]="'#AllSharedBill'+FormattedStringId">Add Bill</a>
                         </li>
 
                         

@@ -23,13 +23,12 @@ export class AddSharedBillComponent implements OnInit {
   Value = undefined;
   ValueMapper = Array();
   IsShowingSharing = true;
-
+  loading = false;
   datetoday = new Date();
   imageSrc;
   CurrentForm;
   uploading = 'not started';
   fileToUpload: File = null;
-  username = undefined;
   currentDate;
 
   constructor(private http: HttpClient, private BIllUitlity: BillPostUtilityService) { }
@@ -83,9 +82,11 @@ export class AddSharedBillComponent implements OnInit {
   }
 
   UploadBill(f: NgForm) {
+    this.loading = true;
     // tslint:disable-next-line:max-line-length
-    this.BIllUitlity.UploadBillToServer(f, this.username, this.fileToUpload, this.BillId, this.Participants, this.ValueMapper).subscribe( data => {
+    this.BIllUitlity.UploadBillToServer(f, this.Username, this.fileToUpload, this.BillId, this.Participants, this.ValueMapper).subscribe( data => {
       console.log(data);
+      this.loading = false;
       this.RefreshData.emit();
     });
   }
