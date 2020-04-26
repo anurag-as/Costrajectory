@@ -12,7 +12,7 @@
 <!--             <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#CopyBill'+FormattedStringId" title="Copy Bill"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
  -->        <a class="nav-link" type='button'  data-toggle="modal" title="Copy Bill" (click)="CopySharedBill()"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
             <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#ViewBill'+FormattedStringId" title="View Bill"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
-            <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#EditBill'+FormattedStringId" title="Edit Bill" *ngIf="uploader == Username || Username == Admin"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  data-toggle="modal" (click)="EditSharedBill()" title="Edit Bill" *ngIf="uploader == Username || Username == Admin"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
             <a class="nav-link" type='button'  data-toggle="modal" (click)="DeleteSharedBill()" title="Delete the Bill" *ngIf="uploader == Username || Username == Admin"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
         </div>
     </nav>
@@ -47,14 +47,6 @@
     </div>
 </div> -->
 
-<!-- Edit Bill Modal -->
-<div class="modal fade" [attr.id]="'EditBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-      <div class="modal-content">
-            <!-- <app-edit-bill></app-edit-bill> -->
-      </div>
-    </div>
-</div>
 
 <!-- View Bill Modal -->
 <div class="modal fade" [attr.id]="'ViewBill'+FormattedStringId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

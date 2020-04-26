@@ -3,6 +3,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { CopyBillComponent } from './copy-bill/copy-bill.component';
 import { DeleteGroupIndivisualBillComponent } from './delete-group-indivisual-bill/delete-group-indivisual-bill.component';
+import { EditGroupIndivisualBillComponent } from './edit-group-indivisual-bill/edit-group-indivisual-bill.component';
 
 @Component({
   selector: 'app-indivisual-bill',
@@ -30,7 +31,6 @@ export class IndivisualBillComponent implements OnInit {
 
   ngOnInit() {
     this.FormattedStringId = String(this.BillId);
-    console.log('OPENED: ',this.Admin, this.Username, this.uploader );
   }
 
   refreshcopy() {
@@ -85,6 +85,34 @@ export class IndivisualBillComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteGroupIndivisualBillComponent, {
       panelClass: 'myapp-no-padding-dialog',
       width: '500px'
+    });
+    // dialogRef.componentInstance.BillID = this.BillId;
+    dialogRef.componentInstance.BillId = this.BillId;
+    dialogRef.componentInstance.Amount = this.Amount;
+    dialogRef.componentInstance.category = this.category;
+    dialogRef.componentInstance.dateTime = this.dateTime;
+    dialogRef.componentInstance.Discription = this.Discription;
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.payer = this.payer;
+    dialogRef.componentInstance.share = this.share;
+    dialogRef.componentInstance.uploader = this.uploader;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.ShareCopy = this.share;
+    dialogRef.componentInstance.ImageName = this.ImageName;
+    dialogRef.componentInstance.Admin = this.Admin;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.refreshCopy.emit();
+    });
+  }
+
+  EditSharedBill(): void {
+    const dialogRef = this.dialog.open(EditGroupIndivisualBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '1300px'
     });
     // dialogRef.componentInstance.BillID = this.BillId;
     dialogRef.componentInstance.BillId = this.BillId;
