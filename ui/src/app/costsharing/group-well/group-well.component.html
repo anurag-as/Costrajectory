@@ -59,6 +59,7 @@
                 [BillName]="Bill.title"
                 [Participants]="Participants"
                 [ImageName]="Bill.image_name"
+                [Admin]="Admin"
                 (refreshCopy)="RefreshData()"></app-indivisual-bill>
               </div>
             </div>            
@@ -161,7 +162,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form #imageForm="ngForm" (ngSubmit)="AddUsersToGroup(imageForm)">
+        <form #AddPeopleForm="ngForm" (ngSubmit)="AddUsersToGroup(AddPeopleForm)">
         <div class="modal-body">
 
           
@@ -207,7 +208,7 @@
 
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!imageForm.valid || !valid[divs[divs.length - 1]]">OK!</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!AddPeopleForm.valid || !valid[divs[divs.length - 1]]" (click)="AddUsersToGroup(AddPeopleForm)">OK!</button>
           <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancel</button>
         </div>
       </form>

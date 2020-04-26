@@ -45,6 +45,7 @@ export class GroupOperationsService {
   AddUsersToGroup( GroupId: number, username: string, members: string[]) {
     const endpoint = 'http://127.0.0.1:5000/addUsersGroup';
     const queryPayload = {user_name: username, group_id: GroupId.toString(), users: members};
+    console.log('ADD USERS : ', queryPayload);
     return this.http.post<Status>(endpoint, queryPayload);
   }
 }

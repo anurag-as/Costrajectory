@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Input, Output } from '@angular/core';
 import { GroupBillPostUtilitiesService } from '../group-bill-post-utilities.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { BillPostUtilityService } from '../../../add-shared-bill/bill-post-utility.service';
+import {NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-copy-bill',
@@ -25,6 +28,7 @@ export class CopyBillComponent implements OnInit {
   @Input() AmountCopy: string;
   ValueMapper: number[] = [];
   IsShowingSharing = true;
+  LoadingImage = false;
 
 
   imageToShow = undefined;
@@ -36,15 +40,15 @@ export class CopyBillComponent implements OnInit {
   canShowImageUploaded = false;
   imageUploaded = false;
   imageSrc;
-  BillHasImage: boolean = undefined;
+  BillHasImage = false;
 
 
-  constructor(private PosterService: GroupBillPostUtilitiesService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private PosterService: GroupBillPostUtilitiesService, private dialogRef: MatDialogRef<CopyBillComponent>, private BillPostUtility: BillPostUtilityService) { }
 
   ngOnInit() {
-    this.fileToUpload = this.ImageName;
-    console.log('IMAGE NAME: ',this.ImageName);
     if (this.ImageName !== 'False') {
+      this.BillHasImage = true;
       this.getImage();
     }
     // tslint:disable-next-line:prefer-const
@@ -98,9 +102,10 @@ export class CopyBillComponent implements OnInit {
   }
 
   getImage() {
-    this.PosterService.receiveImage(this.ImageName, this.BillName).subscribe(data => {
+    this.PosterService.receiveImage(this.ImageName, this.BillName, this.Username).subscribe(data => {
       this.canShowImageUploaded = true;
       this.imageSrc = data.Image;
+      // console.log('IMAGE :', this.imageSrc);
     });
   }
 
@@ -108,6 +113,7 @@ export class CopyBillComponent implements OnInit {
     this.fileToUpload = null;
     this.BillHasImage = false;
     this.imageUploaded = false;
+    this.ImageName = 'False';
   }
 
   private handleFileInput(files: FileList) {
@@ -120,5 +126,45 @@ export class CopyBillComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
     this.imageUploaded = true;
 }
+
+  private closeDialog() {
+    this.dialogRef.close();
+  }
+
+  dataURLtoFile(arr, filename) {
+    const bstr = atob(arr);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename);
+  }
+
+
+  uploadFileToActivity(f: NgForm) {
+    console.log('CHECKS : ', this.BillHasImage, this.imageUploaded);
+    if (this.BillHasImage && !this.imageUploaded) {
+      this.fileToUpload = this.dataURLtoFile(this.imageSrc, this.ImageName);
+      console.log('CAME');
+    }
+    this.uploading = 'started';
+    // console.log('CAME');
+    // tslint:disable-next-line:max-line-length
+    this.BillPostUtility.UploadBillToServer(f, this.Username, this.fileToUpload,  parseInt(this.GroupId, 10) , this.Participants, this.ValueMapper).subscribe(data => {
+     // this.TableAdder.AppendEntry(this.CurrentForm);
+     if (data.message === 'User Quota Exceeded') {
+      window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
+      this.dialogRef.close();
+     }
+     this.uploading = 'ended success';
+     this.dialogRef.close();
+     // window.alert('FILE UPLOADED SUCCESSFULLY');
+     }, error => {
+       this.uploading = 'ended fail';
+       window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
+       this.dialogRef.close();
+     });
+    }
 
 }

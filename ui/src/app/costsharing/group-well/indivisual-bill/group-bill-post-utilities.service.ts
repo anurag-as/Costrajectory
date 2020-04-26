@@ -36,9 +36,9 @@ export class GroupBillPostUtilitiesService {
     return this.http.delete<Status>(endpoint, options);
   }
 
-  receiveImage(MappedImageName , BillName) {
-    const endpoint = 'http://127.0.0.1:5000/previewImage_';
-    const QueryPayload = {mapped_name : MappedImageName, bill_name: BillName};
+  receiveImage(MappedImageName , BillName, USERNAME) {
+    const endpoint = 'http://127.0.0.1:5000/previewImage';
+    const QueryPayload = {mapped_name : MappedImageName, bill_title: BillName, username: USERNAME};
     return this.http.post<ReturnImage>(endpoint, QueryPayload);
   }
 

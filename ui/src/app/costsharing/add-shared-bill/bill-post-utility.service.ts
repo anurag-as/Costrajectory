@@ -30,7 +30,7 @@ export class BillPostUtilityService {
     formData.append('group_id', String(GroupID));
     formData.append('shares', this.NameToValueMapper(Participants, SharedValue));
     // console.log('TO check username: ', username);
-    if (fileToUpload === null) {
+    if (fileToUpload === null || fileToUpload === undefined) {
         console.log('NO IMAGE');
     } else {
         console.log(f.value, fileToUpload.name);

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Input, Output, EventEmitter } from '@angular/core';
+import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { CopyBillComponent } from './copy-bill/copy-bill.component';
+import { DeleteGroupIndivisualBillComponent } from './delete-group-indivisual-bill/delete-group-indivisual-bill.component';
 
 @Component({
   selector: 'app-indivisual-bill',
@@ -21,16 +24,89 @@ export class IndivisualBillComponent implements OnInit {
   @Input() BillName: string;
   @Input() Participants: string[];
   @Output() refreshCopy = new EventEmitter();
+  @Input() Admin: string;
   FormattedStringId: string;
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.FormattedStringId = String(this.BillId);
-    console.log('OPENED', );
+    console.log('OPENED: ',this.Admin, this.Username, this.uploader );
   }
 
   refreshcopy() {
     this.refreshCopy.emit();
+  }
+
+  CopySharedBill(): void {
+    const dialogRef = this.dialog.open(CopyBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '1300px'
+    });
+    // dialogRef.componentInstance.BillID = this.BillId;
+    dialogRef.componentInstance.BillId = this.BillId;
+    dialogRef.componentInstance.Amount = this.Amount;
+    dialogRef.componentInstance.category = this.category;
+    dialogRef.componentInstance.dateTime = this.dateTime;
+    dialogRef.componentInstance.Discription = this.Discription;
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.payer = this.payer;
+    dialogRef.componentInstance.share = this.share;
+    dialogRef.componentInstance.uploader = this.uploader;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.ShareCopy = this.share;
+    dialogRef.componentInstance.AmountCopy = this.Amount;
+    dialogRef.componentInstance.ImageName = this.ImageName;
+    /*
+    [BillId]="BillId"
+            [Amount]="Amount"
+            [category]="category"
+            [dateTime]="dateTime"
+            [Discription]="Discription"
+            [GroupId]="GroupId"
+            [payer]="payer"
+            [share]="share"
+            [uploader]="uploader"
+            [Username]="Username"
+            [BillName]="BillName"
+            [Participants]="Participants"
+            [ShareCopy]="share"
+            [AmountCopy]="Amount"
+            [ImageName]="ImageName"*/
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.refreshCopy.emit();
+    });
+  }
+
+  DeleteSharedBill(): void {
+    const dialogRef = this.dialog.open(DeleteGroupIndivisualBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '500px'
+    });
+    // dialogRef.componentInstance.BillID = this.BillId;
+    dialogRef.componentInstance.BillId = this.BillId;
+    dialogRef.componentInstance.Amount = this.Amount;
+    dialogRef.componentInstance.category = this.category;
+    dialogRef.componentInstance.dateTime = this.dateTime;
+    dialogRef.componentInstance.Discription = this.Discription;
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.payer = this.payer;
+    dialogRef.componentInstance.share = this.share;
+    dialogRef.componentInstance.uploader = this.uploader;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.ShareCopy = this.share;
+    dialogRef.componentInstance.ImageName = this.ImageName;
+    dialogRef.componentInstance.Admin = this.Admin;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.refreshCopy.emit();
+    });
   }
 
 }

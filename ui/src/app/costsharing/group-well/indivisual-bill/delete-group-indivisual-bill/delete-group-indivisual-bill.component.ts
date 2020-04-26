@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input, Output, EventEmitter } from '@angular/core';
 import { GroupBillPostUtilitiesService } from '../group-bill-post-utilities.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-delete-group-indivisual-bill',
@@ -23,15 +24,27 @@ export class DeleteGroupIndivisualBillComponent implements OnInit {
   @Input() Participants: string[];
   @Input() ShareCopy: string[];
   @Output() RefreshCopy = new EventEmitter();
-  constructor( private PosterService: GroupBillPostUtilitiesService ) { }
+  @Input() Admin: string;
+
+  DeleteStarted = false;
+  // tslint:disable-next-line:max-line-length
+  constructor( private PosterService: GroupBillPostUtilitiesService,
+               private dialogRef: MatDialogRef<DeleteGroupIndivisualBillComponent> ) { }
 
   ngOnInit() {
   }
 
   DeleteBill() {
+    this.DeleteStarted = true;
     this.PosterService.DeleteRequestToServer(this.Username, this.GroupId, String(this.BillId), this.ImageName).subscribe( data => {
+      this.DeleteStarted = false;
       this.RefreshCopy.emit();
+      this.dialogRef.close();
     });
+  }
+
+  CloseDialog() {
+    this.dialogRef.close();
   }
 
 }
