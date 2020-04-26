@@ -24,6 +24,7 @@
     "@angular/router": "^8.2.14",
     "@ng-bootstrap/ng-bootstrap": "^5.2.2",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
+    "@types/jquery": "^3.3.35",
     "angular-font-awesome": "^3.1.2",
     "angular-google-charts": "^0.1.6",
     "angular-resizable-element": "^3.3.0",

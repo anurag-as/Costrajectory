@@ -30,7 +30,7 @@
 
                     <span class="navbar-text" *ngIf="Username == Admin">
                         <span type="button" title="Exit the group" class="fa fa-sign-out fa-lg" aria-hidden="true" style="color: whitesmoke;" data-toggle="modal" [attr.data-target]="'#ExitGroupAdmin'+FormattedStringId"></span>&nbsp;
-                        <span type="button" title="Make others Admin" class="fa fa-level-up fa-lg" aria-hidden="true" style="color:chartreuse;" data-toggle="modal" [attr.data-target]="'#MakeGroupAdmin'+FormattedStringId"></span>&nbsp;
+                        <span type="button" title="Change Admin" class="fa fa-level-up fa-lg" aria-hidden="true" style="color:chartreuse;" data-toggle="modal" [attr.data-target]="'#MakeGroupAdmin'+FormattedStringId"></span>&nbsp;
                         <span type="button" title="Add users to group" class="fa fa-user-plus fa-lg" aria-hidden="true" style="color: black;" data-toggle="modal" [attr.data-target]="'#AddPeopleToGroupAdmin'+FormattedStringId"></span>&nbsp;
                         <span type="button" title="Delete Users From Group" class="fa fa-user-times fa-lg" aria-hidden="true" style="color: grey;" data-toggle="modal" [attr.data-target]="'#DeletePeopleFromGroupAdmin'+FormattedStringId"></span>&nbsp;
                         <span type="button" title="Delete the Group" class="fa fa-trash fa-lg" aria-hidden="true" style="color: red;" data-toggle="modal" [attr.data-target]="'#DeleteGroupAdmin'+FormattedStringId"></span>&nbsp;
@@ -59,6 +59,7 @@
                 [BillName]="Bill.title"
                 [Participants]="Participants"
                 [ImageName]="Bill.image_name"
+                [Admin]="Admin"
                 (refreshCopy)="RefreshData()"></app-indivisual-bill>
               </div>
             </div>            
@@ -161,7 +162,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form #imageForm="ngForm" (ngSubmit)="AddUsersToGroup(imageForm)">
+        <form #AddPeopleForm="ngForm" (ngSubmit)="AddUsersToGroup(AddPeopleForm)">
         <div class="modal-body">
 
           
@@ -207,7 +208,7 @@
 
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!imageForm.valid || !valid[divs[divs.length - 1]]">OK!</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!AddPeopleForm.valid || !valid[divs[divs.length - 1]]" (click)="AddUsersToGroup(AddPeopleForm)">OK!</button>
           <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancel</button>
         </div>
       </form>

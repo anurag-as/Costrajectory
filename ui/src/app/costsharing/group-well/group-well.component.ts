@@ -68,6 +68,7 @@ export class GroupWellComponent implements OnInit {
   }
 
   AddUsersToGroup(f: NgForm) {
+    console.log('ADDING');
     this.GroupOperations.AddUsersToGroup(this.GroupId, this.Username, this.ConvertParticipantsToArray(f)).subscribe(data => {
       this.ChangeEvent.emit();
     });
