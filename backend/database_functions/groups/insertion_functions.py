@@ -26,7 +26,6 @@ def insert_into_pending_requests_table(db_connection, group_id, username, status
 def insert_into_group_bills_table(db_connection, uploader, title, datetime, amount, description,
                                   image_name, category, share, payer, group_id):
     db_cursor = db_connection.cursor()
-
     db_cursor.execute('''INSERT INTO GROUP_BILLS (uploader, title, datetime, amount, description, image_name, 
     category, share, payer, group_id) 
         VALUES ("{uploader}","{title}","{datetime}","{amount}","{description}","{image_name}","{category}"

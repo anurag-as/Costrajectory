@@ -66,3 +66,4 @@ def query_profile_details(db_connection, username):
     for row in cursor:
         return list(row)
     return False
+
