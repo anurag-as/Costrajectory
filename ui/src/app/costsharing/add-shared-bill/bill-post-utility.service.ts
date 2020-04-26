@@ -8,6 +8,7 @@ interface Status {
   uploadStatus: boolean;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class BillPostUtilityService {
   constructor(private http: HttpClient) { }
 
   UploadBillToServer(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[]) {
-    console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue);
+    console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
     const Endpoint = 'http://127.0.0.1:5000/addGroupBill';
     const formData: FormData = new FormData();
     formData.append('username', username);
@@ -25,16 +26,16 @@ export class BillPostUtilityService {
     formData.append('date', f.value.date);
     formData.append('amount', f.value.val);
     formData.append('category', f.value.cat);
-    formData.append('payer', f.value.payee);
+    formData.append('payer', f.value.Payee);
     formData.append('group_id', String(GroupID));
-    formData.append('shares', String(this.NameToValueMapper(Participants, SharedValue)));
+    formData.append('shares', this.NameToValueMapper(Participants, SharedValue));
     // console.log('TO check username: ', username);
     if (fileToUpload === null) {
         console.log('NO IMAGE');
     } else {
         console.log(f.value, fileToUpload.name);
-        formData.append('ImageName', fileToUpload.name);
-        formData.append('Image', fileToUpload, fileToUpload.name);
+        formData.append('imageName', fileToUpload.name);
+        formData.append('image', fileToUpload, fileToUpload.name);
     }
     // formData.append('body', fileToUpload, fileToUpload.name);
 
@@ -50,9 +51,10 @@ export class BillPostUtilityService {
     let ConsolidatedListOfJSON = [];
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < Participants.length; i = i + 1) {
-      ConsolidatedListOfJSON.push([Participants[i], SharedValue[i]]);
+      ConsolidatedListOfJSON.push('[' + String([Participants[i], SharedValue[i]]) + ']');
     }
-    return ConsolidatedListOfJSON;
+    // console.log('SHARES: ', ConsolidatedListOfJSON, '[' + String(ConsolidatedListOfJSON) + ']');
+    return '[' + String(ConsolidatedListOfJSON) + ']';
   }
 
 }

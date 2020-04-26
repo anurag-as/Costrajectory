@@ -55,7 +55,10 @@ export class AnalyticsComponent implements OnInit {
       // console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.FormData = data;
-
+      // console.log('DATATYPE: ', typeof(data.TableEntries));
+      if (typeof(data.TableEntries) === 'undefined' ) {
+        return;
+      }
       for ( const entry of data.TableEntries) {
         this.DatainValue[entry.category] = this.DatainValue[entry.category] + parseInt(entry.Amount, 10);
         this.ValueArray.push(parseInt(entry.Amount, 10));

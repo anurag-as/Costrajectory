@@ -28,6 +28,9 @@ export class TabularViewComponent implements OnInit {
       // console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.FormData = data;
+      if (typeof(data.TableEntries) === 'undefined' ) {
+        return;
+      }
       for ( const entry of data.TableEntries) {
         if (entry.Identifier !== 'False') {
           this.BillEntries.push([

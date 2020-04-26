@@ -85,9 +85,9 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon6"><i class="fa fa-file-image-o fa-lg" aria-hidden="true" style="color:green"></i></span>
                         </div>
-                        <input #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" aria-describedby="basic-addon6" />
+                        <input #SharedImage type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" aria-describedby="basic-addon6" />
                         <div class="input-group-append">
-                            <button class="btn-large" [disabled]="Image.value ==''" (click) = "Image.value =''"><i class="fa fa-trash fa-lg" style="color:red"></i></button>                                
+                            <button class="btn-large" [disabled]="SharedImage.value ==''" (click) = "SharedImage.value =''"><i class="fa fa-trash fa-lg" style="color:red"></i></button>                                
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
                         </div>
-                        <input required type="number" placeholder="Enter amount" [ngModel]="Amount" (input)="ResetValues($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
+                        <input required type="number" placeholder="Enter amount" [ngModel]="Amount" (input)="ResetValuesInput($event.target.value)" name="val" class="form-control" aria-describedby="basic-addon2"/>
                     </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fa fa-user fa-lg" aria-hidden="true" style="color:black"></i></span>
                         </div>
-                        <select class="custom-select" required ngModel name="Payee" aria-describedby="basic-addon4">
+                        <select class="custom-select" required [(ngModel)]="payer" name="Payee" aria-describedby="basic-addon4">
                           <option value="" disabled>Choose the Payer</option>
                           <option *ngFor="let member of Participants;">{{member}}</option>
                        </select>
@@ -164,10 +164,11 @@
             <div class="col-sm-5"><p align="left"> <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: coral;"></i> Image</p></div>
           </div>
           <div class="grid-item" >
-            <div class="container-fluid" *ngIf="Image.value ==''">
+
+            <div class="container-fluid" *ngIf="SharedImage.value =='' && ImageName == 'False'">
                 <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png" style="max-width: 80%; max-height: 80%; display: block;" >
             </div>
-            <div class="container-fluid" *ngIf="Image.value !==''">
+            <div class="container-fluid" *ngIf="SharedImage.value !==''">
               <img [src]="imageSrc" [alt]="SharedBill.value.name" style="max-width: 80%; max-height: 80%; display: block;" >
             </div>
           </div>
@@ -177,6 +178,6 @@
 
     <div class="modal-footer">
         <button type="submit" class="btn btn-secondary btn-submit" data-dismiss="modal" (click)="UploadBill(SharedBill)" [disabled]="!SharedBill.valid">OK!</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel!</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="ResetValues()">Cancel!</button>
     </div>
 </form>
