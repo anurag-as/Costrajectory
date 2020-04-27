@@ -93,13 +93,13 @@ export class AddGroupBillComponent implements OnInit {
   }
 
   VerifyUser(user: string) {
-    const endpoint = 'http://127.0.0.1:5000/checkUser';
+    const endpoint = 'http://127.0.0.1:5000/auth/checkUser';
     const QueryPayload = {username : user, password: 'NOTHING'};
     return this.http.post<Validity>(endpoint, QueryPayload);
   }
 
   CreateGroup( Groupname: string, description: string, participants: string[]) {
-    const endpoint = 'http://127.0.0.1:5000/createGroup';
+    const endpoint = 'http://127.0.0.1:5000/group/createGroup';
     // tslint:disable-next-line:max-line-length
     const QueryPayload = {group_title : Groupname, group_description: description, users: participants, user_name: this.username};
     return this.http.post(endpoint, QueryPayload);

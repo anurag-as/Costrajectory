@@ -14,7 +14,7 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     signin(email: string, passwrd: string) {
-        return this.http.post<Result>('http://127.0.0.1:5000/signin',{username: email, password: passwrd});
+        return this.http.post<Result>('http://127.0.0.1:5000/auth/signin',{username: email, password: passwrd});
     }
 
 }
