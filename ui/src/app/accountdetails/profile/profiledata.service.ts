@@ -30,7 +30,7 @@ export class Profileservice {
   constructor(private http: HttpClient) { }
 
   GetData(UserName: string) {
-    const endpoint = 'http://127.0.0.1:5000/profileDetails';
+    const endpoint = 'http://127.0.0.1:5000/account/profileDetails';
     return this.http.get<ProfileDetails>(endpoint, {
         params: {
           user_name : UserName,
@@ -42,7 +42,7 @@ export class Profileservice {
   SetData(UserName: string, f: NgForm) {
     // console.log('FORM: ', f);
     const formData: FormData = new FormData();
-    const endpoint = 'http://127.0.0.1:5000/profileDetails';
+    const endpoint = 'http://127.0.0.1:5000/account/profileDetails';
 
     formData.append('first_name', f.value.first_name);
     formData.append('last_name', f.value.last_name);

@@ -171,7 +171,7 @@ export class GroupWellComponent implements OnInit {
   }
 
   VerifyUser(user: string) {
-    const endpoint = 'http://127.0.0.1:5000/checkUser';
+    const endpoint = 'http://127.0.0.1:5000/auth/checkUser';
     const QueryPayload = {username : user, password: 'NOTHING'};
     return this.http.post<Validity>(endpoint, QueryPayload);
   }

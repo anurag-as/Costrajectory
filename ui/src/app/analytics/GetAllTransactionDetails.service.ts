@@ -20,7 +20,7 @@ export class GetAllTransactionDetails {
     constructor(private http: HttpClient) {}
 
     GetData(UserName: string) {
-        const endpoint = 'http://127.0.0.1:5000/getRecentTransactions';
+        const endpoint = 'http://127.0.0.1:5000/transactions/getRecentTransactions';
         return this.http.post<BillData>(endpoint, {username: UserName});
     }
 }

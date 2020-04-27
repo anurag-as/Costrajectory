@@ -23,11 +23,11 @@ export class AuthService {
 
     signup(email: string, passwrd: string, isPremium: boolean) {
         // console.log('INSIDE SIGNUP SERVICE ', email, passwrd);
-        return this.http.post<Authreturn>('http://127.0.0.1:5000/checkUser', {username: email, password: passwrd, premium: isPremium});
+        return this.http.post<Authreturn>('http://127.0.0.1:5000/auth/checkUser', {username: email, password: passwrd, premium: isPremium});
     }
 
     register(email: string, passwrd: string, isPremium: boolean) {
         console.log('REGISTER USER', isPremium);
-        return this.http.post<Result>('http://127.0.0.1:5000/registerUser', {username: email , password: passwrd, premium: isPremium});
+        return this.http.post<Result>('http://127.0.0.1:5000/auth/registerUser', {username: email , password: passwrd, premium: isPremium});
     }
 }

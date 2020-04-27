@@ -17,7 +17,7 @@ export class UploadService {
 
     postFile(fileToUpload: File, f: NgForm, username: string) {
         this.TableAdder.AppendEntry(f, username);
-        const endpoint = 'http://127.0.0.1:5000/uploadBill';
+        const endpoint = 'http://127.0.0.1:5000/transactions/uploadBill';
         const formData: FormData = new FormData();
 
         formData.append('username', username);
@@ -46,7 +46,7 @@ export class UploadService {
 
     postEditFile(fileToUpload: File, f: NgForm, username: string, BillId: any) {
         this.TableAdder.AppendEntry(f, username);
-        const endpoint = 'http://127.0.0.1:5000/editTransaction';
+        const endpoint = 'http://127.0.0.1:5000/transactions/editTransaction';
         console.log('PATH TAKEN TO EDIT: ', f, fileToUpload);
         const formData: FormData = new FormData();
         formData.append('username', username);

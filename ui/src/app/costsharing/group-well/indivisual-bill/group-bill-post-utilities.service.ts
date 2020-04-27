@@ -19,7 +19,7 @@ export class GroupBillPostUtilitiesService {
   constructor(private http: HttpClient) { }
 
   DeleteRequestToServer(USERNAME: string, GID: string, BID: string, MAPPEDNAME: string) {
-    const endpoint = 'http://127.0.0.1:5000/deleteGroupBill';
+    const endpoint = 'http://127.0.0.1:5000/group/deleteGroupBill';
     const query = {
       username : USERNAME,
       group_id : GID,
@@ -37,7 +37,7 @@ export class GroupBillPostUtilitiesService {
   }
 
   receiveImage(MappedImageName , BillName, USERNAME) {
-    const endpoint = 'http://127.0.0.1:5000/previewImage';
+    const endpoint = 'http://127.0.0.1:5000/transactions/previewImage';
     const QueryPayload = {mapped_name : MappedImageName, bill_title: BillName, username: USERNAME};
     return this.http.post<ReturnImage>(endpoint, QueryPayload);
   }

@@ -48,7 +48,7 @@ export class CostsharingComponent implements OnInit {
   }
 
   ReloadPage() {
-    const endpoint = 'http://127.0.0.1:5000/viewGroup';
+    const endpoint = 'http://127.0.0.1:5000/group/viewGroup';
     const QueryPayload = {user_name : this.username};
     return this.http.post<Billdata>(endpoint, QueryPayload);
   }

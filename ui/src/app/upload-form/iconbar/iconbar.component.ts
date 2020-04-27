@@ -24,7 +24,7 @@ export class IconbarComponent implements OnInit {
   constructor(public dialog: MatDialog, private route: Router, private http: HttpClient) {}
 
   getUsageQuota() {
-    const endpoint = 'http://127.0.0.1:5000/usage';
+    const endpoint = 'http://127.0.0.1:5000/analytics/usage';
     const QueryPayload = {username: this.userName};
     // console.log('USAGE:',QueryPayload);
     return this.http.post<UsageStats>(endpoint, QueryPayload);

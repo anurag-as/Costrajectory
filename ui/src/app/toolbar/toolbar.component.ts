@@ -56,7 +56,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   private GetUserPremiumStatus() {
-    const endpoint = 'http://127.0.0.1:5000/isPremium';
+    const endpoint = 'http://127.0.0.1:5000/auth/isPremium';
     this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
       // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
       if (data.isPremium === 'True') {
@@ -74,7 +74,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   private GetDP() {
-    const endpoint = 'http://127.0.0.1:5000/profilePic';
+    const endpoint = 'http://127.0.0.1:5000/auth/profilePic';
     // const QueryPayload = {username: this.username, mapped_name : this.MappedImageName, original_name: this.ActualImageName};
     // console.log(QueryPayload);
     this.receiveImage(endpoint, this.userName.username).subscribe(data => {
@@ -84,7 +84,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   LogOut(path) {
-    const endpoint = 'http://127.0.0.1:5000/signout';
+    const endpoint = 'http://127.0.0.1:5000/auth/signout';
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   GoPremium() {
-    const endpoint = 'http://127.0.0.1:5000/goPremium';
+    const endpoint = 'http://127.0.0.1:5000/auth/goPremium';
     this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
       // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
       if (data.isPremium === 'True') {
@@ -131,7 +131,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   GetAllGroupDataFromServer(UserName: string) {
-    const endpoint = 'http://127.0.0.1:5000/pendingRequests';
+    const endpoint = 'http://127.0.0.1:5000/group/pendingRequests';
     // console.log('(((( ', UserName);
     return this.http.get<GetG>(endpoint, {
         params: {
@@ -148,7 +148,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   PostDecision(GroupId: number, Decision: string) {
-    const endpoint = 'http://127.0.0.1:5000/groupStatus';
+    const endpoint = 'http://127.0.0.1:5000/group/groupStatus';
     const templatePayload = [[String(GroupId), Decision]];
     this.http.post(endpoint, {group_status: templatePayload, user_name: this.userName.username}).subscribe(data => {
       this.GetAllGroupData();

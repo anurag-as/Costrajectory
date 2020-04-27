@@ -13,19 +13,19 @@ export class GroupOperationsService {
   constructor(private http: HttpClient) { }
 
   deleteUsersFromGroup( GroupId: number, username: string, members: string[]) {
-    const endpoint = 'http://127.0.0.1:5000/removeUsersGroup';
+    const endpoint = 'http://127.0.0.1:5000/group/removeUsersGroup';
     const queryPayload = {user_name: username, group_id: GroupId.toString(), users: members};
     return this.http.post<Status>(endpoint, queryPayload);
   }
 
   deleteGroup( GroupId: number, username: string) {
-    const endpoint = 'http://127.0.0.1:5000/deleteGroup';
+    const endpoint = 'http://127.0.0.1:5000/group/deleteGroup';
     const queryPayload = {user_name: username, group_id: GroupId.toString()};
     return this.http.post<Status>(endpoint, queryPayload);
   }
 
   ExitFromGroup( GroupId: number, username: string, nextAdmin?: string) {
-    const endpoint = 'http://127.0.0.1:5000/deleteGroup';
+    const endpoint = 'http://127.0.0.1:5000/group/deleteGroup';
     const queryPayload = {user_name: username, group_id: GroupId.toString()};
     if (nextAdmin) {
       this.ChangeGroupAdmin(GroupId, username, nextAdmin).subscribe(data => {
@@ -37,13 +37,13 @@ export class GroupOperationsService {
   }
 
   ChangeGroupAdmin( GroupId: number, username: string, nextAdmin: string) {
-    const endpoint = 'http://127.0.0.1:5000/changeGroupAdmin';
+    const endpoint = 'http://127.0.0.1:5000/group/changeGroupAdmin';
     const queryPayload = {user_name: username, group_id: GroupId.toString(), group_admin: nextAdmin};
     return this.http.post<Status>(endpoint, queryPayload);
   }
 
   AddUsersToGroup( GroupId: number, username: string, members: string[]) {
-    const endpoint = 'http://127.0.0.1:5000/addUsersGroup';
+    const endpoint = 'http://127.0.0.1:5000/group/addUsersGroup';
     const queryPayload = {user_name: username, group_id: GroupId.toString(), users: members};
     console.log('ADD USERS : ', queryPayload);
     return this.http.post<Status>(endpoint, queryPayload);
