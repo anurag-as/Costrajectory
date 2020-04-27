@@ -9,7 +9,7 @@ recentTransactionsAPI = Blueprint('recentTransactionsAPI', __name__)
 
 
 # API to return the most recent transactions
-@recentTransactionsAPI.route('/getRecentTransactions', methods=['POST'])
+@recentTransactionsAPI.route('/transactions/getRecentTransactions', methods=['POST'])
 @cross_origin()
 def recentTransactions():
     """

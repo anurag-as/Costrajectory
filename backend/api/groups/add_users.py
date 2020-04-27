@@ -13,7 +13,7 @@ addUsersGroupApi = Blueprint('addUsersGroupApi', __name__)
 
 
 # API to add users to a group
-@addUsersGroupApi.route('/addUsersGroup', methods=['POST'])
+@addUsersGroupApi.route('/group/addUsersGroup', methods=['POST'])
 @cross_origin()
 def add_users_to_group():
     try:

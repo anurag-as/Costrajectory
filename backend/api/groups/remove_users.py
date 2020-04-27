@@ -12,7 +12,7 @@ removeUsersGroupApi = Blueprint('removeUsersGroupApi', __name__)
 
 
 # API to remove users from a group
-@removeUsersGroupApi.route('/removeUsersGroup', methods=['POST'])
+@removeUsersGroupApi.route('/group/removeUsersGroup', methods=['POST'])
 @cross_origin()
 def remove_users_from_group():
     try:

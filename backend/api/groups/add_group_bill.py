@@ -30,7 +30,7 @@ def quota_exceeded(size, total_quota):
 
 
 # API to add a new group transaction
-@addGroupBillAPI.route('/addGroupBill', methods=['POST'])
+@addGroupBillAPI.route('/group/addGroupBill', methods=['POST'])
 @cross_origin()
 def group_bill():
     usage_exceeded = None

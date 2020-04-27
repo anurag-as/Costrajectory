@@ -9,7 +9,7 @@ isPremiumAPI = Blueprint('isPremiumAPI', __name__)
 
 
 # API to check if a particular user is Premium
-@isPremiumAPI.route('/isPremium', methods=['POST'])
+@isPremiumAPI.route('/auth/isPremium', methods=['POST'])
 @cross_origin()
 def api_is_user_premium():
     try:

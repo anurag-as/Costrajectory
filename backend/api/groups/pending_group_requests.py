@@ -8,7 +8,7 @@ pendingRequestsApi = Blueprint('pendingRequestsApi', __name__)
 
 
 # API to create a group for cost sharing
-@pendingRequestsApi.route('/pendingRequests', methods=['GET'])
+@pendingRequestsApi.route('/group/pendingRequests', methods=['GET'])
 @cross_origin()
 def change_admin():
     try:

@@ -14,7 +14,7 @@ createGroupApi = Blueprint('createGroupApi', __name__)
 
 
 # API to create a group for cost sharing
-@createGroupApi.route('/createGroup', methods=['POST'])
+@createGroupApi.route('/group/createGroup', methods=['POST'])
 @cross_origin()
 def create_sharing_group():
     try:

@@ -19,7 +19,7 @@ If user is single user in the group, then group is deleted /deleteGroup
 If user is admin, need to nominate a new admin /changeAdmin
 Else, just remove user from group
 '''
-@exitGroupApi.route('/exitGroup', methods=['POST'])
+@exitGroupApi.route('/group/exitGroup', methods=['POST'])
 @cross_origin()
 def exit_group():
     try:

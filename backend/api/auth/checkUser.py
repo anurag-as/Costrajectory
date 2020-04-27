@@ -5,7 +5,7 @@ from utilities.query_signup import SignUp
 checkUserAPI = Blueprint('checkUserAPI', __name__)
 
 # API to check a username is available for signup
-@checkUserAPI.route('/checkUser', methods=['POST'])
+@checkUserAPI.route('/auth/checkUser', methods=['POST'])
 @cross_origin()
 def checkUser():
     signup = SignUp(request.json['username'])

@@ -13,7 +13,7 @@ from utilities.api_utils import get_alias
 registerUserAPI = Blueprint('registerUserAPI', __name__)
 
 # Api to register a new user
-@registerUserAPI.route('/registerUser', methods=['POST'])
+@registerUserAPI.route('/auth/registerUser', methods=['POST'])
 @cross_origin()
 def registerUser():
     username = request.json['username']

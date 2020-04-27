@@ -10,7 +10,7 @@ from utilities.utils import get_total_size
 usageAPI = Blueprint('usageAPI', __name__)
 
 # API to get usage details for a particular user
-@usageAPI.route('/usage', methods=['POST'])
+@usageAPI.route('/analytics/usage', methods=['POST'])
 @cross_origin()
 def user_space_usage():
     """
