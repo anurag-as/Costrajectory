@@ -9,7 +9,7 @@ recentLogsAPI = Blueprint('recentLogsAPI', __name__)
 
 
 # API to return the most recent transactions
-@recentLogsAPI.route('/getRecentLogs', methods=['GET'])
+@recentLogsAPI.route('/transactions/getRecentLogs', methods=['GET'])
 @cross_origin()
 def recentLogs():
     """

@@ -29,7 +29,7 @@ def quota_exceeded(size, total_quota):
 # API to add a new transaction
 # Legacy version - Uploading a bill, hence the name
 # Later version - Adding a new transaction
-@uploadBillAPI.route('/uploadBill', methods=['POST'])
+@uploadBillAPI.route('/transactions/uploadBill', methods=['POST'])
 @cross_origin()
 def upload():
     usage_exceeded = None

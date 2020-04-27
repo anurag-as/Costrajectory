@@ -10,7 +10,7 @@ from database_functions.logs.recentLogs import insert_into_recent_table
 signInAPI = Blueprint('signInAPI', __name__)
 
 # API to signin a user after authentication
-@signInAPI.route('/signin', methods=['POST'])
+@signInAPI.route('/auth/signin', methods=['POST'])
 @cross_origin()
 def signInUser():
     username = request.json['username']

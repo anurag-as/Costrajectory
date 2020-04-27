@@ -8,7 +8,7 @@ viewGroupApi = Blueprint('viewGroupApi', __name__)
 
 
 # API to view all the groups for a username
-@viewGroupApi.route('/viewGroup', methods=['POST'])
+@viewGroupApi.route('/group/viewGroup', methods=['POST'])
 @cross_origin()
 def viewing_group():
     try:

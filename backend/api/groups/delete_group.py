@@ -11,7 +11,7 @@ deleteGroupAPI = Blueprint('deleteGroupAPI', __name__)
 
 
 # API to create a group for cost sharing
-@deleteGroupAPI.route('/deleteGroup', methods=['POST'])
+@deleteGroupAPI.route('/group/deleteGroup', methods=['POST'])
 @cross_origin()
 def group_status_update():
     try:

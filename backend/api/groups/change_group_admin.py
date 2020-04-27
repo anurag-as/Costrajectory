@@ -11,7 +11,7 @@ changeGroupAdminApi = Blueprint('changeGroupAdminApi', __name__)
 
 
 # API to create a group for cost sharing
-@changeGroupAdminApi.route('/changeGroupAdmin', methods=['POST'])
+@changeGroupAdminApi.route('/group/changeGroupAdmin', methods=['POST'])
 @cross_origin()
 def change_admin():
     try:

@@ -31,7 +31,7 @@ def form_username_alias(first_name, last_name):
 
 
 # API to get usage details for a particular user
-@profileDetailsAPI.route('/profileDetails', methods=['POST', 'GET'])
+@profileDetailsAPI.route('/account/profileDetails', methods=['POST', 'GET'])
 @cross_origin()
 def profile_details():
     """

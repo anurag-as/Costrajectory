@@ -10,7 +10,7 @@ from database_functions.logs.recentLogs import insert_into_recent_table
 deleteTransactionsAPI = Blueprint('deleteTransactionsAPI', __name__)
 
 # API to delete a particular transaction based on uid
-@deleteTransactionsAPI.route('/deleteTransaction', methods=['DELETE'])
+@deleteTransactionsAPI.route('/transactions/deleteTransaction', methods=['DELETE'])
 @cross_origin()
 def deleteTransaction():
     """
