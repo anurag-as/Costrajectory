@@ -12,7 +12,7 @@ signOutAPI = Blueprint('signOutAPI', __name__)
 
 # API to signal that a particular user signed out
 # Used to delete his data, also updating the db to remote
-@signOutAPI.route('/signout', methods=['DELETE'])
+@signOutAPI.route('/auth/signout', methods=['DELETE'])
 @cross_origin()
 def signout():
     """

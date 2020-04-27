@@ -11,7 +11,7 @@ profilePicApi = Blueprint('profilePicApi', __name__)
 
 
 # API to check a username is available for signup
-@profilePicApi.route('/profilePic', methods=['POST'])
+@profilePicApi.route('/auth/profilePic', methods=['POST'])
 @cross_origin()
 def profile_pic_random():
     try:

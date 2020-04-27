@@ -14,7 +14,7 @@ from os import SEEK_END
 editBillAPI = Blueprint('editBillAPI', __name__)
 
 # API to edit a particular transaction based on uid
-@editBillAPI.route('/editTransaction', methods=['POST'])
+@editBillAPI.route('/transactions/editTransaction', methods=['POST'])
 @cross_origin()
 def edit_transaction():
     if 'image' in request.files:

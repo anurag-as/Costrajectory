@@ -11,7 +11,7 @@ from database_functions.logs.recentLogs import insert_into_recent_table
 deleteGroupBillAPI = Blueprint('deleteGroupBillAPI', __name__)
 
 # API to delete a particular transaction based on uid
-@deleteGroupBillAPI.route('/deleteGroupBill', methods=['DELETE'])
+@deleteGroupBillAPI.route('/group/deleteGroupBill', methods=['DELETE'])
 @cross_origin()
 def deleteTransaction():
     """

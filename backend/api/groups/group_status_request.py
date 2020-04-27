@@ -12,7 +12,7 @@ groupStatusAPI = Blueprint('groupStatusAPI', __name__)
 
 
 # API to create a group for cost sharing
-@groupStatusAPI.route('/groupStatus', methods=['POST'])
+@groupStatusAPI.route('/group/groupStatus', methods=['POST'])
 @cross_origin()
 def group_status_update():
     try:

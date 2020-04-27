@@ -20,7 +20,7 @@ Image preview flow remains the same
 These parameters will be used to determine the bill type, and add it to the log appropriately.
 Workaround as original image name is never used in the download, and preserves the caching mechanism
 """
-@previewImageAPI.route('/previewImage', methods=['POST'])
+@previewImageAPI.route('/transactions/previewImage', methods=['POST'])
 @cross_origin()
 def previewImage():
     """
