@@ -36,6 +36,7 @@ export class DeleteGroupIndivisualBillComponent implements OnInit {
 
   DeleteBill() {
     this.DeleteStarted = true;
+    this.dialogRef.disableClose = true;
     this.PosterService.DeleteRequestToServer(this.Username, this.GroupId, String(this.BillId), this.ImageName).subscribe( data => {
       this.DeleteStarted = false;
       this.RefreshCopy.emit();
