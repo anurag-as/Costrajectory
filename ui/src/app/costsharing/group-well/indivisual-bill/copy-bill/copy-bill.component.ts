@@ -144,6 +144,7 @@ export class CopyBillComponent implements OnInit {
 
   uploadFileToActivity(f: NgForm) {
     console.log('CHECKS : ', this.BillHasImage, this.imageUploaded);
+    this.dialogRef.disableClose = true;
     if (this.BillHasImage && !this.imageUploaded) {
       this.fileToUpload = this.dataURLtoFile(this.imageSrc, this.ImageName);
       console.log('CAME');

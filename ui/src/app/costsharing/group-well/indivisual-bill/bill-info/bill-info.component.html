@@ -1,1 +1,170 @@
-<p>bill-info works!</p>
+<div class="card text-center">
+
+
+    <div class="card-header" id="CardTitleForBIllPreview">
+    Bill Preview
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="CloseDialog()">
+        <span aria-hidden="true" style="color: white; padding-right: 5px;">&times;</span>
+    </button>
+    <div id="modeChager" (click)="ChangeMode()">
+        <div id="imageMode" *ngIf="IsShowingSharing">
+            <a type="button"><i class="fa fa-picture-o fa-lg" aria-hidden="true" id="faIcon"></i></a>
+        </div>
+        <div id="ShareModeSelected" *ngIf="IsShowingSharing">
+            <a type="button"><i class="fa fa-money fa-lg" aria-hidden="true" id="faIcon"></i></a>
+        </div>
+        <div id="imageModeSelected" *ngIf="!IsShowingSharing">
+            <a type="button"><i class="fa fa-picture-o fa-lg" aria-hidden="true" id="faIcon"></i></a>
+        </div>
+        <div id="ShareMode" *ngIf="!IsShowingSharing">
+            <a type="button"><i class="fa fa-money fa-lg" aria-hidden="true" id="faIcon"></i></a>
+        </div>
+    </div>
+    
+    
+    </div>
+
+
+    <div class="card-body" *ngIf="IsShowingSharing">
+
+
+        <div class="row" style="height: 130px;">
+            <div class="col md-6">
+                <div class="card-title" id="BillTitleShown">
+                    <h5 class="card-title"><b> &nbsp; {{BillName| uppercase}}</b></h5>
+                </div>
+            </div>
+            <div class="col md-6" id="BillImageShown">
+                <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png">
+            </div>
+        </div>
+    
+        <hr style="height:2px;">
+
+      <!-- <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a> -->
+
+        <div class="row">
+            <div class="col md-6" style="text-align: left; padding-left: 60px;">
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Paid By  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{payer}}
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Amount  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{Amount|currency:"INR":"symbol"}}
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Admin  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{Admin}}
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Date  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{dateTime}}
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Uploader  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{uploader}}
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col md-6" style="text-align: left; padding-left: 60px;">
+                
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Category  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{category}}
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col md-4" id="FieldTitle">
+                        <b>Description  </b>
+                    </div>
+                    <div class="col md-8" id="FieldResponse">
+                        {{Discription}}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <hr style="height:1px;">
+        <hr style="height:1px;">
+        
+        <div class="row" style="height: 6px;">
+            <div class="col md-4" id="MemberColumnHeader"> <b>Member</b> </div>
+            <div class="col md-4" id="ShareColumnHeader"> <b>Share</b> </div>
+        </div>
+
+        <hr style="height:2px;">
+
+        <div class="row" *ngFor="let share of TabledShareData">
+            <div class="col md-4" id="FieldResponse">  {{share.Member}}</div>
+            <div class="col md-4" id="FieldResponse">  {{share.Share|currency:"INR":"symbol"}} </div>
+        </div>
+
+
+        <hr style="height:1px;">
+
+        
+      
+    </div>
+
+    <div class="card-body" *ngIf="!IsShowingSharing && canShowImageUploaded">
+        <img [src]="'data:image/gif;base64,'+imageSrc" style="padding-left: 40px; width: 80%; height: 40%; display: block;">
+    </div>
+
+    <div class="card-body" *ngIf="!IsShowingSharing && !canShowImageUploaded">
+        <div class="spinner-grow text-success" role="status">
+        </div>
+        <h5>Loading Image!!  PLEASE WAIT</h5>
+    </div>
+
+
+    <div class="card-footer text-muted" *ngIf="IsShowingSharing">
+      Download the Bill
+    </div>
+</div>

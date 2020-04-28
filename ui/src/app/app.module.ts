@@ -147,6 +147,7 @@ import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indiv
     AddGroupContainerComponent,
     CopyBillComponent,
     DeleteGroupIndivisualBillComponent,
-    EditGroupIndivisualBillComponent],
+    EditGroupIndivisualBillComponent,
+    BillInfoComponent],
 })
 export class AppModule { }
