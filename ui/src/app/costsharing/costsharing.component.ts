@@ -24,7 +24,7 @@ export class CostsharingComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
    // this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ['a', 'b', 'c', 'rohitp2512@gmail.com']], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
     this.ReloadPage().subscribe(data => {
-      console.log('GROUP DATA: ', data);
+      // console.log('GROUP DATA: ', data);
       this.GroupList = data.body;
     }, err => {
       this.GroupList = [];
@@ -38,7 +38,7 @@ export class CostsharingComponent implements OnInit {
     dialogRef.componentInstance.username = this.Globals.GetUserName;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed ');
+      // console.log('The dialog was closed ');
       this.ReloadPage().subscribe(data => {
         this.GroupList = data.body;
       }, err => {
@@ -54,7 +54,7 @@ export class CostsharingComponent implements OnInit {
   }
 
   ReloadAllData() {
-    console.log('CHANGE DATA');
+    // console.log('CHANGE DATA');
     this.ReloadPage().subscribe(data => {
       this.GroupList = data.body;
     }, err => {
@@ -69,7 +69,7 @@ export class CostsharingComponent implements OnInit {
     dialogRef.componentInstance.username = this.Globals.GetUserName;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

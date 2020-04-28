@@ -68,7 +68,7 @@ export class GroupWellComponent implements OnInit {
   }
 
   AddUsersToGroup(f: NgForm) {
-    console.log('ADDING');
+    // console.log('ADDING');
     this.GroupOperations.AddUsersToGroup(this.GroupId, this.Username, this.ConvertParticipantsToArray(f)).subscribe(data => {
       this.ChangeEvent.emit();
     });
@@ -115,13 +115,13 @@ export class GroupWellComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
-    console.log( this.deletedParticipants, this.Participants);
+    // console.log( this.deletedParticipants, this.Participants);
   }
 
   ResetParticipants() {
     this.Participants = [ ...this.Participants, ...this.deletedParticipants];
     this.deletedParticipants = [];
-    console.log('RESET: ', this.Participants);
+    // console.log('RESET: ', this.Participants);
   }
 
   createDiv(): void {
@@ -155,7 +155,7 @@ export class GroupWellComponent implements OnInit {
         }
       }
     }
-    console.log('PARTICIPANTS: ', participantsOfTheGroup);
+    // console.log('PARTICIPANTS: ', participantsOfTheGroup);
     return participantsOfTheGroup;
   }
 

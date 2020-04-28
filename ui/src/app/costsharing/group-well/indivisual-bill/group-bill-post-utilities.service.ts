@@ -32,7 +32,7 @@ export class GroupBillPostUtilitiesService {
       }),
       body: query
     };
-    console.log('delete bill :', options);
+    // console.log('delete bill :', options);
     return this.http.delete<Status>(endpoint, options);
   }
 
