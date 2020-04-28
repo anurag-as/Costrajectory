@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input, Output } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { GroupBillPostUtilitiesService } from '../group-bill-post-utilities.service';
 
 export interface SharedTable {
   Member: string;
@@ -30,11 +32,17 @@ export class BillInfoComponent implements OnInit {
   @Input() Admin: string;
   TabledShareData: SharedTable[] = [];
   Columns = ['Member', 'Share'];
-  constructor() { }
+  IsShowingSharing = true;
+  canShowImageUploaded = false;
+  imageSrc;
+
+  constructor(private dialogRef: MatDialogRef<BillInfoComponent>, private PosterService: GroupBillPostUtilitiesService) { }
 
   ngOnInit() {
     this.MakeTableSharedData();
-    console.log(this.TabledShareData);
+    if (this.ImageName !== 'False') {
+      this.getImage();
+    }
   }
 
   MakeTableSharedData() {
@@ -42,6 +50,26 @@ export class BillInfoComponent implements OnInit {
     for ( let i = 0 ; i < this.share.length ; i++) {
       this.TabledShareData.push({Member: this.share[i][0], Share: this.share[i][1]});
     }
+  }
+
+  CloseDialog() {
+    this.dialogRef.close();
+  }
+
+  ChangeMode() {
+    if (this.ImageName !== 'False') {
+      this.IsShowingSharing = ! this.IsShowingSharing;
+    }
+  }
+
+  DownloadBill() {}
+
+  getImage() {
+    this.PosterService.receiveImage(this.ImageName, this.BillName, this.Username).subscribe(data => {
+      this.canShowImageUploaded = true;
+      this.imageSrc = data.Image;
+      // console.log('IMAGE :', this.imageSrc);
+    });
   }
 
 }

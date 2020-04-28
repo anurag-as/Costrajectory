@@ -3,14 +3,20 @@
 
     <div class="card-header" id="CardTitleForBIllPreview">
     Bill Preview
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="CloseDialog()">
         <span aria-hidden="true" style="color: white; padding-right: 5px;">&times;</span>
     </button>
-    <div id="modeChager">
-        <div id="imageMode">
+    <div id="modeChager" (click)="ChangeMode()">
+        <div id="imageMode" *ngIf="IsShowingSharing">
             <a type="button"><i class="fa fa-picture-o fa-lg" aria-hidden="true" id="faIcon"></i></a>
         </div>
-        <div id="ShareModeSelected">
+        <div id="ShareModeSelected" *ngIf="IsShowingSharing">
+            <a type="button"><i class="fa fa-money fa-lg" aria-hidden="true" id="faIcon"></i></a>
+        </div>
+        <div id="imageModeSelected" *ngIf="!IsShowingSharing">
+            <a type="button"><i class="fa fa-picture-o fa-lg" aria-hidden="true" id="faIcon"></i></a>
+        </div>
+        <div id="ShareMode" *ngIf="!IsShowingSharing">
             <a type="button"><i class="fa fa-money fa-lg" aria-hidden="true" id="faIcon"></i></a>
         </div>
     </div>
@@ -19,7 +25,7 @@
     </div>
 
 
-    <div class="card-body">
+    <div class="card-body" *ngIf="IsShowingSharing">
 
 
         <div class="row" style="height: 130px;">
@@ -140,14 +146,25 @@
             <div class="col md-4" id="FieldResponse">  {{share.Share|currency:"INR":"symbol"}} </div>
         </div>
 
+
         <hr style="height:1px;">
 
         
       
     </div>
 
+    <div class="card-body" *ngIf="!IsShowingSharing && canShowImageUploaded">
+        <img [src]="'data:image/gif;base64,'+imageSrc" style="padding-left: 40px; width: 80%; height: 40%; display: block;">
+    </div>
 
-    <div class="card-footer text-muted">
+    <div class="card-body" *ngIf="!IsShowingSharing && !canShowImageUploaded">
+        <div class="spinner-grow text-success" role="status">
+        </div>
+        <h5>Loading Image!!  PLEASE WAIT</h5>
+    </div>
+
+
+    <div class="card-footer text-muted" *ngIf="IsShowingSharing">
       Download the Bill
     </div>
 </div>

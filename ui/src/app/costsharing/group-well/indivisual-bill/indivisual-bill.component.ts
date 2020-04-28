@@ -140,7 +140,8 @@ export class IndivisualBillComponent implements OnInit {
   ViewSharedBillInfo(): void {
     const dialogRef = this.dialog.open(BillInfoComponent, {
       panelClass: 'myapp-no-padding-dialog',
-      width: '1000px'
+      width: '1000px',
+      height: '700px'
     });
     // dialogRef.componentInstance.BillID = this.BillId;
     dialogRef.componentInstance.BillId = this.BillId;
