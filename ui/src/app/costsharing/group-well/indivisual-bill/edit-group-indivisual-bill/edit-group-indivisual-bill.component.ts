@@ -144,11 +144,11 @@ export class EditGroupIndivisualBillComponent implements OnInit {
 
 
   uploadFileToActivity(f: NgForm) {
-    console.log('CHECKS : ', this.BillHasImage, this.imageUploaded);
+    // console.log('CHECKS : ', this.BillHasImage, this.imageUploaded);
     this.dialogRef.disableClose = true;
     if (this.BillHasImage && !this.imageUploaded) {
       this.fileToUpload = this.dataURLtoFile(this.imageSrc, this.ImageName);
-      console.log('CAME');
+      // console.log('CAME');
     }
     this.uploading = 'started';
     // console.log('CAME');

@@ -57,10 +57,10 @@ export class AddGroupBillComponent implements OnInit {
   AddBillGroup(f: NgForm) {
     // console.log('GROUP : ', f, this.valid);
     this.CreateGroup(f.value.name, f.value.des, this.ConvertParticipantsToArray(f)).subscribe( data => {
-      console.log('GROUP CREATED');
+      // console.log('GROUP CREATED');
       this.dialogRef.close();
     }, err => {
-      console.log('GROUP CREATION FAILED');
+      // console.log('GROUP CREATION FAILED');
       this.dialogRef.close();
     }
     );
@@ -77,7 +77,7 @@ export class AddGroupBillComponent implements OnInit {
         }
       }
     }
-    console.log('PARTICIPANTS: ', participantsOfTheGroup);
+    // console.log('PARTICIPANTS: ', participantsOfTheGroup);
     return participantsOfTheGroup;
   }
 

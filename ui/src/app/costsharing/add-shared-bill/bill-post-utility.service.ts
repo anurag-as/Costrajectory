@@ -17,7 +17,7 @@ export class BillPostUtilityService {
   constructor(private http: HttpClient) { }
 
   UploadBillToServer(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[]) {
-    console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
+    // console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
     const Endpoint = 'http://127.0.0.1:5000/group/addGroupBill';
     const formData: FormData = new FormData();
     formData.append('username', username);
@@ -31,9 +31,9 @@ export class BillPostUtilityService {
     formData.append('shares', this.NameToValueMapper(Participants, SharedValue));
     // console.log('TO check username: ', username);
     if (fileToUpload === null || fileToUpload === undefined) {
-        console.log('NO IMAGE');
+        // console.log('NO IMAGE');
     } else {
-        console.log(f.value, fileToUpload.name);
+        // console.log(f.value, fileToUpload.name);
         formData.append('imageName', fileToUpload.name);
         formData.append('image', fileToUpload, fileToUpload.name);
     }
@@ -58,7 +58,7 @@ export class BillPostUtilityService {
   }
 
   UploadBillToServer_edit(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[]) {
-    console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
+    // console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
     const Endpoint = 'http://127.0.0.1:5000/group/addGroupBill_';
     const formData: FormData = new FormData();
     formData.append('username', username);
@@ -72,9 +72,9 @@ export class BillPostUtilityService {
     formData.append('shares', this.NameToValueMapper(Participants, SharedValue));
     // console.log('TO check username: ', username);
     if (fileToUpload === null || fileToUpload === undefined) {
-        console.log('NO IMAGE');
+        // console.log('NO IMAGE');
     } else {
-        console.log(f.value, fileToUpload.name);
+        // console.log(f.value, fileToUpload.name);
         formData.append('imageName', fileToUpload.name);
         formData.append('image', fileToUpload, fileToUpload.name);
     }

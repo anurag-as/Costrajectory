@@ -46,7 +46,7 @@ export class AddSharedBillComponent implements OnInit {
 
   private handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
-    console.log(this.fileToUpload);
+    // console.log(this.fileToUpload);
     const reader = new FileReader();
     reader.onload = e => this.imageSrc = reader.result;
 
@@ -60,7 +60,7 @@ export class AddSharedBillComponent implements OnInit {
     for (const par of this.Participants) {
       this.ValueMapper.push(this.Value / this.Participants.length);
     }
-    console.log('RESET VALUES: ', this.ValueMapper);
+    // console.log('RESET VALUES: ', this.ValueMapper);
   }
 
   CalculateValue() {
@@ -78,14 +78,14 @@ export class AddSharedBillComponent implements OnInit {
   ChangeArrayValue({NewValue, Index}) {
     this.ValueMapper[Index] =  NewValue;
     this.Value = this.ValueMapper.reduce((a, b) => a + b);
-    console.log('NEW VALUES: ', this.ValueMapper, this.Value);
+    // console.log('NEW VALUES: ', this.ValueMapper, this.Value);
   }
 
   UploadBill(f: NgForm) {
     this.loading = true;
     // tslint:disable-next-line:max-line-length
     this.BIllUitlity.UploadBillToServer(f, this.Username, this.fileToUpload, this.BillId, this.Participants, this.ValueMapper).subscribe( data => {
-      console.log(data);
+      // console.log(data);
       this.loading = false;
       this.RefreshData.emit();
     });

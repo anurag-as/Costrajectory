@@ -76,7 +76,7 @@ export class IndivisualBillComponent implements OnInit {
             [ImageName]="ImageName"*/
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.refreshCopy.emit();
     });
   }
@@ -104,7 +104,7 @@ export class IndivisualBillComponent implements OnInit {
     dialogRef.componentInstance.Admin = this.Admin;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.refreshCopy.emit();
     });
   }
@@ -132,7 +132,7 @@ export class IndivisualBillComponent implements OnInit {
     dialogRef.componentInstance.Admin = this.Admin;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.refreshCopy.emit();
     });
   }
@@ -161,7 +161,7 @@ export class IndivisualBillComponent implements OnInit {
     dialogRef.componentInstance.Admin = this.Admin;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.refreshCopy.emit();
     });
   }

@@ -28,7 +28,7 @@ export class BillCounterComponent implements OnInit {
 
   SetValue(value) {
     // this.ParticipantValue = value;
-    console.log('CHANGED VALUE FROM COMPONENT: ', parseInt(value, 10), this.ParticipantIndex);
+    // console.log('CHANGED VALUE FROM COMPONENT: ', parseInt(value, 10), this.ParticipantIndex);
     this.ChangeValue.emit({NewValue: parseInt(value, 10), Index: this.ParticipantIndex});
   }
 
