@@ -153,7 +153,7 @@ export class EditGroupIndivisualBillComponent implements OnInit {
     this.uploading = 'started';
     // console.log('CAME');
     // tslint:disable-next-line:max-line-length
-    this.BillPostUtility.UploadBillToServer_edit(f, this.Username, this.fileToUpload,  parseInt(this.GroupId, 10) , this.Participants, this.ValueMapper).subscribe(data => {
+    this.BillPostUtility.UploadBillToServer_edit(f, this.Username, this.fileToUpload,  parseInt(this.GroupId, 10) , this.Participants, this.ValueMapper, this.BillId).subscribe(data => {
      // this.TableAdder.AppendEntry(this.CurrentForm);
      this.dialogRef.disableClose = false;
      if (data.message === 'User Quota Exceeded') {
