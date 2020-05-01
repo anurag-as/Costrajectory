@@ -4,7 +4,7 @@ import {HttpHeaders} from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
 
 interface BugIdReturn {
-  BugId: string;
+  bug_id: string;
 }
 
 @Component({
@@ -31,7 +31,8 @@ export class BugreportComponent implements OnInit {
     this.PostedBugReport = true;
     this.dialogRef.disableClose = true;
     this.SubmitReportPosterService().subscribe( data => {
-      this.BugId = data.BugId;
+      // console.log('BUG: ', data);
+      this.BugId = data.bug_id;
       this.PostedBugReport = false;
       this.GotBugID = true;
       this.dialogRef.disableClose = false;
