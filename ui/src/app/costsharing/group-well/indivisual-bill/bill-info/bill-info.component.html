@@ -35,7 +35,8 @@
                 </div>
             </div>
             <div class="col md-6" id="BillImageShown">
-                <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png">
+<!--                 <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png">
+ -->                <img src="assets\images\logo.png">
             </div>
         </div>
     
@@ -164,7 +165,7 @@
     </div>
 
 
-    <div class="card-footer text-muted" *ngIf="IsShowingSharing">
+    <div class="card-footer text-muted" *ngIf="IsShowingSharing" type="button" (click)="window.print()">
       Download the Bill
     </div>
 </div>

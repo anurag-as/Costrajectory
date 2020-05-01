@@ -59,7 +59,7 @@ export class BillPostUtilityService {
 
   UploadBillToServer_edit(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[]) {
     // console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
-    const Endpoint = 'http://127.0.0.1:5000/group/addGroupBill_';
+    const Endpoint = 'http://127.0.0.1:5000/groups/editGroupTransaction';
     const formData: FormData = new FormData();
     formData.append('username', username);
     formData.append('description', f.value.des);
