@@ -12,4 +12,3 @@ def connection():
 def end_connection(db_connection):
     db_connection.commit()
     db_connection.close()
-
