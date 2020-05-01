@@ -28,9 +28,9 @@ export class UploadService {
         formData.append('category', f.value.cat);
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {
-            console.log('NO IMAGE');
+            // console.log('NO IMAGE');
         } else {
-            console.log(f.value, fileToUpload.name);
+            // console.log(f.value, fileToUpload.name);
             formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
@@ -47,7 +47,7 @@ export class UploadService {
     postEditFile(fileToUpload: File, f: NgForm, username: string, BillId: any) {
         this.TableAdder.AppendEntry(f, username);
         const endpoint = 'http://127.0.0.1:5000/transactions/editTransaction';
-        console.log('PATH TAKEN TO EDIT: ', f, fileToUpload);
+        // console.log('PATH TAKEN TO EDIT: ', f, fileToUpload);
         const formData: FormData = new FormData();
         formData.append('username', username);
         formData.append('Description', f.value.des);
@@ -59,9 +59,9 @@ export class UploadService {
 
         // console.log('TO check username: ', username);
         if (fileToUpload === null || fileToUpload === undefined) {
-            console.log('NO IMAGE');
+            // console.log('NO IMAGE');
         } else {
-            console.log(f.value, fileToUpload.name);
+            // console.log(f.value, fileToUpload.name);
             formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }

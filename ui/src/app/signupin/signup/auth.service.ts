@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     register(email: string, passwrd: string, isPremium: boolean) {
-        console.log('REGISTER USER', isPremium);
+        // console.log('REGISTER USER', isPremium);
         return this.http.post<Result>('http://127.0.0.1:5000/auth/registerUser', {username: email , password: passwrd, premium: isPremium});
     }
 }

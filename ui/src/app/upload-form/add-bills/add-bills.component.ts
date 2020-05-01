@@ -24,11 +24,11 @@ export class AddBillsComponent implements OnInit {
   constructor(private uploader: UploadService, private router: Router, private TableAdder: TabularViewComponent) {}
 
   ngOnInit() {
-   console.log();
+   // console.log();
   }
 
   private handleFileInput(files: FileList) {
-    console.log(this.fileToUpload);
+    // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 
     const reader = new FileReader();
@@ -40,21 +40,21 @@ export class AddBillsComponent implements OnInit {
 
  set uploadStatus(status: string) {
   this.uploading = status;
-  console.log('SETTER', this.uploading, status);
+  // console.log('SETTER', this.uploading, status);
  }
 
  get uploadStatus() {
-   console.log('SETTER', this.uploading);
+   // console.log('SETTER', this.uploading);
    return this.uploading;
  }
 
  set SetForm(form: NgForm) {
    this.CurrentForm = form;
-   console.log('SETTER FORM', this.CurrentForm);
+   // console.log('SETTER FORM', this.CurrentForm);
  }
 
  get GetForm() {
-   console.log('GETTER FORM', this.CurrentForm);
+  // console.log('GETTER FORM', this.CurrentForm);
    return this.CurrentForm;
  }
 

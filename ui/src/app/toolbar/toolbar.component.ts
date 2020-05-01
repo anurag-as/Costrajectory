@@ -94,7 +94,7 @@ export class ToolbarComponent implements OnInit {
       }
     };
     this.http.delete(endpoint, options).subscribe(data => {
-      console.log('LOGGING OUT');
+      // console.log('LOGGING OUT');
     });
     this.logout.deleteKey();
     window.location.reload();
@@ -142,7 +142,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   DecisionPoster(DecisionDetails: {GroupId: number, Decision: string}) {
-    console.log('DECISION GOT : ', DecisionDetails);
+    // console.log('DECISION GOT : ', DecisionDetails);
     // this.GetAllGroupData();
     this.PostDecision(DecisionDetails.GroupId, DecisionDetails.Decision);
   }

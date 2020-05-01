@@ -57,7 +57,8 @@ export class BillPostUtilityService {
     return '[' + String(ConsolidatedListOfJSON) + ']';
   }
 
-  UploadBillToServer_edit(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[]) {
+  // tslint:disable-next-line:max-line-length
+  UploadBillToServer_edit(f: NgForm, username: string, fileToUpload: File, GroupID: number, Participants: string[], SharedValue: number[], BillID: number) {
     // console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
     const Endpoint = 'http://127.0.0.1:5000/groups/editGroupTransaction';
     const formData: FormData = new FormData();
@@ -69,6 +70,7 @@ export class BillPostUtilityService {
     formData.append('category', f.value.cat);
     formData.append('payer', f.value.Payee);
     formData.append('group_id', String(GroupID));
+    formData.append('bill_id', String(BillID));
     formData.append('shares', this.NameToValueMapper(Participants, SharedValue));
     // console.log('TO check username: ', username);
     if (fileToUpload === null || fileToUpload === undefined) {
