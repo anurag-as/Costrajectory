@@ -5,4 +5,4 @@
 <app-upload-form [userName]="userdata.username" *ngIf="authorizationDone == true"></app-upload-form>
 
 
-<app-footer></app-footer>
+<app-footer *ngIf="authorizationDone == true"></app-footer>

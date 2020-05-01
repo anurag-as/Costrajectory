@@ -28,7 +28,8 @@
     </div>
 
     <div class="modal-body" *ngIf="GotBugID && !PostedBugReport">
-      <b><h4> BUG ID : <h4 style="color: red;">{{BugId}}</h4> , Please Note This for future references! </h4></b>
+      <b><h4> BUG ID : <font color="red">{{BugId}}</font></h4>
+      <h4>Note This for future references! </h4></b>
     </div>
 
     <div class="modal-body" *ngIf="PostedBugReport">
