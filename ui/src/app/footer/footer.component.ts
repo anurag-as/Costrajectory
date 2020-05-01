@@ -8,7 +8,7 @@ import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
+  OnMouseHover = false;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -23,6 +23,14 @@ RaiseBugReport(): void {
     panelClass: 'myapp-no-padding-dialog',
     width: '1000px'
     });
+}
+
+over() {
+  this.OnMouseHover = true;
+}
+
+out() {
+  this.OnMouseHover = false;
 }
 
 }
