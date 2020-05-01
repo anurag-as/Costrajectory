@@ -67,7 +67,7 @@ export class TabularViewComponent implements OnInit {
 
   public AppendEntry(f: NgForm, userName: string) {
     // this.BillEntries.push([this.BillEntries.length + 1, f.value.name, f.value.des, f.value.date, f.value.val]);
-    console.log('===============+', this.BillEntries);
+    // console.log('===============+', this.BillEntries);
   }
 
   drop(event: CdkDragDrop<any[]>) {

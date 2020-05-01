@@ -47,7 +47,7 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillCategory = this.BillCategory;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 
@@ -66,7 +66,7 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
     dialogRef.componentInstance.BillCategory = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 
@@ -84,7 +84,7 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.ActualImageName = this.BillImage;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 
@@ -102,7 +102,7 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

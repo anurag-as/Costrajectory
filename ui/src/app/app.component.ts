@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.sessionStorageclient.hasKey() === false) {
       // this.sessionStorageclient.setKey('test', 'value');
-      console.log('NO CURRENT SESSIONS');
+      // console.log('NO CURRENT SESSIONS');
     } else {
       this.userTokenData = this.sessionStorageclient.getKey();
       this.sessionStorageclient.ValidateToken(this.userTokenData.key, this.userTokenData.username).subscribe(
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
           this.userdata = {username: this.userTokenData.username};
           // console.log(',,,,', res);
           if (res.valid) {
-            console.log('TOKEN AUTHENTICATED');
+            // console.log('TOKEN AUTHENTICATED');
             this.globals.UserName = this.userdata.username;
             this.authorizationDone = true;
           } else {

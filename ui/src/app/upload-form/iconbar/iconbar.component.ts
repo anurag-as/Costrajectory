@@ -46,7 +46,7 @@ export class IconbarComponent implements OnInit {
     dialogRef.componentInstance.username = this.userName;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 
