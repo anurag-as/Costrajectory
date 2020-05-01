@@ -11,7 +11,7 @@ import { Observable} from 'rxjs';
     constructor(private http: HttpClient) {}
 
     GetLogs(UserName: string) {
-        const endpoint = 'http://127.0.0.1:5000/transactions/getRecentLogsAPI';
+        const endpoint = 'http://127.0.0.1:5000/transactions/getRecentLogs';
         return this.http.get(endpoint, {
             params: {
                 username : UserName,
