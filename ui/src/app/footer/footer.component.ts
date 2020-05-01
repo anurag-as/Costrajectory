@@ -21,8 +21,8 @@ export class FooterComponent implements OnInit {
 RaiseBugReport(): void {
   const dialogRef = this.dialog.open(BugreportComponent, {
     panelClass: 'myapp-no-padding-dialog',
-    width: '600px'
-  });
+    width: '1000px'
+    });
 }
 
 }
