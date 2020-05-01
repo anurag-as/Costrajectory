@@ -49,7 +49,7 @@ def edit_group_bill_api():
     category = request.form['category']
     payer = request.form['payer']
     group_id = request.form['group_id']
-    shares = literal_eval(request.form['shares'])
+    shares = request.form['shares']
     bill_id = request.form['bill_id']
 
     # editing the transaction record
