@@ -15,7 +15,7 @@
 
 
 
-<div
+<div *ngIf="BillEntries.length != 0"
     cdkDropList
     #todoList="cdkDropList"
     [cdkDropListData]="BillEntries"
@@ -35,3 +35,5 @@
     </div>
   </div>
 
+  <div *ngIf="BillEntries.length == 0" style="height: 400px;">
+  </div>

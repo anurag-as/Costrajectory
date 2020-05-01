@@ -64,6 +64,8 @@ import { DeleteGroupIndivisualBillComponent } from './costsharing/group-well/ind
 import { ViewGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/view-group-indivisual-bill/view-group-indivisual-bill.component';
 // tslint:disable-next-line:max-line-length
 import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/edit-group-indivisual-bill/edit-group-indivisual-bill.component';
+import { FooterComponent } from './footer/footer.component';
+import { BugreportComponent } from './footer/bugreport/bugreport.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +107,9 @@ import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indiv
     BillInfoComponent,
     DeleteGroupIndivisualBillComponent,
     ViewGroupIndivisualBillComponent,
-    EditGroupIndivisualBillComponent
+    EditGroupIndivisualBillComponent,
+    FooterComponent,
+    BugreportComponent
   ],
   imports: [
     BrowserModule,
@@ -148,6 +152,7 @@ import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indiv
     CopyBillComponent,
     DeleteGroupIndivisualBillComponent,
     EditGroupIndivisualBillComponent,
-    BillInfoComponent],
+    BillInfoComponent,
+    BugreportComponent],
 })
 export class AppModule { }
