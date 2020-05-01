@@ -34,3 +34,21 @@ def add_new_bill_id(db_connection, group_id, bill_ids):
     return True
 
 
+# function to edit the transactions
+def edit_group_bill(db_connection, title, datetime, amount, description,
+                                  image_name, category, share, payer, group_id, bill_id):
+    db_connection.execute('''UPDATE GROUP_BILLS SET  title="{title}",
+                                                share="{share}", 
+                                                payer="{payer}", 
+                                                datetime="{datetime}",
+                                                amount="{amount}",
+                                                description="{description}",
+                                                image_name="{image_name}",
+                                                category="{category}"
+                                                WHERE ID="{bill_id}" AND group_id="{group_id}"'''
+                          .format(title=title, datetime=datetime, amount=amount,
+                                  description=description, image_name=image_name, category=category, share=share,
+                                  payer=payer, bill_id=bill_id, group_id=group_id
+                                  ))
+    db_connection.commit()
+    return True
