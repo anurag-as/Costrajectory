@@ -21,13 +21,19 @@ interface Result {
 export class AuthService {
     constructor(private http: HttpClient) {}
 
-    signup(email: string, passwrd: string, isPremium: boolean) {
+    signup(email: string, passwrd: string, isPremium: any) {
+        if ( isPremium === '' ) {
+            isPremium = false;
+        }
         // console.log('INSIDE SIGNUP SERVICE ', email, passwrd);
         return this.http.post<Authreturn>('http://127.0.0.1:5000/auth/checkUser', {username: email, password: passwrd, premium: isPremium});
     }
 
-    register(email: string, passwrd: string, isPremium: boolean) {
+    register(email: string, passwrd: string, isPremium: any) {
         // console.log('REGISTER USER', isPremium);
+        if ( isPremium === '' ) {
+            isPremium = false;
+        }
         return this.http.post<Result>('http://127.0.0.1:5000/auth/registerUser', {username: email , password: passwrd, premium: isPremium});
     }
 }
