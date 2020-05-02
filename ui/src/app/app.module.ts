@@ -66,6 +66,8 @@ import { ViewGroupIndivisualBillComponent } from './costsharing/group-well/indiv
 import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/edit-group-indivisual-bill/edit-group-indivisual-bill.component';
 import { FooterComponent } from './footer/footer.component';
 import { BugreportComponent } from './footer/bugreport/bugreport.component';
+import { Title } from '@angular/platform-browser';
+
 
 @NgModule({
   declarations: [
@@ -136,7 +138,7 @@ import { BugreportComponent } from './footer/bugreport/bugreport.component';
     MatTableModule,
     ResizableModule,
     ],
-  providers: [TabularViewComponent, GlobalConfigsService],
+  providers: [TabularViewComponent, GlobalConfigsService, Title],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA

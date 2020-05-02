@@ -103,7 +103,7 @@ export class ToolbarComponent implements OnInit {
   GoPremium() {
     const endpoint = 'http://127.0.0.1:5000/auth/goPremium';
     this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
-      // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
+      console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
       if (data.isPremium === 'True') {
         this.isPremium = true;
         this.Globals.premium = this.isPremium;
@@ -114,7 +114,7 @@ export class ToolbarComponent implements OnInit {
       }
     }, err => {
       this.Globals.premium = this.isPremium;
-      window.alert('SOMETHING WENT WRONG! TRY AGAIN LATER');
+      window.alert('SERVER BUSY! TRY AGAIN LATER');
     });
   }
 
