@@ -5,6 +5,7 @@ import { Input } from '@angular/core';
 import {Router} from '@angular/router';
 import {ThemePalette} from '@angular/material/core';
 import {HttpClient} from '@angular/common/http';
+import { GlobalConfigsService } from '../../global-configs.service';
 
 interface UsageStats {
   TotalQuota: number;
@@ -21,7 +22,7 @@ export class IconbarComponent implements OnInit {
   usageQuota = undefined;
   maxQuota = undefined;
   color: ThemePalette = 'warn';
-  constructor(public dialog: MatDialog, private route: Router, private http: HttpClient) {}
+  constructor(public dialog: MatDialog, private route: Router, private http: HttpClient, private GlobalService: GlobalConfigsService) {}
 
   getUsageQuota() {
     const endpoint = 'http://127.0.0.1:5000/analytics/usage';
@@ -32,10 +33,15 @@ export class IconbarComponent implements OnInit {
 
   ngOnInit() {
     this.usageQuota = 10;
-    this.getUsageQuota().subscribe(data => {
+    /* this.getUsageQuota().subscribe(data => {
       this.maxQuota = data.TotalQuota;
       this.usageQuota = data.UsedQuota;
       this.usageQuota = Math.min(Math.round((this.usageQuota + Number.EPSILON) * 100) / 100 , data.TotalQuota);
+    }); */
+    this.GlobalService.getUsageQuota().subscribe(data => {
+      this.GlobalService.maxQuota = data.TotalQuota;
+      this.GlobalService.usageQuota = data.UsedQuota;
+      this.GlobalService.usageQuota = Math.min(Math.round((this.GlobalService.usageQuota + Number.EPSILON) * 100) / 100 , data.TotalQuota);
     });
   }
 

@@ -57,6 +57,11 @@ export class CostsharingComponent implements OnInit {
     // console.log('CHANGE DATA');
     this.ReloadPage().subscribe(data => {
       this.GroupList = data.body;
+      this.Globals.getUsageQuota().subscribe(Quota => {
+      this.Globals.maxQuota = Quota.TotalQuota;
+      this.Globals.usageQuota = Quota.UsedQuota;
+      this.Globals.usageQuota = Math.min(Math.round((this.Globals.usageQuota + Number.EPSILON) * 100) / 100 , Quota.TotalQuota);
+      });
     }, err => {
       this.GroupList = [];
     });
