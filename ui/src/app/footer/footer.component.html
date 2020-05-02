@@ -5,7 +5,7 @@ style="bottom: 0; position: relative;">
         <li class="list-inline-item" type="button" style="color: brown;" data-toggle="modal" data-target="#privacyModal">AboutUs</li>
         <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
         
-        <li class="list-inline-item" type="button" style="color: blueviolet" data-toggle="modal" data-target="#TermsModal">Features</li>
+        <li class="list-inline-item" type="button" style="color: blueviolet" data-toggle="modal" data-target="#FeatureFooterModal">Features</li>
         <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
         
         <li class="list-inline-item" style="color: blue" (mouseover)='over()' (mouseout)='out()'>
@@ -21,3 +21,17 @@ style="bottom: 0; position: relative;">
 
     </ul>
 </footer>
+
+
+<div class="modal fade" id="FeatureFooterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <app-about></app-about>
+       
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
