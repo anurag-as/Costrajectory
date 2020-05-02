@@ -14,7 +14,7 @@ import { Observable} from 'rxjs';
         const endpoint = 'http://127.0.0.1:5000/transactions/getRecentLogs';
         return this.http.get(endpoint, {
             params: {
-                username : UserName,
+                user_name : UserName,
             },
             observe: 'response'
           });
