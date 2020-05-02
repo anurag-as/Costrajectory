@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionStorage } from './app.session';
 import { GlobalConfigsService } from './global-configs.service';
+import { Title } from '@angular/platform-browser';
 
 interface TokenData {
   key: string ;
@@ -20,9 +21,10 @@ export class AppComponent implements OnInit {
   userTokenData: TokenData;
   progress = 78;
 
-  constructor(private sessionStorageclient: SessionStorage, public globals: GlobalConfigsService) {}
+  constructor(private sessionStorageclient: SessionStorage, public globals: GlobalConfigsService, private titleService: Title) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Costrajectory');
     if (this.sessionStorageclient.hasKey() === false) {
       // this.sessionStorageclient.setKey('test', 'value');
       // console.log('NO CURRENT SESSIONS');
