@@ -67,7 +67,7 @@ import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indiv
 import { FooterComponent } from './footer/footer.component';
 import { BugreportComponent } from './footer/bugreport/bugreport.component';
 import { Title } from '@angular/platform-browser';
-
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -137,6 +137,7 @@ import { Title } from '@angular/platform-browser';
     MonacoEditorModule.forRoot(),
     MatTableModule,
     ResizableModule,
+    GoogleChartsModule,
     ],
   providers: [TabularViewComponent, GlobalConfigsService, Title],
   bootstrap: [AppComponent],
