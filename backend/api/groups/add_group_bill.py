@@ -7,7 +7,7 @@ from database_functions.transactions.image_mapping_flow import insert_into_image
 from database_functions.transactions.image_size_flow import insert_into_image_size_table
 from database_functions.groups.insertion_functions import insert_into_group_bills_table
 from database_functions.account.token_auth_flow import refresh_token
-from database_functions.account.space_flow import space_usage
+from database_functions.account.space_flow import space_usage, group_space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
 from utilities.utils import get_total_size
@@ -41,13 +41,21 @@ def group_bill():
 
         # If user quota has been exceeded
         user_name = request.form['username']
+
+        # Personal Bill Size
         size = space_usage(connection(), user_name)
+
+        # Group Bill Size
+        group_bill_size = group_space_usage(connection(), user_name)
+
+        # Total Size
+        size += group_bill_size
+
         bool_is_user_premium = is_user_premium(connection(), user_name)
         premium = False
         if bool_is_user_premium == 'True':
             premium = True
         total_quota = get_total_size(premium)
-
         usage_exceeded = quota_exceeded(size, total_quota)
         if not usage_exceeded:  # Upload image if user has not exceeded his quota
             file_extension = file_name.split('.')[-1]
