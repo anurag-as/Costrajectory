@@ -28,6 +28,7 @@ export class GroupWellComponent implements OnInit {
   @Input() GroupName: string;
   @Input() GroupId: number;
   @Input() Username: string;
+  @Input() GroupCreationTime: any;
   @Output() ChangeEvent = new EventEmitter();
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
@@ -44,11 +45,13 @@ export class GroupWellComponent implements OnInit {
   currentDiv: number;
   currentUsername: string;
 
+  FormattedDate: any;
 
   constructor(private GroupOperations: GroupOperationsService, private http: HttpClient) { }
 
   ngOnInit() {
     this.FormattedStringId = String(this.GroupId);
+    this.FormattedDate = new Date(Math.trunc(this.GroupCreationTime));
   }
 
   ResetAddUsersData() {
