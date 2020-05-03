@@ -1,5 +1,9 @@
 from ast import literal_eval
 from yaml import safe_load
+from utilities.api_utils import get_alias
+from database_functions.account.profile_details_flow import get_name
+from database_functions.account.username_alias import get_user_alias, add_alias
+from api.account.profile import form_username_alias
 
 
 # function to get the pending groups for a particular username
@@ -76,12 +80,15 @@ def get_group_info(db_connection, group_id):
         '''.format(group_id=group_id))
     for row in cursor:
         if row:
-            list_users = literal_eval(row[2])
-            list_bills = literal_eval(row[5])
-            group_info = {'group_id': row[0], 'group_admin': row[1],
-                          'users': list_users, 'title': row[3], 'description': row[4],
-                          'bills': list_bills, 'creation_time': row[6]}
-            return group_info
+            try:
+                list_users = literal_eval(row[2])
+                list_bills = literal_eval(row[5])
+                group_info = {'group_id': row[0], 'group_admin': row[1],
+                              'users': list_users, 'title': row[3], 'description': row[4],
+                              'bills': list_bills, 'creation_time': row[6]}
+                return group_info
+            except:
+                continue
     return False
 
 
@@ -123,3 +130,25 @@ def get_bill_name(db_connection, bill_id):
             return row[0]
     db_connection.commit()
     return False
+
+
+# function to get user names and aliases
+def get_user_details(db_connection, users):
+    payload = []
+    for each_user in users:
+        username = each_user
+        name = get_name(db_connection, username)
+        alias = get_user_alias(db_connection, username)
+        if not alias:
+            if name:
+                alias = form_username_alias(name[0], name[1]).upper()
+            else:
+                alias = get_alias(username).upper()
+            add_alias(db_connection, username, alias)
+        if name:
+            full_name = " ".join(name)
+        else:
+            full_name = False
+        user_detail = {'username': username, 'name': full_name, "alias": alias}
+        payload.append(user_detail)
+    return payload

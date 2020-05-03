@@ -22,3 +22,15 @@ def update_alias(db_connection, username, alias):
         '''.format(username=username, alias=alias))
     db_connection.commit()
     return True
+
+
+# function to get the alias for a particular username
+def get_user_alias(db_connection, username):
+    cursor = db_connection.execute('''SELECT alias FROM USERNAME_ALIAS 
+            where username = "{username}"  
+            '''.format(username=username))
+    for row in cursor:
+        if row:
+            return row[0]
+    db_connection.commit()
+    return False

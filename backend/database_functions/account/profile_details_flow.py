@@ -67,3 +67,12 @@ def query_profile_details(db_connection, username):
         return list(row)
     return False
 
+
+# function to get the full name for a particular username
+def get_name(db_connection, username):
+    cursor = db_connection.execute('''SELECT  first_name, last_name
+            FROM PROFILEDETAILS where username = "{username}"
+    LIMIT 1'''.format(username=username))
+    for row in cursor:
+        return list(row)
+    return False
