@@ -17,7 +17,7 @@ def profile_pic_random():
     try:
         user_name = request.json['user_name']
         refresh_token(connection(), request.json['user_name'])
-        profile_pic_path = path.join(getcwd(), "temp", user_name, 'pic')
+        profile_pic_path = path.join(getcwd(), "temp", "."+user_name, "profile_pic", 'pic')
         if not path.exists(profile_pic_path):
             # Caching and Saving profile pic
             profile_pic = generate_image()
@@ -26,9 +26,8 @@ def profile_pic_random():
             with open(profile_pic_path, 'w') as fp:
                 pass
             dump(profile_pic, file=open(profile_pic_path, "wb"))
-        else:
-            # Profile pic already cached
-            profile_pic = load(open(profile_pic_path, "rb"))
-            return profile_pic
+        # Profile pic already cached
+        profile_pic = load(open(profile_pic_path, "rb"))
+        return profile_pic
     except:
         return jsonify({'Error': 'Failed to get profile Picture'})
