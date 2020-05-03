@@ -6,13 +6,10 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" type='button'>Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" type='button' (click)="NavigateToHome()">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" type='button' (click)="addGroupContainer()">Add Group Bill</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" type='button' (click)="addGroupBill()">Add Group</a>
+          <a class="nav-link" type='button' (click)="addGroupBill()">Create Group</a>
         </li>
       </ul>
     </div>
