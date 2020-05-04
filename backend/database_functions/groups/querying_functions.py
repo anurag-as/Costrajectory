@@ -152,3 +152,13 @@ def get_user_details(db_connection, users):
         user_detail = {'username': username, 'name': full_name, "alias": alias}
         payload.append(user_detail)
     return payload
+
+
+# function to get the pending users of the group
+def get_group_pending_users(db_connection, group_id):
+    cursor = db_connection.execute('''SELECT pending_users FROM GROUPS where ID = "{group_id}"  
+    '''.format(group_id=group_id))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False
