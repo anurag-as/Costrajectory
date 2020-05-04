@@ -48,3 +48,10 @@ def add_group_creation_time(db_connection):
     db_connection.execute('''ALTER TABLE GROUPS ADD COLUMN
                               creation_time TEXT;''')
     db_connection.commit()
+
+
+# function to add a column pending users to groups table
+def add_column_pending_users(db_connection):
+    db_connection.execute('''ALTER TABLE GROUPS ADD COLUMN
+                              pending_users TEXT;''')
+    db_connection.commit()
