@@ -25,15 +25,18 @@ def create_sharing_group():
         users = request.json['users']
 
         users = list(set(users))  # Avoid adding same users multiple times to the groups
+        pending_users = users[:]
+        pending_users.remove(group_admin)
+
         current_users = str([group_admin])  # only adding admin to the group
         group_creation_time = str(time())
         group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description,
-                                           group_creation_time)
+                                           group_creation_time, pending_users)
 
         # adding admin to accepted list
         insert_into_pending_requests_table(connection(), group_id, group_admin, "accepted")
 
-        for user in users:
+        for user in pending_users:
             insert_into_pending_requests_table(connection(), group_id, user, "pending")
 
         # adding transaction to logs

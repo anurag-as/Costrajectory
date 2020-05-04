@@ -1,4 +1,4 @@
-# Uploads costracjectory.db to dropbox
+# Uploads costrajectory.db to dropbox
 
 from dropbox.files import WriteMode
 from dropbox import Dropbox

@@ -7,7 +7,7 @@ from database_functions.transactions.create_bill import insert_into_image_table
 from database_functions.transactions.image_mapping_flow import insert_into_image_mapping_table
 from database_functions.transactions.image_size_flow import insert_into_image_size_table
 from database_functions.account.token_auth_flow import refresh_token
-from database_functions.account.space_flow import space_usage
+from database_functions.account.space_flow import space_usage, group_space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
 from utilities.utils import get_total_size
@@ -26,6 +26,7 @@ def quota_exceeded(size, total_quota):
     """
     return int(size) >= int(total_quota)
 
+
 # API to add a new transaction
 # Legacy version - Uploading a bill, hence the name
 # Later version - Adding a new transaction
@@ -40,7 +41,8 @@ def upload():
 
         # If user quota has been exceeded
         user_name = request.form['username']
-        size = space_usage(connection(), user_name)
+        size = space_usage(connection(), user_name) + group_space_usage(connection(), user_name)
+
         bool_is_user_premium = is_user_premium(connection(), user_name)
         premium = False
         if bool_is_user_premium == 'True':

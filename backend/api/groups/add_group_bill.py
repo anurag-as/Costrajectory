@@ -42,14 +42,8 @@ def group_bill():
         # If user quota has been exceeded
         user_name = request.form['username']
 
-        # Personal Bill Size
-        size = space_usage(connection(), user_name)
-
-        # Group Bill Size
-        group_bill_size = group_space_usage(connection(), user_name)
-
-        # Total Size
-        size += group_bill_size
+        # Personal Bill Usage + Group Bill Usage
+        size = space_usage(connection(), user_name) + group_space_usage(connection(), user_name)
 
         bool_is_user_premium = is_user_premium(connection(), user_name)
         premium = False
