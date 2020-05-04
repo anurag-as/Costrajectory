@@ -3,7 +3,8 @@ from flask_cors import cross_origin
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.logs.recentLogs import insert_into_recent_table
-from database_functions.groups.updation_functions import update_group_status, add_new_users_group
+from database_functions.groups.updation_functions import update_group_status, add_new_users_group, \
+    remove_user_from_pending
 from database_functions.groups.querying_functions import get_group_current_users
 from ast import literal_eval
 from time import time
@@ -23,6 +24,7 @@ def group_status_update():
             status = each_status[1]
             group_id = each_status[0]
             update_group_status(connection(), group_id, user_name, status)
+            remove_user_from_pending(connection(), group_id, user_name)
             if status == 'accepted':
                 current_users = get_group_current_users(connection(), group_id)
                 new_users = literal_eval(current_users)
