@@ -75,7 +75,8 @@ def get_groups_user(db_connection, username, status):
 
 # function to get all the group information for a particular group
 def get_group_info(db_connection, group_id):
-    cursor = db_connection.execute('''SELECT ID,group_admin,users,title,description, bill_ids, creation_time FROM 
+    cursor = db_connection.execute('''SELECT ID,group_admin,users,title,description, bill_ids, creation_time,
+    pending_users FROM 
     GROUPS where ID = "{group_id}"  
         '''.format(group_id=group_id))
     for row in cursor:
@@ -83,9 +84,11 @@ def get_group_info(db_connection, group_id):
             try:
                 list_users = literal_eval(row[2])
                 list_bills = literal_eval(row[5])
+                list_pending_users = literal_eval(row[7])
                 group_info = {'group_id': row[0], 'group_admin': row[1],
                               'users': list_users, 'title': row[3], 'description': row[4],
-                              'bills': list_bills, 'creation_time': row[6]}
+                              'bills': list_bills, 'creation_time': row[6],
+                              'pending_users': list_pending_users}
                 return group_info
             except:
                 continue
