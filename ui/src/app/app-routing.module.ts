@@ -8,13 +8,15 @@ import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.co
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
 import { CostsharingComponent } from './costsharing/costsharing.component';
+import { AboutComponent } from './accountdetails/about/about.component';
 
 const routes: Routes = [
    { path: 'logout', component: SignupinComponent},
    { path: '', component: TabularViewComponent},
    { path: 'analytics', component: AnalyticsComponent},
    { path: 'AccDetails', component: AccountdetailsComponent},
-   { path: 'CostSharing', component: CostsharingComponent}
+   { path: 'CostSharing', component: CostsharingComponent},
+   { path: 'About', component: AboutComponent}
   ];
 
 @NgModule({

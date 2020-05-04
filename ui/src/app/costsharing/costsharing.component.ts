@@ -4,6 +4,7 @@ import { GlobalConfigsService } from '../global-configs.service';
 import { AddGroupBillComponent } from './add-group-bill/add-group-bill.component';
 import { AddGroupContainerComponent } from './add-group-container/add-group-container.component';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 interface Billdata {
   body: any[];
@@ -16,7 +17,7 @@ interface Billdata {
 export class CostsharingComponent implements OnInit {
   GroupList: any[];
   username: string;
-  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) {
+  constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient, private route: Router) {
     this.username = this.Globals.GetUserName;
    }
 
@@ -76,6 +77,10 @@ export class CostsharingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
     });
+  }
+
+  NavigateToHome() {
+    this.route.navigate(['CostSharing']);
   }
 
 

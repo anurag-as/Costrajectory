@@ -53,7 +53,6 @@ export class GlobalConfigsService {
   getUsageQuota() {
     const endpoint = 'http://127.0.0.1:5000/analytics/usage';
     const QueryPayload = {username: this.username};
-    // console.log('USAGE:',QueryPayload);
     return this.http.post<UsageStats>(endpoint, QueryPayload);
   }
 

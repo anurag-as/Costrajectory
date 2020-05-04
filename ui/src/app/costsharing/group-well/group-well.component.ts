@@ -30,6 +30,7 @@ export class GroupWellComponent implements OnInit {
   @Input() Username: string;
   @Input() GroupCreationTime: any;
   @Output() ChangeEvent = new EventEmitter();
+  @Input() PendingUsers: string[];
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
   NEXTADMINVALID = false;
