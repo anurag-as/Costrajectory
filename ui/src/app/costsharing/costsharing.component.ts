@@ -24,12 +24,17 @@ export class CostsharingComponent implements OnInit {
   ngOnInit() {
     // tslint:disable-next-line:max-line-length
    // this.GroupList = [['rohitp2512@gmail.com', 'test', '', '', ['a', 'b', 'c', 'rohitp2512@gmail.com']], ['Admin', 'test2', '', '', ''], ['Admin', 'test3', '', '', '']];
-    this.ReloadPage().subscribe(data => {
-      // console.log('GROUP DATA: ', data);
-      this.GroupList = data.body;
-    }, err => {
-      this.GroupList = [];
+   this.ReloadPage().subscribe(data => {
+    this.GroupList = data.body;
+    // console.log('GROUP DATA: ', data.body);
+    this.Globals.getUsageQuota().subscribe(Quota => {
+    this.Globals.maxQuota = Quota.TotalQuota;
+    this.Globals.usageQuota = Quota.UsedQuota;
+    this.Globals.usageQuota = Math.min(Math.round((this.Globals.usageQuota + Number.EPSILON) * 100) / 100 , Quota.TotalQuota);
     });
+  }, err => {
+    this.GroupList = [];
+  });
   }
 
   addGroupBill(): void {
@@ -42,6 +47,12 @@ export class CostsharingComponent implements OnInit {
       // console.log('The dialog was closed ');
       this.ReloadPage().subscribe(data => {
         this.GroupList = data.body;
+        // console.log('GROUP DATA: ', data.body);
+        this.Globals.getUsageQuota().subscribe(Quota => {
+        this.Globals.maxQuota = Quota.TotalQuota;
+        this.Globals.usageQuota = Quota.UsedQuota;
+        this.Globals.usageQuota = Math.min(Math.round((this.Globals.usageQuota + Number.EPSILON) * 100) / 100 , Quota.TotalQuota);
+        });
       }, err => {
         this.GroupList = [];
       });
@@ -55,9 +66,9 @@ export class CostsharingComponent implements OnInit {
   }
 
   ReloadAllData() {
-    // console.log('CHANGE DATA');
-    this.ReloadPage().subscribe(data => {
+      this.ReloadPage().subscribe(data => {
       this.GroupList = data.body;
+      // console.log('GROUP DATA: ', data.body);
       this.Globals.getUsageQuota().subscribe(Quota => {
       this.Globals.maxQuota = Quota.TotalQuota;
       this.Globals.usageQuota = Quota.UsedQuota;
