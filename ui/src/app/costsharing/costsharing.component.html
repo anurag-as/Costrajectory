@@ -24,5 +24,6 @@
 [Participants]="Group.group_info.users" 
 [ParticipantsCopy]="Group.group_info.users" 
 [GroupCreationTime]="Group.group_info.creation_time"
-[PendingUsers]="Group.pending_users"
+[PendingUsers]="Group.group_info.pending_users"
+[Description]="Group.group_info.description"
 (ChangeEvent)="ReloadAllData()"></app-group-well>
