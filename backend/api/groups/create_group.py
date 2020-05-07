@@ -5,7 +5,7 @@ from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.insertion_functions import insert_into_group_table, insert_into_pending_requests_table
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.querying_functions import get_status_for_group
-from database_functions.groups.updation_functions import update_group_status
+from database_functions.groups.updation_functions import update_group_status, update_pending_state_machine
 
 from ast import literal_eval
 from time import time

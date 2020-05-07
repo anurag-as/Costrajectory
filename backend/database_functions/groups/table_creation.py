@@ -55,3 +55,10 @@ def add_column_pending_users(db_connection):
     db_connection.execute('''ALTER TABLE GROUPS ADD COLUMN
                               pending_users TEXT;''')
     db_connection.commit()
+
+
+# function to add a column pending_state_machine to PENDING_Requests table
+def add_pending_state_machine(db_connection):
+    db_connection.execute('''ALTER TABLE PENDING_REQUESTS ADD COLUMN
+                              pending_state_machine INTEGER;''')
+    db_connection.commit()

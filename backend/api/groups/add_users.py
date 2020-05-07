@@ -4,8 +4,10 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.insertion_functions import insert_into_group_table, insert_into_pending_requests_table
 from database_functions.logs.recentLogs import insert_into_recent_table
-from database_functions.groups.querying_functions import get_status_for_group, get_group_title, get_group_pending_users
-from database_functions.groups.updation_functions import update_group_status, add_new_pending_users_group
+from database_functions.groups.querying_functions import get_status_for_group, get_group_title, get_group_pending_users \
+    , get_group_pending_state_machine
+from database_functions.groups.updation_functions import update_group_status, add_new_pending_users_group,\
+    update_pending_state_machine
 from ast import literal_eval
 from time import time
 
@@ -31,6 +33,8 @@ def add_users_to_group():
         new_set_users = list(set(new_set_users + users))
         add_new_pending_users_group(connection(), group_id, str(new_set_users))
 
+        response = {'success': [], 'fail': []}
+
         if not group_title:
             return jsonify(False)
         for user in users:
@@ -39,14 +43,24 @@ def add_users_to_group():
                     get_status_for_group(connection(), group_id, user, "removed") or \
                     get_status_for_group(connection(), group_id, user, "exited") or \
                     get_status_for_group(connection(), group_id, user, "pending"):
-                update_group_status(connection(), group_id, user, "pending")
+
+                if get_status_for_group(connection(), group_id, user, "rejected") and \
+                        get_group_pending_state_machine(connection(), user, group_id) >= 4:
+                    # user has rejected the group too many times, can't be added
+                    response['fail'].append(user)
+                else:  # successfully add the user to the group
+                    update_group_status(connection(), group_id, user, "pending")
+                    response['success'].append(user)
             #  if user entry does not exist in the group, then add a new entry
             elif not get_status_for_group(connection(), group_id, user, "accepted"):
-                insert_into_pending_requests_table(connection(), group_id, user, "pending")
-
+                response['success'].append(user)
+                insert_into_pending_requests_table(connection(), group_id, user, "pending", 0)
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Added additional users to group", group_title)
 
-        return jsonify(True)
+        if response['success']:
+            insert_into_recent_table(connection(), user_name, str(time()), "Added additional users to group",
+                                     group_title)
+
+        return jsonify(response)
     except:
         return jsonify(False)

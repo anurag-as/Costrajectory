@@ -165,3 +165,14 @@ def get_group_pending_users(db_connection, group_id):
         if row:
             return row[0]
     return False
+
+
+# function to get the pending state machine for user and group
+def get_group_pending_state_machine(db_connection, username, group_id):
+    cursor = db_connection.execute('''SELECT pending_state_machine FROM PENDING_REQUESTS  
+    where username="{username}" and group_id="{group_id}"  
+    '''.format(group_id=group_id, username=username))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False

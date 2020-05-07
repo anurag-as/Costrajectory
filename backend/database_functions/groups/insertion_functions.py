@@ -16,10 +16,11 @@ def insert_into_group_table(db_connection, group_admin, users, title, descriptio
 
 
 # function to add the users to pending requests table
-def insert_into_pending_requests_table(db_connection, group_id, username, status):
-    db_connection.execute('''INSERT INTO PENDING_REQUESTS (username, group_id, status) 
-        VALUES ("{username}","{group_id}","{status}")'''
-                          .format(username=username, group_id=group_id, status=status))
+def insert_into_pending_requests_table(db_connection, group_id, username, status, pending_state_machine=0):
+    db_connection.execute('''INSERT INTO PENDING_REQUESTS (username, group_id, status, pending_state_machine) 
+        VALUES ("{username}","{group_id}","{status}", {pending_state_machine})'''
+                          .format(username=username, group_id=group_id, status=status,
+                                  pending_state_machine=pending_state_machine))
     db_connection.commit()
 
 
