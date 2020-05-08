@@ -40,7 +40,7 @@ def add_new_bill_id(db_connection, group_id, bill_ids):
 
 # function to edit the transactions
 def edit_group_bill(db_connection, title, datetime, amount, description,
-                                  image_name, category, share, payer, group_id, bill_id):
+                    image_name, category, share, payer, group_id, bill_id):
     db_connection.execute('''UPDATE GROUP_BILLS SET  title="{title}",
                                                 share="{share}", 
                                                 payer="{payer}", 
@@ -76,5 +76,16 @@ def remove_user_from_pending(db_connection, group_id, username):
     db_connection.execute('''UPDATE GROUPS SET pending_users="{new_pending_users}"
                             WHERE ID="{group_id}"'''
                           .format(group_id=group_id, new_pending_users=new_pending_users))
+    db_connection.commit()
+    return True
+
+
+# function to add new set of pending users to the group
+def update_pending_state_machine(db_connection, group_id, username, pending_state_machine):
+    db_connection.execute('''UPDATE PENDING_REQUESTS  SET  pending_state_machine={pending_state_machine}
+                                    WHERE username="{username}" and group_id="{group_id}"'''
+                          .format(group_id=group_id, username=username,
+                                  pending_state_machine=pending_state_machine))
+
     db_connection.commit()
     return True

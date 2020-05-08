@@ -4,8 +4,8 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.updation_functions import update_group_status, add_new_users_group, \
-    remove_user_from_pending
-from database_functions.groups.querying_functions import get_group_current_users
+    remove_user_from_pending, update_pending_state_machine
+from database_functions.groups.querying_functions import get_group_current_users, get_group_pending_state_machine
 from ast import literal_eval
 from time import time
 
@@ -30,6 +30,13 @@ def group_status_update():
                 new_users = literal_eval(current_users)
                 new_users.append(user_name)
                 add_new_users_group(connection(), group_id, str(new_users))
+                update_pending_state_machine(connection(), group_id, user_name, 0)
+
+            if status == 'rejected':
+                rejects = get_group_pending_state_machine(connection(), user_name, group_id)
+                rejects += 1
+                update_pending_state_machine(connection(), group_id, user_name, rejects)
+
             # adding transaction to logs
             insert_into_recent_table(connection(), user_name, str(time()), "Changed group status", status)
         return jsonify(True)
