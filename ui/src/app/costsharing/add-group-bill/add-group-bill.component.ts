@@ -57,7 +57,7 @@ export class AddGroupBillComponent implements OnInit {
   AddBillGroup(f: NgForm) {
     // console.log('GROUP : ', f, this.valid);
     this.CreateGroup(f.value.name, f.value.des, this.ConvertParticipantsToArray(f)).subscribe( data => {
-      // console.log('GROUP CREATED');
+      // console.log('GROUP CREATED', data);
       this.dialogRef.close();
     }, err => {
       // console.log('GROUP CREATION FAILED');
@@ -102,6 +102,7 @@ export class AddGroupBillComponent implements OnInit {
     const endpoint = 'http://127.0.0.1:5000/group/createGroup';
     // tslint:disable-next-line:max-line-length
     const QueryPayload = {group_title : Groupname, group_description: description, users: participants, user_name: this.username};
+    // console.log(QueryPayload);
     return this.http.post(endpoint, QueryPayload);
   }
 

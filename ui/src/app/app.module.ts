@@ -68,6 +68,11 @@ import { FooterComponent } from './footer/footer.component';
 import { BugreportComponent } from './footer/bugreport/bugreport.component';
 import { Title } from '@angular/platform-browser';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { GroupacceptpopupComponent } from './toolbar/groupacceptpopup/groupacceptpopup.component';
+import { DevelopersComponent } from './accountdetails/developers/developers.component';
+import { UtilitiesComponent } from './utilities/utilities.component';
+import { ErrorfloatComponent } from './Utilities/errorfloat/errorfloat.component';
+import { SuccessfloatComponent } from './Utilities/successfloat/successfloat.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +116,12 @@ import { GoogleChartsModule } from 'angular-google-charts';
     ViewGroupIndivisualBillComponent,
     EditGroupIndivisualBillComponent,
     FooterComponent,
-    BugreportComponent
+    BugreportComponent,
+    GroupacceptpopupComponent,
+    DevelopersComponent,
+    UtilitiesComponent,
+    ErrorfloatComponent,
+    SuccessfloatComponent,
   ],
   imports: [
     BrowserModule,
@@ -156,6 +166,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     DeleteGroupIndivisualBillComponent,
     EditGroupIndivisualBillComponent,
     BillInfoComponent,
-    BugreportComponent],
+    BugreportComponent,
+    GroupacceptpopupComponent],
 })
 export class AppModule { }

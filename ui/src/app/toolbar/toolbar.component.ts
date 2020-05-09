@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionStorage } from '../app.session';
 import { GlobalConfigsService } from '../global-configs.service';
+import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { GroupacceptpopupComponent } from './groupacceptpopup/groupacceptpopup.component';
 
 interface ReturnImage {
   Image: any;
@@ -30,7 +32,8 @@ export class ToolbarComponent implements OnInit {
   isPremium = false;
   GroupData = [];
 
-  constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService) {}
+  // tslint:disable-next-line:max-line-length
+  constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService, public dialog: MatDialog) {}
 
   ngOnInit() {
     // To get the random DP
@@ -125,6 +128,13 @@ export class ToolbarComponent implements OnInit {
   GetAllGroupData() {
     this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
       this.GroupData = data.body.body;
+      if ( typeof(this.GroupData) !== 'string') {
+        const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
+          panelClass: 'myapp-no-padding-dialog'
+        });
+        dialogRef.componentInstance.userName = this.userName;
+        dialogRef.componentInstance.GroupData = this.GroupData;
+      }
       // this.GroupData = [['3', 'delhi'], ['3', 'delhi']];
       // console.log('ALL GROUP DATA: ', this.GroupData);
     });

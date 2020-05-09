@@ -12,13 +12,13 @@
                           </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" type='button' data-toggle="modal" [attr.data-target]="'#ViewAcceptedPeople'+FormattedStringId">Members</a>
-                        </li>
+                        <!--   <li class="nav-item">
+                              <a class="nav-link" type='button' data-toggle="modal" [attr.data-target]="'#ViewAcceptedPeople'+FormattedStringId">Members</a>
+                          </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" type='button' data-toggle="modal" [attr.data-target]="'#ViewPendingPeople'+FormattedStringId">Pending</a>
-                        </li>
+                          <li class="nav-item">
+                              <a class="nav-link" type='button' data-toggle="modal" [attr.data-target]="'#ViewPendingPeople'+FormattedStringId">Pending</a>
+                          </li> -->
 
                         <li class="nav-item">
                         <a class="nav-link" type='button' data-toggle="modal" [attr.data-target]="'#AllSharedBill'+FormattedStringId">Create Bill</a>
@@ -213,6 +213,8 @@
         </div>
       </form>
       </div>
+      <app-errorfloat *ngIf="error" [message]="IntimationMessage"></app-errorfloat>
+      <app-successfloat *ngIf="success" [message]="IntimationMessage"></app-successfloat>
     </div>
   </div>
 
@@ -318,7 +320,7 @@
           </button>
         </div>
 
-        <div class="modal-body" style="height: 400px;">
+        <div class="modal-body">
 
           <div class = "row" style="height: 20px;">
             <div class= "col-md-5">
@@ -342,18 +344,44 @@
 
           <hr>
 
+          <div class = "row" style="height: 20px;">
+            <div class= "col-md-5">
+              <h5>Group Description: </h5>
+            </div>
+            <div class = "col-md-7">
+              <p>{{Description}}</p>
+            </div>
+          </div>
+
+          <hr>
+
           <div class = "row">
             <div class= "col-md-5">
               <h5>Group Members: </h5>
             </div>
             <div class = "col-md-7">
-              <p *ngFor="let Member of Participants">{{Member}}</p>
+              <div class = "row" *ngFor="let Member of Participants" style="height: 25px;">
+                <p style="padding-left: 13px;">{{Member}}</p>
+              </div>
             </div>
           </div>
 
           <hr>
+
+          <div class = "row" *ngIf="PendingUsers.length != 0">
+            <div class= "col-md-5">
+              <h5>Pending Members: </h5>
+            </div>
+            <div class = "col-md-7">
+              <div class = "row" *ngFor="let Member of PendingUsers" style="height: 25px;">
+                <p style="padding-left: 13px;">{{Member}}</p>
+              </div>
+            </div>
+          </div>
+
+          <hr *ngIf="PendingUsers.length != 0">
           
-          <div class = "row" style="height: 20px;">
+          <div class = "row" style="height: 40px;">
             <div class= "col-md-5">
               <h5>Group Created Time: </h5>
             </div>
@@ -432,3 +460,4 @@
       </div>
     </div>
   </div>
+
