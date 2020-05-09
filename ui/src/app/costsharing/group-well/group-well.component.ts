@@ -5,14 +5,12 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { GroupOperationsService } from './group-operations.service';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import { ResizeEvent } from 'angular-resizable-element';
-import { ResizableModule } from 'angular-resizable-element';
-
 
 interface Validity {
   username: string;
   password: string;
   available: boolean;
+  message: string;
 }
 
 
@@ -38,7 +36,7 @@ export class GroupWellComponent implements OnInit {
   IntermediateArray: string[];
   @Input() ParticipantsCopy: string[];
   FormattedStringId: string;
-
+  success = false;
   divs: number[] = [0];
   valid: boolean[] = new Array(100).fill(false);
   StartVerification = false;
@@ -46,9 +44,9 @@ export class GroupWellComponent implements OnInit {
   DoneVerification = false;
   currentDiv: number;
   currentUsername: string;
-
+  IntimationMessage: string;
   FormattedDate: any;
-
+  error = false;
   constructor(private GroupOperations: GroupOperationsService, private http: HttpClient) { }
 
   ngOnInit() {
@@ -171,8 +169,36 @@ export class GroupWellComponent implements OnInit {
     const index = this.DivIdtoIndex(divId);
     this.VerifyUser(name).subscribe(data => {
       this.StartVerification = true;
-      this.valid[this.currentDiv] = data.available && (this.currentUsername !== this.Username) && (!this.Participants.includes(name));
+      // tslint:disable-next-line:max-line-length
+      this.valid[this.currentDiv] = data.available && (this.currentUsername !== this.Username) && (!this.Participants.includes(name)) && (!this.PendingUsers.includes(name) && data.message !== 'User has rejected the group too many times');
       this.StartVerification = false;
+      if (this.valid[this.currentDiv]) {
+        this.success = true;
+        this.IntimationMessage = 'User Available to be added';
+        // this.IntimationMessage = 'User has rejected the group many times';
+      } else {
+        if (this.Participants.includes(name)) {
+          this.error = true;
+          // tslint:disable-next-line:quotemark
+          this.IntimationMessage = "User already a member of group";
+        } else if (this.PendingUsers.includes(name)) {
+          this.error = true;
+          // tslint:disable-next-line:quotemark
+          this.IntimationMessage = "User is already invited";
+        } else if (this.currentUsername === this.Username) {
+          this.error = true;
+          // tslint:disable-next-line:quotemark
+          this.IntimationMessage = "You can't add Yourself";
+        } else if ( data.message === 'User has rejected the group too many times') {
+          this.error = true;
+          // tslint:disable-next-line:quotemark
+          this.IntimationMessage = "User rejected the group";
+        } else {
+          this.error = true;
+          this.IntimationMessage = 'No Username';
+        }
+      }
+      this.FloatedIntimation();
     });
   }
 
@@ -185,6 +211,16 @@ export class GroupWellComponent implements OnInit {
   RefreshData() {
     this.ChangeEvent.emit();
   }
+
+  FloatedIntimation(): void {
+    // show box msg
+    // wait 3 Seconds and hide
+    setTimeout(function() {
+        this.success = false;
+        this.error = false;
+        // console.log(this.edited);
+    }.bind(this), 6000);
+   }
 
 
 }

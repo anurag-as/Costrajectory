@@ -213,6 +213,8 @@
         </div>
       </form>
       </div>
+      <app-errorfloat *ngIf="error" [message]="IntimationMessage"></app-errorfloat>
+      <app-successfloat *ngIf="success" [message]="IntimationMessage"></app-successfloat>
     </div>
   </div>
 
@@ -458,3 +460,4 @@
       </div>
     </div>
   </div>
+

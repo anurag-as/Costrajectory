@@ -70,6 +70,9 @@ import { Title } from '@angular/platform-browser';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { GroupacceptpopupComponent } from './toolbar/groupacceptpopup/groupacceptpopup.component';
 import { DevelopersComponent } from './accountdetails/developers/developers.component';
+import { UtilitiesComponent } from './utilities/utilities.component';
+import { ErrorfloatComponent } from './Utilities/errorfloat/errorfloat.component';
+import { SuccessfloatComponent } from './Utilities/successfloat/successfloat.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +118,10 @@ import { DevelopersComponent } from './accountdetails/developers/developers.comp
     FooterComponent,
     BugreportComponent,
     GroupacceptpopupComponent,
-    DevelopersComponent
+    DevelopersComponent,
+    UtilitiesComponent,
+    ErrorfloatComponent,
+    SuccessfloatComponent,
   ],
   imports: [
     BrowserModule,
