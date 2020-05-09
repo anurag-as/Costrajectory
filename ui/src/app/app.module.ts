@@ -69,6 +69,7 @@ import { BugreportComponent } from './footer/bugreport/bugreport.component';
 import { Title } from '@angular/platform-browser';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { GroupacceptpopupComponent } from './toolbar/groupacceptpopup/groupacceptpopup.component';
+import { DevelopersComponent } from './accountdetails/developers/developers.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { GroupacceptpopupComponent } from './toolbar/groupacceptpopup/groupaccep
     EditGroupIndivisualBillComponent,
     FooterComponent,
     BugreportComponent,
-    GroupacceptpopupComponent
+    GroupacceptpopupComponent,
+    DevelopersComponent
   ],
   imports: [
     BrowserModule,

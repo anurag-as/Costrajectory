@@ -358,7 +358,9 @@
               <h5>Group Members: </h5>
             </div>
             <div class = "col-md-7">
-              <p *ngFor="let Member of Participants">{{Member}}</p>
+              <div class = "row" *ngFor="let Member of Participants" style="height: 25px;">
+                <p style="padding-left: 13px;">{{Member}}</p>
+              </div>
             </div>
           </div>
 
@@ -369,7 +371,9 @@
               <h5>Pending Members: </h5>
             </div>
             <div class = "col-md-7">
-              <p *ngFor="let Member of PendingUsers">{{Member}}</p>
+              <div class = "row" *ngFor="let Member of PendingUsers" style="height: 25px;">
+                <p style="padding-left: 13px;">{{Member}}</p>
+              </div>
             </div>
           </div>
 

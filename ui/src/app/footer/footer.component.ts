@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BugreportComponent } from './bugreport/bugreport.component';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -9,13 +10,17 @@ import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class FooterComponent implements OnInit {
   OnMouseHover = false;
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private route: Router) { }
 
   ngOnInit() {
   }
 
   goToLink(url: string) {
     window.open(url, '_blank');
+}
+
+RedirectTolink(url: string) {
+  this.route.navigate(['/' + url]);
 }
 
 RaiseBugReport(): void {

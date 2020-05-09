@@ -2,12 +2,12 @@
 style="bottom: 0; position: relative;">
 <!-- <p class="mb-1">© Costrajectory</p>
  -->    <ul class="list-inline">
-        <li class="list-inline-item" type="button" style="color: brown;" data-toggle="modal" data-target="#privacyModal">AboutUs</li>
+        <li class="list-inline-item" type="button" style="color: brown;" (click)="RedirectTolink('AboutUs')">AboutUs</li>
         <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
         
-         <li class="list-inline-item" type="button" style="color: blueviolet" data-toggle="modal" data-target="#FeatureFooterModal">Features</li>
-<!--         <li class="list-inline-item" type="button" style="color: blueviolet" (click)="goToLink('\assets\StandaloneHTML\about.html')">Features</li>    
- -->            <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
+<!--         <li class="list-inline-item" type="button" style="color: blueviolet" data-toggle="modal" data-target="#FeatureFooterModal">Features</li>
+-->         <li class="list-inline-item" type="button" style="color: blueviolet" (click)="RedirectTolink('About')">Features</li>    
+            <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
         
         <li class="list-inline-item" style="color: blue" (mouseover)='over()' (mouseout)='out()'>
             <img src="assets\images\logo.png" style="height: 35px; width: 60px;" *ngIf="OnMouseHover">
