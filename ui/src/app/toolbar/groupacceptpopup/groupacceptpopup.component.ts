@@ -16,6 +16,7 @@ interface GetG {
 export class GroupacceptpopupComponent implements OnInit {
   @Input() userName;
   @Input() GroupData;
+  RequestId = 1;
   constructor(private http: HttpClient, private dialogRef: MatDialogRef<GroupacceptpopupComponent>) { }
 
   ngOnInit() {
@@ -59,6 +60,10 @@ export class GroupacceptpopupComponent implements OnInit {
 
     ParseInt(a, b) {
       return parseInt(a, b);
+    }
+
+    ChangeRequestType(request) {
+      this.RequestId = request;
     }
 
 }

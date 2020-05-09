@@ -137,3 +137,34 @@
 
 #ButtonGroupToolbarPremium {
 }
+
+#GroupRequestsActive {
+  background-color: red; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+  }
+
+
+#GroupRequestsInActive {
+  background-color: red; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+  background-image: -webkit-linear-gradient(30deg, white 20%, red 80%);
+}
+
+#AddUsersActive {
+  background-color: orange; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+}
+
+#AddUsersInActive {
+  background-color: orange; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+  background-image: -webkit-linear-gradient(150deg,  white 20%, orange 80%);
+}
