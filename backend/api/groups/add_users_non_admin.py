@@ -6,8 +6,8 @@ from database_functions.groups.insertion_functions import insert_into_group_tabl
     insert_into_admin_approvals_table
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.querying_functions import get_status_for_group, get_group_title, get_group_pending_users \
-    , get_group_pending_state_machine
-from database_functions.groups.updation_functions import update_group_status, add_new_pending_users_group,\
+    , get_group_pending_state_machine, get_group_admin_approval
+from database_functions.groups.updation_functions import update_group_status, add_new_pending_users_group, \
     update_pending_state_machine
 from time import time
 
@@ -46,14 +46,16 @@ def add_users_to_group_non_admin():
                 else:  # successfully add the user to the group
                     update_group_status(connection(), group_id, user, "awaiting")
                     response['success'].append(user)
-                    insert_into_admin_approvals_table(connection(), group_admin, "awaiting", "add",
-                                                      user, group_title, group_id)
+                    if not get_group_admin_approval(connection(), user, group_id):  # to avoid duplicates
+                        insert_into_admin_approvals_table(connection(), group_admin, "awaiting", "add",
+                                                          user, group_title, group_id)
             #  if user entry does not exist in the group, then add a new entry
             elif not get_status_for_group(connection(), group_id, user, "accepted"):
                 response['success'].append(user)
                 insert_into_pending_requests_table(connection(), group_id, user, "awaiting", 0)
-                insert_into_admin_approvals_table(connection(), group_admin, "awaiting", "add",
-                                                  user, group_title, group_id)
+                if not get_group_admin_approval(connection(), user, group_id):
+                    insert_into_admin_approvals_table(connection(), group_admin, "awaiting", "add",
+                                                      user, group_title, group_id)
         # adding transaction to logs
 
         if response['success']:

@@ -176,3 +176,15 @@ def get_group_pending_state_machine(db_connection, username, group_id):
         if row:
             return row[0]
     return False
+
+
+# function to get the status for group_id and user in admin approvals table
+def get_group_admin_approval(db_connection, user, group_id):
+    cursor = db_connection.execute('''SELECT status FROM ADMIN_APPROVALS  
+    where user="{user}" and group_id="{group_id}"  
+    '''.format(group_id=group_id, user=user))
+    for row in cursor:
+        if row:
+            return row[0]
+    return False
+

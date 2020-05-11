@@ -37,6 +37,7 @@ from api.groups.delete_group_bill import deleteGroupBillAPI
 from api.groups.edit_group_bill import editGroupBillAPI
 from api.utils.bug_fix import bugDetailsAPI
 from api.groups.add_users_non_admin import addUsersGroupNonAdminApi
+from api.groups.remove_users_non_admin import removeUsersGroupNonAdminApi
 
 
 # Flask APP
@@ -75,6 +76,7 @@ app.register_blueprint(deleteGroupBillAPI)
 app.register_blueprint(editGroupBillAPI)
 app.register_blueprint(bugDetailsAPI)
 app.register_blueprint(addUsersGroupNonAdminApi)
+app.register_blueprint(removeUsersGroupNonAdminApi)
 
 
 if __name__ == '__main__':
