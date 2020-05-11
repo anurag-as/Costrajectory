@@ -188,3 +188,21 @@ def get_group_admin_approval(db_connection, user, group_id):
             return row[0]
     return False
 
+
+# function to get the pending approvals for admin
+def get_pending_admin_approvals(db_connection, admin):
+    cursor = db_connection.execute('''SELECT type, user, group_title, group_id FROM ADMIN_APPROVALS 
+    where admin = "{admin}" 
+    AND status = "awaiting"
+    '''.format(admin=admin))
+    approvals = {'add':[], 'remove':[]}
+    for row in cursor:
+        if row:
+            if row[0] == 'add':
+                approvals['add'].append([{'type': row[0], 'username': row[1], 'group_title':row[2],
+                                          'group_id': row[3]}])
+            else:
+                approvals['remove'].append([{'type': row[0], 'username': row[1], 'group_title': row[2],
+                                          'group_id': row[3]}])
+    db_connection.commit()
+    return approvals if approvals else "False"
