@@ -40,3 +40,12 @@ def insert_into_group_bills_table(db_connection, uploader, title, datetime, amou
     db_connection.commit()
     return bill_id
 
+
+# function to add the users to group_admin approvals table
+def insert_into_admin_approvals_table(db_connection, admin, status, approval_type, user, group_title, group_id):
+    db_connection.execute('''INSERT INTO ADMIN_APPROVALS (admin, status, type, user, group_title, group_id) 
+        VALUES ("{admin}","{status}","{approval_type}", "{user}", "{group_title}", "{group_id}")'''
+                          .format(admin=admin, status=status, approval_type=approval_type,group_id=group_id,
+                                  group_title=group_title,
+                                  user=user))
+    db_connection.commit()

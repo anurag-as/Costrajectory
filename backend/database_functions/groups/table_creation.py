@@ -62,3 +62,14 @@ def add_pending_state_machine(db_connection):
     db_connection.execute('''ALTER TABLE PENDING_REQUESTS ADD COLUMN
                               pending_state_machine INTEGER;''')
     db_connection.commit()
+
+
+# Creating the admin approvals table
+def create_admin_approvals_table(db_connection):
+    db_connection.execute('''CREATE TABLE ADMIN_APPROVALS
+         (ID INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL ,
+         admin              TEXT    NOT NULL,
+         status             TEXT    NOT NULL,
+         type               TEXT    NOT NULL,
+         user               TEXT    NOT NULL);''')
+    db_connection.commit()
