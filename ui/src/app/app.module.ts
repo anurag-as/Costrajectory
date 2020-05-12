@@ -73,6 +73,8 @@ import { DevelopersComponent } from './accountdetails/developers/developers.comp
 import { UtilitiesComponent } from './utilities/utilities.component';
 import { ErrorfloatComponent } from './Utilities/errorfloat/errorfloat.component';
 import { SuccessfloatComponent } from './Utilities/successfloat/successfloat.component';
+import { AddUsersSharedBillComponent } from './costsharing/group-well/add-users-shared-bill/add-users-shared-bill.component';
+import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-users-shared-bill/delete-users-shared-bill.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +124,8 @@ import { SuccessfloatComponent } from './Utilities/successfloat/successfloat.com
     UtilitiesComponent,
     ErrorfloatComponent,
     SuccessfloatComponent,
+    AddUsersSharedBillComponent,
+    DeleteUsersSharedBillComponent,
   ],
   imports: [
     BrowserModule,
@@ -167,6 +171,9 @@ import { SuccessfloatComponent } from './Utilities/successfloat/successfloat.com
     EditGroupIndivisualBillComponent,
     BillInfoComponent,
     BugreportComponent,
-    GroupacceptpopupComponent],
+    GroupacceptpopupComponent,
+    AddUsersSharedBillComponent,
+    DeleteUsersSharedBillComponent
+    ],
 })
 export class AppModule { }

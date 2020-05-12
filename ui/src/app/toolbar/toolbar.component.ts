@@ -131,7 +131,8 @@ export class ToolbarComponent implements OnInit {
       if ( typeof(this.GroupData) !== 'string') {
         this.RequestId = 1;
         const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
-          panelClass: 'myapp-no-padding-dialog'
+          panelClass: 'myapp-no-padding-dialog',
+          width: '800px'
         });
         dialogRef.componentInstance.userName = this.userName;
         dialogRef.componentInstance.GroupData = this.GroupData;
