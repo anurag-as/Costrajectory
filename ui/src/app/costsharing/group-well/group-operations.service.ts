@@ -12,8 +12,11 @@ export class GroupOperationsService {
 
   constructor(private http: HttpClient) { }
 
-  deleteUsersFromGroup( GroupId: number, username: string, members: string[]) {
-    const endpoint = 'http://127.0.0.1:5000/group/removeUsersGroup';
+  deleteUsersFromGroup( GroupId: number, username: string, members: string[], NonAdminMode ?: boolean) {
+    let endpoint = 'http://127.0.0.1:5000/group/removeUsersGroup';
+    if (NonAdminMode === true) {
+      endpoint = 'http://127.0.0.1:5000/group/removeUsersGroupNonAdmin';
+    }
     const queryPayload = {user_name: username, group_id: GroupId.toString(), users: members};
     return this.http.post<Status>(endpoint, queryPayload);
   }
@@ -42,8 +45,11 @@ export class GroupOperationsService {
     return this.http.post<Status>(endpoint, queryPayload);
   }
 
-  AddUsersToGroup( GroupId: number, username: string, members: string[]) {
-    const endpoint = 'http://127.0.0.1:5000/group/addUsersGroup';
+  AddUsersToGroup( GroupId: number, username: string, members: string[], NonAdminMode ?: boolean) {
+    let endpoint = 'http://127.0.0.1:5000/group/addUsersGroup';
+    if (NonAdminMode === true) {
+      endpoint = 'http://127.0.0.1:5000/group/addUsersGroupNonAdmin';
+    }
     const queryPayload = {user_name: username, group_id: GroupId.toString(), users: members};
     console.log('ADD USERS : ', queryPayload);
     return this.http.post<Status>(endpoint, queryPayload);

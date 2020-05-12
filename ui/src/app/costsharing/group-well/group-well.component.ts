@@ -5,6 +5,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { GroupOperationsService } from './group-operations.service';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import { AddUsersSharedBillComponent } from './add-users-shared-bill/add-users-shared-bill.component';
+import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DeleteUsersSharedBillComponent } from './delete-users-shared-bill/delete-users-shared-bill.component';
 
 interface Validity {
   username: string;
@@ -47,7 +50,9 @@ export class GroupWellComponent implements OnInit {
   IntimationMessage: string;
   FormattedDate: any;
   error = false;
-  constructor(private GroupOperations: GroupOperationsService, private http: HttpClient) { }
+  constructor(private GroupOperations: GroupOperationsService,
+              private http: HttpClient,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.FormattedStringId = String(this.GroupId);
@@ -222,5 +227,73 @@ export class GroupWellComponent implements OnInit {
     }.bind(this), 6000);
    }
 
+  AddUsersToGroupDialogAdminMode(): void {
+    const dialogRef = this.dialog.open(AddUsersSharedBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '700px'
+    });
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.Admin = this.Admin;
+    dialogRef.componentInstance.PendingUsers = this.PendingUsers;
+    dialogRef.componentInstance.isAdminMODE = true;
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // this.RefreshData();
+    });
+  }
 
+  AddUsersToGroupDialogNonAdminMode(): void {
+    const dialogRef = this.dialog.open(AddUsersSharedBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '700px'
+    });
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.Admin = this.Admin;
+    dialogRef.componentInstance.PendingUsers = this.PendingUsers;
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.isAdminMODE = false;
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // this.RefreshData();
+    });
+  }
+
+  DeleteUsersToGroupDialogAdminMode(): void {
+    const dialogRef = this.dialog.open(DeleteUsersSharedBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '700px'
+    });
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.Admin = this.Admin;
+    dialogRef.componentInstance.PendingUsers = this.PendingUsers;
+    dialogRef.componentInstance.isAdminMODE = true;
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.RefreshData();
+    });
+  }
+
+  DeleteUsersToGroupDialogNonAdminMode(): void {
+    const dialogRef = this.dialog.open(DeleteUsersSharedBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '700px'
+    });
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.Username = this.Username;
+    dialogRef.componentInstance.Participants = this.Participants;
+    dialogRef.componentInstance.Admin = this.Admin;
+    dialogRef.componentInstance.PendingUsers = this.PendingUsers;
+    dialogRef.componentInstance.GroupId = this.GroupId;
+    dialogRef.componentInstance.isAdminMODE = false;
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // this.RefreshData();
+    });
+  }
 }

@@ -31,7 +31,7 @@ export class ToolbarComponent implements OnInit {
   base64Data = '';
   isPremium = false;
   GroupData = [];
-
+  RequestId = 0;
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService, public dialog: MatDialog) {}
 
@@ -129,15 +129,23 @@ export class ToolbarComponent implements OnInit {
     this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
       this.GroupData = data.body.body;
       if ( typeof(this.GroupData) !== 'string') {
+        this.RequestId = 1;
         const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
-          panelClass: 'myapp-no-padding-dialog'
+          panelClass: 'myapp-no-padding-dialog',
+          width: '800px'
         });
         dialogRef.componentInstance.userName = this.userName;
         dialogRef.componentInstance.GroupData = this.GroupData;
+      } else {
+        this.RequestId = 0;
       }
       // this.GroupData = [['3', 'delhi'], ['3', 'delhi']];
       // console.log('ALL GROUP DATA: ', this.GroupData);
     });
+  }
+
+  ChangeRequestType(request) {
+    this.RequestId = request;
   }
 
   GetAllGroupDataFromServer(UserName: string) {
