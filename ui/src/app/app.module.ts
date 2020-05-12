@@ -71,8 +71,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { GroupacceptpopupComponent } from './toolbar/groupacceptpopup/groupacceptpopup.component';
 import { DevelopersComponent } from './accountdetails/developers/developers.component';
 import { UtilitiesComponent } from './utilities/utilities.component';
-import { ErrorfloatComponent } from './Utilities/errorfloat/errorfloat.component';
-import { SuccessfloatComponent } from './Utilities/successfloat/successfloat.component';
+import { ErrorfloatComponent } from './utilities/errorfloat/errorfloat.component';
+import { SuccessfloatComponent } from './utilities/successfloat/successfloat.component';
 import { AddUsersSharedBillComponent } from './costsharing/group-well/add-users-shared-bill/add-users-shared-bill.component';
 import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-users-shared-bill/delete-users-shared-bill.component';
 
