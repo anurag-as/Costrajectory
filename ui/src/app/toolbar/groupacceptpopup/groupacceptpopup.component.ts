@@ -5,7 +5,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 
 interface GetG {
-  body: [];
+  group_admin_approvals: { add: [], remove: [] };
+  personal_requests: [];
 }
 
 @Component({
@@ -16,11 +17,16 @@ interface GetG {
 export class GroupacceptpopupComponent implements OnInit {
   @Input() userName;
   @Input() GroupData;
-  RequestId = 1;
+  @Input() PeopleAdd;
+  @Input() PeopleRemove;
+  @Input() RequestId = 1;
+  @Input() UserToBeAddedOrRemoved: string;
+
   constructor(private http: HttpClient, private dialogRef: MatDialogRef<GroupacceptpopupComponent>) { }
 
   ngOnInit() {
     // console.log('PENDING REQ: ', this.GroupData, typeof(this.GroupData));
+    // this.dialogRef.updateSize();
   }
 
   DecisionPoster(DecisionDetails: {GroupId: number, Decision: string}) {
@@ -39,7 +45,9 @@ export class GroupacceptpopupComponent implements OnInit {
 
   GetAllGroupData() {
       this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
-        this.GroupData = data.body.body;
+        this.GroupData = data.body.personal_requests;
+        this.PeopleAdd = data.body.group_admin_approvals.add;
+        this.PeopleRemove = data.body.group_admin_approvals.remove;
       });
     }
 

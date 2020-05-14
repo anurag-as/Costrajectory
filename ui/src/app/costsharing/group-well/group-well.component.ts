@@ -78,13 +78,13 @@ export class GroupWellComponent implements OnInit {
 
   AddUsersToGroup(f: NgForm) {
     // console.log('ADDING');
-    this.GroupOperations.AddUsersToGroup(this.GroupId, this.Username, this.ConvertParticipantsToArray(f)).subscribe(data => {
+    this.GroupOperations.AddUsersToGroup(this.GroupId, this.Username, this.ConvertParticipantsToArray(f), this.Admin).subscribe(data => {
       this.ChangeEvent.emit();
     });
   }
 
   DeleteUsersFromGroup() {
-    this.GroupOperations.deleteUsersFromGroup(this.GroupId, this.Username, this.deletedParticipants).subscribe(data => {
+    this.GroupOperations.deleteUsersFromGroup(this.GroupId, this.Username, this.deletedParticipants, this.Admin).subscribe(data => {
       this.ChangeEvent.emit();
     });
   }
@@ -257,7 +257,7 @@ export class GroupWellComponent implements OnInit {
     dialogRef.componentInstance.GroupId = this.GroupId;
     dialogRef.componentInstance.isAdminMODE = false;
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+       console.log('The dialog was closed');
       // this.RefreshData();
     });
   }

@@ -10,7 +10,9 @@ import { EventEmitter } from '@angular/core';
 export class GroupAcceptComponent implements OnInit {
   @Input() GroupName;
   @Input() GroupID;
-  @Output() decision = new EventEmitter<{GroupId: number, Decision: string}>();
+  @Input() RequestType = 1; // 1 -> group , 2-> Add, 3-> Remove
+  @Output() decision = new EventEmitter<{GroupId: number, Decision: string, RequestType: number}>();
+  @Input() UserToBeAddedOrRemoved: string;
 
   constructor() { }
 
@@ -18,11 +20,11 @@ export class GroupAcceptComponent implements OnInit {
   }
 
   AcceptGroup() {
-    this.decision.emit({GroupId: this.GroupID, Decision: 'accepted'});
+    this.decision.emit({GroupId: this.GroupID, Decision: 'accepted', RequestType: this.RequestType});
   }
 
   RejectGroup() {
-    this.decision.emit({GroupId: this.GroupID, Decision: 'rejected'});
+    this.decision.emit({GroupId: this.GroupID, Decision: 'rejected', RequestType: this.RequestType});
   }
 
 }
