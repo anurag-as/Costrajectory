@@ -26,7 +26,7 @@ def create_sharing_group():
 
         users = list(set(users))  # Avoid adding same users multiple times to the groups
         pending_users = users[:]
-        pending_users.remove(group_admin)
+
 
         current_users = str([group_admin])  # only adding admin to the group
         group_creation_time = str(time())

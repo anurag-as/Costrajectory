@@ -84,7 +84,10 @@ def get_group_info(db_connection, group_id):
             try:
                 list_users = literal_eval(row[2])
                 list_bills = literal_eval(row[5])
-                list_pending_users = literal_eval(row[7])
+                if(row[7] == None):
+                    list_pending_users = []
+                else:
+                    list_pending_users = literal_eval(row[7])
                 group_info = {'group_id': row[0], 'group_admin': row[1],
                               'users': list_users, 'title': row[3], 'description': row[4],
                               'bills': list_bills, 'creation_time': row[6],
