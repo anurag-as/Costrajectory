@@ -6,7 +6,6 @@ from database_functions.groups.querying_functions import get_status_for_group, g
 
 checkUserAPI = Blueprint('checkUserAPI', __name__)
 
-
 # API to check a username is available for signup
 @checkUserAPI.route('/auth/checkUser', methods=['POST'])
 @cross_origin()
@@ -28,5 +27,4 @@ def checkUser():
         x = jsonify(
             {'username': username, 'password': password, 'available': signup.check_user()
              })
-
     return x
