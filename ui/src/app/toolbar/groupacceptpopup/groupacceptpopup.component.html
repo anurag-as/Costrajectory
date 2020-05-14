@@ -5,22 +5,39 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body" style="padding: 0;" *ngIf="RequestId != 0">
+    <div class="modal-body" style="padding-top: 0; padding-bottom: 0;" *ngIf="RequestId != 0">
       <div class="modal-body" type="button" [attr.id]="RequestId == 1 ? 'GroupRequestsActive': 'GroupRequestsInActive'" (click)="ChangeRequestType(1)">
-        <p style="padding: 0; position: relative; left:100px; top:-13px;"><b>Group Requests</b></p>
+        <p style="padding-top: 0; padding-bottom: 0; position: relative; left:200px; top:-13px;"><b>Group Requests</b></p>
       </div>
       <div class="modal-body" type="button" [attr.id]="RequestId == 2 ? 'AddUsersActive': 'AddUsersInActive'" (click)="ChangeRequestType(2)">
-        <p style="padding: 0; position: relative; right:0px; top:-13px;"><b>Add People Reqests</b></p>
+        <p style="padding-top: 0; padding-bottom: 0; position: relative; right:-10px; top:-13px;"><b>Add People Reqests</b></p>
       </div>
     </div>
-    <div class="modal-body" *ngIf="GroupData != 'False'">
-      <app-group-accept (decision)="DecisionPoster($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)"></app-group-accept>
-      <!-- <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
-      <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
-      <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept> -->
+    
+    <div class="modal-body" *ngIf="GroupData != 'False' && GroupData != undefined && RequestId == 1" style="padding-top: 0; padding-bottom: 0;">
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionGroup($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)" [RequestType]="1"></app-group-accept>
     </div>
-    <div class="modal-body" *ngIf="GroupData == 'False'">
-      <h5 style="color: green;"> NO GROUP REQUESTS AVAILABLE!!</h5>
+    <div class="modal-body" *ngIf="GroupData == 'False' && GroupData != undefined && RequestId == 1">
+      <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
+    </div>
+
+    <div class="modal-body" *ngIf="PeopleAdd != 'False' && PeopleAdd != undefined && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionAdminAdd($event)" *ngFor="let RequestsAdd of PeopleAdd; let i = index" 
+      [GroupName]="RequestsAdd.group_title" 
+      [GroupID]= "ParseInt(RequestsAdd.group_id, 10)" 
+      [RequestType]="2"
+      [UserToBeAddedOrRemoved]="RequestsAdd.username" ></app-group-accept>
+    </div>
+    <hr>
+    <div class="modal-body" *ngIf="PeopleRemove != 'False' && PeopleRemove != undefined && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionAdminRemove($event)" *ngFor="let RequestsRemove of PeopleRemove; let i = index" 
+      [GroupName]="RequestsRemove.group_title" 
+      [GroupID]= "ParseInt(RequestsRemove.group_id, 10)" 
+      [RequestType]="3"
+      [UserToBeAddedOrRemoved]="RequestsRemove.username"></app-group-accept>
+    </div>
+    <div class="modal-body" *ngIf="PeopleAdd == 'False' && PeopleRemove == 'False' && GroupData != undefined && RequestId == 2">
+      <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeDialog()">Cancel</button>

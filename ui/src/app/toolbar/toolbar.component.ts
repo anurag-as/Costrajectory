@@ -16,7 +16,8 @@ interface PremiumStatus {
 }
 
 interface GetG {
-  body: [];
+  group_admin_approvals: { add: [], remove: [] };
+  personal_requests: [];
 }
 
 @Component({
@@ -32,6 +33,8 @@ export class ToolbarComponent implements OnInit {
   isPremium = false;
   GroupData = [];
   RequestId = 0;
+  PeopleAdd = [];
+  PeopleRemove = [];
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService, public dialog: MatDialog) {}
 
@@ -127,8 +130,11 @@ export class ToolbarComponent implements OnInit {
 
   GetAllGroupData() {
     this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
-      this.GroupData = data.body.body;
-      if ( typeof(this.GroupData) !== 'string') {
+      this.GroupData = data.body.personal_requests;
+      this.PeopleAdd = data.body.group_admin_approvals.add;
+      this.PeopleRemove = data.body.group_admin_approvals.remove;
+      // console.log('REQUESTS: ', this.GroupData, this.PeopleAdd, this.PeopleRemove);
+      if ( typeof(this.GroupData) !== 'string' && this.GroupData !== undefined) {
         this.RequestId = 1;
         const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
           panelClass: 'myapp-no-padding-dialog',
@@ -136,8 +142,10 @@ export class ToolbarComponent implements OnInit {
         });
         dialogRef.componentInstance.userName = this.userName;
         dialogRef.componentInstance.GroupData = this.GroupData;
-      } else {
-        this.RequestId = 0;
+        dialogRef.componentInstance.PeopleAdd = this.PeopleAdd;
+        dialogRef.componentInstance.PeopleRemove = this.PeopleRemove;
+      } else if (typeof(data.body.group_admin_approvals) !== 'string') {
+        this.RequestId = 2;
       }
       // this.GroupData = [['3', 'delhi'], ['3', 'delhi']];
       // console.log('ALL GROUP DATA: ', this.GroupData);

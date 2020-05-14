@@ -29,6 +29,9 @@
   }
 
   .btnRoundAccept {
+    padding: 0;
+    position: relative;
+    top: -8px;
     background-color: rgb(150, 228, 150);
   }
 
@@ -37,6 +40,9 @@
   }
 
   .btnRoundReject {
+    padding: 0;
+    position: relative;
+    top: -8px;
     background-color: rgb(238, 155, 124);
   }
 

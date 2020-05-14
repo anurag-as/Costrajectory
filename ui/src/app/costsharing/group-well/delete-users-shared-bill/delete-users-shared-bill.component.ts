@@ -50,7 +50,8 @@ export class DeleteUsersSharedBillComponent implements OnInit {
   }
 
   DeleteUsersFromGroup() {
-    this.GroupOperations.deleteUsersFromGroup(this.GroupId, this.Username, this.deletedParticipants, !this.isAdminMODE).subscribe(data => {
+    // tslint:disable-next-line:max-line-length
+    this.GroupOperations.deleteUsersFromGroup(this.GroupId, this.Username, this.deletedParticipants, this.Admin, !this.isAdminMODE).subscribe(data => {
       this.closeDialog();
     });
   }
