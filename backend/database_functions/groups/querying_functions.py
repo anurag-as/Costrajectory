@@ -202,10 +202,10 @@ def get_pending_admin_approvals(db_connection, admin):
     for row in cursor:
         if row:
             if row[0] == 'add':
-                approvals['add'].append([{'type': row[0], 'username': row[1], 'group_title':row[2],
-                                          'group_id': row[3]}])
+                approvals['add'].append({'type': row[0], 'username': row[1], 'group_title':row[2],
+                                          'group_id': row[3]})
             else:
-                approvals['remove'].append([{'type': row[0], 'username': row[1], 'group_title': row[2],
-                                          'group_id': row[3]}])
+                approvals['remove'].append({'type': row[0], 'username': row[1], 'group_title': row[2],
+                                          'group_id': row[3]})
     db_connection.commit()
     return approvals if approvals else "False"
