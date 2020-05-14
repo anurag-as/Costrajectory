@@ -15,14 +15,14 @@
     </div>
     
     <div class="modal-body" *ngIf="GroupData != 'False' && GroupData != undefined && RequestId == 1" style="padding-top: 0; padding-bottom: 0;">
-      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionPoster($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)" [RequestType]="1"></app-group-accept>
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionGroup($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)" [RequestType]="1"></app-group-accept>
     </div>
     <div class="modal-body" *ngIf="GroupData == 'False' && GroupData != undefined && RequestId == 1">
       <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
     </div>
 
     <div class="modal-body" *ngIf="PeopleAdd != 'False' && PeopleAdd != undefined && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
-      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionPoster($event)" *ngFor="let RequestsAdd of PeopleAdd; let i = index" 
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionAdminAdd($event)" *ngFor="let RequestsAdd of PeopleAdd; let i = index" 
       [GroupName]="RequestsAdd.group_title" 
       [GroupID]= "ParseInt(RequestsAdd.group_id, 10)" 
       [RequestType]="2"
@@ -30,7 +30,7 @@
     </div>
     <hr>
     <div class="modal-body" *ngIf="PeopleRemove != 'False' && PeopleRemove != undefined && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
-      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionPoster($event)" *ngFor="let RequestsRemove of PeopleRemove; let i = index" 
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionAdminRemove($event)" *ngFor="let RequestsRemove of PeopleRemove; let i = index" 
       [GroupName]="RequestsRemove.group_title" 
       [GroupID]= "ParseInt(RequestsRemove.group_id, 10)" 
       [RequestType]="3"

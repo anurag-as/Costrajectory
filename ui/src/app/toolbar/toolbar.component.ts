@@ -133,7 +133,7 @@ export class ToolbarComponent implements OnInit {
       this.GroupData = data.body.personal_requests;
       this.PeopleAdd = data.body.group_admin_approvals.add;
       this.PeopleRemove = data.body.group_admin_approvals.remove;
-      console.log('REQUESTS: ', this.GroupData, this.PeopleAdd, this.PeopleRemove);
+      // console.log('REQUESTS: ', this.GroupData, this.PeopleAdd, this.PeopleRemove);
       if ( typeof(this.GroupData) !== 'string' && this.GroupData !== undefined) {
         this.RequestId = 1;
         const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
