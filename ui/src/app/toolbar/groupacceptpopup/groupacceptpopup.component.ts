@@ -38,7 +38,7 @@ export class GroupacceptpopupComponent implements OnInit {
   }
 
   DecisionGroup(DecisionDetails: {GroupId: number, Decision: string, RequestType: number}) {
-    console.log('DECISION GOT : ', DecisionDetails);
+    // console.log('DECISION GOT : ', DecisionDetails);
     // tslint:disable-next-line:max-line-length
     this.requestService.AdminGroupRequest( DecisionDetails.RequestType, this.userName, DecisionDetails.Decision, DecisionDetails.GroupId).subscribe(data => {
       // console.log('DECISION POSTED : ', DecisionDetails);
@@ -70,7 +70,7 @@ export class GroupacceptpopupComponent implements OnInit {
 
   GetAllGroupData() {
       this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
-        console.log('INSIDE POP UP: ', data.body);
+        // console.log('INSIDE POP UP: ', data.body);
         this.GroupData = data.body.personal_requests;
         this.PeopleAdd = data.body.group_admin_approvals.add;
         this.PeopleRemove = data.body.group_admin_approvals.remove;

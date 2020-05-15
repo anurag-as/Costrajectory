@@ -137,10 +137,6 @@ export class ToolbarComponent implements OnInit {
       this.GroupData = data.body.personal_requests;
       this.PeopleAdd = data.body.group_admin_approvals.add;
       this.PeopleRemove = data.body.group_admin_approvals.remove;
-      console.log('REQUESTS: ', this.GroupData, this.PeopleAdd, this.PeopleRemove,
-                                typeof(this.GroupData) === 'string',
-                                this.PeopleAdd.length === 0,
-                                this.PeopleRemove.length === 0);
       if ( typeof(this.GroupData) !== 'string') {
         this.RequestId = 1;
       } else if ( this.PeopleAdd.length !== 0 || this.PeopleRemove.length !== 0) {

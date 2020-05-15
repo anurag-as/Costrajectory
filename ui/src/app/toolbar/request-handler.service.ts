@@ -39,7 +39,7 @@ export class RequestHandlerService {
     // if (decision === 'accepted') {} else if ( decision === 'rejected') {}
     const endpoint = 'http://127.0.0.1:5000/group/groupStatus';
     const payload = {group_status: [[String(groupId), decision]], user_name: userName.username};
-    console.log('BEFORE SENDING: ', payload);
+    // console.log('BEFORE SENDING: ', payload);
     return this.http.post(endpoint , payload);
   }
 }
