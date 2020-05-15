@@ -70,7 +70,7 @@ export class GroupacceptpopupComponent implements OnInit {
 
   GetAllGroupData() {
       this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
-        // console.log('INSIDE POP UP: ', data.body);
+        console.log('INSIDE POP UP: ', data.body);
         this.GroupData = data.body.personal_requests;
         this.PeopleAdd = data.body.group_admin_approvals.add;
         this.PeopleRemove = data.body.group_admin_approvals.remove;
