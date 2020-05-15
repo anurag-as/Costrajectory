@@ -128,14 +128,23 @@ export class ToolbarComponent implements OnInit {
     this.Route.navigate(['/AccDetails']);
   }
 
-  GetAllGroupData() {
+  GetAllGroupData( Button ?: boolean) {
+    let status = false;
+    if ( Button === true ) {
+      status = true;
+    }
     this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
       this.GroupData = data.body.personal_requests;
       this.PeopleAdd = data.body.group_admin_approvals.add;
       this.PeopleRemove = data.body.group_admin_approvals.remove;
-      // console.log('REQUESTS: ', this.GroupData, this.PeopleAdd, this.PeopleRemove);
-      if ( typeof(this.GroupData) !== 'string' && this.GroupData !== undefined) {
+      if ( typeof(this.GroupData) !== 'string') {
         this.RequestId = 1;
+      } else if ( this.PeopleAdd.length !== 0 || this.PeopleRemove.length !== 0) {
+        this.RequestId = 2;
+      } else {
+        this.RequestId = 3;
+      }
+      if (this.RequestId !== 3 || status) {
         const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
           panelClass: 'myapp-no-padding-dialog',
           width: '800px'
@@ -144,11 +153,7 @@ export class ToolbarComponent implements OnInit {
         dialogRef.componentInstance.GroupData = this.GroupData;
         dialogRef.componentInstance.PeopleAdd = this.PeopleAdd;
         dialogRef.componentInstance.PeopleRemove = this.PeopleRemove;
-      } else if (typeof(data.body.group_admin_approvals) !== 'string') {
-        this.RequestId = 2;
       }
-      // this.GroupData = [['3', 'delhi'], ['3', 'delhi']];
-      // console.log('ALL GROUP DATA: ', this.GroupData);
     });
   }
 

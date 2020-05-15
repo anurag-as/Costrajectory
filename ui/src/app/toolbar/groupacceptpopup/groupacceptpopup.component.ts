@@ -38,7 +38,7 @@ export class GroupacceptpopupComponent implements OnInit {
   }
 
   DecisionGroup(DecisionDetails: {GroupId: number, Decision: string, RequestType: number}) {
-    console.log('DECISION GOT : ', DecisionDetails);
+    // console.log('DECISION GOT : ', DecisionDetails);
     // tslint:disable-next-line:max-line-length
     this.requestService.AdminGroupRequest( DecisionDetails.RequestType, this.userName, DecisionDetails.Decision, DecisionDetails.GroupId).subscribe(data => {
       // console.log('DECISION POSTED : ', DecisionDetails);
