@@ -4,7 +4,8 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.querying_functions import get_status_for_group, get_group_title, get_group_current_users
-from database_functions.groups.updation_functions import update_group_status, add_new_users_group
+from database_functions.groups.updation_functions import update_group_status, add_new_users_group, \
+    resolve_admin_approval
 from ast import literal_eval
 from time import time
 
@@ -25,6 +26,12 @@ def remove_users_from_group():
         if not group_title:
             return jsonify(False)
         for user in users:
+            try:  # resolving admin approvals
+                group_admin = request.json['group_admin']
+                resolve_admin_approval(connection(), group_admin, "remove", user, group_id)
+            except:
+                pass
+
             update_group_status(connection(), group_id, user, "removed")
             current_users = get_group_current_users(connection(), group_id)
             new_users = literal_eval(current_users)
