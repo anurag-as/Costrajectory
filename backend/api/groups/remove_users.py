@@ -29,14 +29,18 @@ def remove_users_from_group():
             try:  # resolving admin approvals
                 group_admin = request.json['group_admin']
                 resolve_admin_approval(connection(), group_admin, "remove", user, group_id)
+                resolve_admin_approval(connection(), group_admin, "add", user, group_id)
             except:
                 pass
 
             update_group_status(connection(), group_id, user, "removed")
-            current_users = get_group_current_users(connection(), group_id)
-            new_users = literal_eval(current_users)
-            new_users.remove(user)
-            add_new_users_group(connection(), group_id, str(new_users))
+            try:
+                current_users = get_group_current_users(connection(), group_id)
+                new_users = literal_eval(current_users)
+                new_users.remove(user)
+                add_new_users_group(connection(), group_id, str(new_users))
+            except:
+                pass
         # adding transaction to logs
         insert_into_recent_table(connection(), user_name, str(time()), "Removed users from group", group_title)
 
