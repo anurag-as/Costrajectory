@@ -17,21 +17,21 @@ export class RequestHandlerService {
   // Admin Remove Reject ->  NEW API
   constructor(private http: HttpClient) { }
 
-  AdminAddRequest(requesttType: number, userName: string, decision: string, groupId: number, AffectedUser: string) {
+  AdminAddRequest(requesttType: number, userName: any, decision: string, groupId: number, AffectedUser: string) {
     let endpoint = 'http://127.0.0.1:5000/group/addUsersGroup';
     if (decision === 'rejected') {
       endpoint = 'http://127.0.0.1:5000/group/removeUsersGroup';
     }
-    const payload = {user_name: userName, group_id: groupId.toString(), users: [AffectedUser], group_admin: userName};
+    const payload = {user_name: userName.username, group_id: groupId.toString(), users: [AffectedUser], group_admin: userName.username};
     return this.http.post(endpoint , payload);
   }
 
-  AdminRejectRequest(requesttType: number, userName: string, decision: string, groupId: number, AffectedUser: string) {
+  AdminRejectRequest(requesttType: number, userName: any, decision: string, groupId: number, AffectedUser: string) {
     let endpoint = 'http://127.0.0.1:5000/group/removeUsersGroup';
     if (decision === 'rejected') {
-      endpoint = 'http://127.0.0.1:5000/group/removeUsersGroup_';
+      endpoint = 'http://127.0.0.1:5000/group/resolveAdminApproval';
     }
-    const payload = {user_name: userName, group_id: groupId.toString(), users: [AffectedUser], group_admin: userName};
+    const payload = {user_name: userName.username, group_id: groupId.toString(), users: [AffectedUser], group_admin: userName.username};
     return this.http.post(endpoint , payload);
   }
 
