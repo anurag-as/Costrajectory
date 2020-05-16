@@ -43,6 +43,7 @@ export class AddUsersSharedBillComponent implements OnInit {
               private dialogRef: MatDialogRef<AddUsersSharedBillComponent>) { }
 
   ngOnInit() {
+    console.log('ADD USERS: ', this.isAdminMODE);
   }
 
   Verify(divId: number, name: string) {
@@ -107,7 +108,7 @@ export class AddUsersSharedBillComponent implements OnInit {
    AddUsersToGroup(f: NgForm) {
     // console.log('ADDING');
     // tslint:disable-next-line:max-line-length
-    this.GroupOperations.AddUsersToGroup(this.GroupId, this.Username, this.ConvertParticipantsToArray(f), !this.isAdminMODE).subscribe(data => {
+    this.GroupOperations.AddUsersToGroup(this.GroupId, this.Username, this.ConvertParticipantsToArray(f), this.Admin, !this.isAdminMODE).subscribe(data => {
       this.dialogRef.close();
     });
   }

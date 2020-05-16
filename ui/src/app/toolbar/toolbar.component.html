@@ -22,8 +22,9 @@
                       <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                           role="menu" aria-labelledby="button-split">
                         <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Account Settings</a></li>
-                         <li role="menuitem"><a class="dropdown-item" type="button" data-toggle="modal" data-target="#AcceptRequests">Pending Group Accepts</a></li>
-                         <li class="divider dropdown-divider" type="button"></li>
+<!--                          <li role="menuitem"><a class="dropdown-item" type="button" data-toggle="modal" data-target="#AcceptRequests">Pending Group Accepts</a></li>
+ -->                          <li role="menuitem"><a class="dropdown-item" type="button" (click)="GetAllGroupData(true)">Pending Accepts</a></li>
+                              <li class="divider dropdown-divider" type="button"></li>
                          <li role="menuitem" id="logoutdropdown" type="button"><a class="dropdown-item" (click) = "LogOut()"><i class="fa fa-sign-out fa-2x" aria-hidden="true" style="color:red;"></i><div id="Logout">Logout</div></a>
                         </li> 
                       </ul>
@@ -47,8 +48,8 @@
                       <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                           role="menu" aria-labelledby="button-split">
                         <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Account Settings</a></li>
-                         <li role="menuitem"><a class="dropdown-item" type="button" data-toggle="modal" data-target="#AcceptRequests">Pending Group Accepts</a></li>
-                         <li class="divider dropdown-divider" type="button"></li>
+                        <li role="menuitem"><a class="dropdown-item" type="button" (click)="GetAllGroupData(true)">Pending Accepts</a></li>
+                      <li class="divider dropdown-divider" type="button"></li>
                          <li role="menuitem" id="logoutdropdown" type="button"><a class="dropdown-item" (click) = "LogOut()"><i class="fa fa-sign-out fa-2x" aria-hidden="true" style="color:red;"></i><div id="Logout">Logout</div></a>
                         </li> 
                       </ul>
@@ -105,9 +106,9 @@
 </div>
 
 
-<!-- Modal For accepting Requests -->
+<!-- Modal For accepting Requests 
 <div class="modal fade" id="AcceptRequests" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Accept Requests!</h5>
@@ -115,31 +116,49 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style="padding: 0;" *ngIf="RequestId != 0">
+      <div class="modal-body" style="padding-top: 0; padding-bottom: 0;" *ngIf="RequestId != 0">
         <div class="modal-body" type="button" [attr.id]="RequestId == 1 ? 'GroupRequestsActive': 'GroupRequestsInActive'" (click)="ChangeRequestType(1)">
-          <p style="padding: 0; position: relative; left:100px; top:-13px;"><b>Group Requests</b></p>
+          <p style="padding-top: 0; padding-bottom: 0; position: relative; left:100px; top:-13px;"><b>Group Requests</b></p>
         </div>
         <div class="modal-body" type="button" [attr.id]="RequestId == 2 ? 'AddUsersActive': 'AddUsersInActive'" (click)="ChangeRequestType(2)">
-          <p style="padding: 0; position: relative; right:0px; top:-13px;"><b>Add People Reqests</b></p>
+          <p style="padding-top: 0; padding-bottom: 0; position: relative; right:0px; top:-13px;"><b>Add People Reqests</b></p>
         </div>
       </div>
       
-      <div class="modal-body" *ngIf="GroupData != 'False'">
-        <app-group-accept (decision)="DecisionPoster($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)"></app-group-accept>
-        <!-- <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
-        <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept>
-        <app-group-accept (decision)="DecisionPoster($event)"></app-group-accept> -->
+      <div class="modal-body" *ngIf="GroupData != 'False' && RequestId == 1" style="padding-top: 0; padding-bottom: 0;">
+        <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionPoster($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)" [RequestType]="1"></app-group-accept>
       </div>
-      <div class="modal-body" *ngIf="GroupData == 'False'">
-        <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>
+      <div class="modal-body" *ngIf="GroupData == 'False' && RequestId == 1">
+        <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
       </div>
+
+      <div class="modal-body" *ngIf="PeopleAdd.length != 0 && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
+        <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionPoster($event)" *ngFor="let RequestsAdd of PeopleAdd; let i = index" 
+        [GroupName]="RequestsAdd.group_title" 
+        [GroupID]= "ParseInt(RequestsAdd.group_id, 10)" 
+        [RequestType]="2"
+        [UserToBeAddedOrRemoved]="RequestsAdd.username" ></app-group-accept>
+      </div>
+      <hr>
+      <div class="modal-body" *ngIf="PeopleRemove.length != 0 && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
+        <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionPoster($event)" *ngFor="let RequestsRemove of PeopleRemove; let i = index" 
+        [GroupName]="RequestsRemove.group_title" 
+        [GroupID]= "ParseInt(RequestsRemove.group_id, 10)" 
+        [RequestType]="3"
+        [UserToBeAddedOrRemoved]="RequestsRemove.username"></app-group-accept>
+      </div>
+      <div class="modal-body" *ngIf="PeopleAdd.length == 0 && PeopleRemove.length == 0 && RequestId == 2">
+        <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
+      </div>
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
 </div>
-
+-->
 
           <!-- <div class="modal-body" style="padding: 0; width: 20%; height: 32px; background-color: green; position: relative; top: -16px; right: -189px;
             background-image: -webkit-linear-gradient(-30deg, orange 50%, white 50%);">

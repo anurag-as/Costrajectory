@@ -16,7 +16,8 @@ interface PremiumStatus {
 }
 
 interface GetG {
-  body: [];
+  group_admin_approvals: { add: [], remove: [] };
+  personal_requests: [];
 }
 
 @Component({
@@ -32,6 +33,8 @@ export class ToolbarComponent implements OnInit {
   isPremium = false;
   GroupData = [];
   RequestId = 0;
+  PeopleAdd = [];
+  PeopleRemove = [];
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService, public dialog: MatDialog) {}
 
@@ -125,22 +128,32 @@ export class ToolbarComponent implements OnInit {
     this.Route.navigate(['/AccDetails']);
   }
 
-  GetAllGroupData() {
+  GetAllGroupData( Button ?: boolean) {
+    let status = false;
+    if ( Button === true ) {
+      status = true;
+    }
     this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
-      this.GroupData = data.body.body;
+      this.GroupData = data.body.personal_requests;
+      this.PeopleAdd = data.body.group_admin_approvals.add;
+      this.PeopleRemove = data.body.group_admin_approvals.remove;
       if ( typeof(this.GroupData) !== 'string') {
         this.RequestId = 1;
+      } else if ( this.PeopleAdd.length !== 0 || this.PeopleRemove.length !== 0) {
+        this.RequestId = 2;
+      } else {
+        this.RequestId = 3;
+      }
+      if (this.RequestId !== 3 || status) {
         const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
           panelClass: 'myapp-no-padding-dialog',
           width: '800px'
         });
         dialogRef.componentInstance.userName = this.userName;
         dialogRef.componentInstance.GroupData = this.GroupData;
-      } else {
-        this.RequestId = 0;
+        dialogRef.componentInstance.PeopleAdd = this.PeopleAdd;
+        dialogRef.componentInstance.PeopleRemove = this.PeopleRemove;
       }
-      // this.GroupData = [['3', 'delhi'], ['3', 'delhi']];
-      // console.log('ALL GROUP DATA: ', this.GroupData);
     });
   }
 
