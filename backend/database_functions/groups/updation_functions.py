@@ -89,3 +89,15 @@ def update_pending_state_machine(db_connection, group_id, username, pending_stat
 
     db_connection.commit()
     return True
+
+
+# function to resolve admin_approval for a user, group_id, type
+def resolve_admin_approval(db_connection, admin, approval_type,  user, group_id):
+    db_connection.execute('''UPDATE ADMIN_APPROVALS  SET  status="resolved"
+                                    WHERE user="{user}" and group_id="{group_id}" and admin="{admin}"
+                                    and type="{approval_type}"'''
+                          .format(group_id=group_id, user=user,
+                                  admin=admin, approval_type=approval_type))
+
+    db_connection.commit()
+    return True
