@@ -35,6 +35,6 @@ def registerUser():
         add_alias(connection(), username, alias)
 
         insert_into_token_table(db, username, presentTime, token)
-    x = jsonify({'username': request.json['username'], 'password': request.json['password'],
+    x = jsonify({'username': request.json['username'],
                  'registered': registered, 'token': token})
     return x
