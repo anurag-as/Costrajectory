@@ -42,7 +42,7 @@ export class DeleteBillComponent implements OnInit {
   }
 
   DeleteBillFromThisComponent(): void {
-    const endpoint = 'http://127.0.0.1:5000/deleteTransaction';
+    const endpoint = 'http://127.0.0.1:5000/transactions/deleteTransaction';
     const QueryPayload = {uid: this.BillID, username: this.Globals.GetUsername(), mapped_name: this.MappedImageName};
     const options = {
       headers: new HttpHeaders({

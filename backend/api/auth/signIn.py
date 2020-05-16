@@ -1,14 +1,16 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, insert_into_token_table
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_flow import insert_into_token_table
 from time import time
 from utilities.utils import generate_token
-from query_signin import SignIn
+from utilities.query_signin import SignIn
+from database_functions.logs.recentLogs import insert_into_recent_table
 
 signInAPI = Blueprint('signInAPI', __name__)
 
 # API to signin a user after authentication
-@signInAPI.route('/signin', methods=['POST'])
+@signInAPI.route('/auth/signin', methods=['POST'])
 @cross_origin()
 def signInUser():
     username = request.json['username']
@@ -23,6 +25,9 @@ def signInUser():
         db = connection()
         presentTime = str(time())
         insert_into_token_table(db, username, presentTime, token)
+
+        insert_into_recent_table(connection(), username, str(time()), "Signed In", "")
+
     else:
         token = False
     return jsonify({'valid': valid, 'token': token, 'username': username})

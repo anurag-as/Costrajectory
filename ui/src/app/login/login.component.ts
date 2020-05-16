@@ -68,9 +68,9 @@ export class LoginComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-        console.log('here');
+        // console.log('here');
         this.isUserexists( this.registerForm.value.email);
-        console.log('here2');
+        // console.log('here2');
         if (this.isUserexisting === true) {
           alert('Username alredy registered, please use another\n\n');
           return;

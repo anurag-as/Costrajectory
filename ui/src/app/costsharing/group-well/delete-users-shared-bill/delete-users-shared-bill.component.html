@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle"> Delete People from Group? </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <h5 class="modal-title" *ngIf="!isAdminMODE" style="left: 50px; position: relative; top: 5px; width: 600px;"> As you are not the admin, The requests go to Admin for Approval! </h5>
+    <div class="modal-body" style="height: 500px; overflow: hidden;">
+        <div class="row">
+            <div class="col">
+                <div class="example-container">
+                    <h4 style="color: green;">Participants &nbsp;<i class="fa fa-users fa-lg" aria-hidden="true"></i></h4>
+                  
+                    <div
+                      cdkDropList
+                      #srcList="cdkDropList"
+                      [cdkDropListData]="ParticipantsFiltered"
+                      [cdkDropListConnectedTo]="[destList]"
+                      class="example-list"
+                      (cdkDropListDropped)="drop($event)">
+                      <div class="example-box" *ngFor="let item of ParticipantsFiltered" cdkDrag [cdkDragDisabled]="item == Username" style="color: rgb(5, 71, 5);">{{item}}</div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="example-container">
+                    <h4 style="color: red;">Deleted &nbsp;<i class="fa fa-user-times fa-lg" aria-hidden="true"></i></h4>
+                  
+                    <div
+                      cdkDropList
+                      #destList="cdkDropList"
+                      [cdkDropListData]="deletedParticipants"
+                      [cdkDropListConnectedTo]="[srcList]"
+                      class="example-list"
+                      (cdkDropListDropped)="drop($event)">
+                      <div class="example-box" *ngFor="let item of deletedParticipants" cdkDrag style="color: rgb(63, 11, 11);">{{item}}</div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        
+          
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="DeleteUsersFromGroup()" [disabled]="deletedParticipants.length == 0">OK!</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeDialog()">Cancel</button>
+    </div>
+  </div>

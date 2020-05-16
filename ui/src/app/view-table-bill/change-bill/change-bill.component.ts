@@ -43,7 +43,7 @@ export class ChangeBillComponent implements OnInit {
   }
 
   getImage() {
-    const endpoint = 'http://127.0.0.1:5000/previewImage';
+    const endpoint = 'http://127.0.0.1:5000/transactions/previewImage';
     const QueryPayload = {username: this.username, mapped_name : this.MappedImageName, original_name: this.ActualImageName};
     this.receiveImage(endpoint, QueryPayload).subscribe(data => {
       this.canShowImageUploaded = true;
@@ -67,6 +67,11 @@ export class ChangeBillComponent implements OnInit {
     this.imageUploaded = true;
 }
 
+clearImage() {
+  this.fileToUpload = null;
+  this.BillHasImage = false;
+  this.imageUploaded = false;
+}
 
  dataURLtoFile(arr, filename) {
       const bstr = atob(arr);

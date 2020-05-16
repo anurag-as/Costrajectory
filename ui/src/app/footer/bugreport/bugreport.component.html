@@ -1,0 +1,53 @@
+<div class="modal-content">
+    <div class="modal-header" >
+      <h5 class="modal-title" id="exampleModalLabel">Bug Report</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="CloseDiaglog()">
+        <span aria-hidden="true" *ngIf="!PostedBugReport">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="!GotBugID && !PostedBugReport">
+      <div class="row">
+        <div class="col-md-2">
+          <b style="position: relative; right: -20px; top:15px">Bug Title</b>
+        </div>
+        <div class="col-md-10">
+          <input #Bname required type="text" placeholder="    Enter Bug Title" [(ngModel)]="ReportTitle" name="BugReportTitle" style="width: 100%; height: 60px;"/> 
+        </div>
+      </div>
+      <hr>
+      <hr>
+      <div class="row">
+        <div class="col-md-2" style="text-align: center;">
+          <b>Bug Description</b> 
+        </div>
+        <div class="col-md-10">
+          <textarea #Bname required type="text" placeholder="   Enter Bug Description" [(ngModel)]="ReportDesctiption" name="BugReportDescription" style="width: 100%; height: 100px;"></textarea> 
+        </div>
+      </div>
+              
+    </div>
+
+    <div class="modal-body" *ngIf="GotBugID && !PostedBugReport">
+      <b><h4> BUG ID : <font color="red">{{BugId}}</font></h4>
+      <h4>Note This for future references! </h4></b>
+    </div>
+
+    <div class="modal-body" *ngIf="PostedBugReport">
+      <div id="containerBUG">
+        <div class="spinner-grow text-success" role="status">
+        </div>
+        <div class="spinner-grow text-success" role="status">
+        </div>
+        <div class="spinner-grow text-success" role="status">
+        </div>
+      </div>
+      <div id="containerBUG">
+        <h5>Reporting BUG!! Please Wait</h5>
+      </div>
+    </div>
+              
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" [disabled]="ReportTitle == '' || ReportDesctiption=='' " *ngIf="!GotBugID && !PostedBugReport" (click)="SubmitReport()">Raise Report!</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="CloseDiaglog()" *ngIf="!PostedBugReport">Close</button>
+    </div>
+  </div>

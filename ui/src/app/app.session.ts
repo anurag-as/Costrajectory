@@ -21,11 +21,11 @@ export class SessionStorage {
             for (let i = 0; i < localStorage.length; i++) {
                 const value = localStorage.key(i);
                 if ( value.indexOf( '@' ) === -1) {
-                    console.log('SKIP');
+                    // console.log('SKIP');
                     continue;
                 }
                 const token = localStorage.getItem(value);
-                console.log('GOT THE KEY ', token, value);
+                // console.log('GOT THE KEY ', token, value);
                 return ({key : token, username : value});
               }
           } else {
@@ -38,11 +38,11 @@ export class SessionStorage {
         // const key = token;
         const key = username;
         localStorage.setItem(key , token);
-        console.log('SET THE KEY ', token, username);
+        // console.log('SET THE KEY ', token, username);
     }
 
     deleteKey() {
-        console.log('DELETED THE KEY');
+        // console.log('DELETED THE KEY');
         localStorage.clear();
         // this.Route.navigate(['/logout']);
         // this.ngZone.run(() => this.Route.navigateByUrl('login'));
@@ -50,7 +50,7 @@ export class SessionStorage {
 
     ValidateToken(Token: string, Username: string) {
         // console.log('VALIDATION CHECKING');
-        const endpoint = 'http://127.0.0.1:5000/checkValidity';
+        const endpoint = 'http://127.0.0.1:5000/auth/checkValidity';
         return this.http.post<TokenValidity>(endpoint, {username: Username, token: Token});
     }
 }

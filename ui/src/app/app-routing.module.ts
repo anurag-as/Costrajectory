@@ -6,11 +6,19 @@ import {AppComponent} from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { TabularViewComponent } from './upload-form/tabular-view/tabular-view.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
+import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
+import { CostsharingComponent } from './costsharing/costsharing.component';
+import { AboutComponent } from './accountdetails/about/about.component';
+import { DevelopersComponent } from './accountdetails/developers/developers.component';
 
 const routes: Routes = [
    { path: 'logout', component: SignupinComponent},
    { path: '', component: TabularViewComponent},
-   { path: 'analytics', component: AnalyticsComponent}
+   { path: 'analytics', component: AnalyticsComponent},
+   { path: 'AccDetails', component: AccountdetailsComponent},
+   { path: 'CostSharing', component: CostsharingComponent},
+   { path: 'About', component: AboutComponent},
+   { path: 'AboutUs', component: DevelopersComponent}
   ];
 
 @NgModule({

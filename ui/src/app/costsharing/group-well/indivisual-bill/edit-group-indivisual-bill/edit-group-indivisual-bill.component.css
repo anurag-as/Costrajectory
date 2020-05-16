@@ -1,0 +1,21 @@
+#ImageShare {
+    width: 50%; 
+    height: 100%; 
+    display: inline-block;
+    overflow: auto;
+}
+
+#BillDetails {
+    width: 50%; 
+    height: 100%; 
+    display: inline-block;
+    overflow: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 2px;
+  }
+

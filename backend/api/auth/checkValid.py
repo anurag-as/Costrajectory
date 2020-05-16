@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
-from database_functions import connection, get_datetime_token
+from database_functions.db_connection.connection import connection
+from database_functions.account.token_flow import get_datetime_token
+
 from time import time
 checkValidTokenAPI = Blueprint('checkValidTokenAPI', __name__)
 
@@ -20,7 +22,7 @@ def check_validity_token(username, token):
 
 
 # API to check the validity of a token for a particular username (<timeout)
-@checkValidTokenAPI.route('/checkValidity', methods=['POST'])
+@checkValidTokenAPI.route('/auth/checkValidity', methods=['POST'])
 @cross_origin()
 def checkValid():
     try:

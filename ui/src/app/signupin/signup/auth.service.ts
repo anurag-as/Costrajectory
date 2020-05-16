@@ -4,28 +4,34 @@ import { mergeMap } from 'rxjs/operators';
 
 interface Authreturn {
     username: string;
-    password: string;
     available: boolean;
+    Premium: boolean;
 }
 
 interface Result {
     username: string;
-    password: string;
     registered: boolean;
     token: string;
+    Premium: boolean;
 }
 
 @Injectable({providedIn : 'root'} )
 export class AuthService {
     constructor(private http: HttpClient) {}
 
-    signup(email: string, passwrd: string) {
+    signup(email: string, passwrd: string, isPremium: any) {
+        if ( isPremium === '' ) {
+            isPremium = false;
+        }
         // console.log('INSIDE SIGNUP SERVICE ', email, passwrd);
-        return this.http.post<Authreturn>('http://127.0.0.1:5000/checkUser', {username: email, password: passwrd});
+        return this.http.post<Authreturn>('http://127.0.0.1:5000/auth/checkUser', {username: email, password: passwrd, premium: isPremium});
     }
 
-    register(email: string, passwrd: string) {
-        // console.log('REGISTER USER', email, passwrd);
-        return this.http.post<Result>('http://127.0.0.1:5000/registerUser', {username: email , password: passwrd});
+    register(email: string, passwrd: string, isPremium: any) {
+        // console.log('REGISTER USER', isPremium);
+        if ( isPremium === '' ) {
+            isPremium = false;
+        }
+        return this.http.post<Result>('http://127.0.0.1:5000/auth/registerUser', {username: email , password: passwrd, premium: isPremium});
     }
 }

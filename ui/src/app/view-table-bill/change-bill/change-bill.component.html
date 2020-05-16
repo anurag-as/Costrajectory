@@ -1,42 +1,116 @@
 <div class="container-fluid" *ngIf="uploading == 'not started'">
     <form #imageForm="ngForm" (ngSubmit)="uploadFileToActivity(imageForm)">
-        <div class="row">
-            <div [ngClass]="!(BillHasImage || imageUploaded) ? 'col-md-12' : 'col-md-6'">
+        <div class="grid">
+            <!--<div [ngClass]="!(BillHasImage || imageUploaded) ? 'col-md-12' : 'col-md-6'">-->
+            <div class="grid-item">
                 <div class="container-fluid">
-                    <label>Bill name :</label>
-                    <input id="name" #Bname required type="text" placeholder="Enter name" [(ngModel)]="BillName" name="name" class="form-control" value="test"/>
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Bill name :</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope fa-lg" aria-hidden="true" style="color:orange"></i></span>
+                                </div>
+                                <input id="name" #Bname required type="text" placeholder="Enter Bill Name" [(ngModel)]="BillName" name="name" class="form-control" aria-describedby="basic-addon1" />
+                              </div>
+                        </div>
+                      </div>
 
-                    <label>Bill Amount:</label>
-                    <input id="val" required type="number" placeholder="Enter amount" [(ngModel)]="BillAmount" name="val" class="form-control"/>
 
-                    <label>Description:</label>
-                    <input id="des" required type="test" placeholder="Enter Description" [(ngModel)]="BillDescription" name="des" class="form-control"/>
+                      <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Bill Amount:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon2"><i class="fa fa-money fa-lg" aria-hidden="true" style="color:green"></i></span>
+                                </div>
+                                <input id="val" required type="number" placeholder="Enter amount" [(ngModel)]="BillAmount" name="val" class="form-control" aria-describedby="basic-addon2"/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Description:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon3"><i class="fa fa-list fa-lg" aria-hidden="true" style="color:black"></i></span>
+                                </div>
+                                <input id="des" required type="test" placeholder="Enter Description" [(ngModel)]="BillDescription" name="des" class="form-control" aria-describedby="basic-addon3"/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Category:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon4"><i class="fa fa-id-card-o fa-lg" aria-hidden="true" style="color:blueviolet"></i></span>
+                                </div>
+                                <select class="custom-select" id="cat" required [(ngModel)]="BillCategory" name="cat" aria-describedby="basic-addon4">
+                                    <option value="" disabled>Choose the category</option>
+                                    <option>Travel</option>
+                                    <option>Shopping</option>
+                                    <option>Investments</option>
+                                    <option>Food</option>
+                                    <option>Utilities</option>
+                                    <option>Medical</option>
+                                    <option>Entertainment</option>
+                                    <option>Housing</option>
+                                    <option>Others</option>
+                                 </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Bill Date:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon5"><i class="fa fa-calendar fa-lg" aria-hidden="true" style="color:blue"></i></span>
+                                </div>
+                                <input id="date" required type="date" value="10-02-1996" [(ngModel)]="BillDate" name="date" class="form-control" aria-describedby="basic-addon5" />
+                            </div>
+                        </div>
+                      </div>
+
+
+                      <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="staticEmail" class="col-form-label">Bill Image:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon6"><i class="fa fa-file-image-o fa-lg" aria-hidden="true" style="color:green"></i></span>
+                                </div>
+                                <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill" aria-describedby="basic-addon6" />
+                                <div class="input-group-append">
+                                    <button class="btn-large" title="Delete the image" [disabled]="!imageUploaded && !BillHasImage" (click) = "clearImage(); Image.value ='';"><i class="fa fa-trash fa-lg" style="color:red"></i></button>                                </div>
+                                </div>
+                        </div>
+                      </div>
+
+
+                      <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid"><i class="material-icons">save</i></button>
+
                     
-                    <label>Category:</label>
-                    <select class="custom-select" id="cat" required [(ngModel)]="BillCategory" name="cat">
-                        <option value="" disabled>Choose the category</option>
-                        <option>Travel</option>
-                        <option>Shopping</option>
-                        <option>Investments</option>
-                        <option>Food</option>
-                        <option>Utilities</option>
-                        <option>Medical</option>
-                        <option>Entertainment</option>
-                        <option>Housing</option>
-                        <option>Others</option>
-                     </select>
-                     
-                    <label>Date: </label>
-                    <input id="date" required type="date" value="10-02-1996" [(ngModel)]="BillDate" name="date" class="form-control"/>
-
-                    <label>File:</label>
-                    <input id="file-input" #Image type="file" acccept=".png, .jpg, .jpeg" (change)="handleFileInput($event.target.files)" class="form-control" placeholder="Upload Bill"/>
-                    
-                    <button type="submit" class="btn-large btn-submit" [disabled]="!imageForm.valid"><i class="material-icons">save</i></button>
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="grid-item">
                 <div class="container-fluid">
                     <div class="container-fluid" *ngIf="(imageUploaded)">
                         <img [src]="imageSrc"  [alt]="ActualImageName" style="max-width: 90%; max-height: 90%; display: block;" >
@@ -49,6 +123,9 @@
                             <div class="spinner-grow text-success" role="status"></div>
                             <p>&nbsp;&nbsp; <b>Loading Image!!  PLEASE WAIT </b></p>
                         </div>                    
+                    </div>
+                    <div class="container-fluid" *ngIf="!imageUploaded && !BillHasImage">
+                        <img src="https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png" style="max-width: 80%; max-height: 80%; display: block;" >
                     </div>
                 </div>
             </div>

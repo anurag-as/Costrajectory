@@ -1,14 +1,20 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from time import time
-from database_functions import connection, edit_transactions_image_table, insert_into_image_mapping_table, refresh_token, insert_into_image_size_table
+from database_functions.db_connection.connection import connection
+from database_functions.transactions.create_bill import edit_transactions_image_table
+from database_functions.transactions.image_mapping_flow import insert_into_image_mapping_table
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.transactions.image_size_flow import insert_into_image_size_table
+from database_functions.logs.recentLogs import insert_into_recent_table
+
 from utilities.upload import uploadFile
 from os import SEEK_END
 
 editBillAPI = Blueprint('editBillAPI', __name__)
 
 # API to edit a particular transaction based on uid
-@editBillAPI.route('/editTransaction', methods=['POST'])
+@editBillAPI.route('/transactions/editTransaction', methods=['POST'])
 @cross_origin()
 def edit_transaction():
     if 'image' in request.files:
@@ -46,4 +52,8 @@ def edit_transaction():
                                   mapped_file_name, category)
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])
+
+    # adding transaction to logs
+    insert_into_recent_table(connection(), user_name, str(time()), "Edit Transaction", title)
+
     return jsonify({'editStatus': True})

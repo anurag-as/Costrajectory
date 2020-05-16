@@ -56,9 +56,12 @@ def get_root_directory():
     return current_path
 
 
-def get_total_size():
+def get_total_size(premium):
     root_directory = get_root_directory()
     with open(path.join(root_directory, "config.yml"), 'r') as ymlfile:
         cfg = load(ymlfile, SafeLoader)
-        total_quota = cfg['server']['limit']
+        if premium:
+            total_quota = cfg['server']['limit']['premium']
+        else:
+            total_quota = cfg['server']['limit']['normal']
         return total_quota

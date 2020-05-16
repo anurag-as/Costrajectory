@@ -1,10 +1,17 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 from time import time
-from database_functions import connection, insert_into_image_table, insert_into_image_mapping_table, insert_into_image_size_table, refresh_token, space_usage
+from database_functions.db_connection.connection import connection
+from database_functions.account.premium_flow import is_user_premium
+from database_functions.transactions.create_bill import insert_into_image_table
+from database_functions.transactions.image_mapping_flow import insert_into_image_mapping_table
+from database_functions.transactions.image_size_flow import insert_into_image_size_table
+from database_functions.account.token_auth_flow import refresh_token
+from database_functions.account.space_flow import space_usage, group_space_usage
 from os import SEEK_END
 from utilities.upload import uploadFile
 from utilities.utils import get_total_size
+from database_functions.logs.recentLogs import insert_into_recent_table
 
 
 uploadBillAPI = Blueprint('uploadBillAPI', __name__)
@@ -19,10 +26,11 @@ def quota_exceeded(size, total_quota):
     """
     return int(size) >= int(total_quota)
 
+
 # API to add a new transaction
 # Legacy version - Uploading a bill, hence the name
 # Later version - Adding a new transaction
-@uploadBillAPI.route('/uploadBill', methods=['POST'])
+@uploadBillAPI.route('/transactions/uploadBill', methods=['POST'])
 @cross_origin()
 def upload():
     usage_exceeded = None
@@ -33,8 +41,14 @@ def upload():
 
         # If user quota has been exceeded
         user_name = request.form['username']
-        size = space_usage(connection(), user_name)
-        total_quota = get_total_size()
+        size = space_usage(connection(), user_name) + group_space_usage(connection(), user_name)
+
+        bool_is_user_premium = is_user_premium(connection(), user_name)
+        premium = False
+        if bool_is_user_premium == 'True':
+            premium = True
+        total_quota = get_total_size(premium)
+
         usage_exceeded = quota_exceeded(size, total_quota)
         if not usage_exceeded:  # Upload image if user has not exceeded his quota
             file_extension = file_name.split('.')[-1]
@@ -66,6 +80,9 @@ def upload():
     category = request.form['category']
     # adding the transaction record
     insert_into_image_table(connection(), user_name, title, date_time, amount, description, mapped_file_name, category)
+
+    # adding transaction to logs
+    insert_into_recent_table(connection(), user_name, str(time()), "Added Transaction", title)
 
     # refresh the token, needs to be added to other API Calls
     refresh_token(connection(), request.form['username'])

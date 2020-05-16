@@ -20,7 +20,7 @@ export class UploadFormComponent implements OnInit {
 
   private handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
-    console.log(this.fileToUpload);
+    // console.log(this.fileToUpload);
 }
 
 
