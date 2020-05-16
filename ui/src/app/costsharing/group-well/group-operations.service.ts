@@ -50,9 +50,9 @@ export class GroupOperationsService {
     if (NonAdminMode === true) {
       endpoint = 'http://127.0.0.1:5000/group/addUsersGroupNonAdmin';
     }
-    console.log('MODE CHECK: ', endpoint);
+    // console.log('MODE CHECK: ', endpoint);
     const queryPayload = {user_name: username, group_id: GroupId.toString(), users: members, group_admin: GroupAdmin};
-    console.log('ADD USERS : ', queryPayload);
+    // console.log('ADD USERS : ', queryPayload);
     return this.http.post<Status>(endpoint, queryPayload);
   }
 }
