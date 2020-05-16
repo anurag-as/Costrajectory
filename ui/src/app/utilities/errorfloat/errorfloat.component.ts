@@ -11,7 +11,7 @@ export class ErrorfloatComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('CALLED: ', this.message);
+    // console.log('CALLED: ', this.message);
   }
 
 }

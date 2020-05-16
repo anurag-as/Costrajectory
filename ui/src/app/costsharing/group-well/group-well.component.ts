@@ -209,7 +209,7 @@ export class GroupWellComponent implements OnInit {
 
   VerifyUser(user: string) {
     const endpoint = 'http://127.0.0.1:5000/auth/checkUser';
-    const QueryPayload = {username : user, password: 'NOTHING'};
+    const QueryPayload = {username : user, password: 'NOTHING', group_id: String(this.GroupId)};
     return this.http.post<Validity>(endpoint, QueryPayload);
   }
 
@@ -257,7 +257,7 @@ export class GroupWellComponent implements OnInit {
     dialogRef.componentInstance.GroupId = this.GroupId;
     dialogRef.componentInstance.isAdminMODE = false;
     dialogRef.afterClosed().subscribe(result => {
-       console.log('The dialog was closed');
+       // console.log('The dialog was closed');
       // this.RefreshData();
     });
   }
