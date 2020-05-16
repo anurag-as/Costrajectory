@@ -4,14 +4,12 @@ import { mergeMap } from 'rxjs/operators';
 
 interface Authreturn {
     username: string;
-    password: string;
     available: boolean;
     Premium: boolean;
 }
 
 interface Result {
     username: string;
-    password: string;
     registered: boolean;
     token: string;
     Premium: boolean;
