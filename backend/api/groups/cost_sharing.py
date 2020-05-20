@@ -1,3 +1,7 @@
+from sys import maxsize
+from copy import deepcopy
+
+
 # Preparing the user data on spent and paid and net
 def prepare_data(bill_data):
     """
@@ -29,6 +33,35 @@ def prepare_data(bill_data):
     return user
 
 
+# check if sharing is done
+def net_zero(users):
+    for each_user in users.keys():
+        if users[each_user]['net'] != 0:
+            return False
+    return True
+
+
+# get max paid and max spent user currently
+def get_max_min(users):
+    """
+    Max net and min net among all the users
+    :param users: Bill data
+    :return: Max and min (usernames and amount)
+    """
+    max_user = ""
+    max_amount = -1 * maxsize
+    min_user = ""
+    min_amount = maxsize
+    for user, details in users.items():
+        if details['net'] > max_amount:
+            max_user = user
+            max_amount = details['net']
+        if details['net'] < min_amount:
+            min_user = user
+            min_amount = details['net']
+    return max_user, max_amount, min_user, min_amount
+
+
 # optimizing cost sharing between users to minimize transactions
 def optimize_share(user):
     """
@@ -36,7 +69,14 @@ def optimize_share(user):
     :param user: paid, spent and net for each user
     :return: Returning the settlements needed to be made for each group
     """
-    return user
+    settlements = []
+    while not net_zero(user):
+        max_user, max_val, min_user, min_val = get_max_min(user)
+        settlement_amount = abs(min(abs(max_val), abs(min_val)))
+        user[max_user]['net'] -= settlement_amount
+        user[min_user]['net'] += settlement_amount
+        settlements.append([max_user, min_user, settlement_amount])
+    return settlements
 
 
 # Algorithm to divide the group costs and help in settlement
@@ -47,5 +87,8 @@ def cost_sharing_split(bill_data):
     :return: Cost split between the different users
     """
     user = prepare_data(bill_data)
+    user_data = deepcopy(user)
+    sharing_payload = {'raw_data': user_data}
     optimized_sharing = optimize_share(user)
-    return optimized_sharing
+    sharing_payload['settlements'] = optimized_sharing
+    return sharing_payload
