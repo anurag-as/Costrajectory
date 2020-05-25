@@ -153,6 +153,7 @@ export class ToolbarComponent implements OnInit {
         dialogRef.componentInstance.GroupData = this.GroupData;
         dialogRef.componentInstance.PeopleAdd = this.PeopleAdd;
         dialogRef.componentInstance.PeopleRemove = this.PeopleRemove;
+        dialogRef.componentInstance.RequestId = this.RequestId;
       }
     });
   }

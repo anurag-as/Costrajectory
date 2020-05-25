@@ -4,6 +4,7 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.groups.querying_functions import get_groups_user, get_group_info, get_bill_data,\
     get_user_details
+from api.groups.cost_sharing import cost_sharing_split
 
 viewGroupApi = Blueprint('viewGroupApi', __name__)
 
@@ -30,7 +31,9 @@ def viewing_group():
                         bill_data = get_bill_data(connection(), bill_id)
                         if bill_data:
                             bills.append(bill_data)
-                    group_payload = {'group_info': group_info, 'bill_data': bills, 'user_details': user_details}
+                    cost_sharing_info = cost_sharing_split(bills)
+                    group_payload = {'group_info': group_info, 'bill_data': bills, 'user_details': user_details,
+                                     'cost_sharing': cost_sharing_info}
                     all_group_info.append(group_payload)
             except:
                 continue

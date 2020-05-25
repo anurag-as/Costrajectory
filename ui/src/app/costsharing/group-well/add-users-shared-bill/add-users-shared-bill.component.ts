@@ -43,7 +43,7 @@ export class AddUsersSharedBillComponent implements OnInit {
               private dialogRef: MatDialogRef<AddUsersSharedBillComponent>) { }
 
   ngOnInit() {
-    console.log('ADD USERS: ', this.isAdminMODE);
+    // console.log('ADD USERS: ', this.isAdminMODE);
   }
 
   Verify(divId: number, name: string) {
@@ -87,7 +87,7 @@ export class AddUsersSharedBillComponent implements OnInit {
 
   VerifyUser(user: string) {
     const endpoint = 'http://127.0.0.1:5000/auth/checkUser';
-    const QueryPayload = {username : user, password: 'NOTHING'};
+    const QueryPayload = {username : user, password: 'NOTHING', group_id: String(this.GroupId)};
     return this.http.post<Validity>(endpoint, QueryPayload);
   }
 

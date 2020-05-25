@@ -21,10 +21,10 @@ def checkUser():
         else:
             message = 'Request successfully sent to user'
         x = jsonify(
-            {'username': username, 'password': password, 'available': signup.check_user(), 'message': message
+            {'username': username, 'available': signup.check_user(), 'message': message
              })
     except KeyError:
         x = jsonify(
-            {'username': username, 'password': password, 'available': signup.check_user()
+            {'username': username, 'available': signup.check_user()
              })
     return x
