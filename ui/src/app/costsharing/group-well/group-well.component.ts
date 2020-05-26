@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 import { AddUsersSharedBillComponent } from './add-users-shared-bill/add-users-shared-bill.component';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DeleteUsersSharedBillComponent } from './delete-users-shared-bill/delete-users-shared-bill.component';
+import { ShareSettlementComponent } from './share-settlement/share-settlement.component';
 
 interface Validity {
   username: string;
@@ -296,4 +297,13 @@ export class GroupWellComponent implements OnInit {
       // this.RefreshData();
     });
   }
+
+    Settlements(): void {
+      const dialogRef = this.dialog.open(ShareSettlementComponent, {
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      // dialogRef.componentInstance.GroupId = this.GroupId;
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
 }

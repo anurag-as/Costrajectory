@@ -75,6 +75,13 @@ import { ErrorfloatComponent } from './utilities/errorfloat/errorfloat.component
 import { SuccessfloatComponent } from './utilities/successfloat/successfloat.component';
 import { AddUsersSharedBillComponent } from './costsharing/group-well/add-users-shared-bill/add-users-shared-bill.component';
 import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-users-shared-bill/delete-users-shared-bill.component';
+import { ShareSettlementComponent } from './costsharing/group-well/share-settlement/share-settlement.component';
+import { ShareOweComponent } from './costsharing/group-well/share-settlement/share-owe/share-owe.component';
+// tslint:disable-next-line:max-line-length
+import { ShareSettlementHistoryComponent } from './costsharing/group-well/share-settlement/share-settlement-history/share-settlement-history.component';
+import { ShareOthersComponent } from './costsharing/group-well/share-settlement/share-others/share-others.component';
+import { AliasHolderComponent } from './utilities/alias-holder/alias-holder.component';
+import { RandomcolorModule } from 'angular-randomcolor';
 
 @NgModule({
   declarations: [
@@ -126,6 +133,11 @@ import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-
     SuccessfloatComponent,
     AddUsersSharedBillComponent,
     DeleteUsersSharedBillComponent,
+    ShareSettlementComponent,
+    ShareOweComponent,
+    ShareSettlementHistoryComponent,
+    ShareOthersComponent,
+    AliasHolderComponent
   ],
   imports: [
     BrowserModule,
@@ -152,6 +164,7 @@ import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-
     MatTableModule,
     ResizableModule,
     GoogleChartsModule,
+    RandomcolorModule
     ],
   providers: [TabularViewComponent, GlobalConfigsService, Title],
   bootstrap: [AppComponent],
@@ -173,7 +186,8 @@ import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-
     BugreportComponent,
     GroupacceptpopupComponent,
     AddUsersSharedBillComponent,
-    DeleteUsersSharedBillComponent
+    DeleteUsersSharedBillComponent,
+    ShareSettlementComponent
     ],
 })
 export class AppModule { }

@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLongTitle"> Settlements </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="row"  style="width: 1200px; padding-left: 30px; padding-bottom: 30px;">
+    <div class="col-md-4">
+        <div class="card-body bg-light" id="SHareSettlementcol"> 
+            <div class="card" id="SHareSettlementcard">
+                <app-share-settlement-history></app-share-settlement-history>
+            </div>
+            <div class="card" id="SHareSettlementcard">
+                <app-share-settlement-history></app-share-settlement-history>
+            </div>
+            <div class="card" id="SHareSettlementcard">
+                <app-share-settlement-history></app-share-settlement-history>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-body bg-light" id="SHareSettlementcol"> 
+            <div class="card" id="SHareSettlementcard">
+                <app-share-others></app-share-others>
+            </div>
+
+            <div class="card" id="SHareSettlementcard">
+                <app-share-others></app-share-others>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-body bg-light" id="SHareSettlementcol"> 
+            <div class="card" id="SHareSettlementcard" style="height: 150px;">
+                <app-share-owe [SettlementValue]="'400'"></app-share-owe>
+            </div>
+            <div class="card" id="SHareSettlementcard" style="height: 150px;">
+                <app-share-owe [SettlementValue]="'100'"></app-share-owe>
+            </div>
+           
+         </div>
+    </div>
+</div>
