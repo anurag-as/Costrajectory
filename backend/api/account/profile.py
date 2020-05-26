@@ -37,69 +37,72 @@ def profile_details():
     """
     API for querying and updating profile details
     """
-    # Post request for updating the details
-    if request.method == 'POST':
-        user_name = request.form['user_name']
+    try:
+        # Post request for updating the details
+        if request.method == 'POST':
+            user_name = request.form['user_name']
 
-        # refreshing token for sign in
-        refresh_token(connection(), user_name)
+            # refreshing token for sign in
+            refresh_token(connection(), user_name)
 
-        # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Edit Profile", "")
+            # adding transaction to logs
+            insert_into_recent_table(connection(), user_name, str(time()), "Edit Profile", "")
 
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
 
-        alias = form_username_alias(first_name, last_name)
-        if alias:
-            update_alias(connection(), user_name, alias)
+            alias = form_username_alias(first_name, last_name)
+            if alias:
+                update_alias(connection(), user_name, alias)
 
-        email = request.form['email']
-        address = request.form['address']
-        address2 = request.form['address2']
-        dob = request.form['dob']
-        gender = request.form['gender']
-        country = request.form['country']
-        state = request.form['state']
-        zip_code = request.form['zip_code']
-        if not query_profile_details(connection(), user_name):  # User entry does not exist
-            return jsonify(
-                insert_into_profile_details(connection(), user_name, first_name, last_name, email, address, address2,
-                                            dob, gender, country, state, zip_code))
+            email = request.form['email']
+            address = request.form['address']
+            address2 = request.form['address2']
+            dob = request.form['dob']
+            gender = request.form['gender']
+            country = request.form['country']
+            state = request.form['state']
+            zip_code = request.form['zip_code']
+            if not query_profile_details(connection(), user_name):  # User entry does not exist
+                return jsonify(
+                    insert_into_profile_details(connection(), user_name, first_name, last_name, email, address, address2,
+                                                dob, gender, country, state, zip_code))
+            else:
+                return jsonify(edit_profile_table(connection(), user_name, first_name, last_name, email, address, address2,
+                                                  dob, gender, country, state, zip_code))
+
         else:
-            return jsonify(edit_profile_table(connection(), user_name, first_name, last_name, email, address, address2,
-                                              dob, gender, country, state, zip_code))
-
-    else:
-        user_name = request.args.get('user_name')
-        refresh_token(connection(), user_name)
-        if not query_profile_details(connection(), user_name):  # User entry does not exist
-            response = {
-                'user_name': user_name,
-                'first_name': '',
-                'last_name': '',
-                'email': '',
-                'address': '',
-                'address2': '',
-                'dob': '',
-                'gender': '',
-                'country': '',
-                'state': '',
-                'zip_code': None
-            }
-        else:
-            data = query_profile_details(connection(), user_name)
-            response = {
-                'user_name': user_name,
-                'first_name': data[1],
-                'last_name': data[2],
-                'email': data[3],
-                'address': data[4],
-                'address2': data[5],
-                'dob': data[6],
-                'gender': data[7],
-                'country': data[8],
-                'state': data[9],
-                'zip_code': data[10]
-            }
-        return jsonify(response)
+            user_name = request.args.get('user_name')
+            refresh_token(connection(), user_name)
+            if not query_profile_details(connection(), user_name):  # User entry does not exist
+                response = {
+                    'user_name': user_name,
+                    'first_name': '',
+                    'last_name': '',
+                    'email': '',
+                    'address': '',
+                    'address2': '',
+                    'dob': '',
+                    'gender': '',
+                    'country': '',
+                    'state': '',
+                    'zip_code': None
+                }
+            else:
+                data = query_profile_details(connection(), user_name)
+                response = {
+                    'user_name': user_name,
+                    'first_name': data[1],
+                    'last_name': data[2],
+                    'email': data[3],
+                    'address': data[4],
+                    'address2': data[5],
+                    'dob': data[6],
+                    'gender': data[7],
+                    'country': data[8],
+                    'state': data[9],
+                    'zip_code': data[10]
+                }
+            return jsonify(response)
+    except:
+        return jsonify(False)
