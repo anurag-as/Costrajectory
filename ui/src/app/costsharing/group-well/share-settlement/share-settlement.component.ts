@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-share-settlement',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./share-settlement.component.css']
 })
 export class ShareSettlementComponent implements OnInit {
-
-  constructor() { }
+  @Input() UserAlias: any;
+  @Input() SharingData: any[];
+  constructor(private dialogRef: MatDialogRef<ShareSettlementComponent>) { }
 
   ngOnInit() {
+    console.log('SHARED DATA:', this.UserAlias, this.SharingData);
+  }
+
+  Close() {
+    this.dialogRef.close();
   }
 
 }

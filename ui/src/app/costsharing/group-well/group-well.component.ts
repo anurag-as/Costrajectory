@@ -34,6 +34,8 @@ export class GroupWellComponent implements OnInit {
   @Output() ChangeEvent = new EventEmitter();
   @Input() PendingUsers: string[];
   @Input() Description;
+  @Input() UserAlias: any;
+  @Input() SharingData: any[];
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
   NEXTADMINVALID = false;
@@ -302,7 +304,8 @@ export class GroupWellComponent implements OnInit {
       const dialogRef = this.dialog.open(ShareSettlementComponent, {
         panelClass: 'myapp-no-padding-dialog'
       });
-      // dialogRef.componentInstance.GroupId = this.GroupId;
+      dialogRef.componentInstance.UserAlias = this.UserAlias;
+      dialogRef.componentInstance.SharingData = this.SharingData;
       dialogRef.afterClosed().subscribe(result => {
       });
     }
