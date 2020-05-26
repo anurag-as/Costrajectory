@@ -1,0 +1,36 @@
+.modal-header {
+    width: 1200px;
+}
+
+.modal-header > h4 {
+    width: 150px;
+/*     background-color: grey;
+ */    position: relative;
+    left: 40%;
+}
+
+#SHareSettlementcol {
+    height: 600px;
+    align-items: center;
+    overflow:   scroll;
+    max-height: 600px;
+}
+
+#SHareSettlementcard {
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
+    border-radius: 12px;  
+    height: 80px;
+    width: 98%;
+    box-sizing: content-box;
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.scroll {
+    max-height: 600px;
+    overflow-y: auto;
+}

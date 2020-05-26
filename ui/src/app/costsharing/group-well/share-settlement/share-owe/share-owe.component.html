@@ -1,0 +1,9 @@
+<app-alias-holder [Alias]="'AB'" id="payer"></app-alias-holder>
+<p id="Text">OWES YOU {{ SettlementValue | currency: 'INR':true}}</p>
+<div>
+    <p id="SettleText"> SETTLE : </p> 
+    <input type="number" id="SettleVal" name="SettlementVal" [(ngModel)]="currentValue">
+    <span type="button" title="Settle" class="fa fa-check fa-lg" aria-hidden="true" id="PostVal" style="color: green;" (click)="PostValue()"></span>
+    <span type="button" title="Reset" class="fa fa-refresh fa-lg" aria-hidden="true" id="PostVal" style="color: red;" (click)="ResetValue()"></span>
+
+</div>
