@@ -16,7 +16,7 @@ export class AliasHolderComponent implements OnInit {
 
   ngOnInit() {
     this.newColor = RandomColor.generateColor();
-    console.log('SVG: ', this.Alias, this.newColor);
+    // console.log('SVG: ', this.Alias, this.newColor);
   }
 
 }

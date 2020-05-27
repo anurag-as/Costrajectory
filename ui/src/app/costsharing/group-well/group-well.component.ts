@@ -36,6 +36,7 @@ export class GroupWellComponent implements OnInit {
   @Input() Description;
   @Input() UserAlias: any;
   @Input() SharingData: any[];
+  @Input() GroupIndex: number;
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
   NEXTADMINVALID = false;
@@ -309,8 +310,10 @@ export class GroupWellComponent implements OnInit {
       dialogRef.componentInstance.SharingData = this.SharingData;
       dialogRef.componentInstance.username = this.Username;
       dialogRef.componentInstance.GroupId = this.GroupId;
+      dialogRef.componentInstance.GroupIndex = this.GroupIndex;
       dialogRef.afterClosed().subscribe(result => {
         if (result.DATACHANGED) {
+          console.log('DATA has changed');
           this.RefreshData();
         }
       });

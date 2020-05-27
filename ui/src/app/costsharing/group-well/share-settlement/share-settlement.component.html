@@ -39,13 +39,9 @@
     </div>
     <div class="col-md-4">
         <div class="card-body bg-light" id="SHareSettlementcol"> 
-            <div class="card" id="SHareSettlementcard" style="height: 150px;">
-                <app-share-owe [SettlementValue]="'400'"></app-share-owe>
-            </div>
-            <div class="card" id="SHareSettlementcard" style="height: 150px;">
-                <app-share-owe [SettlementValue]="'100'"></app-share-owe>
-            </div>
-           
+            <div class="card" id="SHareSettlementcard" style="height: 150px;"  *ngFor="let Share of SharingData; let i = index">
+                <app-share-owe (ChangeEvent)="PostSettlement($event)" [AliasData]="UserAlias" [SettlementValue]="Share[2]" [Payer]="Share[0]" *ngIf="Share[1] == username"></app-share-owe>
+            </div>           
          </div>
     </div>
 </div>

@@ -23,6 +23,8 @@ export class ShareSettlementComponent implements OnInit {
   @Output() ChangeEvent = new EventEmitter();
   @Input() username: string;
   @Input() GroupId: number;
+  @Input() GroupIndex: number;
+
   HasDataChanged = false;
   constructor(private dialogRef: MatDialogRef<ShareSettlementComponent>, private http: HttpClient) {
     dialogRef.backdropClick().subscribe(() => {
@@ -32,7 +34,7 @@ export class ShareSettlementComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('SHARED DATA:', this.UserAlias, this.SharingData);
+    // console.log('SHARED DATA:', this.UserAlias, this.SharingData);
   }
 
   Close() {
@@ -50,12 +52,13 @@ export class ShareSettlementComponent implements OnInit {
     return this.http.post<Billdata>(endpoint, QueryPayload);
   }
 
-  PostSettlement( value: number, payer: string) {
-    this.UploadBillToServer(this.username, this.GroupId, payer, value).subscribe( () => {
+  PostSettlement( postValues: {payer: string, value: number}) {
+    this.UploadBillToServer(this.username, this.GroupId, postValues.payer, postValues.value).subscribe( x => {
+      console.log('STATUS MESSAGE ', x);
       this.ReloadPage().subscribe(data => {
-        this.UserAlias = data.body.user_details;
-        this.SharingData = data.body.cost_sharing.settlements;
-        console.log('SHARED DATA:', this.UserAlias, this.SharingData);
+        console.log('SHARED DATA on refresh:', data.body[this.GroupIndex]);
+        this.UserAlias = data.body[this.GroupIndex].user_details;
+        this.SharingData = data.body[this.GroupIndex].cost_sharing.settlements;
         this.HasDataChanged = true;
       });
     });
@@ -63,7 +66,7 @@ export class ShareSettlementComponent implements OnInit {
 
   UploadBillToServer(username: string, GroupID: number, payee: string, amount: number) {
     // console.log('SHARED BILL :', f, username, fileToUpload, GroupID, Participants, SharedValue, f.value.Payee);
-    const Endpoint = 'http://127.0.0.1:5000/groups/editGroupTransaction';
+    const Endpoint = 'http://127.0.0.1:5000/group/addGroupBill';
     const formData: FormData = new FormData();
     formData.append('username', username);
     formData.append('description', '');
@@ -78,6 +81,7 @@ export class ShareSettlementComponent implements OnInit {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
+    console.log('SETTLE PAY :', username, GroupID, amount, payee);
 
     return this.http.post<Status>(Endpoint, formData, {headers});
   }
