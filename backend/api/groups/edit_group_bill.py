@@ -18,48 +18,51 @@ editGroupBillAPI = Blueprint('editGroupBillAPI', __name__)
 @editGroupBillAPI.route('/groups/editGroupTransaction', methods=['POST'])
 @cross_origin()
 def edit_group_bill_api():
-    if 'image' in request.files:
-        # Image has to be uploaded
-        file = request.files['image']
-        file_name = file.filename
-        file_extension = file_name.split('.')[-1]
-        original_file_name = file_name
-        present_time = str(time())
-        file_name = present_time + '.' + file_extension
-        mapped_file_name = file_name
-        # adding image mapping for cross referencing later
-        insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+    try:
+        if 'image' in request.files:
+            # Image has to be uploaded
+            file = request.files['image']
+            file_name = file.filename
+            file_extension = file_name.split('.')[-1]
+            original_file_name = file_name
+            present_time = str(time())
+            file_name = present_time + '.' + file_extension
+            mapped_file_name = file_name
+            # adding image mapping for cross referencing later
+            insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
 
-        # uploading the file to dropbox
-        uploadFile(file, mapped_file_name)
+            # uploading the file to dropbox
+            uploadFile(file, mapped_file_name)
 
-        file.seek(0, SEEK_END)
-        file_size = file.tell() / (10 ** 6)  # file_size in mb
-        # adding entry to image size table
-        insert_into_image_size_table(connection(), mapped_file_name, file_size)
+            file.seek(0, SEEK_END)
+            file_size = file.tell() / (10 ** 6)  # file_size in mb
+            # adding entry to image size table
+            insert_into_image_size_table(connection(), mapped_file_name, file_size)
 
-    else:
-        # Image not a part of the transaction
-        mapped_file_name = str(False)
-    user_name = request.form['username']
-    title = request.form['title']
-    date_time = request.form['date']
-    description = request.form['description']
-    amount = request.form['amount']
-    category = request.form['category']
-    payer = request.form['payer']
-    group_id = request.form['group_id']
-    shares = request.form['shares']
-    bill_id = request.form['bill_id']
+        else:
+            # Image not a part of the transaction
+            mapped_file_name = str(False)
+        user_name = request.form['username']
+        title = request.form['title']
+        date_time = request.form['date']
+        description = request.form['description']
+        amount = request.form['amount']
+        category = request.form['category']
+        payer = request.form['payer']
+        group_id = request.form['group_id']
+        shares = request.form['shares']
+        bill_id = request.form['bill_id']
 
-    # editing the transaction record
-    edit_group_bill(connection(), title, date_time, amount, description,
-                    mapped_file_name, category, shares, payer, group_id, bill_id)
+        # editing the transaction record
+        edit_group_bill(connection(), title, date_time, amount, description,
+                        mapped_file_name, category, shares, payer, group_id, bill_id)
 
-    # refresh the token, needs to be added to other API Calls
-    refresh_token(connection(), request.form['username'])
+        # refresh the token, needs to be added to other API Calls
+        refresh_token(connection(), request.form['username'])
 
-    # adding transaction to logs
-    insert_into_recent_table(connection(), user_name, str(time()), "Edit Group Transaction", title)
+        # adding transaction to logs
+        insert_into_recent_table(connection(), user_name, str(time()), "Edit Group Transaction", title)
 
-    return jsonify({'editStatus': True})
+        return jsonify({'editStatus': True})
+    except:
+        return jsonify(False)

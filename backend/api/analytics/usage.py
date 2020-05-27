@@ -17,12 +17,15 @@ def user_space_usage():
     """
     API for usage details
     """
-    user_name = request.json['username']
-    refresh_token(connection(), user_name)
-    size = space_usage(connection(), user_name) + group_space_usage(connection(), user_name)
-    bool_is_user_premium = is_user_premium(connection(), user_name)
-    premium = False
-    if bool_is_user_premium == 'True':
-        premium = True
-    total_quota = get_total_size(premium)
-    return jsonify({'TotalQuota': total_quota, 'UsedQuota': size})
+    try:
+        user_name = request.json['username']
+        refresh_token(connection(), user_name)
+        size = space_usage(connection(), user_name) + group_space_usage(connection(), user_name)
+        bool_is_user_premium = is_user_premium(connection(), user_name)
+        premium = False
+        if bool_is_user_premium == 'True':
+            premium = True
+        total_quota = get_total_size(premium)
+        return jsonify({'TotalQuota': total_quota, 'UsedQuota': size})
+    except:
+        return jsonify(False)

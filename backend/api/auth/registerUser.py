@@ -12,29 +12,33 @@ from utilities.api_utils import get_alias
 
 registerUserAPI = Blueprint('registerUserAPI', __name__)
 
+
 # Api to register a new user
 @registerUserAPI.route('/auth/registerUser', methods=['POST'])
 @cross_origin()
 def registerUser():
-    username = request.json['username']
-    password = request.json['password']
-    is_premium = request.json['premium']
-    signup = SignUp(username, password, is_premium)
-    registered = signup.add_user_after_authentication()
-    token = False
-    if registered:
-        token = str(generate_token())
-        db = connection()
-        presentTime = str(time())
+    try:
+        username = request.json['username']
+        password = request.json['password']
+        is_premium = request.json['premium']
+        signup = SignUp(username, password, is_premium)
+        registered = signup.add_user_after_authentication()
+        token = False
+        if registered:
+            token = str(generate_token())
+            db = connection()
+            presentTime = str(time())
 
-        # adding transaction to logs
-        insert_into_recent_table(connection(), username, presentTime, "Registered Profile", "")
+            # adding transaction to logs
+            insert_into_recent_table(connection(), username, presentTime, "Registered Profile", "")
 
-        # adding entry to username alias table
-        alias = get_alias(username)
-        add_alias(connection(), username, alias)
+            # adding entry to username alias table
+            alias = get_alias(username)
+            add_alias(connection(), username, alias)
 
-        insert_into_token_table(db, username, presentTime, token)
-    x = jsonify({'username': request.json['username'],
-                 'registered': registered, 'token': token})
-    return x
+            insert_into_token_table(db, username, presentTime, token)
+        x = jsonify({'username': request.json['username'],
+                     'registered': registered, 'token': token})
+        return x
+    except:
+        return jsonify(False)

@@ -18,13 +18,16 @@ def signout():
     """
     API when user signs out. Delete all his transaction Data
     """
-    upload_db()  # upload the dropbox server to the latest code (automation)
-    user_name = request.json['username']
+    try:
+        upload_db()  # upload the dropbox server to the latest code (automation)
+        user_name = request.json['username']
 
-    # adding transaction to logs
-    insert_into_recent_table(connection(), user_name, str(time()), "Signed Out", "")
+        # adding transaction to logs
+        insert_into_recent_table(connection(), user_name, str(time()), "Signed Out", "")
 
-    user_data_path = path.join(getcwd(), "temp", "." + user_name)
-    if path.exists(user_data_path):
-        rmtree(user_data_path)
-    return jsonify(True)
+        user_data_path = path.join(getcwd(), "temp", "." + user_name)
+        if path.exists(user_data_path):
+            rmtree(user_data_path)
+        return jsonify(True)
+    except:
+        return jsonify(False)

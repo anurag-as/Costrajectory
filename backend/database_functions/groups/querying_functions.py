@@ -84,7 +84,7 @@ def get_group_info(db_connection, group_id):
             try:
                 list_users = literal_eval(row[2])
                 list_bills = literal_eval(row[5])
-                if(row[7] == None):
+                if (row[7] == None):
                     list_pending_users = []
                 else:
                     list_pending_users = literal_eval(row[7])
@@ -140,7 +140,7 @@ def get_bill_name(db_connection, bill_id):
 
 # function to get user names and aliases
 def get_user_details(db_connection, users):
-    payload = []
+    payload = {}
     for each_user in users:
         username = each_user
         name = get_name(db_connection, username)
@@ -155,8 +155,7 @@ def get_user_details(db_connection, users):
             full_name = " ".join(name)
         else:
             full_name = False
-        user_detail = {'username': username, 'name': full_name, "alias": alias}
-        payload.append(user_detail)
+        payload[username] = {'name': full_name, "alias": alias}
     return payload
 
 
@@ -198,14 +197,14 @@ def get_pending_admin_approvals(db_connection, admin):
     where admin = "{admin}" 
     AND status = "awaiting"
     '''.format(admin=admin))
-    approvals = {'add':[], 'remove':[]}
+    approvals = {'add': [], 'remove': []}
     for row in cursor:
         if row:
             if row[0] == 'add':
-                approvals['add'].append({'type': row[0], 'username': row[1], 'group_title':row[2],
-                                          'group_id': row[3]})
+                approvals['add'].append({'type': row[0], 'username': row[1], 'group_title': row[2],
+                                         'group_id': row[3]})
             else:
                 approvals['remove'].append({'type': row[0], 'username': row[1], 'group_title': row[2],
-                                          'group_id': row[3]})
+                                            'group_id': row[3]})
     db_connection.commit()
     return approvals if approvals else "False"
