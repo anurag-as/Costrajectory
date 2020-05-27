@@ -140,7 +140,7 @@ def get_bill_name(db_connection, bill_id):
 
 # function to get user names and aliases
 def get_user_details(db_connection, users):
-    payload = []
+    payload = {}
     for each_user in users:
         username = each_user
         name = get_name(db_connection, username)
@@ -155,8 +155,7 @@ def get_user_details(db_connection, users):
             full_name = " ".join(name)
         else:
             full_name = False
-        user_detail = {'username': username, 'name': full_name, "alias": alias}
-        payload.append(user_detail)
+        payload[username] = {'name': full_name, "alias": alias}
     return payload
 
 
