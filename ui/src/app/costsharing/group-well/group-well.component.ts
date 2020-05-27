@@ -52,6 +52,7 @@ export class GroupWellComponent implements OnInit {
   currentUsername: string;
   IntimationMessage: string;
   FormattedDate: any;
+  HasSHaredDataChanged = false;
   error = false;
   constructor(private GroupOperations: GroupOperationsService,
               private http: HttpClient,
@@ -306,7 +307,16 @@ export class GroupWellComponent implements OnInit {
       });
       dialogRef.componentInstance.UserAlias = this.UserAlias;
       dialogRef.componentInstance.SharingData = this.SharingData;
+      dialogRef.componentInstance.username = this.Username;
+      dialogRef.componentInstance.GroupId = this.GroupId;
       dialogRef.afterClosed().subscribe(result => {
+        if (result.DATACHANGED) {
+          this.RefreshData();
+        }
       });
+    }
+
+    GroupDataChanged() {
+      this.HasSHaredDataChanged = true;
     }
 }
