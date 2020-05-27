@@ -34,6 +34,8 @@ export class GroupWellComponent implements OnInit {
   @Output() ChangeEvent = new EventEmitter();
   @Input() PendingUsers: string[];
   @Input() Description;
+  @Input() UserAlias: any;
+  @Input() SharingData: any[];
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
   NEXTADMINVALID = false;
@@ -50,6 +52,7 @@ export class GroupWellComponent implements OnInit {
   currentUsername: string;
   IntimationMessage: string;
   FormattedDate: any;
+  HasSHaredDataChanged = false;
   error = false;
   constructor(private GroupOperations: GroupOperationsService,
               private http: HttpClient,
@@ -302,8 +305,18 @@ export class GroupWellComponent implements OnInit {
       const dialogRef = this.dialog.open(ShareSettlementComponent, {
         panelClass: 'myapp-no-padding-dialog'
       });
-      // dialogRef.componentInstance.GroupId = this.GroupId;
+      dialogRef.componentInstance.UserAlias = this.UserAlias;
+      dialogRef.componentInstance.SharingData = this.SharingData;
+      dialogRef.componentInstance.username = this.Username;
+      dialogRef.componentInstance.GroupId = this.GroupId;
       dialogRef.afterClosed().subscribe(result => {
+        if (result.DATACHANGED) {
+          this.RefreshData();
+        }
       });
+    }
+
+    GroupDataChanged() {
+      this.HasSHaredDataChanged = true;
     }
 }
