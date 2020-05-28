@@ -3,13 +3,16 @@ from copy import deepcopy
 
 
 # Preparing the user data on spent and paid and net
-def prepare_data(bill_data):
+def prepare_data(bill_data, settlement_data):
     """
     Computing the spent and paid amount for each users for each group
     :param bill_data: Bill information for a particular group
+    :param settlement_data: History of settlements info
     :return: Paid and Spent and net for each user individually.
     """
     user = {}
+
+    # for bills
     for each_bill in bill_data:
         try:
             user[each_bill['payer']]['paid'] += int(each_bill['amount'])
@@ -30,6 +33,26 @@ def prepare_data(bill_data):
                 user[each_user[0]]['spent'] = int(each_user[1])
                 user[each_user[0]]['net'] = int(each_user[1])
 
+    # for settlements
+    for each_bill in settlement_data:
+        try:
+            user[each_bill['payer']]['paid'] += int(each_bill['amount'])
+            user[each_bill['payer']]['net'] -= int(each_bill['amount'])
+
+        except KeyError:
+            user[each_bill['payer']] = {'paid': 0, 'spent': 0, 'net': 0}
+            user[each_bill['payer']]['paid'] = int(each_bill['amount'])
+            user[each_bill['payer']]['net'] = -1 * int(each_bill['amount'])
+
+        for each_user in each_bill['share']:
+            try:
+                user[each_user[0]]['spent'] += int(each_user[1])
+                user[each_user[0]]['net'] += int(each_user[1])
+
+            except KeyError:
+                user[each_user[0]] = {'paid': 0, 'spent': 0, 'net': 0}
+                user[each_user[0]]['spent'] = int(each_user[1])
+                user[each_user[0]]['net'] = int(each_user[1])
     return user
 
 
@@ -80,13 +103,14 @@ def optimize_share(user):
 
 
 # Algorithm to divide the group costs and help in settlement
-def cost_sharing_split(bill_data):
+def cost_sharing_split(bill_data, settlement_data):
     """
     Cost sharing algorithm
     :param bill_data: Bill info
+    :param settlement_data: History of settlements info
     :return: Cost split between the different users
     """
-    user = prepare_data(bill_data)
+    user = prepare_data(bill_data, settlement_data)
     user_data = deepcopy(user)
     sharing_payload = {'raw_data': user_data}
     optimized_sharing = optimize_share(user)
