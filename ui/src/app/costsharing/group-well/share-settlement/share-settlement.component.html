@@ -18,16 +18,9 @@
 <div class="row"  style="width: 1200px; padding-left: 30px; padding-bottom: 30px;">
     <div class="col-md-4">
         <div class="card-body bg-light" id="SHareSettlementcol"> 
-            <div class="card" id="SHareSettlementcard">
-                <app-share-settlement-history></app-share-settlement-history>
+            <div class="card" id="SHareSettlementcard" *ngFor="let Settlement of SettlementHistory; let i = index">
+                <app-share-settlement-history [AliasData]="UserAlias" [SingleHistory]="Settlement"></app-share-settlement-history>
             </div>
-            <div class="card" id="SHareSettlementcard">
-                <app-share-settlement-history></app-share-settlement-history>
-            </div>
-            <div class="card" id="SHareSettlementcard">
-                <app-share-settlement-history></app-share-settlement-history>
-            </div>
-
         </div>
     </div>
     <div class="col-md-4">

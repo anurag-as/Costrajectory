@@ -24,7 +24,7 @@ export class ShareSettlementComponent implements OnInit {
   @Input() username: string;
   @Input() GroupId: number;
   @Input() GroupIndex: number;
-
+  @Input() SettlementHistory: any[];
   HasDataChanged = false;
   constructor(private dialogRef: MatDialogRef<ShareSettlementComponent>, private http: HttpClient) {
     dialogRef.backdropClick().subscribe(() => {
@@ -35,6 +35,7 @@ export class ShareSettlementComponent implements OnInit {
 
   ngOnInit() {
     // console.log('SHARED DATA:', this.UserAlias, this.SharingData);
+    console.log('DEBUG1: ', this.SettlementHistory);
   }
 
   Close() {
@@ -59,6 +60,7 @@ export class ShareSettlementComponent implements OnInit {
         console.log('SHARED DATA on refresh:', data.body[this.GroupIndex]);
         this.UserAlias = data.body[this.GroupIndex].user_details;
         this.SharingData = data.body[this.GroupIndex].cost_sharing.settlements;
+        this.SettlementHistory = data.body[this.GroupIndex].settlement_history;
         this.HasDataChanged = true;
       });
     });

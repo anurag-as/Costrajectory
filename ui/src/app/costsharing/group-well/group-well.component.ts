@@ -37,6 +37,7 @@ export class GroupWellComponent implements OnInit {
   @Input() UserAlias: any;
   @Input() SharingData: any[];
   @Input() GroupIndex: number;
+  @Input() SettlementHistory: any[];
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
   NEXTADMINVALID = false;
@@ -62,7 +63,6 @@ export class GroupWellComponent implements OnInit {
   ngOnInit() {
     this.FormattedStringId = String(this.GroupId);
     this.FormattedDate = new Date(Math.trunc(this.GroupCreationTime));
-    // console.log('++++++++++++ ', this.PendingUsers);
   }
 
   ResetAddUsersData() {
@@ -311,6 +311,7 @@ export class GroupWellComponent implements OnInit {
       dialogRef.componentInstance.username = this.Username;
       dialogRef.componentInstance.GroupId = this.GroupId;
       dialogRef.componentInstance.GroupIndex = this.GroupIndex;
+      dialogRef.componentInstance.SettlementHistory = this.SettlementHistory;
       dialogRef.afterClosed().subscribe(result => {
         if (result.DATACHANGED) {
           console.log('DATA has changed');
