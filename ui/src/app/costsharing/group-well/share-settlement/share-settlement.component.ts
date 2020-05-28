@@ -60,7 +60,7 @@ export class ShareSettlementComponent implements OnInit {
         console.log('SHARED DATA on refresh:', data.body[this.GroupIndex]);
         this.UserAlias = data.body[this.GroupIndex].user_details;
         this.SharingData = data.body[this.GroupIndex].cost_sharing.settlements;
-        this.SettlementHistory = data.body[this.GroupIndex].settlement_history;
+        this.SettlementHistory = data.body[this.GroupIndex].cost_sharing.settlement_history;
         this.HasDataChanged = true;
       });
     });
