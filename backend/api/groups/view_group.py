@@ -35,7 +35,7 @@ def viewing_group():
                                 settlements.append(bill_data)
                             else:
                                 bills.append(bill_data)
-                    cost_sharing_info = cost_sharing_split(bills)
+                    cost_sharing_info = cost_sharing_split(bills, settlements)
                     cost_sharing_info['settlement_history'] = settlements
                     group_payload = {'group_info': group_info, 'bill_data': bills, 'user_details': user_details,
                                      'cost_sharing': cost_sharing_info}
