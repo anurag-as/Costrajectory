@@ -93,12 +93,19 @@ def optimize_share(user):
     :return: Returning the settlements needed to be made for each group
     """
     settlements = []
+    #keep a count to prevent Hang
+    count = 0
+
     while not net_zero(user):
         max_user, max_val, min_user, min_val = get_max_min(user)
         settlement_amount = abs(min(abs(max_val), abs(min_val)))
         user[max_user]['net'] -= settlement_amount
         user[min_user]['net'] += settlement_amount
         settlements.append([max_user, min_user, settlement_amount])
+        count += 1
+        if(count >= 100):
+            settlements = []
+            break
     return settlements
 
 
