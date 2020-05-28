@@ -1,4 +1,4 @@
-<app-alias-holder [Alias]="'AB'" id="payer"></app-alias-holder>
+<app-alias-holder [Alias]="AliasData[Payer].alias | uppercase" id="payer" title={{Payer}}></app-alias-holder>
 <p id="Text">OWES YOU {{ SettlementValue | currency: 'INR'}}</p>
 <div>
     <p id="SettleText"> SETTLE : </p> 
