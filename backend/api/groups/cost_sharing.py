@@ -15,51 +15,51 @@ def prepare_data(bill_data, settlement_data):
     # for bills
     for each_bill in bill_data:
         try:
-            user[each_bill['payer']]['paid'] += int(each_bill['amount'])
-            user[each_bill['payer']]['net'] -= int(each_bill['amount'])
+            user[each_bill['payer']]['paid'] += float(each_bill['amount'])
+            user[each_bill['payer']]['net'] -= float(each_bill['amount'])
 
         except KeyError:
             user[each_bill['payer']] = {'paid': 0, 'spent': 0, 'net': 0}
-            user[each_bill['payer']]['paid'] = int(each_bill['amount'])
-            user[each_bill['payer']]['net'] = -1 * int(each_bill['amount'])
+            user[each_bill['payer']]['paid'] = float(each_bill['amount'])
+            user[each_bill['payer']]['net'] = -1 * float(each_bill['amount'])
 
         for each_user in each_bill['share']:
             try:
-                user[each_user[0]]['spent'] += int(each_user[1])
-                user[each_user[0]]['net'] += int(each_user[1])
+                user[each_user[0]]['spent'] += float(each_user[1])
+                user[each_user[0]]['net'] += float(each_user[1])
 
             except KeyError:
                 user[each_user[0]] = {'paid': 0, 'spent': 0, 'net': 0}
-                user[each_user[0]]['spent'] = int(each_user[1])
-                user[each_user[0]]['net'] = int(each_user[1])
+                user[each_user[0]]['spent'] = float(each_user[1])
+                user[each_user[0]]['net'] = float(each_user[1])
 
     # for settlements
     for each_bill in settlement_data:
         try:
-            user[each_bill['payer']]['paid'] += int(each_bill['amount'])
-            user[each_bill['payer']]['net'] -= int(each_bill['amount'])
+            user[each_bill['payer']]['paid'] += float(each_bill['amount'])
+            user[each_bill['payer']]['net'] -= float(each_bill['amount'])
 
         except KeyError:
             user[each_bill['payer']] = {'paid': 0, 'spent': 0, 'net': 0}
-            user[each_bill['payer']]['paid'] = int(each_bill['amount'])
-            user[each_bill['payer']]['net'] = -1 * int(each_bill['amount'])
+            user[each_bill['payer']]['paid'] = float(each_bill['amount'])
+            user[each_bill['payer']]['net'] = -1 * float(each_bill['amount'])
 
         for each_user in each_bill['share']:
             try:
-                user[each_user[0]]['spent'] += int(each_user[1])
-                user[each_user[0]]['net'] += int(each_user[1])
+                user[each_user[0]]['spent'] += float(each_user[1])
+                user[each_user[0]]['net'] += float(each_user[1])
 
             except KeyError:
                 user[each_user[0]] = {'paid': 0, 'spent': 0, 'net': 0}
-                user[each_user[0]]['spent'] = int(each_user[1])
-                user[each_user[0]]['net'] = int(each_user[1])
+                user[each_user[0]]['spent'] = float(each_user[1])
+                user[each_user[0]]['net'] = float(each_user[1])
     return user
 
 
 # check if sharing is done
 def net_zero(users):
     for each_user in users.keys():
-        if users[each_user]['net'] != 0:
+        if users[each_user]['net'] >= 1:
             return False
     return True
 
