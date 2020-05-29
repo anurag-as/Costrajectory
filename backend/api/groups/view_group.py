@@ -30,15 +30,20 @@ def viewing_group():
                     settlements = []
                     for bill_id in group_info['bills']:
                         bill_data = get_bill_data(connection(), bill_id)
+                        print(bill_data)
                         if bill_data:
                             if bill_data['category'] == 'settlement':
                                 settlements.append(bill_data)
                             else:
                                 bills.append(bill_data)
+                    print("-"*100)
+                    print("Settlements In main", settlements)
+                    print("Bill data in Main", bills)
                     cost_sharing_info = cost_sharing_split(bills, settlements)
                     cost_sharing_info['settlement_history'] = settlements
                     group_payload = {'group_info': group_info, 'bill_data': bills, 'user_details': user_details,
                                      'cost_sharing': cost_sharing_info}
+                    print("Group Payload", group_payload)
                     all_group_info.append(group_payload)
             except:
                 continue

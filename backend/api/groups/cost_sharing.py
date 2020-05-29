@@ -14,52 +14,69 @@ def prepare_data(bill_data, settlement_data):
 
     # for bills
     for each_bill in bill_data:
+        print("Each bill", each_bill)
+        print(each_bill['amount'])
         try:
-            user[each_bill['payer']]['paid'] += int(each_bill['amount'])
-            user[each_bill['payer']]['net'] -= int(each_bill['amount'])
+            print("1")
+            user[each_bill['payer']]['paid'] += float(each_bill['amount'])
+            print("2")
+            user[each_bill['payer']]['net'] -= float(each_bill['amount'])
+            print("3")
 
         except KeyError:
+            print("4")
             user[each_bill['payer']] = {'paid': 0, 'spent': 0, 'net': 0}
-            user[each_bill['payer']]['paid'] = int(each_bill['amount'])
-            user[each_bill['payer']]['net'] = -1 * int(each_bill['amount'])
-
+            print("5")
+            user[each_bill['payer']]['paid'] = float(each_bill['amount'])
+            print("6")
+            user[each_bill['payer']]['net'] = -1 * float(each_bill['amount'])
+            print("7")
+        print("Each bill", each_bill)
         for each_user in each_bill['share']:
             try:
-                user[each_user[0]]['spent'] += int(each_user[1])
-                user[each_user[0]]['net'] += int(each_user[1])
-
-            except KeyError:
+                print("8")
+                print("User", user)
+                user[each_user[0]]['spent'] += float(each_user[1])
+                print("9")
+                user[each_user[0]]['net'] += float(each_user[1])
+                print("10")
+            except Exception as e:
+                print("11", e)
                 user[each_user[0]] = {'paid': 0, 'spent': 0, 'net': 0}
-                user[each_user[0]]['spent'] = int(each_user[1])
-                user[each_user[0]]['net'] = int(each_user[1])
-
+                user[each_user[0]]['spent'] = float(each_user[1])
+                user[each_user[0]]['net'] = float(each_user[1])
+        print("User", user)
+    print("User222", user)
+    print("Settlement data", settlement_data)
     # for settlements
     for each_bill in settlement_data:
         try:
-            user[each_bill['payer']]['paid'] += int(each_bill['amount'])
-            user[each_bill['payer']]['net'] -= int(each_bill['amount'])
+            user[each_bill['payer']]['paid'] += float(each_bill['amount'])
+            user[each_bill['payer']]['net'] -= float(each_bill['amount'])
 
         except KeyError:
             user[each_bill['payer']] = {'paid': 0, 'spent': 0, 'net': 0}
-            user[each_bill['payer']]['paid'] = int(each_bill['amount'])
-            user[each_bill['payer']]['net'] = -1 * int(each_bill['amount'])
+            user[each_bill['payer']]['paid'] = float(each_bill['amount'])
+            user[each_bill['payer']]['net'] = -1 * float(each_bill['amount'])
 
         for each_user in each_bill['share']:
             try:
-                user[each_user[0]]['spent'] += int(each_user[1])
-                user[each_user[0]]['net'] += int(each_user[1])
+                user[each_user[0]]['spent'] += float(each_user[1])
+                user[each_user[0]]['net'] += float(each_user[1])
 
             except KeyError:
                 user[each_user[0]] = {'paid': 0, 'spent': 0, 'net': 0}
-                user[each_user[0]]['spent'] = int(each_user[1])
-                user[each_user[0]]['net'] = int(each_user[1])
+                user[each_user[0]]['spent'] = float(each_user[1])
+                user[each_user[0]]['net'] = float(each_user[1])
+        print("User1", user)
     return user
 
 
 # check if sharing is done
 def net_zero(users):
     for each_user in users.keys():
-        if users[each_user]['net'] != 0:
+        print(users[each_user])
+        if float(users[each_user]['net']) >= 1:
             return False
     return True
 
@@ -97,6 +114,7 @@ def optimize_share(user):
     count = 0
 
     while not net_zero(user):
+        print("Count", count)
         max_user, max_val, min_user, min_val = get_max_min(user)
         settlement_amount = abs(min(abs(max_val), abs(min_val)))
         user[max_user]['net'] -= settlement_amount
@@ -118,8 +136,11 @@ def cost_sharing_split(bill_data, settlement_data):
     :return: Cost split between the different users
     """
     user = prepare_data(bill_data, settlement_data)
+    print("user", user)
     user_data = deepcopy(user)
     sharing_payload = {'raw_data': user_data}
+    print("sharing_payload", sharing_payload)
     optimized_sharing = optimize_share(user)
+    print("Optimized sharing", optimized_sharing)
     sharing_payload['settlements'] = optimized_sharing
     return sharing_payload
