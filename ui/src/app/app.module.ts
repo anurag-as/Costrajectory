@@ -30,7 +30,58 @@ import { ChangeBillComponent } from './view-table-bill/change-bill/change-bill.c
 import { ViewBillComponent } from './view-table-bill/view-bill/view-bill.component';
 import { DeleteBillComponent } from './view-table-bill/delete-bill/delete-bill.component';
 import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.component';
-
+import { AnalyticsComponent } from './analytics/analytics.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
+import { ProfileComponent } from './accountdetails/profile/profile.component';
+import { AboutComponent } from './accountdetails/about/about.component';
+import { LogsComponent } from './accountdetails/logs/logs.component';
+import { ContactComponent } from './accountdetails/contact/contact.component';
+import { StatusComponent } from './accountdetails/status/status.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { TermsComponent } from './accountdetails/terms/terms.component';
+import { PrivacyComponent } from './accountdetails/privacy/privacy.component';
+import { SupportComponent } from './accountdetails/support/support.component';
+import {MatTableModule} from '@angular/material/table';
+import { CostsharingComponent } from './costsharing/costsharing.component';
+import { AddGroupBillComponent } from './costsharing/add-group-bill/add-group-bill.component';
+import { AddGroupContainerComponent } from './costsharing/add-group-container/add-group-container.component';
+import { GroupWellComponent } from './costsharing/group-well/group-well.component';
+import { GroupAcceptComponent } from './toolbar/group-accept/group-accept.component';
+import { AddSharedBillComponent } from './costsharing/add-shared-bill/add-shared-bill.component';
+import { BillCounterComponent } from './costsharing/AddSharedBill/bill-counter/bill-counter.component';
+import { IndivisualBillComponent } from './costsharing/group-well/indivisual-bill/indivisual-bill.component';
+import { ResizableModule } from 'angular-resizable-element';
+import { CopyBillComponent } from './costsharing/group-well/indivisual-bill/copy-bill/copy-bill.component';
+import { BillInfoComponent } from './costsharing/group-well/indivisual-bill/bill-info/bill-info.component';
+// tslint:disable-next-line:max-line-length
+import { DeleteGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/delete-group-indivisual-bill/delete-group-indivisual-bill.component';
+// tslint:disable-next-line:max-line-length
+import { ViewGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/view-group-indivisual-bill/view-group-indivisual-bill.component';
+// tslint:disable-next-line:max-line-length
+import { EditGroupIndivisualBillComponent } from './costsharing/group-well/indivisual-bill/edit-group-indivisual-bill/edit-group-indivisual-bill.component';
+import { FooterComponent } from './footer/footer.component';
+import { BugreportComponent } from './footer/bugreport/bugreport.component';
+import { Title } from '@angular/platform-browser';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { GroupacceptpopupComponent } from './toolbar/groupacceptpopup/groupacceptpopup.component';
+import { DevelopersComponent } from './accountdetails/developers/developers.component';
+import { UtilitiesComponent } from './utilities/utilities.component';
+import { ErrorfloatComponent } from './utilities/errorfloat/errorfloat.component';
+import { SuccessfloatComponent } from './utilities/successfloat/successfloat.component';
+import { AddUsersSharedBillComponent } from './costsharing/group-well/add-users-shared-bill/add-users-shared-bill.component';
+import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-users-shared-bill/delete-users-shared-bill.component';
+import { ShareSettlementComponent } from './costsharing/group-well/share-settlement/share-settlement.component';
+import { ShareOweComponent } from './costsharing/group-well/share-settlement/share-owe/share-owe.component';
+// tslint:disable-next-line:max-line-length
+import { ShareSettlementHistoryComponent } from './costsharing/group-well/share-settlement/share-settlement-history/share-settlement-history.component';
+import { ShareOthersComponent } from './costsharing/group-well/share-settlement/share-others/share-others.component';
+import { AliasHolderComponent } from './utilities/alias-holder/alias-holder.component';
+import { RandomcolorModule } from 'angular-randomcolor';
 
 @NgModule({
   declarations: [
@@ -49,7 +100,44 @@ import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.compone
     ChangeBillComponent,
     ViewBillComponent,
     DeleteBillComponent,
-    EditBillComponent
+    EditBillComponent,
+    AnalyticsComponent,
+    AccountdetailsComponent,
+    ProfileComponent,
+    AboutComponent,
+    LogsComponent,
+    ContactComponent,
+    StatusComponent,
+    TermsComponent,
+    PrivacyComponent,
+    SupportComponent,
+    CostsharingComponent,
+    AddGroupBillComponent,
+    AddGroupContainerComponent,
+    GroupWellComponent,
+    GroupAcceptComponent,
+    AddSharedBillComponent,
+    BillCounterComponent,
+    IndivisualBillComponent,
+    CopyBillComponent,
+    BillInfoComponent,
+    DeleteGroupIndivisualBillComponent,
+    ViewGroupIndivisualBillComponent,
+    EditGroupIndivisualBillComponent,
+    FooterComponent,
+    BugreportComponent,
+    GroupacceptpopupComponent,
+    DevelopersComponent,
+    UtilitiesComponent,
+    ErrorfloatComponent,
+    SuccessfloatComponent,
+    AddUsersSharedBillComponent,
+    DeleteUsersSharedBillComponent,
+    ShareSettlementComponent,
+    ShareOweComponent,
+    ShareSettlementHistoryComponent,
+    ShareOthersComponent,
+    AliasHolderComponent
   ],
   imports: [
     BrowserModule,
@@ -66,13 +154,40 @@ import { EditBillComponent } from './view-table-bill/edit-bill/edit-bill.compone
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    AngularFontAwesomeModule
-  ],
-  providers: [TabularViewComponent, GlobalConfigsService],
+    AngularFontAwesomeModule,
+    MatProgressBarModule,
+    MatMenuModule,
+    ProgressbarModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    DragDropModule,
+    MonacoEditorModule.forRoot(),
+    MatTableModule,
+    ResizableModule,
+    GoogleChartsModule,
+    RandomcolorModule
+    ],
+  providers: [TabularViewComponent, GlobalConfigsService, Title],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [AddBillsComponent, ChangeBillComponent, ViewBillComponent, DeleteBillComponent, EditBillComponent],
+  entryComponents: [
+    AddBillsComponent,
+    ChangeBillComponent,
+    ViewBillComponent,
+    DeleteBillComponent,
+    EditBillComponent,
+    AddGroupBillComponent,
+    AddGroupContainerComponent,
+    CopyBillComponent,
+    DeleteGroupIndivisualBillComponent,
+    EditGroupIndivisualBillComponent,
+    BillInfoComponent,
+    BugreportComponent,
+    GroupacceptpopupComponent,
+    AddUsersSharedBillComponent,
+    DeleteUsersSharedBillComponent,
+    ShareSettlementComponent
+    ],
 })
 export class AppModule { }

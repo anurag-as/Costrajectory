@@ -1,0 +1,71 @@
+card-group > card1 {
+    width: 10px;
+}  
+
+card-group > cardx {
+  width: 80px;
+  z-index: 5;
+}  
+
+.cardxy {
+  width: 190px;
+}
+
+.cardxy .card-body {
+/*   box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
+ */  border-radius: 12px;
+  height: 120px;
+  width: 170px;
+  position: relative;
+  right: -650px;
+  top: -16px;
+  background-color: #bdd4e7;
+/*   background-image: linear-gradient(315deg, #22b14d 0%, #8693ab 74%);
+ */  background-image: radial-gradient(#8693ab, #8693ab,#22b14d );
+
+}
+
+
+.cardx .card-body {
+  background-color: gold;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
+  border-radius: 12px;
+}
+
+.card1 {
+  padding-right: 30px;
+}
+
+.cardx {
+  padding-right: 30px;
+}
+
+.card-group {
+  padding: 30px;
+}
+
+#container2 {
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  #name2,
+  #photo2 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #photo2 {
+    z-index: 10;
+  }
+
+  .cardHouse {
+    background-image: url('/assets/images/Billbg.png');
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 100%;
+    background-size: 100% 100%;
+
+  }

@@ -1,3 +1,157 @@
+
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+
 .mat-card {
     text-indent: 220px;
+}
+
+#toggler {
+  padding-left: 25%;
+}
+
+.img {
+    /* The image used */
+    background-image: url("https://static.thenounproject.com/png/736683-200.png");
+  
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .item{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+.body{
+  position: absolute;
+  top: 65px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: auto;
+	height: auto;
+	background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
+	background-size: cover;
+	-webkit-filter: blur(5px);
+	z-index: -1;
+}
+
+.grad{
+	position: absolute;
+	top: 65px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 0;
+	opacity: 0.7;
+}
+
+.header{
+	position: absolute;
+	top: calc(50% - 40px);
+	left: calc(50% - 300px);
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+}
+
+.header div span{
+	color: green !important;
+	font-weight: bold;
+
+}
+
+
+.nonMember{
+	position: absolute;
+	top: calc(50% - 40px);
+	left: calc(50% - 300px);
+	z-index: 2;
+}
+
+.nonMember div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+}
+
+#StateTogglerRegister{
+	position: absolute;
+	top: calc(50% + 140px);
+	left: calc(50% - 40px);
+	z-index: 2;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-weight: bold;
+	background-color:transparent;
+	border: 0ch;
+}
+
+#StateTogglerLogin{
+	position: absolute;
+	top: calc(50% + 140px);
+	left: calc(50% - 40px);
+	z-index: 2;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-weight: bold;
+	background-color:transparent;
+	border: 0ch;
+}
+
+.header2{
+	position: absolute;
+	top: calc(50% - 40px);
+	left: calc(50% - 300px);
+	z-index: 2;
+}
+
+.header2 img{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+	background: transparent;
 }

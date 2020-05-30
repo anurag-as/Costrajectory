@@ -1,0 +1,63 @@
+<div>
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle"> Add People to Group? </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <h5 class="modal-title" *ngIf="!isAdminMODE" style="left: 50px; position: relative; top: 5px; width: 600px;"> As you are not the admin, The requests go to Admin for Approval! </h5>
+    <form #AddPeopleForm="ngForm" (ngSubmit)="AddUsersToGroup(AddPeopleForm)">
+    <div class="modal-body">
+
+      
+        <div class="grid">
+            <div class="grid-item">
+                <div class="container-fluid">
+
+                    <div class="form-group row" *ngFor="let div of divs" id="div{{div}}">
+                      <div class="col-sm-2" *ngIf = "div == divs[0]">
+                          <label for="staticEmail" class="col-form-label">Participant</label>
+                      </div>
+                      <div class="col-sm-2" *ngIf = "div !== divs[0]">
+                          <label for="staticEmail" class="col-form-label"></label>
+                      </div>
+
+                      <div class="col-sm-9">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon6"><i class="fa fa-user-o fa-lg" aria-hidden="true" style="color:green"></i></span>
+                              </div>
+                              <input #Participant type="email" ngModel name="{{div}}" class="form-control" placeholder="Add participant email ID" aria-describedby="basic-addon6" [readonly]="valid[div]" required/>
+
+                              <div class="input-group-append">
+
+                                  <button class="btn-large" *ngIf = '!valid[div]' type="button" [disabled]="Participant.value ==''" (click) = "Verify(div,Participant.value)"><i class="fa fa-user-plus fa-lg" title = "Verify user" style="color:red"></i></button>
+          <!--                                     <button class="btn-large" type="button" [disabled]="Participant.value ==''" (click) = "deleteDiv(div)"><i id= "spinner" class="fa fa-spinner fa-lg" title = "Delete Participant" style="color:rgb(148, 53, 236)"></i></button>
+          -->
+                                  <button class="btn-large" *ngIf = 'valid[div]' type="button" [disabled]="Participant.value =='' || !valid[div]"><i class="fa fa-user-plus fa-lg" title = "User Verified" style="color:green"></i></button>
+
+                                  <button class="btn-large" type="button" [disabled]="div == divs[0]" (click) = "deleteDiv(div)"><i class="fa fa-trash fa-lg" title = "Delete Participant" style="color:red"></i></button>
+                                  
+                                  <button *ngIf = "div == divs[divs.length - 1]" type="button" class="btn-large" [disabled]="Participant.value ==''" (click) = "createDiv()"><i class="fa fa-plus fa-lg" title = "Add Participant" style="color:green"></i></button>
+                              
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!AddPeopleForm.valid || !valid[divs[divs.length - 1]]">OK!</button>
+      <button type="button" class="btn btn-secondary"  data-dismiss="modal" (click)="closeDialog()">Cancel</button>
+    </div>
+  </form>
+  </div>
+  <app-errorfloat *ngIf="error" [message]="IntimationMessage"></app-errorfloat>
+  <app-successfloat *ngIf="success" [message]="IntimationMessage"></app-successfloat>
+</div>

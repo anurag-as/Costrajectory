@@ -23,6 +23,7 @@ export class ChangeBillComponent implements OnInit {
   BillIdentifier: string = undefined;
   BillImage: any = undefined;
   BillDate: any = undefined;
+  BillCategory: any = undefined;
   MappedImageName = undefined;
   ActualImageName = undefined;
   imageToShow = undefined;
@@ -33,7 +34,7 @@ export class ChangeBillComponent implements OnInit {
   imgfromServer = true;
   canShowImageUploaded = false;
   imageUploaded = false;
-  imageSrc;
+  imageSrc = undefined;
 
   constructor(private http: HttpClient, private uploader: UploadService) { }
 
@@ -42,7 +43,7 @@ export class ChangeBillComponent implements OnInit {
   }
 
   getImage() {
-    const endpoint = 'http://127.0.0.1:5000/previewImage';
+    const endpoint = 'http://127.0.0.1:5000/transactions/previewImage';
     const QueryPayload = {username: this.username, mapped_name : this.MappedImageName, original_name: this.ActualImageName};
     this.receiveImage(endpoint, QueryPayload).subscribe(data => {
       this.canShowImageUploaded = true;
@@ -51,12 +52,12 @@ export class ChangeBillComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('00000000 :', this.BillHasImage);
+    // console.log('00000000 :', this.BillHasImage);
     this.getImage();
   }
 
   private handleFileInput(files: FileList) {
-    console.log(this.fileToUpload);
+    // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 
     const reader = new FileReader();
@@ -66,6 +67,11 @@ export class ChangeBillComponent implements OnInit {
     this.imageUploaded = true;
 }
 
+clearImage() {
+  this.fileToUpload = null;
+  this.BillHasImage = false;
+  this.imageUploaded = false;
+}
 
  dataURLtoFile(arr, filename) {
       const bstr = atob(arr);
@@ -82,9 +88,12 @@ export class ChangeBillComponent implements OnInit {
       this.fileToUpload = this.dataURLtoFile(this.imageSrc, this.ActualImageName);
     }
     this.uploading = 'started';
-    console.log('CAME');
+    // console.log('CAME');
     this.uploader.postFile(this.fileToUpload, f, this.username).subscribe(data => {
      // this.TableAdder.AppendEntry(this.CurrentForm);
+     if (data.message === 'User Quota Exceeded') {
+      window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
+     }
      this.uploading = 'ended success';
      window.location.reload();
      // window.alert('FILE UPLOADED SUCCESSFULLY');

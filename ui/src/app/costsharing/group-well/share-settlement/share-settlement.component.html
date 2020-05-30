@@ -1,0 +1,42 @@
+<div class="modal-header" style="background-color: chartreuse;">
+    <h4 class="modal-title" style="left: 530px;"> Settlements </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="Close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="row"  style="width: 1200px; padding-top: 5px;">
+    <div class="col-md-4" style="text-align: center;">
+        <h5>Settlement History</h5>
+    </div>
+    <div class="col-md-4" style="text-align: center;">
+        <h5>Pending Settlements</h5>
+    </div>
+    <div class="col-md-4" style="text-align: center;">
+        <h5>Your Pending Settlements</h5>
+    </div>
+</div>
+<div class="row"  style="width: 1200px; padding-left: 30px; padding-bottom: 30px;">
+    <div class="col-md-4">
+        <div class="card-body bg-light" id="SHareSettlementcol"> 
+            <div class="card" id="SHareSettlementcard" *ngFor="let Settlement of SettlementHistory; let i = index">
+                <app-share-settlement-history [AliasData]="UserAlias" [SingleHistory]="Settlement"></app-share-settlement-history>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-body bg-light" id="SHareSettlementcol"> 
+            <div class="card" id="SHareSettlementcard" *ngFor="let Share of SharingData; let i = index">
+                <app-share-others [SharedEntry]="Share" [AliasData]="UserAlias"></app-share-others>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-body bg-light" id="SHareSettlementcol"> 
+            <div *ngFor="let Share of SharingData; let i = index">
+                <div class="card" id="SHareSettlementcard" style="height: 150px;" *ngIf="Share[1] == username">
+                    <app-share-owe (ChangeEvent)="PostSettlement($event)" [AliasData]="UserAlias" [SettlementValue]="Share[2]" [Payer]="Share[0]" ></app-share-owe>
+                </div>    
+            </div>      
+         </div>
+    </div>
+</div>

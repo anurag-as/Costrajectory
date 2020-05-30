@@ -22,6 +22,8 @@ export class SignupComponent {
   allusers: any;
   isUserexisting: any = undefined;
   loading = false;
+  Premium = false;
+  currentPassword: any;
   @Output() userdata = new EventEmitter<{username: string, password: string}>();
 
   constructor(private http: HttpClient, private Authserviceclient: AuthService, private sessionKey: SessionStorage) {}
@@ -33,18 +35,22 @@ export class SignupComponent {
       }
 
       this.loading = true;
-      this.Authserviceclient.signup(f.value.email, f.value.password).subscribe(result => {
+      this.Premium = f.value.isPremium;
+      this.currentPassword = f.value.cpassword;
+      this.Authserviceclient.signup(f.value.email, f.value.password, f.value.isPremium).subscribe(result => {
           // result = this.isUserexisting;
           // console.log('FROM BASE', result);
           // this.loading = false;
+          // console.log('CHECK FLOW_1:', this.currentPassword);
           if (!result.available) {
               // this.isUserexisting = result;
-              this.Authserviceclient.register(result.username, result.password).subscribe(res => {
+              this.Authserviceclient.register(result.username, this.currentPassword, this.Premium).subscribe(res => {
                 // console.log('FROM BASE 2', res);
                 this.loading = false;
                 if (res.registered) {
+                  // console.log('CHECK FLOW_2:', this.currentPassword);
                   this.sessionKey.setKey(res.token, res.username);
-                  this.userdata.emit({username: res.username, password: res.password});
+                  this.userdata.emit({username: res.username, password: this.currentPassword});
                 } else {
                   window.alert('Some problem with registering, try again later!!!');
                   this.loading = false;

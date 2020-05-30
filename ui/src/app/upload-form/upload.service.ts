@@ -8,6 +8,7 @@ import { TabularViewComponent } from './tabular-view/tabular-view.component';
 
 interface Status {
     UploadStatus: boolean;
+    message: string;
 }
 
 @Injectable({providedIn : 'root'} )
@@ -16,7 +17,7 @@ export class UploadService {
 
     postFile(fileToUpload: File, f: NgForm, username: string) {
         this.TableAdder.AppendEntry(f, username);
-        const endpoint = 'http://127.0.0.1:5000/uploadBill';
+        const endpoint = 'http://127.0.0.1:5000/transactions/uploadBill';
         const formData: FormData = new FormData();
 
         formData.append('username', username);
@@ -24,16 +25,15 @@ export class UploadService {
         formData.append('Name', f.value.name);
         formData.append('Date', f.value.date);
         formData.append('Amount', f.value.val);
-
+        formData.append('category', f.value.cat);
         // console.log('TO check username: ', username);
         if (fileToUpload === null) {
-            console.log('NO IMAGE');
+            // console.log('NO IMAGE');
         } else {
-            console.log(f.value, fileToUpload.name);
+            // console.log(f.value, fileToUpload.name);
             formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
-       
         // formData.append('body', fileToUpload, fileToUpload.name);
 
         const headers = new HttpHeaders();
@@ -46,26 +46,25 @@ export class UploadService {
 
     postEditFile(fileToUpload: File, f: NgForm, username: string, BillId: any) {
         this.TableAdder.AppendEntry(f, username);
-        const endpoint = 'http://127.0.0.1:5000/editTransaction';
-        console.log('PATH TAKEN TO EDIT: ',endpoint);
+        const endpoint = 'http://127.0.0.1:5000/transactions/editTransaction';
+        // console.log('PATH TAKEN TO EDIT: ', f, fileToUpload);
         const formData: FormData = new FormData();
-
         formData.append('username', username);
         formData.append('Description', f.value.des);
         formData.append('Name', f.value.name);
         formData.append('Date', f.value.date);
         formData.append('Amount', f.value.val);
         formData.append('uid', BillId);
-        
+        formData.append('category', f.value.cat);
+
         // console.log('TO check username: ', username);
-        if (fileToUpload === null) {
-            console.log('NO IMAGE');
+        if (fileToUpload === null || fileToUpload === undefined) {
+            // console.log('NO IMAGE');
         } else {
-            console.log(f.value, fileToUpload.name);
+            // console.log(f.value, fileToUpload.name);
             formData.append('FileName', fileToUpload.name);
             formData.append('image', fileToUpload, fileToUpload.name);
         }
-       
         // formData.append('body', fileToUpload, fileToUpload.name);
 
         const headers = new HttpHeaders();

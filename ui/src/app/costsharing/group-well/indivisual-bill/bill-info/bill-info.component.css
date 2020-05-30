@@ -1,0 +1,132 @@
+#NavigationalBarForBIllPreview {
+    text-align: center;
+    width: 100%;
+    color: white;
+    height: 10px;
+    vertical-align: top;
+    margin: auto;
+    padding: 0px;
+    font-family: "Lucida Console", Courier, monospace;
+    overflow: hidden;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+
+#CardTitleForBIllPreview {
+    color: white;
+    font-family: "Lucida Console", Courier, monospace;
+    background-color: black;
+    height: 40px;
+    padding-bottom: 0px;
+    padding-top: 7px;
+    margin: 0;
+}
+
+#modeChager {
+    z-index: 2;
+    border: 1px solid white;
+    width: 62px;
+    height: 25px;   
+    position: relative;
+    padding-top: 0px; 
+    padding-bottom: 0px;
+    top: -26px;
+    left: 85%;
+}
+
+#imageMode {
+    z-index: 2;
+    display: inline-block; 
+    position: relative;
+    width: 30px;
+    height: 25px;   
+    left: 0px;
+    top: -1px;
+    /*background-color: red;*/
+}
+
+#ShareMode {
+    z-index: 2;
+    display: inline-block; 
+    position: relative;
+    width: 30px;
+    height: 25px;   
+    left: 0px;
+    top: -1px;
+}
+
+#faIcon {
+    text-align: center;
+    vertical-align: middle;
+    display:inline-block;
+}
+
+#imageModeSelected {
+    z-index: 2;
+    display: inline-block; 
+    position: relative;
+    width: 30px;
+    height: 25px;   
+    left: 0px;
+    top: -1px;
+    background-color: white;
+    color: black;
+}
+
+#ShareModeSelected {
+    z-index: 2;
+    display: inline-block; 
+    position: relative;
+    width: 30px;
+    height: 25px;   
+    left: 0px;
+    top: -1px;
+    background-color: white;
+    color: black;
+}
+
+#BillTitleShown {
+    height: 130px;
+    text-align: left;
+}
+
+#BillTitleShown h5 {
+    vertical-align: bottom;
+    position: relative;
+    top: 40%;
+    left: 10%;
+    font-family: Verdana;
+}
+
+
+#BillImageShown {
+    height: 130px;
+    text-align: right;
+}
+
+#BillImageShown img {
+    height: 130px;
+    width: 130px;
+    vertical-align: bottom;
+    position: relative;
+    right: 60px
+}
+
+#FieldTitle {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#FieldResponse {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#MemberColumnHeader {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#ShareColumnHeader{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

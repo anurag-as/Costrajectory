@@ -1,25 +1,39 @@
 <table class="table" style="width: 100%">
     <thead>
       <tr>
-        <th scope="col" style="width: 16.6%; text-align:left">#</th>
-        <th scope="bill name" style="width: 16.6%; text-align:left">Bill name</th>
-        <th scope="bill description" style="width: 16.6%; text-align:left">Bill description</th>
-        <th scope="bill date" style="width: 16.6%; text-align:left">Bill Date</th>
-        <th scope="bill amount" style="width: 16.6%; text-align:left">Bill amount</th>
-        <th scope="bill amount" style="width: 16.6%; text-align:left"></th>
+        
+        <th scope="col" style="width: 3%; text-align:center">#</th>
+        <th scope="bill name" style="width: 16%; text-align:left">Bill name</th>
+        <th scope="bill description" style="width: 17%; text-align:left">Bill description</th>
+        <th scope="bill date" style="width: 16%; text-align:left">Bill Date</th>
+        <th scope="bill amount" style="width: 16%; text-align:left">Bill category</th>
+        <th scope="bill amount" style="width: 18%; text-align:left">Bill Amount</th>
+        <th scope="bill amount" style="width: 18%; text-align:left"></th>
       </tr>
     </thead>
   </table>
 
-<ng-container *ngFor="let indexobj of BillEntries">
-  <app-view-table-bill 
-    [BillEnum]='indexobj[0]'
-    [BillName]='indexobj[1]' 
-    [BillDescription]='indexobj[2]' 
-    [BillDate]='indexobj[3]'
-    [BillAmount]='indexobj[4]'
-    [BillHasImage]='indexobj[5]'
-    [BillIdentifier]='indexobj[6]'
-    [BillImage]='indexobj[7]'
-    [BillId]='indexobj[8]'></app-view-table-bill>
-</ng-container>
+
+
+<div *ngIf="BillEntries.length != 0"
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="BillEntries"
+    (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let indexobj of BillEntries" cdkDrag>
+        <app-view-table-bill 
+        [BillEnum]='indexobj[0]'
+        [BillName]='indexobj[1]' 
+        [BillDescription]='indexobj[2]' 
+        [BillDate]='indexobj[3]'
+        [BillAmount]='indexobj[4]'
+        [BillHasImage]='indexobj[5]'
+        [BillIdentifier]='indexobj[6]'
+        [BillImage]='indexobj[7]'
+        [BillId]='indexobj[8]'
+        [BillCategory]='indexobj[9]'></app-view-table-bill>
+    </div>
+  </div>
+
+  <div *ngIf="BillEntries.length == 0" style="height: 400px;">
+  </div>

@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand"> Cost Sharing &copy;</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" type='button' (click)="NavigateToHome()">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" type='button' (click)="addGroupBill()">Create Group</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<app-group-well *ngFor="let Group of GroupList; let i = index" 
+[Username]="username" 
+[Admin]= "Group.group_info.group_admin" 
+[GroupName]="Group.group_info.title" 
+[GroupId]="Group.group_info.group_id" 
+[Bills]="Group.bill_data" 
+[Participants]="Group.group_info.users" 
+[ParticipantsCopy]="Group.group_info.users" 
+[GroupCreationTime]="Group.group_info.creation_time"
+[PendingUsers]="Group.group_info.pending_users"
+[Description]="Group.group_info.description"
+[UserAlias]="Group.user_details"
+[SharingData]="Group.cost_sharing.settlements"
+[GroupIndex]="i"
+[SettlementHistory]="Group.cost_sharing.settlement_history"
+(ChangeEvent)="ReloadAllData()"></app-group-well>

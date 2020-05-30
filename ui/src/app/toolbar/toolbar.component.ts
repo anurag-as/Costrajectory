@@ -3,6 +3,22 @@ import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionStorage } from '../app.session';
+import { GlobalConfigsService } from '../global-configs.service';
+import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { GroupacceptpopupComponent } from './groupacceptpopup/groupacceptpopup.component';
+
+interface ReturnImage {
+  Image: any;
+}
+
+interface PremiumStatus {
+  isPremium: string;
+}
+
+interface GetG {
+  group_admin_approvals: { add: [], remove: [] };
+  personal_requests: [];
+}
 
 @Component({
   selector: 'app-toolbar',
@@ -12,20 +28,69 @@ import { SessionStorage } from '../app.session';
 export class ToolbarComponent implements OnInit {
   @Input() userName;
   @Input() Authoriation;
-
-
-  constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router) {}
+  canShowImage = false;
+  base64Data = '';
+  isPremium = false;
+  GroupData = [];
+  RequestId = 0;
+  PeopleAdd = [];
+  PeopleRemove = [];
+  // tslint:disable-next-line:max-line-length
+  constructor(private http: HttpClient, private logout: SessionStorage, private Route: Router, private Globals: GlobalConfigsService, public dialog: MatDialog) {}
 
   ngOnInit() {
+    // To get the random DP
+    // this.GetDP();
+    // this.GetUserPremiumStatus();
   }
-  
-  test() {
-    console.log('HERE');
-    this.http.get('http://127.0.0.1:5000/getAlluserNames').subscribe(posts => { console.log(posts); });
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnChanges(chg) {
+    if (chg.Authoriation === undefined) {
+      return;
+    }
+    if (chg.Authoriation.currentValue === true) {
+        this.GetUserPremiumStatus();
+        this.GetDP();
+        this.GetAllGroupData();
+    }
+
+  }
+
+  receiveImage(URL: string, username: string) {
+    return this.http.post<ReturnImage>(URL, {user_name: username});
+  }
+
+  private GetUserPremiumStatus() {
+    const endpoint = 'http://127.0.0.1:5000/auth/isPremium';
+    this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
+      // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
+      if (data.isPremium === 'True') {
+        this.isPremium = true;
+        this.Globals.premium = this.isPremium;
+      } else {
+        this.isPremium = false;
+        this.Globals.premium = this.isPremium;
+      }
+    }, err => {
+      this.isPremium = false;
+      this.Globals.premium = this.isPremium;
+    });
+    // return this.isPremium;
+  }
+
+  private GetDP() {
+    const endpoint = 'http://127.0.0.1:5000/auth/profilePic';
+    // const QueryPayload = {username: this.username, mapped_name : this.MappedImageName, original_name: this.ActualImageName};
+    // console.log(QueryPayload);
+    this.receiveImage(endpoint, this.userName.username).subscribe(data => {
+      this.canShowImage = true;
+      this.base64Data = data.Image;
+    });
   }
 
   LogOut(path) {
-    const endpoint = 'http://127.0.0.1:5000/signout';
+    const endpoint = 'http://127.0.0.1:5000/auth/signout';
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -35,9 +100,95 @@ export class ToolbarComponent implements OnInit {
       }
     };
     this.http.delete(endpoint, options).subscribe(data => {
-      console.log('LOGGING OUT');
+      // console.log('LOGGING OUT');
     });
     this.logout.deleteKey();
     window.location.reload();
   }
+
+  GoPremium() {
+    const endpoint = 'http://127.0.0.1:5000/auth/goPremium';
+    this.http.post<PremiumStatus>(endpoint, {username: this.userName.username}).subscribe(data => {
+      // console.log('ON CHANGE ANGULAR : ', data, this.userName.username);
+      if (data.isPremium === 'True') {
+        this.isPremium = true;
+        this.Globals.premium = this.isPremium;
+        window.location.reload();
+      } else {
+        this.Globals.premium = this.isPremium;
+        window.alert('SOMETHING WENT WRONG! TRY AGAIN LATER');
+      }
+    }, err => {
+      this.Globals.premium = this.isPremium;
+      window.alert('SERVER BUSY! TRY AGAIN LATER');
+    });
+  }
+
+  GoToAccountDetails() {
+    this.Route.navigate(['/AccDetails']);
+  }
+
+  GetAllGroupData( Button ?: boolean) {
+    let status = false;
+    if ( Button === true ) {
+      status = true;
+    }
+    this.GetAllGroupDataFromServer(this.userName.username).subscribe(data => {
+      this.GroupData = data.body.personal_requests;
+      this.PeopleAdd = data.body.group_admin_approvals.add;
+      this.PeopleRemove = data.body.group_admin_approvals.remove;
+      if ( typeof(this.GroupData) !== 'string') {
+        this.RequestId = 1;
+      } else if ( this.PeopleAdd.length !== 0 || this.PeopleRemove.length !== 0) {
+        this.RequestId = 2;
+      } else {
+        this.RequestId = 3;
+      }
+      if (this.RequestId !== 3 || status) {
+        const dialogRef = this.dialog.open(GroupacceptpopupComponent, {
+          panelClass: 'myapp-no-padding-dialog',
+          width: '800px'
+        });
+        dialogRef.componentInstance.userName = this.userName;
+        dialogRef.componentInstance.GroupData = this.GroupData;
+        dialogRef.componentInstance.PeopleAdd = this.PeopleAdd;
+        dialogRef.componentInstance.PeopleRemove = this.PeopleRemove;
+        dialogRef.componentInstance.RequestId = this.RequestId;
+      }
+    });
+  }
+
+  ChangeRequestType(request) {
+    this.RequestId = request;
+  }
+
+  GetAllGroupDataFromServer(UserName: string) {
+    const endpoint = 'http://127.0.0.1:5000/group/pendingRequests';
+    // console.log('(((( ', UserName);
+    return this.http.get<GetG>(endpoint, {
+        params: {
+            user_name : UserName,
+        },
+        observe: 'response'
+      });
+  }
+
+  DecisionPoster(DecisionDetails: {GroupId: number, Decision: string}) {
+    // console.log('DECISION GOT : ', DecisionDetails);
+    // this.GetAllGroupData();
+    this.PostDecision(DecisionDetails.GroupId, DecisionDetails.Decision);
+  }
+
+  PostDecision(GroupId: number, Decision: string) {
+    const endpoint = 'http://127.0.0.1:5000/group/groupStatus';
+    const templatePayload = [[String(GroupId), Decision]];
+    this.http.post(endpoint, {group_status: templatePayload, user_name: this.userName.username}).subscribe(data => {
+      this.GetAllGroupData();
+    });
+}
+
+ParseInt(a, b) {
+  return parseInt(a, b);
+}
+
 }

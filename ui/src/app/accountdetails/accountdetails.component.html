@@ -1,0 +1,56 @@
+<div class="container">
+    <!-- <div class="sidenav">
+        <a href="#">Account Details</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <footer class="text-muted text-center text-small" style="position: absolute; top: 1100px; left: 30px;">
+            <p class="mb-1">© Costrajectory</p>
+        </footer>
+    </div> -->
+
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><span class="fa fa-list-ul fa-lg" aria-hidden="true"></span> Menu</div>
+        <div class="list-group list-group-flush" type="button">
+          <a class="list-group-item list-group-item-action bg-light" (click)="ChangeMode('profile')">Profile</a>
+          <a class="list-group-item list-group-item-action bg-light" (click)="ChangeMode('about')">About</a>
+          <a class="list-group-item list-group-item-action bg-light" (click)="ChangeMode('logs')">Logs</a>
+         <!--  <a class="list-group-item list-group-item-action bg-light" (click)="ChangeMode('contact')">Contact</a>
+          <a class="list-group-item list-group-item-action bg-light" (click)="ChangeMode('Status')">Status</a> -->
+        </div>
+
+        <footer class="text-muted text-center text-small" style="position: absolute; top: 1100px; left: 30px;">
+            <p class="mb-1">© Costrajectory</p>
+        </footer>
+      </div>
+  
+    <app-profile *ngIf="selected=='profile'"></app-profile>
+    <app-about *ngIf="selected=='about'"></app-about>
+    <app-logs *ngIf="selected=='logs'"></app-logs>
+    <app-contact *ngIf="selected=='contact'"></app-contact>
+    <app-status *ngIf="selected=='Status'"></app-status>
+
+
+<!--     <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">© Costrajectory</p>
+    <ul class="list-inline">
+        <li class="list-inline-item" type="button" style="color: brown;" data-toggle="modal" data-target="#privacyModal">Privacy</li>
+        <li class="list-inline-item" type="button" style="color: blueviolet" data-toggle="modal" data-target="#TermsModal">Terms</li>
+        <li class="list-inline-item" type="button" style="color: blue" data-toggle="modal" data-target="#SupportModal">Support</li>
+    </ul>
+    </footer>
+ --></div>
+
+<!--  -------------------- PRIVACY ------------------- -->
+<div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <app-privacy></app-privacy>
+</div>
+
+<!--  -------------------- Terms ------------------- -->
+<div class="modal fade" id="TermsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <app-terms></app-terms>
+</div>
+
+<!--  -------------------- Support ------------------- -->
+<div class="modal fade" id="SupportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <app-support></app-support>
+</div>

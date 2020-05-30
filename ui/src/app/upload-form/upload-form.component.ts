@@ -15,12 +15,12 @@ export class UploadFormComponent implements OnInit {
   constructor(private uploader: UploadService, private route: Router) { }
 
   ngOnInit() {
-    this.route.navigate(['']);
+    this.route.navigate(['/analytics']);
   }
 
   private handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
-    console.log(this.fileToUpload);
+    // console.log(this.fileToUpload);
 }
 
 

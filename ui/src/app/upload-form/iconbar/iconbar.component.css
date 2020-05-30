@@ -3,3 +3,20 @@
     color: #fff;
   }
   
+  mat-progress-bar {
+    height: 1em;
+    width: 10em;
+  }
+
+  .progressbar {
+    height: 1em;
+    width: 10em;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .green-progress .mat-progress-bar-fill::after {
+    background-color: green !important;
+}

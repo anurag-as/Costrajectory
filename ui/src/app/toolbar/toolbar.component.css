@@ -5,3 +5,166 @@
   .example-spacer {
     flex: 1 1 auto;
   }
+
+  #name2 {
+    z-index: 10;
+  }
+
+  #crown {
+    mix-blend-mode: multiply;
+    top:  -9px;
+    left: 130px;
+    overflow: hidden;
+  }
+
+  #premium {
+    position: relative;
+    width: 150px;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #a18d6c;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    left: -150px;
+    top: 20px;
+    overflow: hidden;
+  }
+  
+  #premImg {
+    position: absolute;
+    height: 30px;
+    width: 25px;
+    top: 1px;
+    left: 4px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 25fr;
+    grid-template-rows: 5fr;
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 3px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    font-family: 'Exo', sans-serif;
+    color: #a18d6c;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  #dropdownAccount {
+    background-color: transparent;
+    outline-color: none;
+    outline: none;
+    border: none;
+  }
+  
+
+  /* #premiumName {
+    position: absolute;
+    margin-top: 10px;
+    left: 1550px;
+    top: 5px;
+    overflow: hidden;  
+
+  }
+
+  #RandomDP {
+    position: absolute;
+    margin-top: 10px;
+    left: 1600px;
+    top: 5px;
+    overflow: hidden; 
+  }
+
+  #OtherOptions {
+    position: absolute;
+    margin-top: 10px;
+    left: 1650px;
+    top: 5px; 
+  }
+ */
+  #Logout {
+    position: absolute;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    top: 110px;
+    left:65px;
+  }
+
+  #container {
+    position: relative;
+  }
+
+#Uname {
+  position: absolute;
+  right: 35px;
+}
+
+.grid-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 70px 20px;
+  /*left: 1500px;*/
+  top: 2px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 25fr 2fr 2fr;
+  grid-template-rows: 5fr;
+  grid-auto-rows: minmax(150px, auto);
+  grid-gap: 3px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+  font-family: 'Exo', sans-serif;
+  color: green;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#ButtonGroupToolbarNotPremium {
+  position: relative;
+  left: 50px;
+  top: -15px;
+  width: 100px;
+}
+
+#ButtonGroupToolbarPremium {
+}
+
+#GroupRequestsActive {
+  background-color: red; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+  }
+
+
+#GroupRequestsInActive {
+  background-color: red; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+  background-image: -webkit-linear-gradient(30deg, white 20%, red 80%);
+}
+
+#AddUsersActive {
+  background-color: orange; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+}
+
+#AddUsersInActive {
+  background-color: orange; 
+  height: 10px; 
+  width: 50%; 
+  display: inline-block;  
+  background-image: -webkit-linear-gradient(150deg,  white 20%, orange 80%);
+}
