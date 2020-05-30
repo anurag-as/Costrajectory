@@ -10,6 +10,7 @@ import { AccountdetailsComponent } from './accountdetails/accountdetails.compone
 import { CostsharingComponent } from './costsharing/costsharing.component';
 import { AboutComponent } from './accountdetails/about/about.component';
 import { DevelopersComponent } from './accountdetails/developers/developers.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
    { path: 'logout', component: SignupinComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
    { path: 'AccDetails', component: AccountdetailsComponent},
    { path: 'CostSharing', component: CostsharingComponent},
    { path: 'About', component: AboutComponent},
-   { path: 'AboutUs', component: DevelopersComponent}
+   { path: 'AboutUs', component: DevelopersComponent},
+   { path: 'Home', component: HomeComponent}
   ];
 
 @NgModule({
