@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header" >
-      <h5 class="modal-title" id="exampleModalLabel">Bug Report</h5>
+      <h5 class="modal-title" id="exampleModalLabel" style="position: relative; right: -25px; color:blue;">Report a bug or simply give feedback!</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="CloseDiaglog()">
         <span aria-hidden="true" *ngIf="!PostedBugReport">&times;</span>
       </button>
@@ -8,20 +8,20 @@
     <div class="modal-body" *ngIf="!GotBugID && !PostedBugReport">
       <div class="row">
         <div class="col-md-2">
-          <b style="position: relative; right: -20px; top:15px">Bug Title</b>
+          <b style="position: relative; right: -25px; top:15px; color:green;">Title</b>
         </div>
         <div class="col-md-10">
-          <input #Bname required type="text" placeholder="    Enter Bug Title" [(ngModel)]="ReportTitle" name="BugReportTitle" style="width: 100%; height: 60px;"/> 
+          <input #Bname required type="text" placeholder=" Enter title." [(ngModel)]="ReportTitle" name="BugReportTitle" style="width: 100%; height: 60px;"/> 
         </div>
       </div>
       <hr>
       <hr>
       <div class="row">
         <div class="col-md-2" style="text-align: center;">
-          <b>Bug Description</b> 
+          <b style="color:green;">Description</b> 
         </div>
         <div class="col-md-10">
-          <textarea #Bname required type="text" placeholder="   Enter Bug Description" [(ngModel)]="ReportDesctiption" name="BugReportDescription" style="width: 100%; height: 100px;"></textarea> 
+          <textarea #Bname required type="text" placeholder=" Enter Description." [(ngModel)]="ReportDesctiption" name="BugReportDescription" style="width: 100%; height: 100px;"></textarea> 
         </div>
       </div>
               
@@ -47,7 +47,7 @@
     </div>
               
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" [disabled]="ReportTitle == '' || ReportDesctiption=='' " *ngIf="!GotBugID && !PostedBugReport" (click)="SubmitReport()">Raise Report!</button>
+      <button type="button" class="btn btn-primary" [disabled]="ReportTitle == '' || ReportDesctiption=='' " *ngIf="!GotBugID && !PostedBugReport" (click)="SubmitReport()">Submit</button>
       <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="CloseDiaglog()" *ngIf="!PostedBugReport">Close</button>
     </div>
   </div>
