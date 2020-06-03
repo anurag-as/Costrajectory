@@ -6,7 +6,7 @@
 
 <div class="card-body bg-light" style="padding: 0px;"> 
     <div class="row">
-        <div style="display: inline-block; padding: 10px;">
+        <div style="display: inline-block; padding: 5px;">
             <div class="card" id="SHareSettlementcard">
                 <app-share-others [SharedEntry]="Share" [AliasData]="testAlias"></app-share-others>
             </div>
@@ -17,15 +17,15 @@
                 <app-share-others [SharedEntry]="Share" [AliasData]="testAlias"></app-share-others>
             </div>
         </div>
-        <div style="display: inline-block; padding: 10px;">
-            <div class="card" id="SHareSettlementcard">
+        <div style="display: inline-block; padding: 5px; width: 33%;">
+            <div class="card" id="SHareSettlementcard" style="width: 90%; padding: 0px;">
                 <app-share-others [SharedEntry]="Share" [AliasData]="testAlias"></app-share-others>
             </div>
-            <div class="card" id="SHareSettlementcard" style="height: 150px;">
+            <div class="card" id="SHareSettlementcard" style="height: 150px; width: 90%; padding: 0px;">
                 <app-share-owe (ChangeEvent)="PostSettlement($event)" [AliasData]="testAlias" [SettlementValue]="'23'" [Payer]="'a@a.com'" ></app-share-owe>
             </div>    
         </div>
-        <div style="display: inline-block; padding: 10px;">
+        <div style="display: inline-block; padding: 5px;">
             <div class="card" id="SHareSettlementcard">
                 <app-share-others [SharedEntry]="Share" [AliasData]="testAlias"></app-share-others>
             </div>

@@ -88,6 +88,14 @@ import { RecentBillsComponent } from './home/recent-bills/recent-bills.component
 import { RecentSharesComponent } from './home/recent-shares/recent-shares.component';
 import { DotPointerComponent } from './utilities/dot-pointer/dot-pointer.component';
 import { LineComponent } from './utilities/line/line.component';
+import { DotlineComponent } from './utilities/homecomp/dotline/dotline.component';
+import { DotlineInfoComponent } from './utilities/homecomp/dotline-info/dotline-info.component';
+import { DotlineInfoDownComponent } from './utilities/homecomp/dotline-info-down/dotline-info-down.component';
+import { DotlineDownComponent } from './utilities/homecomp/dotline-down/dotline-down.component';
+import { InfoRectUpComponent } from './utilities/homecomp/info-rect-up/info-rect-up.component';
+import { InfoRectDownComponent } from './utilities/homecomp/info-rect-down/info-rect-down.component';
+import { DotPointerDotUPComponent } from './utilities/homecomp/dot-pointer-dot-up/dot-pointer-dot-up.component';
+import { DotPointerDotDOWNComponent } from './utilities/homecomp/dot-pointer-dot-down/dot-pointer-dot-down.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +157,15 @@ import { LineComponent } from './utilities/line/line.component';
     RecentBillsComponent,
     RecentSharesComponent,
     DotPointerComponent,
-    LineComponent
+    LineComponent,
+    DotlineComponent,
+    DotlineInfoComponent,
+    DotlineInfoDownComponent,
+    DotlineDownComponent,
+    InfoRectUpComponent,
+    InfoRectDownComponent,
+    DotPointerDotUPComponent,
+    DotPointerDotDOWNComponent
   ],
   imports: [
     BrowserModule,
