@@ -1,25 +1,28 @@
 <footer class="my-5 pt-5 text-muted text-center text-small" 
 style="bottom: 0; position: relative;">
-<!-- <p class="mb-1">© Costrajectory</p>
- -->    <ul class="list-inline">
-        <li class="list-inline-item" type="button" style="color: brown;" (click)="RedirectTolink('AboutUs')">AboutUs</li>
-        <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
+       <ul class="list-inline">
+        <li class="list-inline-item" type="button" style="color: blue;" (click)="RedirectTolink('AboutUs')">AboutUs</li>
         
-<!--         <li class="list-inline-item" type="button" style="color: blueviolet" data-toggle="modal" data-target="#FeatureFooterModal">Features</li>
--->         <li class="list-inline-item" type="button" style="color: blueviolet" (click)="RedirectTolink('About')">Features</li>    
-            <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
+        <li class="list-inline-item" style="color: blue; padding-left: 15px; padding-right: 15px;">|</li>
+        <li class="list-inline-item" type="button" style="color: green" (click)="RedirectTolink('About')">Features</li>    
         
-        <li class="list-inline-item" style="color: blue" (mouseover)='over()' (mouseout)='out()'>
-            <img src="assets\images\logo.png" style="height: 35px; width: 60px;" *ngIf="OnMouseHover">
-            <img src="assets\images\logo_inverted.png" style="height: 35px; width: 60px;" *ngIf="!OnMouseHover">
+        <li class="list-inline-item" style="color: green; padding-left: 15px; padding-right: 15px;">|</li>
+        <li class="list-inline-item" type="button" style="color: blue" (click)="RaiseBugReport()">Report bug</li>
+        
+        <li class="list-inline-item" style="color: blue; padding-left: 15px; padding-right: 15px;">|</li>
+        <li class="list-inline-item" type="button" style="color: green" (click)="goToLink('https://mail.google.com/mail/?view=cm&fs=1&to=Costrajectory@gmail.com')" >Costrajectory@gmail.com</li>  
+        
+        <li class="list-inline-item" style="color: green; padding-left: 15px; padding-right: 15px;">|</li>
+	<li class="list-inline-item" style="color: blue" (mouseover)='over()' (mouseout)='out()'>
+        <img src="assets\images\logo.png" style="height: 35px; width: 60px;" *ngIf="OnMouseHover">
+        <img src="assets\images\logo_inverted.png" style="height: 35px; width: 60px;" *ngIf="!OnMouseHover">
         </li>
-        <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
-        
-        <li class="list-inline-item" type="button" style="color: black" (click)="RaiseBugReport()">Report bug</li>
-        <li class="list-inline-item" style="color: black; padding-left: 15px; padding-right: 15px;">|</li>
-
-        <li class="list-inline-item" type="button" style="color: green" (click)="goToLink('https://mail.google.com/mail/?view=cm&fs=1&to=Costrajectory@gmail.com')" >Costrajectory@gmail.com</li>
-
+	
+	<li class="list-inline-item" style="color: green; padding-left: 15px; padding-right: 15px;">|</li>
+	<li class="list-inline-item" style="color: blue; padding-left: 15px; padding-right: 15px;">Copyright© 2020 Costrajectory</li>
+	
+	<li class="list-inline-item" style="color: blue; padding-left: 15px; padding-right: 15px;">|</li>
+	<li class="list-inline-item" style="color: green; padding-left: 15px; padding-right: 15px;"> All Rights Reserved.</li>
     </ul>
 </footer>
 
