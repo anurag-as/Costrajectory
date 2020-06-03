@@ -1,2 +1,13 @@
-<app-dot-pointer style="background-color: yellow;"></app-dot-pointer>
-<app-line></app-line>
+<div style="position: relative; top:0px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+
+     <div *ngFor="let number of numbers" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-dot-pointer-dot-up style="background-color: yellow;"></app-dot-pointer-dot-up>
+    </div>
+</div>
+
+<div style="position: relative; top:-20px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+    <div *ngFor="let number of numbers" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-dot-pointer-dot-down style="background-color: violet;"></app-dot-pointer-dot-down>
+    </div>
+</div>
+
