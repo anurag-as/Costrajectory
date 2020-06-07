@@ -96,6 +96,7 @@ import { InfoRectUpComponent } from './utilities/homecomp/info-rect-up/info-rect
 import { InfoRectDownComponent } from './utilities/homecomp/info-rect-down/info-rect-down.component';
 import { DotPointerDotUPComponent } from './utilities/homecomp/dot-pointer-dot-up/dot-pointer-dot-up.component';
 import { DotPointerDotDOWNComponent } from './utilities/homecomp/dot-pointer-dot-down/dot-pointer-dot-down.component';
+import { MiniOweInterfaceComponent } from './home/recent-shares/mini-owe-interface/mini-owe-interface.component';
 
 @NgModule({
   declarations: [
@@ -165,7 +166,8 @@ import { DotPointerDotDOWNComponent } from './utilities/homecomp/dot-pointer-dot
     InfoRectUpComponent,
     InfoRectDownComponent,
     DotPointerDotUPComponent,
-    DotPointerDotDOWNComponent
+    DotPointerDotDOWNComponent,
+    MiniOweInterfaceComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,8 @@
     box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
     border-radius: 12px;  
     height: 80px;
-    width: 102%;
+    width: 100%;
     box-sizing: content-box;
     position: relative;
+    overflow-x: auto;
 }
