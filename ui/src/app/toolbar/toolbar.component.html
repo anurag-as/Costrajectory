@@ -4,7 +4,7 @@
       <span class="example-spacer"></span>
 
       <div *ngIf="Authoriation == true">
-              <button id="premium" class = "btn btn-primary" *ngIf="!isPremium" data-toggle="modal" data-target="#goPremium"><img class="img-responsive"  id="premImg" src="assets\images\premium.png" height="30px" width="25px" /> &nbsp; &nbsp;Go Premium!</button> 
+              <button id="premium" class = "btn btn-primary" *ngIf="!isPremium" data-toggle="modal" data-target="#goPremium"><img class="img-responsive"  id="premImg" src="assets\images\premium.png" height="30px" width="25px"/> &nbsp; &nbsp;Go Premium!</button> 
               <img id="crown" *ngIf="isPremium" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTw4_JpJJQX7rUIHxThn30iwDl8CzLIHjV-Pov2WMYUiB-zt9YS" height="60" width="60" style="transform:rotate(45deg); position: absolute;"/>
 
               <div class = "grid-container" id="ButtonGroupToolbarNotPremium" *ngIf="!isPremium">
@@ -21,9 +21,9 @@
                       </button>
                       <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                           role="menu" aria-labelledby="button-split">
-                        <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Account Settings</a></li>
+                        <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Settings</a></li>
 <!--                          <li role="menuitem"><a class="dropdown-item" type="button" data-toggle="modal" data-target="#AcceptRequests">Pending Group Accepts</a></li>
- -->                          <li role="menuitem"><a class="dropdown-item" type="button" (click)="GetAllGroupData(true)">Pending Accepts</a></li>
+ -->                          <li role="menuitem"><a class="dropdown-item" type="button" (click)="GetAllGroupData(true)">Requests</a></li>
                               <li class="divider dropdown-divider" type="button"></li>
                          <li role="menuitem" id="logoutdropdown" type="button"><a class="dropdown-item" (click) = "LogOut()"><i class="fa fa-sign-out fa-2x" aria-hidden="true" style="color:red;"></i><div id="Logout">Logout</div></a>
                         </li> 
@@ -34,7 +34,7 @@
               </div>
 
               <div class = "grid-container" id="ButtonGroupToolbarPremium" *ngIf="isPremium">
-                <!-- <button id="premium" class = "btn btn-primary" *ngIf="!isPremium" (click)="GoPremium()"><img class="img-responsive"  id="premImg" src="assets\images\premium.png" height="30px" width="25px" /> &nbsp; &nbsp;Go Premium!</button>  -->
+                <!-- <button id="premium" class = "btn btn-primary" *ngIf="!isPremium" (click)="GoPremium()"><img class="img-responsive"  id="premImg" src="assets\images\premium.png" height="30px" width="25px" /> &nbsp; &nbsp;!</button>  -->
                 <div class="grid-item">
                  <img id="RandomDP" class="img-responsive" [src]="'data:image/gif;base64,'+base64Data" style="max-height: 35px; max-width: 35px;" />
                 <!-- <button href="#" style="color:transparent;width:2px;" title="Logout" (click) = "LogOut()" class="btn btn-link"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color:red;"></i></button> -->
@@ -47,8 +47,8 @@
                       </button>
                       <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                           role="menu" aria-labelledby="button-split">
-                        <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Account Settings</a></li>
-                        <li role="menuitem"><a class="dropdown-item" type="button" (click)="GetAllGroupData(true)">Pending Accepts</a></li>
+                        <li role="menuitem" type="button"><a class="dropdown-item" (click) = "GoToAccountDetails()">Settings</a></li>
+                        <li role="menuitem"><a class="dropdown-item" type="button" (click)="GetAllGroupData(true)">Requests</a></li>
                       <li class="divider dropdown-divider" type="button"></li>
                          <li role="menuitem" id="logoutdropdown" type="button"><a class="dropdown-item" (click) = "LogOut()"><i class="fa fa-sign-out fa-2x" aria-hidden="true" style="color:red;"></i><div id="Logout">Logout</div></a>
                         </li> 
@@ -81,25 +81,25 @@
       </div>
       <div class="modal-body">
         <div class="grid">
-          <img class="img-responsive" src="https://lh3.googleusercontent.com/proxy/ZAlv6BmSXWylEXcdGfL4-fadlhwYHgYP9djSITn7I7XZq1WHIuZ35z8f4MW20mEWkcGeqFFKqT5E1LTFpeK4KAqFqn33gY0" height="35px" width="35px"/>
-          <p>Get Access to more space upto 400MB!</p>
+          <img class="img-responsive" src="assets\images\premium_icon1.png" height="35px" width="35px"/>
+          <p> &nbsp; Intuitive analytics and personalized content!</p>
         </div>
         <div class="grid">
-          <img class="img-responsive" src="https://lh3.googleusercontent.com/proxy/ZAlv6BmSXWylEXcdGfL4-fadlhwYHgYP9djSITn7I7XZq1WHIuZ35z8f4MW20mEWkcGeqFFKqT5E1LTFpeK4KAqFqn33gY0" height="35px" width="35px"/>
-          <p>Get Access to more Analytics!</p>
+          <img class="img-responsive" src="assets\images\premium_icon2.png" height="35px" width="35px"/>
+          <p>  &nbsp; Additional Storage!</p>
         </div>
         <div class="grid">
-          <img class="img-responsive" src="https://lh3.googleusercontent.com/proxy/ZAlv6BmSXWylEXcdGfL4-fadlhwYHgYP9djSITn7I7XZq1WHIuZ35z8f4MW20mEWkcGeqFFKqT5E1LTFpeK4KAqFqn33gY0" height="35px" width="35px"/>
-          <p>Get Access to All the beta releases!</p>
+          <img class="img-responsive" src="assets\images\premium_icon3.png" height="35px" width="35px"/>
+          <p> &nbsp; Exciting new features!</p>
         </div>
         <div class="grid">
-          <img class="img-responsive" src="https://lh3.googleusercontent.com/proxy/ZAlv6BmSXWylEXcdGfL4-fadlhwYHgYP9djSITn7I7XZq1WHIuZ35z8f4MW20mEWkcGeqFFKqT5E1LTFpeK4KAqFqn33gY0" height="35px" width="35px"/>
-          <p>Get Exclusive Export options and much more...!!</p>
+          <img class="img-responsive" src="assets\images\premium_icon4.png" height="35px" width="35px"/>
+          <p> &nbsp; And much more!</p>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" (click)="GoPremium()">Go Premium!!!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Maybe Later.</button>
+        <button type="button" class="btn btn-primary" (click)="GoPremium()">Yes, go premium!</button>
       </div>
     </div>
   </div>
