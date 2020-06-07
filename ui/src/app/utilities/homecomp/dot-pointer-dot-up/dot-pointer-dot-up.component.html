@@ -1,17 +1,24 @@
 <svg version="1.1"
      baseProfile="full"
      xmlns="http://www.w3.org/2000/svg"
-     style="width: 150; height: 140;">
+     style="width: 150; height: 280;">
      
-     <line x1="0" y1="130" x2="75" y2="130" style="stroke:red;stroke-width:3;" />
+     <line x1="0" y1="140" x2="75" y2="140" style="stroke:red;stroke-width:3;" />
      
-     <line x1="75" y1="130" x2="150" y2="130" style="stroke:black;stroke-width:3;"></line>
+     <line x1="75" y1="140" x2="150" y2="140" style="stroke:black;stroke-width:3;"></line>
      
-     <line x1="75" y1="130" x2="75" y2="80" style="stroke:orange;stroke-width:3;" />
+     <line x1="75" y1="140" x2="75" y2="80" style="stroke-width:3;" [attr.stroke]="BubbleColor"/>
       
       
       <g class="box">
-        <circle cx="75" cy="130" r="5" fill="red"/>
+        <circle cx="75" cy="140" r="5" [style.fill]="BubbleColor"/>
+      </g>
+
+      <rect x="-10" y="200" width="50" height="60" style="stroke:black;stroke-width:2;opacity:1"  fill-opacity="0"/>
+      <rect x="110" y="200" width="50" height="60" style="stroke:black;stroke-width:2;opacity:1"  fill-opacity="0"/>
+
+      <g>
+        <rect x="-10" y="20" width="170" height="60" style="stroke:black;stroke-width:2;opacity:1" fill-opacity="0"/>
       </g>
       
 

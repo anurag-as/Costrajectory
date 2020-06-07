@@ -1,5 +1,5 @@
 <app-alias-holder [Alias]="AliasData[Payer].alias | uppercase" id="payer" title={{Payer}}></app-alias-holder>
-<p id="Text">OWES YOU {{ SettlementValue | currency: 'INR'}}</p>
+<p id="Text">OWES YOU {{ SettlementValue | currency: 'INR'}} <span *ngIf="GroupName != undefined" title="{{GroupName}}" style="color: blue;"> : {{GroupNameTruncated}}</span></p>
 <div>
     <p id="SettleText"> SETTLE : </p> 
     <input type="number" id="SettleVal" name="SettlementVal" [(ngModel)]="currentValue">
