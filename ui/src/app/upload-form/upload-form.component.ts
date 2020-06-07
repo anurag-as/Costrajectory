@@ -15,7 +15,7 @@ export class UploadFormComponent implements OnInit {
   constructor(private uploader: UploadService, private route: Router) { }
 
   ngOnInit() {
-    this.route.navigate(['/analytics']);
+    this.route.navigate(['/Home']);
   }
 
   private handleFileInput(files: FileList) {

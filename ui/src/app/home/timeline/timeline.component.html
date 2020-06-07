@@ -1,0 +1,28 @@
+<div #Timeline style="position: relative; top:0px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+
+     <div *ngFor="let number of numbers" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-dot-pointer-dot-up [BubbleColor]="'#FFFF00'"></app-dot-pointer-dot-up>
+        <app-dot-pointer-dot-down></app-dot-pointer-dot-down> 
+
+    </div>
+
+
+</div>
+
+<div class="SliderRight" type="button" (click)="scrollRight()">
+    <span>
+        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+    </span>
+</div>
+
+<div class="SliderLeft" type="button" (click)="scrollLeft()"> <!-- *ngIf="InitialState != 0" -->
+    <span>
+        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>    </span>
+</div>
+
+<!-- <div style="position: relative; top:-20px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+    <div *ngFor="let number of numbers" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-dot-pointer-dot-down></app-dot-pointer-dot-down>
+    </div>
+</div>
+ -->

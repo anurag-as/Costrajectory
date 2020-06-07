@@ -60,9 +60,14 @@ export class IconbarComponent implements OnInit {
     this.route.navigate(['/analytics']);
   }
 
-  GoHome(): void {
+  BillHome(): void {
     this.route.navigate(['']);
   }
+
+  Home(): void {
+    this.route.navigate(['/Home']);
+  }
+
 
   CostSharing(): void {
     this.route.navigate(['CostSharing']);
