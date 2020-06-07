@@ -20,12 +20,6 @@ interface Status {
 export class RecentSharesComponent implements OnInit {
   @Input() SharesPayload: any;
   @Input() Username: string;
-  testAlias = {
-    'a@a.com': {alias: 'aa', name: false},
-    'b@b.com': {alias: 'bb', name: false},
-    'c@c.com': {alias: 'cc', name: false}
-    };
-
   /* COmbinations allowed currently -->
     1. 2 settlement, 2 shares
     2. 6 settlements
@@ -42,7 +36,6 @@ export class RecentSharesComponent implements OnInit {
   listRight: any[];
   listLeft2: any[];
   listRight2: any[];
-  Share = ['c@c.com', 'b@b.com', 400];
 
   constructor(private Globals: GlobalConfigsService, private http: HttpClient) {
     this.Username = Globals.GetUserName;
@@ -52,7 +45,7 @@ export class RecentSharesComponent implements OnInit {
     this.ReloadPage().subscribe(data => {
       this.ResetValues();
       this.SharesPayload = data.body;
-      console.log('GROUP DATA HOME: ', data.body);
+      // console.log('GROUP DATA HOME: ', data.body);
       this.CreateCOntentFromPayload();
       this.RandomSettlementSelector();
       this.PrepareLists();
@@ -100,8 +93,8 @@ export class RecentSharesComponent implements OnInit {
 
   RandomSettlementSelector() {
     // Initialize the numbers
-    this.Shares = Math.min( 2, this.NumberOfShare);
-    this.Settlements = Math.min( 6 - this.Shares * 2, this.NumberOfSettlements );
+    this.Settlements = Math.min( 2, this.NumberOfSettlements);
+    this.Shares = Math.min( 6 - this.Shares * 2, this.NumberOfShare );
 
     while (this.Shares > 0) {
       const removedBit = this.ContentQueuePay.shift();
@@ -119,8 +112,8 @@ export class RecentSharesComponent implements OnInit {
       this.ContentQueueSettlement.push(removedBit);
     }
 
-    console.log('SETTLEMENTS :', this.FinalSettlement);
-    console.log('SHARES :', this.FinalShares);
+    // console.log('SETTLEMENTS :', this.FinalSettlement);
+    // console.log('SHARES :', this.NumberOfShare);
 
   }
 
@@ -132,11 +125,11 @@ export class RecentSharesComponent implements OnInit {
 
   PostSettlement( postValues: {payer: string, value: number, GroupId: number}) {
     this.UploadBillToServer(this.Username, postValues.GroupId, postValues.payer, postValues.value).subscribe( x => {
-      console.log('STATUS MESSAGE ', x);
+      // console.log('STATUS MESSAGE ', x);
       this.ReloadPage().subscribe(data => {
         this.ResetValues();
         this.SharesPayload = data.body;
-        console.log('GROUP DATA HOME: ', data.body);
+        // console.log('GROUP DATA HOME: ', data.body);
         this.CreateCOntentFromPayload();
         this.RandomSettlementSelector();
         this.PrepareLists();
@@ -163,7 +156,6 @@ export class RecentSharesComponent implements OnInit {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
-    console.log('SETTLE PAY :', username, GroupID, amount, payee);
 
     return this.http.post<Status>(Endpoint, formData, {headers});
   }

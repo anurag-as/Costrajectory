@@ -17,7 +17,7 @@
                 <app-mini-owe-interface *ngIf="entry.type==1" (ChangeEvent)="PostSettlement($event)" [AliasData]="entry.aliasData" [SettlementValue]="entry.amount" [Payer]="entry.shares[0]" [GroupName]="entry.groupName" [GroupId]="entry.groupId"></app-mini-owe-interface>    
             </div>
             <div class="card" id="SHareSettlementcard" *ngFor="let entry of listLeft2; let i = index">
-                <app-share-others *ngIf="entry.type==1" [SharedEntry]="entry.shares" [AliasData]="entry.aliasData" [GroupName]="entry.groupName"></app-share-others>
+                <app-share-others *ngIf="entry.type==2" [SharedEntry]="entry.shares" [AliasData]="entry.aliasData" [GroupName]="entry.groupName"></app-share-others>
             </div>
         </div>
         <div style="display: inline-block; padding: 5px; width: 47%; padding-left: 20px;">
@@ -25,7 +25,7 @@
                 <app-mini-owe-interface *ngIf="entry.type==1" (ChangeEvent)="PostSettlement($event)" [AliasData]="entry.aliasData" [SettlementValue]="entry.amount" [Payer]="entry.shares[0]" [GroupName]="entry.groupName" [GroupId]="entry.groupId"></app-mini-owe-interface>    
             </div>
             <div class="card" id="SHareSettlementcard" *ngFor="let entry of listRight2; let i = index">
-                <app-share-others *ngIf="entry.type==1" [SharedEntry]="entry.shares" [AliasData]="entry.aliasData" [GroupName]="entry.groupName"></app-share-others>
+                <app-share-others *ngIf="entry.type==2" [SharedEntry]="entry.shares" [AliasData]="entry.aliasData" [GroupName]="entry.groupName"></app-share-others>
             </div>   
         </div>        
     </div>
