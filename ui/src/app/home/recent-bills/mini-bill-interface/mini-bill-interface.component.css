@@ -2,7 +2,8 @@
     height: 65px; 
     width: 80%;
     background-image: linear-gradient(to bottom right, #86DDEE, #10C6A3);
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
+/*     background-image: linear-gradient(to bottom right, #35cf27, #683ab7);
+ */    box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
     margin:0 auto;
 }
 

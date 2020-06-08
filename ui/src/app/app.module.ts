@@ -229,7 +229,12 @@ import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-add
     GroupacceptpopupComponent,
     AddUsersSharedBillComponent,
     DeleteUsersSharedBillComponent,
-    ShareSettlementComponent
+    ShareSettlementComponent,
+    ViewAddedBillComponent,
+    DeleteAddedBillComponent,
+    CloneAddedBillComponent,
+    EditAddedBillComponent,
+    InfoAddedBillComponent
     ],
 })
 export class AppModule { }
