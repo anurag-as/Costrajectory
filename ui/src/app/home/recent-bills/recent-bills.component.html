@@ -4,3 +4,23 @@
     </nav>
 </div>
 
+
+<div *ngIf="BillEntries.length != 0"
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="BillEntries"
+    (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let indexobj of BillEntries" cdkDrag>
+      <app-mini-bill-interface 
+        [BillEnum]='indexobj[0]'
+        [BillName]='indexobj[1]' 
+        [BillDescription]='indexobj[2]' 
+        [BillDate]='indexobj[3]'
+        [BillAmount]='indexobj[4]'
+        [BillHasImage]='indexobj[5]'
+        [BillIdentifier]='indexobj[6]'
+        [BillImage]='indexobj[7]'
+        [BillId]='indexobj[8]'
+        [BillCategory]='indexobj[9]'></app-mini-bill-interface >
+    </div>
+  </div>
