@@ -103,6 +103,9 @@ import { DeleteAddedBillComponent } from './BillInterface/delete-added-bill/dele
 import { CloneAddedBillComponent } from './BillInterface/clone-added-bill/clone-added-bill.component';
 import { EditAddedBillComponent } from './BillInterface/edit-added-bill/edit-added-bill.component';
 import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-added-bill.component';
+import { TestComponent } from './analytics/test/test.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { TimeSliderComponent } from './analytics/time-slider/time-slider.component';
 
 @NgModule({
   declarations: [
@@ -179,7 +182,9 @@ import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-add
     DeleteAddedBillComponent,
     CloneAddedBillComponent,
     EditAddedBillComponent,
-    InfoAddedBillComponent
+    InfoAddedBillComponent,
+    TestComponent,
+    TimeSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -206,7 +211,8 @@ import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-add
     MatTableModule,
     ResizableModule,
     GoogleChartsModule,
-    RandomcolorModule
+    RandomcolorModule,
+    Ng5SliderModule
     ],
   providers: [TabularViewComponent, GlobalConfigsService, Title],
   bootstrap: [AppComponent],
