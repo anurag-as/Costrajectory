@@ -1,6 +1,55 @@
-<body>
-<div id="chartContainerBar" style="height: 370px; width: 50%;"></div>
-<div id="chartContainerPie" style="height: 370px; width: 50%;"></div>
+<div>
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><span class="fa fa-list-ul fa-lg" aria-hidden="true"></span> Options</div>
+        <div class="list-group list-group-flush" type="button">
+            
+            <hr style="color: brown;">
 
-<div id="chartContainerline" style="height: 370px; width: 100%;"></div>
-</body>
+            
+            <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+                <label for="Timeline" class="col-form-label" style="padding-left: 50px;">Timeline</label>
+                <select class="custom-select" required ngModel name="Timeline"aria-describedby="basic-addon4">
+                    <option value="" disabled>Choose the Timeline</option>
+                    <option>Week</option>
+                    <option>Month</option>
+                    <option>Quarter</option>
+                    <option>Year</option>
+                </select>
+              </div>
+              
+             <hr style="color: brown;">
+    
+          <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+            <label for="Mode" class="col-form-label" style="padding-left: 50px;">Mode</label>
+            <select class="custom-select" required ngModel name="Mode"aria-describedby="basic-addon4">
+                <option value="" disabled>Choose the Mode</option>
+                <option>Peronal</option>
+                <option>Shared</option>
+            </select>
+          </div>
+          
+         <hr style="color: brown;">
+
+         <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+            <label for="category" class="col-form-label" style="padding-left: 50px;">Category</label>
+            <select class="custom-select" required ngModel name="category" aria-describedby="basic-addon4">
+                <option value="" disabled>Choose the category</option>
+                <option>Travel</option>
+                <option>Shopping</option>
+                <option>Investments</option>
+                <option>Food</option>
+                <option>Utilities</option>
+                <option>Medical</option>
+                <option>Entertainment</option>
+                <option>Housing</option>
+                <option>Others</option>
+            </select>
+          </div>
+        
+        </div>
+    </div>
+
+    <app-time-slider id="SLIDER"></app-time-slider>
+
+
+</div>
