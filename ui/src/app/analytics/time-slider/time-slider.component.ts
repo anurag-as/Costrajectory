@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
+import { Input } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface BillData {
   username: string;
@@ -13,6 +15,7 @@ interface BillData {
   styleUrls: ['./time-slider.component.scss']
 })
 export class TimeSliderComponent implements OnInit {
+  @Input() Timer: string;
   DataObj = new Week();
   minValue = 0;
   maxValue = this.DataObj.GetSteps(new Date(2020, 1, 1), new Date(2020, 6, 9));
@@ -30,9 +33,26 @@ export class TimeSliderComponent implements OnInit {
       }
     }
   };
+  constructor( private cdr: ChangeDetectorRef ) {}
 
   ngOnInit() {}
-  constructor() {}
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnChanges(chg) {
+    console.log('CHANGED ', chg.Timer.currentValue);
+    if ( chg.Timer.currentValue  === 'Week') {
+      this.DataObj = new Week();
+    } else if ( chg.Timer.currentValue  === 'Month' ) {
+      this.DataObj = new Month();
+    } else if ( chg.Timer.currentValue  === 'Quarter' ) {
+      this.DataObj = new Quarter();
+    } else {
+      this.DataObj = new Year();
+    }
+    this.minValue = 0;
+    this.maxValue = this.DataObj.GetSteps(new Date(2020, 1, 1), new Date(2020, 6, 9));
+    this.options.ceil = this.maxValue;
+  }
 }
 
 export class Week {

@@ -8,7 +8,7 @@
             
             <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
                 <label for="Timeline" class="col-form-label" style="padding-left: 50px;">Timeline</label>
-                <select class="custom-select" required ngModel name="Timeline"aria-describedby="basic-addon4">
+                <select class="custom-select" required [(ngModel)]="Timeline" name="Timeline"aria-describedby="basic-addon4">
                     <option value="" disabled>Choose the Timeline</option>
                     <option>Week</option>
                     <option>Month</option>
@@ -45,11 +45,31 @@
                 <option>Others</option>
             </select>
           </div>
+
+          <hr style="color: brown;">
+
+            
+            <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+                <label for="Timeline" class="col-form-label" style="padding-left: 50px;">Timeline</label>
+                <select class="custom-select" required ngModel name="Timeline"aria-describedby="basic-addon4">
+                    <option value="" disabled>Choose the Timeline</option>
+                    <option>Week</option>
+                    <option>Month</option>
+                    <option>Quarter</option>
+                    <option>Year</option>
+                </select>
+              </div>
+              
+             <hr style="color: brown;">
         
         </div>
     </div>
 
-    <app-time-slider id="SLIDER"></app-time-slider>
+    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Week'"></app-time-slider>
+    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Month'"></app-time-slider>
+    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Quarter'"></app-time-slider>
+    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Year'"></app-time-slider>
+
 
 
 </div>

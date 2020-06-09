@@ -7,10 +7,6 @@ interface BillData {
   ImageEntries: [];
 }
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-analytics',
@@ -18,11 +14,7 @@ interface Food {
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  Timeline = 'Week';
   ngOnInit() {}
   constructor() {}
 }
