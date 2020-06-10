@@ -15,6 +15,8 @@ interface BillData {
 })
 export class AnalyticsComponent implements OnInit {
   Timeline = 'Week';
+  Mode = 'Personal';
+  Category = 'All';
   ngOnInit() {}
   constructor() {}
 }

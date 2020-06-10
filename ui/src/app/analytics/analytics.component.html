@@ -1,5 +1,18 @@
 <div>
-    <div class="bg-light border-right" id="sidebar-wrapper">
+    
+
+    <nav class="navbar navbar-expand-lg"
+         style = "width: calc(100% - 220px);
+                  position: relative;
+                  left: 200px;
+                  height: 70px;">
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Week'"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Month'"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Quarter'"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Year'"></app-time-slider>
+    </nav>
+
+      <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading"><span class="fa fa-list-ul fa-lg" aria-hidden="true"></span> Options</div>
         <div class="list-group list-group-flush" type="button">
             
@@ -21,9 +34,9 @@
     
           <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
             <label for="Mode" class="col-form-label" style="padding-left: 50px;">Mode</label>
-            <select class="custom-select" required ngModel name="Mode"aria-describedby="basic-addon4">
+            <select class="custom-select" required [(ngModel)]="Mode" name="Mode"aria-describedby="basic-addon4">
                 <option value="" disabled>Choose the Mode</option>
-                <option>Peronal</option>
+                <option>Personal</option>
                 <option>Shared</option>
             </select>
           </div>
@@ -32,8 +45,9 @@
 
          <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
             <label for="category" class="col-form-label" style="padding-left: 50px;">Category</label>
-            <select class="custom-select" required ngModel name="category" aria-describedby="basic-addon4">
+            <select class="custom-select" required [(ngModel)]="Category" name="category" aria-describedby="basic-addon4">
                 <option value="" disabled>Choose the category</option>
+                <option>All</option>
                 <option>Travel</option>
                 <option>Shopping</option>
                 <option>Investments</option>
@@ -50,8 +64,8 @@
 
             
             <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
-                <label for="Timeline" class="col-form-label" style="padding-left: 50px;">Timeline</label>
-                <select class="custom-select" required ngModel name="Timeline"aria-describedby="basic-addon4">
+                <label for="Timeline" class="col-form-label" style="padding-left: 50px;">Group</label>
+                <select class="custom-select" required ngModel name="Timeline"aria-describedby="basic-addon4" [disabled]="Mode == 'Personal'">
                     <option value="" disabled>Choose the Timeline</option>
                     <option>Week</option>
                     <option>Month</option>
@@ -64,12 +78,38 @@
         
         </div>
     </div>
+    
+    <div class="row">
 
-    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Week'"></app-time-slider>
-    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Month'"></app-time-slider>
-    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Quarter'"></app-time-slider>
-    <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Year'"></app-time-slider>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <app-pie-chart style="position: relative; left: 100px;"></app-pie-chart>
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <div class="card-body">
+                    <app-predictor-chart></app-predictor-chart>
+                </div>
+            </div>
+    
+    </div>
 
+    <div class="row" style="position:relative ; top: -150px;">
 
+        <div class="col-md-6">
+            <div class="card-body">
+                <app-line-chart></app-line-chart>
+            </div>
+        </div>
 
+        <div class="col-md-6">
+            <div class="card-body">
+                <app-diff-chart></app-diff-chart>
+            </div>
+        </div>
+
+    </div>
+
+    
 </div>

@@ -106,6 +106,10 @@ import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-add
 import { TestComponent } from './analytics/test/test.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { TimeSliderComponent } from './analytics/time-slider/time-slider.component';
+import { PieChartComponent } from './analytics/pie-chart/pie-chart.component';
+import { PredictorChartComponent } from './analytics/predictor-chart/predictor-chart.component';
+import { DiffChartComponent } from './analytics/diff-chart/diff-chart.component';
+import { LineChartComponent } from './analytics/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -184,7 +188,11 @@ import { TimeSliderComponent } from './analytics/time-slider/time-slider.compone
     EditAddedBillComponent,
     InfoAddedBillComponent,
     TestComponent,
-    TimeSliderComponent
+    TimeSliderComponent,
+    PieChartComponent,
+    PredictorChartComponent,
+    DiffChartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
