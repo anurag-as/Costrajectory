@@ -71,9 +71,11 @@ def profile_details():
                            'Country': country,
                            'State': state,
                            'Zip Code': zip_code}
+            message = "You just updated your profile details! "
 
             # adding transaction to logs
-            insert_into_recent_table(connection(), user_name, str(time()), "Profile Details Updated", str(description))
+            insert_into_recent_table(connection(), user_name, str(time()), "Profile Details Updated",
+                                     message + str(description))
 
             if not query_profile_details(connection(), user_name):  # User entry does not exist
                 return jsonify(
