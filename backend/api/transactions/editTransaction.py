@@ -49,14 +49,23 @@ def edit_transaction():
         description = request.form['Description']
         amount = request.form['Amount']
         category = request.form['category']
+
         # adding the transaction record
         edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description,
                                       mapped_file_name, category)
         # refresh the token, needs to be added to other API Calls
         refresh_token(connection(), request.form['username'])
 
+        message = "You edited this transaction "
+        message_description = {'Title': title,
+                               'DateTime': date_time,
+                               'Description': description,
+                               'Amount': amount,
+                               'Category': category,
+                               }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Edit Transaction", title)
+        insert_into_recent_table(connection(), user_name, str(time()), "Edit Transaction" + title,
+                                 message + str(message_description))
 
         return jsonify({'editStatus': True})
     except:
