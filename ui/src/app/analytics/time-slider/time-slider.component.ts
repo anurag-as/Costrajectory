@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
-import { Input } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 
 interface BillData {
@@ -16,30 +16,36 @@ interface BillData {
 })
 export class TimeSliderComponent implements OnInit {
   @Input() Timer: string;
+  @Output() Timerange = new EventEmitter <{Ldate: Date, rDate: Date}> ();
+  @Input() MinDate: Date;
+  @Input() MaxDate: Date;
   DataObj = new Week();
   minValue = 0;
   maxValue = this.DataObj.GetSteps(new Date(2020, 1, 1), new Date(2020, 6, 9));
   options = {
     floor: 0,
-    ceil: this.maxValue,
+    ceil: this.DataObj.GetSteps( this.MinDate, this.MaxDate),
     translate: (value: number, label: LabelType): string => {
+      this.Timerange.emit({Ldate: this.MinDate, rDate: this.DataObj.TranslateToDate(this.MinDate , value)});
       switch (label) {
         case LabelType.Low:
-          return this.DataObj.TranslateToString(new Date(2020, 1, 1) , value);
+          return this.DataObj.TranslateToString(this.MinDate , value);
         case LabelType.High:
-          return this.DataObj.TranslateToString(new Date(2020, 1, 1) , value);
+          return this.DataObj.TranslateToString(this.MinDate , value);
         default:
-          return this.DataObj.TranslateToString(new Date(2020, 1, 1) , value);
+          return this.DataObj.TranslateToString(this.MinDate , value);
       }
     }
   };
   constructor( private cdr: ChangeDetectorRef ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('INput to time slider: ', this.MinDate, this.MaxDate);
+  }
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges(chg) {
-    console.log('CHANGED ', chg.Timer.currentValue);
+    // console.log('CHANGED ', chg.Timer.currentValue);
     if ( chg.Timer.currentValue  === 'Week') {
       this.DataObj = new Week();
     } else if ( chg.Timer.currentValue  === 'Month' ) {
@@ -50,7 +56,7 @@ export class TimeSliderComponent implements OnInit {
       this.DataObj = new Year();
     }
     this.minValue = 0;
-    this.maxValue = this.DataObj.GetSteps(new Date(2020, 1, 1), new Date(2020, 6, 9));
+    this.maxValue = this.DataObj.GetSteps( this.MinDate, this.MaxDate);
     this.options.ceil = this.maxValue;
   }
 }
@@ -70,6 +76,10 @@ export class Week {
 
   TranslateToString(startDate: Date, value: number) {
     return this.addDays(startDate , value * 7).toDateString();
+  }
+
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 7);
   }
 
 }
@@ -94,6 +104,10 @@ export class Month {
     return this.addDays(startDate , value * 30).toDateString();
   }
 
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 30);
+  }
+
 
 }
 export class Quarter {
@@ -116,6 +130,10 @@ export class Quarter {
     return this.addDays(startDate , value * 92).toDateString();
   }
 
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 92);
+  }
+
 }
 
 export class Year {
@@ -135,6 +153,10 @@ export class Year {
 
   TranslateToString(startDate: Date, value: number) {
     return this.addDays(startDate , value * 365).toDateString();
+  }
+
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 365);
   }
 
 }

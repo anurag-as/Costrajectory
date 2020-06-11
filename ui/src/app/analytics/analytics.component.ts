@@ -4,7 +4,9 @@ import { GlobalConfigsService } from '../global-configs.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {HttpHeaders} from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
-import { AuxillaryTasksService } from './auxillary-tasks.service';
+import { AuxillaryTasksService, Filter } from './auxillary-tasks.service';
+import { timingSafeEqual } from 'crypto';
+import { group } from '@angular/animations';
 
 interface BillData {
   username: string;
@@ -32,26 +34,45 @@ export class AnalyticsComponent implements OnInit {
   Category = 'All';
   SharesPayload: any;
   Username: string;
-
-  BillEntries = [];
+  GroupIndex = 0;
+  BillEntries: any;
   DataLoading = 'Started';
   UserName: string;
   FormData: BillData;
+  GroupNames: any[] = [];
+  // tslint:disable-next-line:variable-name
+  Date_l_Personal: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Personal: Date;
+    // tslint:disable-next-line:variable-name
+  Date_l_Shared: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Shared: Date;
+
+  // tslint:disable-next-line:variable-name
+  Date_l_Personal_current: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Personal_current: Date;
+    // tslint:disable-next-line:variable-name
+  Date_l_Shared_current: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Shared_current: Date;
 
   constructor(private DataGetter: Getdata, public globals: GlobalConfigsService, private http: HttpClient,
-              private AuxillaryTasks: AuxillaryTasksService) {
+              private AuxillaryTasks: AuxillaryTasksService,
+              private DataFilter: Filter) {
     this.Username = globals.GetUserName;
   }
 
   ngOnInit() {
-    this.GetPersonalBills();
-    this.GetPersonalShares();
+    this.GetBills();
   }
 
-  GetPersonalShares() {
+  GetBills() {
     this.ReloadShares().subscribe(data => {
     this.SharesPayload = data.body;
     console.log('GROUP DATA HOME: ', data.body);
+    this.GetPersonalBills();
     }, err => {
     this.SharesPayload = [];
     });
@@ -67,40 +88,12 @@ export class AnalyticsComponent implements OnInit {
     this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
       console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
-      this.FormData = data;
-      if (typeof(data.TableEntries) === 'undefined' ) {
-        return;
-      }
-      for ( const entry of data.TableEntries) {
-        if (entry.Identifier !== 'False') {
-          this.BillEntries.push([
-            this.BillEntries.length + 1,
-            entry.Name,
-            entry.Description,
-            entry.Date,
-            entry.Amount,
-            true,
-            entry.Identifier,
-            data.ImageEntries[entry.Identifier],
-            entry.uid,
-            entry.category
-          ]);
-        } else {
-          this.BillEntries.push([
-            this.BillEntries.length + 1,
-            entry.Name,
-            entry.Description,
-            entry.Date,
-            entry.Amount,
-            false,
-            entry.Identifier,
-            undefined,
-            entry.uid,
-            entry.category
-          ]);
-        }
-      }
-      console.log('BILLS : ', this.BillEntries);
+      this.BillEntries = data;
+      this.GetDataRange();
+      this.GetGroupNames();
+      console.log('BILLS : ', this.BillEntries, this.Date_l_Personal, this.Date_r_Personal
+                            , this.Date_l_Shared, this.Date_r_Shared);
+
     }, err => {
       this.DataLoading = 'Fail';
     });
@@ -114,6 +107,32 @@ export class AnalyticsComponent implements OnInit {
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
+    }
+  }
+
+  GetGroupNames() {
+    for ( const grp of this.SharesPayload) {
+      this.GroupNames.push(grp.group_info.title);
+    }
+  }
+
+  GetDataRange() {
+    let DateData = this.AuxillaryTasks.GetMaxMinDatePersonal(this.BillEntries);
+    this.Date_l_Personal = DateData.MinDate;
+    this.Date_r_Personal = DateData.MaxDate;
+
+    DateData = this.AuxillaryTasks.GetMaxMinDateShared(this.SharesPayload);
+    this.Date_l_Shared = DateData.MinDate;
+    this.Date_r_Shared = DateData.MaxDate;
+  }
+
+  DateInterrupt(Range: {Ldate: Date, rDate: Date}) {
+    if ( this.Mode === 'Personal') {
+      this.Date_l_Personal_current = Range.Ldate;
+      this.Date_r_Personal_current = Range.rDate;
+    } else {
+      this.Date_l_Shared_current = Range.Ldate;
+      this.Date_r_Shared_current = Range.rDate;
     }
   }
 

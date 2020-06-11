@@ -41,29 +41,31 @@ export class AuxillaryTasksService {
     for ( const bill of PersonalData.TableEntries) {
       BillArr.push( this.DateStringToDate(bill.Date));
     }
-
     return {
-      MinDate: Math.min.apply(null, BillArr),
-      MaxDate: Math.max.apply(null, BillArr)
+      MinDate: new Date(Math.min.apply(null, BillArr)),
+      MaxDate: new Date(Math.max.apply(null, BillArr))
     };
   }
 
-  GetMaxMinDateShared(GroupData, GroupIdx): DateRange {
+  GetMaxMinDateShared(GroupData): DateRange {
     const BillArr: Date[] = [];
-
-    for ( const bill of GroupData[GroupIdx].bill_data) {
+    for (const GroupConsidered of GroupData) {
+      for ( const bill of GroupConsidered.bill_data) {
         BillArr.push( this.DateStringToDate(bill.datetime));
+      }
     }
-
     return {
-      MinDate: Math.min.apply(null, BillArr),
-      MaxDate: Math.max.apply(null, BillArr)
+      MinDate: new Date(Math.min.apply(null, BillArr)),
+      MaxDate: new Date(Math.max.apply(null, BillArr))
     };
   }
 
   constructor() { }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 export class Filter {
   Username: string;
   constructor(public globals: GlobalConfigsService) {

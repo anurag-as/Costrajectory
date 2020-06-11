@@ -110,6 +110,7 @@ import { PieChartComponent } from './analytics/pie-chart/pie-chart.component';
 import { PredictorChartComponent } from './analytics/predictor-chart/predictor-chart.component';
 import { DiffChartComponent } from './analytics/diff-chart/diff-chart.component';
 import { LineChartComponent } from './analytics/line-chart/line-chart.component';
+import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.service';
 
 @NgModule({
   declarations: [
@@ -222,7 +223,7 @@ import { LineChartComponent } from './analytics/line-chart/line-chart.component'
     RandomcolorModule,
     Ng5SliderModule
     ],
-  providers: [TabularViewComponent, GlobalConfigsService, Title],
+  providers: [TabularViewComponent, GlobalConfigsService, Title, Filter, AuxillaryTasksService],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
