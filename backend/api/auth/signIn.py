@@ -28,7 +28,10 @@ def signInUser():
             presentTime = str(time())
             insert_into_token_table(db, username, presentTime, token)
 
-            insert_into_recent_table(connection(), username, str(time()), "Signed In", "")
+            message = """You just signed in, is it really you? Stay organized and on track,
+                      If not! change your password immediately. For everyone minute spent in organizing,
+                      an hour is earned!"""
+            insert_into_recent_table(connection(), username, str(time()), "Signed In", message)
 
         else:
             token = False
