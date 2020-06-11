@@ -53,6 +53,7 @@ def edit_group_bill_api():
         shares = request.form['shares']
         bill_id = request.form['bill_id']
 
+
         # editing the transaction record
         edit_group_bill(connection(), title, date_time, amount, description,
                         mapped_file_name, category, shares, payer, group_id, bill_id)
@@ -60,8 +61,19 @@ def edit_group_bill_api():
         # refresh the token, needs to be added to other API Calls
         refresh_token(connection(), request.form['username'])
 
+        message = "You added a group bill "
+        message_description = {'Title': title,
+                               'DateTime': date_time,
+                               'Description': description,
+                               'Amount': amount,
+                               'Category': category,
+                               'Payer': payer,
+                               'Shares': shares,
+                               'Group': title
+                               }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Edit Group Transaction", title)
+        insert_into_recent_table(connection(), user_name, str(time()), "Edit Group Transaction" + title,
+                                 message + str(message_description))
 
         return jsonify({'editStatus': True})
     except:
