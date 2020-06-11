@@ -45,9 +45,6 @@ def profile_details():
             # refreshing token for sign in
             refresh_token(connection(), user_name)
 
-            # adding transaction to logs
-            insert_into_recent_table(connection(), user_name, str(time()), "Edit Profile", "")
-
             first_name = request.form['first_name']
             last_name = request.form['last_name']
 
@@ -63,6 +60,21 @@ def profile_details():
             country = request.form['country']
             state = request.form['state']
             zip_code = request.form['zip_code']
+
+            description = {'First Name': first_name,
+                           'Last Name': last_name,
+                           'Email Address': email,
+                           'Address': address,
+                           'Address2': address2,
+                           'Date of Birth': dob,
+                           'Gender': gender,
+                           'Country': country,
+                           'State': state,
+                           'Zip Code': zip_code}
+
+            # adding transaction to logs
+            insert_into_recent_table(connection(), user_name, str(time()), "Profile Details Updated", str(description))
+
             if not query_profile_details(connection(), user_name):  # User entry does not exist
                 return jsonify(
                     insert_into_profile_details(connection(), user_name, first_name, last_name, email, address, address2,
