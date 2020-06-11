@@ -23,14 +23,14 @@ export class DiffChartComponent implements OnInit {
       ['2017', 1030, 540, 350]
     ]);
 
-    let options = {
+    const options = {
       chart: {
         title: 'Company Performance',
         subtitle: 'Sales, Expenses, and Profit: 2014-2017',
       }
     };
 
-    let chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+    const chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
   }

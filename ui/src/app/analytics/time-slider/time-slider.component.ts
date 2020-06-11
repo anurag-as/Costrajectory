@@ -64,7 +64,7 @@ export class Week {
   }
 
 
-  GetSteps(startDate: Date, endDate: Date) {
+  GetSteps(startDate: any, endDate: any) {
     return Math.round((endDate - startDate) / (7 * 24 * 60 * 60 * 1000)) + 1;
   }
 
