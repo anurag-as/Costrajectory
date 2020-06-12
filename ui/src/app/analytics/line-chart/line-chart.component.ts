@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare let google: any;
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',

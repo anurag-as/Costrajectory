@@ -5,7 +5,6 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {HttpHeaders} from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
 import { AuxillaryTasksService, Filter } from './auxillary-tasks.service';
-import { timingSafeEqual } from 'crypto';
 import { group } from '@angular/animations';
 
 interface BillData {
@@ -58,6 +57,9 @@ export class AnalyticsComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   Date_r_Shared_current: Date;
 
+  PersonalDataCurrent: any;
+  SharedDataCurrent: any;
+
   constructor(private DataGetter: Getdata, public globals: GlobalConfigsService, private http: HttpClient,
               private AuxillaryTasks: AuxillaryTasksService,
               private DataFilter: Filter) {
@@ -91,6 +93,8 @@ export class AnalyticsComponent implements OnInit {
       this.BillEntries = data;
       this.GetDataRange();
       this.GetGroupNames();
+      this.SharedDataCurrent = this.SharesPayload;
+      this.PersonalDataCurrent = this.BillEntries;
       console.log('BILLS : ', this.BillEntries, this.Date_l_Personal, this.Date_r_Personal
                             , this.Date_l_Shared, this.Date_r_Shared);
 
@@ -130,10 +134,57 @@ export class AnalyticsComponent implements OnInit {
     if ( this.Mode === 'Personal') {
       this.Date_l_Personal_current = Range.Ldate;
       this.Date_r_Personal_current = Range.rDate;
+      const FIlterParams = {
+        LDate :  this.Date_l_Personal_current,
+        RDate : this.Date_r_Personal_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.PersonalDataCurrent = this.DataFilter.FilterData(FIlterParams);
     } else {
       this.Date_l_Shared_current = Range.Ldate;
       this.Date_r_Shared_current = Range.rDate;
+      const FIlterParams = {
+        LDate :  this.Date_l_Shared_current,
+        RDate : this.Date_r_Shared_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
     }
+  }
+
+  ForceChangeData() {
+    if ( this.Mode === 'Personal') {
+      const FIlterParams = {
+        LDate :  this.Date_l_Personal_current,
+        RDate : this.Date_r_Personal_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.PersonalDataCurrent = this.DataFilter.FilterData(FIlterParams);
+    } else {
+      const FIlterParams = {
+        LDate :  this.Date_l_Shared_current,
+        RDate : this.Date_r_Shared_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
+    }
+    console.log('THINGS CHANGED: ', this.SharedDataCurrent, this.PersonalDataCurrent);
   }
 
 }

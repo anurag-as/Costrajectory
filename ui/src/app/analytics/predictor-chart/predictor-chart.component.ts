@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare let google: any;
 @Component({
   selector: 'app-predictor-chart',
   templateUrl: './predictor-chart.component.html',

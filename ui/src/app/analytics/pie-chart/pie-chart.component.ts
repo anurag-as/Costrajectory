@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare let google: any;
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
