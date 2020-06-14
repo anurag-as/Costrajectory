@@ -19,18 +19,38 @@ export class TimeSliderComponent implements OnInit {
   @Output() Timerange = new EventEmitter <{Ldate: Date, rDate: Date}> ();
   @Input() MinDate: Date;
   @Input() MaxDate: Date;
+  loading = false;
   DataObj = new Week();
   minValue = 0;
   maxValue = this.DataObj.GetSteps(new Date(2020, 1, 1), new Date(2020, 6, 9));
+  SendCounter = 0;
+  SendDateLeft: Date;
+  SendDateRight: Date;
   options = {
     floor: 0,
     ceil: this.DataObj.GetSteps( this.MinDate, this.MaxDate),
     translate: (value: number, label: LabelType): string => {
-      this.Timerange.emit({Ldate: this.MinDate, rDate: this.DataObj.TranslateToDate(this.MinDate , value)});
       switch (label) {
         case LabelType.Low:
+          if (this.SendCounter === 2) {
+            this.SendDateLeft = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter = 0;
+            this.Timerange.emit({Ldate: this.SendDateLeft, rDate: this.SendDateRight});
+          } else {
+            this.SendDateLeft = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter += 1;
+          }
           return this.DataObj.TranslateToString(this.MinDate , value);
         case LabelType.High:
+          if (this.SendCounter === 2) {
+            // this.Timerange.emit({Ldate: this.MinDate, rDate: this.DataObj.TranslateToDate(this.MinDate , value)});
+            this.SendDateRight = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter = 0;
+            this.Timerange.emit({Ldate: this.SendDateLeft, rDate: this.SendDateRight});
+          } else {
+            this.SendDateRight = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter += 1;
+          }
           return this.DataObj.TranslateToString(this.MinDate , value);
         default:
           return this.DataObj.TranslateToString(this.MinDate , value);
@@ -40,13 +60,17 @@ export class TimeSliderComponent implements OnInit {
   constructor( private cdr: ChangeDetectorRef ) {}
 
   ngOnInit() {
-    console.log('INput to time slider: ', this.MinDate, this.MaxDate);
+    // console.log('INput to time slider: ', this.MinDate, this.MaxDate);
+    if (this.MinDate === undefined || this.MaxDate === undefined) {
+      this.loading = true;
+    } else {
+      this.loading = false;
+    }
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges(chg) {
-    // console.log('CHANGED ', chg.Timer.currentValue);
-    if ( chg.Timer.currentValue  === 'Week') {
+    if ( chg.Timer === undefined || chg.Timer.currentValue  === 'Week') {
       this.DataObj = new Week();
     } else if ( chg.Timer.currentValue  === 'Month' ) {
       this.DataObj = new Month();

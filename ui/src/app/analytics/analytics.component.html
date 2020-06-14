@@ -17,6 +17,11 @@
         <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Quarter' && Mode == 'Shared'" [MinDate]="Date_l_Shared" [MaxDate]="Date_r_Shared" (Timerange)="DateInterrupt($event)"></app-time-slider>
         <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Year' && Mode == 'Shared'" [MinDate]="Date_l_Shared" [MaxDate]="Date_r_Shared" (Timerange)="DateInterrupt($event)"></app-time-slider>
 
+        <div *ngIf="Timeline == ''" style="width: 500px; position:relative; left:500px">
+            <div class="spinner-border" role="status">
+            </div>
+            <span>&nbsp;&nbsp; <b>Please Select the required Timeline ... </b></span>
+         </div>
     </nav>
 
       <div class="bg-light border-right" id="sidebar-wrapper">
@@ -87,7 +92,10 @@
 
             <div class="col-md-6">
                 <div class="card-body">
-                    <app-pie-chart style="position: relative; left: 100px;"></app-pie-chart>
+                    <app-pie-chart style="position: relative; left: 100px;"
+                                   [Category] = "Category"
+                                   [AnalyticData] = "PersonalDataCurrent"
+                                   [Mode] = "Mode"></app-pie-chart>
                 </div>
             </div>
     

@@ -23,6 +23,7 @@ interface ReturnData {
   Mode: string;
   Data: any;
   GroupIdx: number;
+  WithoutCategoryFileter: any;
 }
 
 @Injectable({
@@ -89,8 +90,10 @@ export class Filter {
 
   SharedMode(LeftDate: Date, RightDate: Date, SharedData: any, CategoryChosen: string, GroupIDx: number): ReturnData {
     const DataBuffer = [];
+    const WithoutCategoryFileterLocal = [];
     for ( const bill of SharedData[GroupIDx].bill_data) {
       if (bill.datetime >= LeftDate && bill.datetime <= RightDate) {
+        WithoutCategoryFileterLocal.push(bill);
         if (CategoryChosen === 'All') {
           DataBuffer.push(bill);
         } else if ( CategoryChosen === bill.category) {
@@ -105,13 +108,29 @@ export class Filter {
       Mode: 'Shared',
       Data: DataBuffer,
       GroupIdx: GroupIDx,
+      WithoutCategoryFileter: WithoutCategoryFileterLocal
     };
   }
 
   PersonalMode(LeftDate: Date, RightDate: Date, PersonalData: any, CategoryChosen: string) {
     const DataBuffer = [];
+    const WithoutCategoryFileterLocal = [];
+    if (PersonalData === undefined) {
+      return {
+        LDate : LeftDate,
+        RDate : RightDate,
+        Category : CategoryChosen,
+        Mode: 'Personal',
+        Data: DataBuffer,
+        GroupIdx: -1,
+        WithoutCategoryFileter: WithoutCategoryFileterLocal
+      };
+    }
     for ( const bill of PersonalData.TableEntries) {
-      if (bill.datetime >= LeftDate && bill.datetime <= RightDate) {
+      // tslint:disable-next-line:max-line-length
+      // console.log('PERSONAL INPUTS: ', bill, new Date(bill.Date), LeftDate, RightDate, new Date(bill.Date) >= LeftDate, new Date(bill.Date) <= RightDate);
+      if (new Date(bill.Date) >= LeftDate && new Date(bill.Date) <= RightDate) {
+        WithoutCategoryFileterLocal.push(bill);
         if (CategoryChosen === 'All') {
           DataBuffer.push(bill);
         } else if ( CategoryChosen === bill.category) {
@@ -126,6 +145,7 @@ export class Filter {
       Mode: 'Personal',
       Data: DataBuffer,
       GroupIdx: -1,
+      WithoutCategoryFileter: WithoutCategoryFileterLocal
     };
   }
 }

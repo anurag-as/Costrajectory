@@ -28,7 +28,7 @@ interface Status {
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  Timeline = 'Week';
+  Timeline = '';
   Mode = 'Personal';
   Category = 'All';
   SharesPayload: any;
@@ -88,16 +88,12 @@ export class AnalyticsComponent implements OnInit {
 
   GetPersonalBills() {
     this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
-      console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.BillEntries = data;
       this.GetDataRange();
       this.GetGroupNames();
       this.SharedDataCurrent = this.SharesPayload;
       this.PersonalDataCurrent = this.BillEntries;
-      console.log('BILLS : ', this.BillEntries, this.Date_l_Personal, this.Date_r_Personal
-                            , this.Date_l_Shared, this.Date_r_Shared);
-
     }, err => {
       this.DataLoading = 'Fail';
     });
@@ -144,6 +140,7 @@ export class AnalyticsComponent implements OnInit {
         GroupIdx: this.GroupIndex
       };
       this.PersonalDataCurrent = this.DataFilter.FilterData(FIlterParams);
+      // console.log('DATE INTERRUPT: PERSONAL : ', this.PersonalDataCurrent);
     } else {
       this.Date_l_Shared_current = Range.Ldate;
       this.Date_r_Shared_current = Range.rDate;
@@ -157,6 +154,8 @@ export class AnalyticsComponent implements OnInit {
         GroupIdx: this.GroupIndex
       };
       this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
+      // console.log('DATE INTERRUPT: SHARED : ', this.SharedDataCurrent);
+
     }
   }
 
