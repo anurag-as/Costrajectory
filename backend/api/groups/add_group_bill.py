@@ -14,6 +14,7 @@ from utilities.utils import get_total_size
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.updation_functions import add_new_bill_id
 from database_functions.groups.querying_functions import get_groups_bills
+from database_functions.groups.querying_functions import get_group_title
 from ast import literal_eval
 
 addGroupBillAPI = Blueprint('addGroupBillAPI', __name__)
@@ -91,6 +92,7 @@ def group_bill():
 
         bill_id = insert_into_group_bills_table(connection(), uploader, title, date_time, amount, description,
                                                 mapped_file_name, category, shares, payer, group_id)
+        group_title = get_group_title(connection(), group_id)
 
         # add the bill_id to the groups table
         current_bills = get_groups_bills(connection(), group_id)
@@ -98,8 +100,20 @@ def group_bill():
         new_bills.append(bill_id)
         add_new_bill_id(connection(), group_id, str(new_bills))
 
+        message = "You added a group bill "
+        message_description = {'Title': title,
+                               'DateTime': date_time,
+                               'Description': description,
+                               'Amount': amount,
+                               'Category': category,
+                               'Uploader': uploader,
+                               'Payer': payer,
+                               'Shares': shares,
+                               'Group': group_title
+                               }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Added Group Transaction", title)
+        insert_into_recent_table(connection(), user_name, str(time()), "Added Group Transaction" + title,
+                                 message + str(message_description))
 
         # refresh the token, needs to be added to other API Calls
         refresh_token(connection(), request.form['username'])
