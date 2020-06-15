@@ -92,8 +92,8 @@ export class AnalyticsComponent implements OnInit {
       this.BillEntries = data;
       this.GetDataRange();
       this.GetGroupNames();
-      this.SharedDataCurrent = this.SharesPayload;
-      this.PersonalDataCurrent = this.BillEntries;
+      this.SharedDataCurrent = this.DateInterrupt( {Ldate: this.Date_l_Shared, rDate: this.Date_r_Shared});
+      this.PersonalDataCurrent = this.DateInterrupt( {Ldate: this.Date_l_Personal, rDate: this.Date_r_Personal});
     }, err => {
       this.DataLoading = 'Fail';
     });
