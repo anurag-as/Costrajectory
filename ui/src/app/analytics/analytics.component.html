@@ -77,9 +77,9 @@
             
             <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
                 <label for="GroupIndex" class="col-form-label" style="padding-left: 50px;">Group</label>
-                <select class="custom-select" required (ngModelChange)="ForceChangeData($event)" [(ngModel)]="GroupIndex" name="GroupIndex"aria-describedby="basic-addon4" [disabled]="Mode == 'Personal'">
+                <select class="custom-select" required [(ngModel)]="GroupIndex" (ngModelChange)="ForceChangeData($event)"  name="GroupIndex"aria-describedby="basic-addon4" [disabled]="Mode == 'Personal'">
                     <option value="" disabled>Choose the Group</option>
-                    <option *ngFor="let GN of GroupNames; let i = index" value="i">{{GN}}</option>
+                    <option *ngFor="let GN of GroupNames; let i = index" value="{{i}}">{{GN}}</option>
                 </select>
               </div>
               
@@ -95,7 +95,11 @@
                     <app-pie-chart style="position: relative; left: 100px;"
                                    [Category] = "Category"
                                    [AnalyticData] = "PersonalDataCurrent"
-                                   [Mode] = "Mode"></app-pie-chart>
+                                   [Mode] = "Mode" *ngIf="Mode == 'Personal'"></app-pie-chart>
+                    <app-pie-chart style="position: relative; left: 100px;"
+                                   [Category] = "Category"
+                                   [AnalyticData] = "SharedDataCurrent"
+                                   [Mode] = "Mode" *ngIf="Mode == 'Shared'"></app-pie-chart>
                 </div>
             </div>
     
@@ -111,7 +115,18 @@
 
         <div class="col-md-6">
             <div class="card-body">
-                <app-line-chart></app-line-chart>
+                <app-line-chart *ngIf="Mode == 'Personal'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="PersonalDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Personal_current"
+                                [rdate]="Date_r_Personal_current"></app-line-chart>
+                <app-line-chart *ngIf="Mode == 'Shared'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="SharedDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Shared_current"
+                                [rdate]="Date_r_Shared_current"></app-line-chart>
             </div>
         </div>
 

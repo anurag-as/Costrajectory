@@ -14,12 +14,12 @@ export class PieChartComponent implements OnInit {
   ngOnInit() {
     // google.charts.load('current', {packages: ['corechart']});
     // google.charts.setOnLoadCallback(this.drawChart);
-    console.log('PIE CHART : ', this.Category, this.AnalyticData, this.Mode);
+    // console.log('PIE CHART : ', this.Category, this.AnalyticData, this.Mode);
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges(chg) {
-    console.log('PIE CHART CHANGE : ', this.Category, this.AnalyticData, this.Mode);
+    // console.log('PIE CHART CHANGE : ', this.Category, this.AnalyticData, this.Mode);
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode));
   }
@@ -51,39 +51,19 @@ export class PieChartComponent implements OnInit {
         finalizedData.push([entry, dict[entry]]);
       }
     }
-    console.log('Finalized Data : ', finalizedData);
     return finalizedData;
 
   }
 
   drawChart(AnalyticData, Mode) {
-    /*
-    const ArrayOfItems = [];
-    let data : any;
-    console.log('INSIDE DRAW PIE CHART :', AnalyticData, Mode);
-    if ( AnalyticData === undefined) {
-      const data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Work',     11],
-        ['Eat',      2],
-        ['Commute',  2],
-        ['Watch TV', 2],
-        ['Sleep',    7]
-      ]);
-
-    } else {
-      if ( Mode === 'Personal') {
-        for (const bill of AnalyticData.WithoutCategoryFileter) {
-          ArrayOfItems.push([bill.category, parseInt(bill.Amount, 10)]);
-        }
-        console.log('TABLE :', ArrayOfItems);
-        const data = google.visualization.arrayToDataTable([ArrayOfItems]);
-      }
-    }*/
     const ArrayOfItems = [['Category', 'Spends']];
     if ( Mode === 'Personal') {
       for (const bill of AnalyticData.WithoutCategoryFileter) {
         ArrayOfItems.push([bill.category, parseInt(bill.Amount, 10)]);
+      }
+    } else {
+      for (const bill of AnalyticData.WithoutCategoryFileter) {
+        ArrayOfItems.push([bill.category, parseInt(bill.amount, 10)]);
       }
     }
     // const data = google.visualization.arrayToDataTable([ArrayOfItems]);

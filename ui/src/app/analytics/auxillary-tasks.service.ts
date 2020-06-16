@@ -92,7 +92,7 @@ export class Filter {
     const DataBuffer = [];
     const WithoutCategoryFileterLocal = [];
     for ( const bill of SharedData[GroupIDx].bill_data) {
-      if (bill.datetime >= LeftDate && bill.datetime <= RightDate) {
+      if (new Date(bill.datetime) >= LeftDate && new Date(bill.datetime) <= RightDate) {
         WithoutCategoryFileterLocal.push(bill);
         if (CategoryChosen === 'All') {
           DataBuffer.push(bill);

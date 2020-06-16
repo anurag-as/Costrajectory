@@ -181,6 +181,7 @@ export class AnalyticsComponent implements OnInit {
         PersonalData: this.BillEntries,
         GroupIdx: this.GroupIndex
       };
+      console.log('group index', this.GroupIndex);
       this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
     }
     console.log('THINGS CHANGED: ', this.SharedDataCurrent, this.PersonalDataCurrent);
