@@ -105,7 +105,18 @@
     
             <div class="col-md-6">
                 <div class="card-body">
-                    <app-predictor-chart></app-predictor-chart>
+                    <app-predictor-chart *ngIf="Mode == 'Personal'"
+                                    [Mode] = "Mode"
+                                    [AnalyticData]="PersonalDataCurrent"
+                                    [timeline]="Timeline"
+                                    [ldate]="Date_l_Personal_current"
+                                    [rdate]="Date_r_Personal_current"></app-predictor-chart>
+                    <app-predictor-chart *ngIf="Mode == 'Shared'"
+                                    [Mode] = "Mode"
+                                    [AnalyticData]="SharedDataCurrent"
+                                    [timeline]="Timeline"
+                                    [ldate]="Date_l_Shared_current"
+                                    [rdate]="Date_r_Shared_current"></app-predictor-chart>
                 </div>
             </div>
     
