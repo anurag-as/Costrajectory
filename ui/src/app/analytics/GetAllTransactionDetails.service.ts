@@ -11,10 +11,6 @@ interface BillData {
     ImageEntries: any;
 }
 
-// tslint:disable-next-line:max-line-length
-// {"Name" : "Test1" , "Description": "Test Description1", "Date": "10/12/2020" , "Amount": 500, "HasImage":"True", "Itentifier": "Sample image identier1"}
-// {"Itentifier": "Sample image identier3" , "Image" : "File"}
-
 @Injectable({providedIn : 'root'} )
 export class GetAllTransactionDetails {
     constructor(private http: HttpClient) {}

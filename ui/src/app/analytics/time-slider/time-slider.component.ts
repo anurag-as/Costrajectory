@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
+import { Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface BillData {
   username: string;
@@ -13,26 +15,74 @@ interface BillData {
   styleUrls: ['./time-slider.component.scss']
 })
 export class TimeSliderComponent implements OnInit {
+  @Input() Timer: string;
+  @Output() Timerange = new EventEmitter <{Ldate: Date, rDate: Date}> ();
+  @Input() MinDate: Date;
+  @Input() MaxDate: Date;
+  loading = false;
   DataObj = new Week();
   minValue = 0;
   maxValue = this.DataObj.GetSteps(new Date(2020, 1, 1), new Date(2020, 6, 9));
+  SendCounter = 0;
+  SendDateLeft: Date;
+  SendDateRight: Date;
   options = {
     floor: 0,
-    ceil: this.maxValue,
+    ceil: this.DataObj.GetSteps( this.MinDate, this.MaxDate),
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return this.DataObj.TranslateToString(new Date(2020, 1, 1) , value);
+          if (this.SendCounter === 2) {
+            this.SendDateLeft = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter = 0;
+            this.Timerange.emit({Ldate: this.SendDateLeft, rDate: this.SendDateRight});
+          } else {
+            this.SendDateLeft = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter += 1;
+          }
+          return this.DataObj.TranslateToString(this.MinDate , value);
         case LabelType.High:
-          return this.DataObj.TranslateToString(new Date(2020, 1, 1) , value);
+          if (this.SendCounter === 2) {
+            // this.Timerange.emit({Ldate: this.MinDate, rDate: this.DataObj.TranslateToDate(this.MinDate , value)});
+            this.SendDateRight = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter = 0;
+            this.Timerange.emit({Ldate: this.SendDateLeft, rDate: this.SendDateRight});
+          } else {
+            this.SendDateRight = this.DataObj.TranslateToDate(this.MinDate , value);
+            this.SendCounter += 1;
+          }
+          return this.DataObj.TranslateToString(this.MinDate , value);
         default:
-          return this.DataObj.TranslateToString(new Date(2020, 1, 1) , value);
+          return this.DataObj.TranslateToString(this.MinDate , value);
       }
     }
   };
+  constructor( private cdr: ChangeDetectorRef ) {}
 
-  ngOnInit() {}
-  constructor() {}
+  ngOnInit() {
+    // console.log('INput to time slider: ', this.MinDate, this.MaxDate);
+    if (this.MinDate === undefined || this.MaxDate === undefined) {
+      this.loading = true;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnChanges(chg) {
+    if ( chg.Timer === undefined || chg.Timer.currentValue  === 'Week') {
+      this.DataObj = new Week();
+    } else if ( chg.Timer.currentValue  === 'Month' ) {
+      this.DataObj = new Month();
+    } else if ( chg.Timer.currentValue  === 'Quarter' ) {
+      this.DataObj = new Quarter();
+    } else {
+      this.DataObj = new Year();
+    }
+    this.minValue = 0;
+    this.maxValue = this.DataObj.GetSteps( this.MinDate, this.MaxDate);
+    this.options.ceil = this.maxValue;
+  }
 }
 
 export class Week {
@@ -44,12 +94,16 @@ export class Week {
   }
 
 
-  GetSteps(startDate: Date, endDate: Date) {
+  GetSteps(startDate: any, endDate: any) {
     return Math.round((endDate - startDate) / (7 * 24 * 60 * 60 * 1000)) + 1;
   }
 
   TranslateToString(startDate: Date, value: number) {
     return this.addDays(startDate , value * 7).toDateString();
+  }
+
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 7);
   }
 
 }
@@ -74,6 +128,10 @@ export class Month {
     return this.addDays(startDate , value * 30).toDateString();
   }
 
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 30);
+  }
+
 
 }
 export class Quarter {
@@ -96,6 +154,10 @@ export class Quarter {
     return this.addDays(startDate , value * 92).toDateString();
   }
 
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 92);
+  }
+
 }
 
 export class Year {
@@ -115,6 +177,10 @@ export class Year {
 
   TranslateToString(startDate: Date, value: number) {
     return this.addDays(startDate , value * 365).toDateString();
+  }
+
+  TranslateToDate(startDate: Date, value: number) {
+    return this.addDays(startDate , value * 365);
   }
 
 }
