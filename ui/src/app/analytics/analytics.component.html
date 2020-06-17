@@ -3,7 +3,9 @@
 
     <nav class="navbar navbar-expand-lg"
          style = "width: calc(100% - 220px);
-                  position: relative;
+                  position: sticky;
+                  z-index: 999;
+                  top:0;
                   left: 200px;
                   height: 70px;">
 
@@ -105,13 +107,24 @@
     
             <div class="col-md-6">
                 <div class="card-body">
-                    <app-predictor-chart></app-predictor-chart>
+                    <app-predictor-chart *ngIf="Mode == 'Personal'"
+                                    [Mode] = "Mode"
+                                    [AnalyticData]="PersonalDataCurrent"
+                                    [timeline]="Timeline"
+                                    [ldate]="Date_l_Personal_current"
+                                    [rdate]="Date_r_Personal_current"></app-predictor-chart>
+                    <app-predictor-chart *ngIf="Mode == 'Shared'"
+                                    [Mode] = "Mode"
+                                    [AnalyticData]="SharedDataCurrent"
+                                    [timeline]="Timeline"
+                                    [ldate]="Date_l_Shared_current"
+                                    [rdate]="Date_r_Shared_current"></app-predictor-chart>
                 </div>
             </div>
     
     </div>
 
-    <div class="row" style="position:relative ; top: -150px;">
+    <div class="row" style="position:relative ; top: -1200px;">
 
         <div class="col-md-6">
             <div class="card-body">

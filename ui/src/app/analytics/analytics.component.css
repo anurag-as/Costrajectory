@@ -4,8 +4,7 @@
     left: 0px;
     position: relative;
     width: 200px;
-    height: 100%;
-    z-index: 0;
+    height: 1800px;
     display: inline-block;
     padding: 0px;
     top:-70px;
@@ -19,6 +18,8 @@
   
   #sidebar-wrapper .list-group {
     width: 198px;
+    position: sticky;
+    top: 0px;
   }
   
   
