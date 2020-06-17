@@ -61,7 +61,7 @@ export class DiffChartComponent implements OnInit {
         for ( let i = 0; i <= DateArray.length - 1; i += 1) {
           if ( (new Date(bill.Date)).getTime() > (DateArray[i][0]).getTime()
               && (new Date(bill.Date)).getTime() <= (DateArray[i + 1][0]).getTime() ) {
-            if ( bill.category ===  Adata.category) {
+            if ( bill.category ===  Adata.Category) {
               DateArray[i][2] += parseInt(bill.Amount , 10);
             }
             DateArray[i][1] += parseInt(bill.Amount , 10);
@@ -73,7 +73,7 @@ export class DiffChartComponent implements OnInit {
           for ( let i = 0; i <= DateArray.length - 1; i += 1) {
             if ( (new Date(bill.datetime)).getTime() > (DateArray[i][0]).getTime()
                 && (new Date(bill.datetime)).getTime() <= (DateArray[i + 1][0]).getTime() ) {
-              if ( bill.category ===  Adata.category) {
+              if ( bill.category ===  Adata.Category) {
                 DateArray[i][2] += parseInt(bill.amount , 10);
               }
               DateArray[i][1] += parseInt(bill.amount , 10);
@@ -81,8 +81,12 @@ export class DiffChartComponent implements OnInit {
           }
           }
           }
-    console.log('ADATA : ', DateArray);
-    
+
+    for ( let i = 0; i <= DateArray.length - 1; i += 1) {
+      DateArray[i][0] = (DateArray[i][0]).toLocaleDateString('en-US');
+    }
+    console.log('ADATA : ', DateArray, Adata);
+
     return(DateArray);
     }
 
@@ -91,7 +95,7 @@ export class DiffChartComponent implements OnInit {
       return;
     }
     const data = new google.visualization.DataTable();
-    data.addColumn('date', 'Date');
+    data.addColumn('string', 'Date');
     data.addColumn('number', 'Cumulative');
     data.addColumn('number', 'Spend');
     data.addRows(this.createDataset(AnalyticData, Mode, leftDate, RightDate, timeline));
