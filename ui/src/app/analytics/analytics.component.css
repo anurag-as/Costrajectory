@@ -1,7 +1,55 @@
-#chartContainerBar {
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: 0px;
+    left: 0px;
+    position: relative;
+    width: 200px;
+    height: 1800px;
     display: inline-block;
-}
+    padding: 0px;
+    top:-70px;
+  }
+  
+  
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 198px;
+    position: sticky;
+    top: 0px;
+  }
+  
+  
+  #SLIDER {
+    display: inline-block; 
+    width: calc(90% - 200px); 
+    padding-left: 50px; 
+    position: relative;
+    height: 40px;
+    width: 100%;
+  }
 
-#chartContainerPie {
-    display: inline-block;
-}
+  #PIECHART {
+    padding-left: 5px; 
+    position: relative;
+  }
+
+  #PREDCHART {
+    padding-left: 5px; 
+    position: relative;
+  }
+
+  .row {
+    width: calc(100% - 220px);
+    position: absolute;
+    left : 220px;
+    top: 220px;
+  }
+
+  .card-body {
+    height: 500px;
+  }
+

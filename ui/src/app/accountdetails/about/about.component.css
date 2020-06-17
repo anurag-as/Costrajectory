@@ -1,11 +1,11 @@
 p {
-    font-size:xx-large;  
+    font-size:23px;  
     text-align: center;
     vertical-align: middle;
     display: table-cell;   
-    padding-top: 60px;
+    padding-top: 80px;
     font-family: 'Exo', sans-serif;
-	font-weight: bold;
+    font-weight: bold;
 
 }
 
@@ -23,10 +23,10 @@ p {
 }
 
 #right {
-    padding-left: 55px;
+    padding-left: 30px;
 }
 
 #left {
-    padding-right: 25px;
+    padding-right: 30px;
 }
 

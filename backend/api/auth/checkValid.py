@@ -24,7 +24,7 @@ def check_validity_token(username, token):
 # API to check the validity of a token for a particular username (<timeout)
 @checkValidTokenAPI.route('/auth/checkValidity', methods=['POST'])
 @cross_origin()
-def checkValid():
+def check_valid():
     try:
         username = request.json['username']
         token = request.json['token']

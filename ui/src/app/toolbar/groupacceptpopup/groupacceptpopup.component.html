@@ -1,24 +1,24 @@
 <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLongTitle">Accept Requests!</h5>
+      <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Pending Notifications!</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body" style="padding-top: 0; padding-bottom: 0;" *ngIf="RequestId != 0">
       <div class="modal-body" type="button" [attr.id]="RequestId == 1 ? 'GroupRequestsActive': 'GroupRequestsInActive'" (click)="ChangeRequestType(1)">
-        <p style="padding-top: 0; padding-bottom: 0; position: relative; left:200px; top:-13px;"><b>Group Requests</b></p>
+        <p style="padding-top: 0; padding-bottom: 0; position: relative; left:200px; top:-13px;"><b>Group Join Requests</b></p>
       </div>
       <div class="modal-body" type="button" [attr.id]="RequestId == 2 ? 'AddUsersActive': 'AddUsersInActive'" (click)="ChangeRequestType(2)">
-        <p style="padding-top: 0; padding-bottom: 0; position: relative; right:-10px; top:-13px;"><b>Add People Reqests</b></p>
+        <p style="padding-top: 0; padding-bottom: 0; position: relative; right:-10px; top:-13px;"><b>Admin Approvals</b></p>
       </div>
     </div>
     
     <div class="modal-body" *ngIf="GroupData != 'False' && RequestId == 1" style="padding-top: 0; padding-bottom: 0;">
-      <app-group-accept style="padding-top: 0; padding-bottom: 0;" (decision)="DecisionGroup($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)" [RequestType]="1"></app-group-accept>
+      <app-group-accept style="padding-top: 0; padding-bottom: 0;"(decision)="DecisionGroup($event)" *ngFor="let Group of GroupData; let i = index" [GroupName]="Group[1]" [GroupID]= "ParseInt(Group[0], 10)" [RequestType]="1"></app-group-accept>
     </div>
     <div class="modal-body" *ngIf="GroupData == 'False' && RequestId == 1">
-      <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
+      <h5 style="color: blue;"> No pending requests!</h5>      
     </div>
 
     <div class="modal-body" *ngIf="PeopleAdd.length != 0 && RequestId == 2" style="padding-top: 0; padding-bottom: 0;">
@@ -37,9 +37,9 @@
       [UserToBeAddedOrRemoved]="RequestsRemove.username"></app-group-accept>
     </div>
     <div class="modal-body" *ngIf="PeopleAdd.length == 0 && PeopleRemove.length == 0 && RequestId == 2">
-      <h5 style="color: green;"> NO REQUESTS AVAILABLE!!</h5>      
+      <h5 style="color: green;"> No pending requests!</h5>      
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeDialog()">Cancel</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeDialog()">Close</button>
     </div>
   </div>

@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
   GoHome() {
-    this.Route.navigate(['']);
+    this.Route.navigate(['/Home']);
   }
 
   submit(form: NgForm) {

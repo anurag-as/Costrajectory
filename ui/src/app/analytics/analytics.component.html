@@ -1,6 +1,155 @@
-<body>
-<div id="chartContainerBar" style="height: 370px; width: 50%;"></div>
-<div id="chartContainerPie" style="height: 370px; width: 50%;"></div>
+<div>
+    
 
-<div id="chartContainerline" style="height: 370px; width: 100%;"></div>
-</body>
+    <nav class="navbar navbar-expand-lg"
+         style = "width: calc(100% - 220px);
+                  position: sticky;
+                  z-index: 999;
+                  top:0;
+                  left: 200px;
+                  height: 70px;">
+
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Week' && Mode == 'Personal'" [MinDate]="Date_l_Personal" [MaxDate]="Date_r_Personal" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Month' && Mode == 'Personal'" [MinDate]="Date_l_Personal" [MaxDate]="Date_r_Personal" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Quarter' && Mode == 'Personal'" [MinDate]="Date_l_Personal" [MaxDate]="Date_r_Personal" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Year' && Mode == 'Personal'" [MinDate]="Date_l_Personal" [MaxDate]="Date_r_Personal" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Week' && Mode == 'Shared'" [MinDate]="Date_l_Shared" [MaxDate]="Date_r_Shared" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Month' && Mode == 'Shared'" [MinDate]="Date_l_Shared" [MaxDate]="Date_r_Shared" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Quarter' && Mode == 'Shared'" [MinDate]="Date_l_Shared" [MaxDate]="Date_r_Shared" (Timerange)="DateInterrupt($event)"></app-time-slider>
+        <app-time-slider id="SLIDER" [Timer]="Timeline" *ngIf="Timeline == 'Year' && Mode == 'Shared'" [MinDate]="Date_l_Shared" [MaxDate]="Date_r_Shared" (Timerange)="DateInterrupt($event)"></app-time-slider>
+
+        <div *ngIf="Timeline == ''" style="width: 500px; position:relative; left:500px">
+            <div class="spinner-border" role="status">
+            </div>
+            <span>&nbsp;&nbsp; <b>Please Select the required Timeline ... </b></span>
+         </div>
+    </nav>
+
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><span class="fa fa-list-ul fa-lg" aria-hidden="true"></span> Options</div>
+        <div class="list-group list-group-flush" type="button">
+            
+            <hr style="color: brown;">
+
+            
+            <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+                <label for="Timeline" class="col-form-label" style="padding-left: 50px;">Timeline</label>
+                <select class="custom-select" required [(ngModel)]="Timeline" name="Timeline"aria-describedby="basic-addon4">
+                    <option value="" disabled>Choose the Timeline</option>
+                    <option>Week</option>
+                    <option>Month</option>
+                    <option>Quarter</option>
+                    <option>Year</option>
+                </select>
+              </div>
+              
+             <hr style="color: brown;">
+    
+          <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+            <label for="Mode" class="col-form-label" style="padding-left: 50px;">Mode</label>
+            <select class="custom-select" required [(ngModel)]="Mode" name="Mode"aria-describedby="basic-addon4">
+                <option value="" disabled>Choose the Mode</option>
+                <option>Personal</option>
+                <option>Shared</option>
+            </select>
+          </div>
+          
+         <hr style="color: brown;">
+
+         <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+            <label for="category" class="col-form-label" style="padding-left: 50px;">Category</label>
+            <select class="custom-select" required [(ngModel)]="Category" (ngModelChange)="ForceChangeData($event)" name="category" aria-describedby="basic-addon4">
+                <option value="" disabled>Choose the category</option>
+                <option>All</option>
+                <option>Travel</option>
+                <option>Shopping</option>
+                <option>Investments</option>
+                <option>Food</option>
+                <option>Utilities</option>
+                <option>Medical</option>
+                <option>Entertainment</option>
+                <option>Housing</option>
+                <option>Others</option>
+            </select>
+          </div>
+
+          <hr style="color: brown;">
+
+            
+            <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+                <label for="GroupIndex" class="col-form-label" style="padding-left: 50px;">Group</label>
+                <select class="custom-select" required [(ngModel)]="GroupIndex" (ngModelChange)="ForceChangeData($event)"  name="GroupIndex"aria-describedby="basic-addon4" [disabled]="Mode == 'Personal'">
+                    <option value="" disabled>Choose the Group</option>
+                    <option *ngFor="let GN of GroupNames; let i = index" value="{{i}}">{{GN}}</option>
+                </select>
+              </div>
+              
+             <hr style="color: brown;">
+        
+        </div>
+    </div>
+    
+    <div class="row">
+
+            <div class="col-md-6">
+                <div class="card-body">
+                    <app-pie-chart style="position: relative; left: 100px;"
+                                   [Category] = "Category"
+                                   [AnalyticData] = "PersonalDataCurrent"
+                                   [Mode] = "Mode" *ngIf="Mode == 'Personal'"></app-pie-chart>
+                    <app-pie-chart style="position: relative; left: 100px;"
+                                   [Category] = "Category"
+                                   [AnalyticData] = "SharedDataCurrent"
+                                   [Mode] = "Mode" *ngIf="Mode == 'Shared'"></app-pie-chart>
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <div class="card-body">
+                    <app-predictor-chart *ngIf="Mode == 'Personal'"
+                                    [Mode] = "Mode"
+                                    [AnalyticData]="PersonalDataCurrent"
+                                    [timeline]="Timeline"
+                                    [ldate]="Date_l_Personal_current"
+                                    [rdate]="Date_r_Personal_current"></app-predictor-chart>
+                    <app-predictor-chart *ngIf="Mode == 'Shared'"
+                                    [Mode] = "Mode"
+                                    [AnalyticData]="SharedDataCurrent"
+                                    [timeline]="Timeline"
+                                    [ldate]="Date_l_Shared_current"
+                                    [rdate]="Date_r_Shared_current"></app-predictor-chart>
+                </div>
+            </div>
+    
+    </div>
+
+    <div class="row" style="position:relative ; top: -1200px;">
+
+        <div class="col-md-6">
+            <div class="card-body">
+                <app-line-chart *ngIf="Mode == 'Personal'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="PersonalDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Personal_current"
+                                [rdate]="Date_r_Personal_current"></app-line-chart>
+                <app-line-chart *ngIf="Mode == 'Shared'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="SharedDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Shared_current"
+                                [rdate]="Date_r_Shared_current"></app-line-chart>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card-body">
+                <app-diff-chart></app-diff-chart>
+            </div>
+        </div>
+
+    </div>
+
+    
+</div>

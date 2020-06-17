@@ -1,12 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from '.././canvasjs.min';
-import {GetAllTransactionDetails} from './GetAllTransactionDetails.service';
-import {GlobalConfigsService} from '../global-configs.service';
+import { Getdata } from '../upload-form/tabular-view/GetData.service';
+import { GlobalConfigsService } from '../global-configs.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import { AuxillaryTasksService, Filter } from './auxillary-tasks.service';
+import { group } from '@angular/animations';
 
 interface BillData {
   username: string;
   TableEntries: [];
   ImageEntries: [];
+}
+
+interface Billdata {
+  body: any[];
+}
+
+interface Status {
+  message: string;
+  uploadStatus: boolean;
 }
 
 @Component({
@@ -15,171 +28,164 @@ interface BillData {
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  BillEntries = [];
+  Timeline = '';
+  Mode = 'Personal';
+  Category = 'All';
+  SharesPayload: any;
+  Username: string;
+  GroupIndex = 0;
+  BillEntries: any;
   DataLoading = 'Started';
   UserName: string;
   FormData: BillData;
-  Categories = ['Travel', 'Shopping', 'Investments', 'Food', 'Utilities', 'Medical', 'Entertainment', 'Housing', 'Others'];
-  DatainValue = {
-    Travel: 0,
-    Shopping: 0,
-    Investments: 0,
-    Food: 0,
-    Utilities: 0,
-    Medical: 0,
-    Entertainment: 0,
-    Housing: 0,
-    Others: 0,
-  };
-  DatainPercent = {
-    Travel: 0,
-    Shopping: 0,
-    Investments: 0,
-    Food: 0,
-    Utilities: 0,
-    Medical: 0,
-    Entertainment: 0,
-    Housing: 0,
-    Others: 0,
-  };
-  ValueArray = [];
-  ConsolidatedValue: any = [];
-  ConsolidatedPecent: any = [];
-  ConsolidatedDate: any = [];
+  GroupNames: any[] = [];
+  // tslint:disable-next-line:variable-name
+  Date_l_Personal: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Personal: Date;
+    // tslint:disable-next-line:variable-name
+  Date_l_Shared: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Shared: Date;
 
-  TotalSum: any;
-  constructor(private DataGather: GetAllTransactionDetails, public globals: GlobalConfigsService) { }
+  // tslint:disable-next-line:variable-name
+  Date_l_Personal_current: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Personal_current: Date;
+    // tslint:disable-next-line:variable-name
+  Date_l_Shared_current: Date;
+  // tslint:disable-next-line:variable-name
+  Date_r_Shared_current: Date;
+
+  PersonalDataCurrent: any;
+  SharedDataCurrent: any;
+
+  constructor(private DataGetter: Getdata, public globals: GlobalConfigsService, private http: HttpClient,
+              private AuxillaryTasks: AuxillaryTasksService,
+              private DataFilter: Filter) {
+    this.Username = globals.GetUserName;
+  }
 
   ngOnInit() {
-    this.DataGather.GetData( this.globals.GetUserName ).subscribe( data => {
-      // console.log('MAIN DATA : ', data);
+    this.GetBills();
+  }
+
+  GetBills() {
+    this.ReloadShares().subscribe(data => {
+    this.SharesPayload = data.body;
+    console.log('GROUP DATA HOME: ', data.body);
+    this.GetPersonalBills();
+    }, err => {
+    this.SharesPayload = [];
+    });
+  }
+
+  ReloadShares() {
+    const endpoint = 'http://127.0.0.1:5000/group/viewGroup';
+    const QueryPayload = {user_name : this.globals.GetUsername()};
+    return this.http.post<Billdata>(endpoint, QueryPayload);
+  }
+
+  GetPersonalBills() {
+    this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
       this.DataLoading = 'Success';
-      this.FormData = data;
-      // console.log('DATATYPE: ', typeof(data.TableEntries));
-      if (typeof(data.TableEntries) === 'undefined' ) {
-        return;
-      }
-      for ( const entry of data.TableEntries) {
-        this.DatainValue[entry.category] = this.DatainValue[entry.category] + parseInt(entry.Amount, 10);
-        this.ValueArray.push(parseInt(entry.Amount, 10));
-        // this.ConsolidatedDate.push({y: parseInt(entry.Amount, 10), x: this.ConvertDatetoDateObj(entry.Date)});
-        this.ConsolidatedDate = this.checkIfDateinArray(this.ConsolidatedDate, entry.Date, parseInt(entry.Amount, 10));
-      }
-
-      this.TotalSum = this.SumArray(this.ValueArray);
-
-      for ( const category of this.Categories) {
-        this.ConsolidatedValue.push({ label: category, y: this.DatainValue[category] });
-        this.ConsolidatedPecent.push({ label: category, y: (parseInt(this.DatainValue[category], 10) / this.TotalSum) * 100 });
-      }
-
-      this.BarChartRender(this.ConsolidatedValue, this.Categories);
-      this.PieChartRender(this.ConsolidatedPecent, this.Categories);
-      this.LineChartrender(this.ConsolidatedDate);
-
+      this.BillEntries = data;
+      this.GetDataRange();
+      this.GetGroupNames();
+      this.SharedDataCurrent = this.DateInterrupt( {Ldate: this.Date_l_Shared, rDate: this.Date_r_Shared});
+      this.PersonalDataCurrent = this.DateInterrupt( {Ldate: this.Date_l_Personal, rDate: this.Date_r_Personal});
     }, err => {
       this.DataLoading = 'Fail';
     });
   }
 
-  SumArray(arr): number {
-    return(arr.reduce((a, b) => a + b, 0));
-  }
-
-  ConvertDatetoDateObj(DateStr: string): Date {
-    return new Date(parseInt(DateStr.split('-')[0], 10), parseInt(DateStr.split('-')[1], 10), parseInt(DateStr.split('-')[2], 10));
-  }
-
-  checkIfDateinArray(arr, date, valueToAdd) {
-    const reference = this.ConvertDatetoDateObj(date);
-    for ( const jsonObj of arr) {
-      // console.log('COMPARING : ', jsonObj.x, reference);
-      if (jsonObj.x.getTime() === reference.getTime()) {
-        // console.log('MATCH');
-        jsonObj.y = jsonObj.y + valueToAdd;
-        return arr;
-      }
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
     }
-    arr.push({y: valueToAdd, x: reference});
-    return arr;
   }
-  BarChartRender(ConsolidatedValue, Categories) {
-    // console.log('DATAPOINTS BAR : ', ConsolidatedValue);
-    const chart = new CanvasJS.Chart('chartContainerBar', {
-      animationEnabled: true,
-      exportEnabled: true,
-      title: {
-        text: ''
-      },
-      data: [{
-        type: 'column',
-        dataPoints: ConsolidatedValue
-      }]
-    });
 
-    chart.render();
-      }
-
-    PieChartRender(ConsolidatedPecent, Categories) {
-      // console.log('DATAPOINTS PIE : ', ConsolidatedPecent);
-      const chart = new CanvasJS.Chart('chartContainerPie', {
-        animationEnabled: true,
-        title: {
-          text: ''
-        },
-        data: [{
-          type: 'pie',
-          startAngle: 240,
-          yValueFormatString: '##0.00"%"',
-          indexLabel: '{label} {y}',
-          dataPoints: ConsolidatedPecent
-        }]
-      });
-      chart.render();
+  GetGroupNames() {
+    for ( const grp of this.SharesPayload) {
+      this.GroupNames.push(grp.group_info.title);
     }
-
-    LineChartrender(DateList) {
-      // console.log('DATELIST: ', DateList);
-      const chart = new CanvasJS.Chart('chartContainerline', {
-        animationEnabled: true,
-        theme: 'light2',
-        title: {
-          text: ''
-        },
-        axisX: {
-          valueFormatString: 'DD MMM YYYY',
-          crosshair: {
-            enabled: true,
-            snapToDataPoint: true
-          }
-        },
-        axisY: {
-          title: '',
-          crosshair: {
-            enabled: true
-          }
-        },
-        toolTip: {
-          shared: true
-        },
-        legend: {
-          cursor: 'pointer',
-          verticalAlign: 'bottom',
-          horizontalAlign: 'left',
-          dockInsidePlotArea: true,
-        },
-        data: [{
-          type: 'line',
-          showInLegend: true,
-          name: '',
-          markerType: 'square',
-          xValueFormatString: 'DD MMM, YYYY',
-          color: '#F08080',
-          dataPoints: DateList
-        }],
-    });
-      chart.render();
   }
 
+  GetDataRange() {
+    let DateData = this.AuxillaryTasks.GetMaxMinDatePersonal(this.BillEntries);
+    this.Date_l_Personal = DateData.MinDate;
+    this.Date_r_Personal = DateData.MaxDate;
+
+    DateData = this.AuxillaryTasks.GetMaxMinDateShared(this.SharesPayload);
+    this.Date_l_Shared = DateData.MinDate;
+    this.Date_r_Shared = DateData.MaxDate;
+  }
+
+  DateInterrupt(Range: {Ldate: Date, rDate: Date}) {
+    if ( this.Mode === 'Personal') {
+      this.Date_l_Personal_current = Range.Ldate;
+      this.Date_r_Personal_current = Range.rDate;
+      const FIlterParams = {
+        LDate :  this.Date_l_Personal_current,
+        RDate : this.Date_r_Personal_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.PersonalDataCurrent = this.DataFilter.FilterData(FIlterParams);
+      // console.log('DATE INTERRUPT: PERSONAL : ', this.PersonalDataCurrent);
+    } else {
+      this.Date_l_Shared_current = Range.Ldate;
+      this.Date_r_Shared_current = Range.rDate;
+      const FIlterParams = {
+        LDate :  this.Date_l_Shared_current,
+        RDate : this.Date_r_Shared_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
+      // console.log('DATE INTERRUPT: SHARED : ', this.SharedDataCurrent);
+
+    }
+  }
+
+  ForceChangeData() {
+    if ( this.Mode === 'Personal') {
+      const FIlterParams = {
+        LDate :  this.Date_l_Personal_current,
+        RDate : this.Date_r_Personal_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      this.PersonalDataCurrent = this.DataFilter.FilterData(FIlterParams);
+    } else {
+      const FIlterParams = {
+        LDate :  this.Date_l_Shared_current,
+        RDate : this.Date_r_Shared_current,
+        Category : this.Category,
+        Mode: this.Mode,
+        SharedData: this.SharesPayload,
+        PersonalData: this.BillEntries,
+        GroupIdx: this.GroupIndex
+      };
+      console.log('group index', this.GroupIndex);
+      this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
+    }
+    console.log('THINGS CHANGED: ', this.SharedDataCurrent, this.PersonalDataCurrent);
+  }
 
 }
+

@@ -22,8 +22,9 @@ def signout():
         upload_db()  # upload the dropbox server to the latest code (automation)
         user_name = request.json['username']
 
+        message = "There are no goodbyes for us, wherever you are, you data will stay safe in our heart!"
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Signed Out", "")
+        insert_into_recent_table(connection(), user_name, str(time()), "Signed Out", message)
 
         user_data_path = path.join(getcwd(), "temp", "." + user_name)
         if path.exists(user_data_path):

@@ -6,13 +6,13 @@ from database_functions.groups.querying_functions import get_status_for_group, g
 
 checkUserAPI = Blueprint('checkUserAPI', __name__)
 
+
 # API to check a username is available for signup
 @checkUserAPI.route('/auth/checkUser', methods=['POST'])
 @cross_origin()
-def checkUser():
+def check_user():
     signup = SignUp(request.json['username'])
     username = request.json['username']
-    password = request.json['password']
     try:
         group_id = request.json['group_id']
         if get_status_for_group(connection(), group_id, username, "rejected") and \
