@@ -145,7 +145,18 @@
 
         <div class="col-md-6">
             <div class="card-body">
-                <app-diff-chart></app-diff-chart>
+                <app-diff-chart *ngIf="Mode == 'Personal'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="PersonalDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Personal_current"
+                                [rdate]="Date_r_Personal_current"></app-diff-chart>
+                <app-diff-chart *ngIf="Mode == 'Shared'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="SharedDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Shared_current"
+                                [rdate]="Date_r_Shared_current"></app-diff-chart>
             </div>
         </div>
 
