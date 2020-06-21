@@ -138,3 +138,29 @@ body{
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
 }
+
+#sidebar-wrapper2 {
+    margin-left: 0px;
+    left: 0px;
+    height: 1800px;
+	padding: 0px;
+  }
+  
+  
+  #sidebar-wrapper2 .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper2 .list-group {
+    width: 198px;
+    position: sticky;
+    top: 0px;
+  }
+    
+  .card-body {
+    height: 500px;
+  }
+
+
+
