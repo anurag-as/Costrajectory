@@ -111,6 +111,10 @@ import { PredictorChartComponent } from './analytics/predictor-chart/predictor-c
 import { DiffChartComponent } from './analytics/diff-chart/diff-chart.component';
 import { LineChartComponent } from './analytics/line-chart/line-chart.component';
 import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.service';
+import { LoadersComponent } from './loaders/loaders.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -193,7 +197,8 @@ import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.servic
     PieChartComponent,
     PredictorChartComponent,
     DiffChartComponent,
-    LineChartComponent
+    LineChartComponent,
+    LoadersComponent,
   ],
   imports: [
     BrowserModule,
@@ -221,9 +226,19 @@ import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.servic
     ResizableModule,
     GoogleChartsModule,
     RandomcolorModule,
-    Ng5SliderModule
-    ],
-  providers: [TabularViewComponent, GlobalConfigsService, Title, Filter, AuxillaryTasksService],
+    Ng5SliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    TabularViewComponent,
+    GlobalConfigsService,
+    Title,
+    Filter,
+    AuxillaryTasksService,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA

@@ -1,4 +1,4 @@
-<table class="table" style="width: 100%">
+<!-- <table class="table" style="width: 100%">
     <thead>
       <tr>
         
@@ -11,16 +11,67 @@
         <th scope="bill amount" style="width: 18%; text-align:left"></th>
       </tr>
     </thead>
-  </table>
+  </table> -->
+<div class="row" style="width: 98%;">
+  <div class="col-lg-2">
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">  &nbsp; &nbsp;  &nbsp; <span class="fa fa-filter fa-lg" aria-hidden="true"></span>  &nbsp; Filter</div>
+      
+      <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+        <label for="category" class="col-form-label" style="padding-left: 50px;">Category</label>
+        <select class="custom-select" required [(ngModel)]="Category" (ngModelChange)="FilterData()" name="category" aria-describedby="basic-addon4">
+            <option value="" disabled>Choose the category</option>
+            <option>All</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Investments</option>
+            <option>Food</option>
+            <option>Utilities</option>
+            <option>Medical</option>
+            <option>Entertainment</option>
+            <option>Housing</option>
+            <option>Others</option>
+          </select>
+      </div>
 
 
+      <div class="list-group-item list-group-item-action bg-light" style="padding: 0px; height: 90px;">
+        <mat-form-field color="accent" style="padding-left: 10px; padding-top: 15px;">
+          <mat-label>From</mat-label>
+          <input matInput [matDatepicker]="picker1" [(ngModel)] = "Date_l_Personal" (dateChange)="FilterData()">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-<div *ngIf="BillEntries.length != 0"
+      <div class="list-group-item list-group-item-action bg-light" style="padding: 0px; height: 90px;">
+        <mat-form-field color="accent" style="padding-left: 10px; padding-top: 15px;">
+          <mat-label>TO</mat-label>
+          <input matInput [matDatepicker]="picker2" [(ngModel)] = "Date_r_Personal" (dateChange)="FilterData()">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
+        <span type="button" title="Reset" class="fa fa-refresh fa-lg" aria-hidden="true" (click)="ResetFilters()"
+              style="padding-left: 50px; padding-top: 10px; display: inline-block; color: red;">
+              <p style="padding-left:5px; padding-top: 5px; display: inline-block; color: black;"><b>RESET</b></p>
+        </span>
+        
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="col-lg-10">
+    <div *ngIf="BillEntries.length != 0"
     cdkDropList
     #todoList="cdkDropList"
     [cdkDropListData]="BillEntries"
     (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let indexobj of BillEntries" cdkDrag>
+      <div class="container-fluid" *ngFor="let indexobj of BillEntries" style="padding-left: 30px; width:40% ; display: inline-block;">
         <app-view-table-bill 
         [BillEnum]='indexobj[0]'
         [BillName]='indexobj[1]' 
@@ -34,6 +85,11 @@
         [BillCategory]='indexobj[9]'></app-view-table-bill>
     </div>
   </div>
+
+  </div>
+
+</div>
+
 
   <div *ngIf="BillEntries.length == 0" style="height: 400px;">
   </div>
