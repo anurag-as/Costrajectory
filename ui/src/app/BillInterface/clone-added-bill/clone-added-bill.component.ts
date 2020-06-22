@@ -56,7 +56,7 @@ export class CloneAddedBillComponent implements OnInit {
     this.getImage();
   }
 
-  private handleFileInput(files: FileList) {
+  handleFileInput(files: FileList) {
     // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 

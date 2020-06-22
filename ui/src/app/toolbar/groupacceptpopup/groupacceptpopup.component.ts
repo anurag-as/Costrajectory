@@ -88,7 +88,7 @@ export class GroupacceptpopupComponent implements OnInit {
         });
     }
 
-    private closeDialog() {
+    closeDialog() {
       this.dialogRef.close();
     }
 

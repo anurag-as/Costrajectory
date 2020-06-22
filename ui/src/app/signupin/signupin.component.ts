@@ -16,7 +16,7 @@ export class SignupinComponent implements OnInit {
   ngOnInit() {
   }
 
-  private changeState() {
+  public changeState() {
     if (this.signup) {
       this.signup = false;
     } else {
@@ -24,7 +24,7 @@ export class SignupinComponent implements OnInit {
     }
   }
 
-  private authorization(loginDetails: {username: string , password: string}) {
+  public authorization(loginDetails: {username: string , password: string}) {
      // console.log(loginDetails.username, loginDetails.password);
      this.userdata.emit({username: loginDetails.username, password: loginDetails.password});
   }
