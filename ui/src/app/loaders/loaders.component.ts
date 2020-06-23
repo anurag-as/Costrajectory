@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loaders.component.css']
 })
 export class LoadersComponent implements OnInit {
-
+  status = '';
+  quote = '';
   constructor() { }
 
   ngOnInit() {

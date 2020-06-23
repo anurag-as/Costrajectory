@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private authorization(loginDetails: {username: string , password: string}) {
+  public authorization(loginDetails: {username: string , password: string}) {
     // console.log(loginDetails.username, loginDetails.password);
     this.userdata = loginDetails;
     // console.log(this.userdata);

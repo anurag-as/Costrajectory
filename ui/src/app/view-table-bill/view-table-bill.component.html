@@ -66,7 +66,7 @@
     <div class="navbar-nav" id="buttonGroup">
         <a class="nav-link" type='button'  (click)="ViewBill()" title="Bill info"><i style="color: rgb(102, 84, 2);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </a>
         <a class="nav-link" type='button'  title="Copy Bill" (click)="ChangeBill()"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
-        <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#ViewBill'+FormattedStringId" title="View Bill" *ngIf="BillHasImage == true"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
+        <a class="nav-link" type='button'  data-toggle="modal" [attr.data-target]="'#ViewBill'" title="View Bill" *ngIf="BillHasImage == true"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
         <a class="nav-link" type='button'  (click)="EditBill()" title="Edit Bill"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
         <a class="nav-link" type='button'  (click)="DeleteBill()" title="Delete the Bill"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
     </div>
