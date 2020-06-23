@@ -1,7 +1,7 @@
 <div #Timeline style="position: relative; top:0px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
 
-     <div *ngFor="let number of numbers" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
-        <app-dot-pointer-dot-up [BubbleColor]="'#FFFF00'"></app-dot-pointer-dot-up>
+     <div *ngFor="let Loginstance of LogData" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-dot-pointer-dot-up [BubbleColor]="'#FFFF00'" style="background-color: chartreuse;"></app-dot-pointer-dot-up>
         <app-dot-pointer-dot-down></app-dot-pointer-dot-down> 
 
     </div>

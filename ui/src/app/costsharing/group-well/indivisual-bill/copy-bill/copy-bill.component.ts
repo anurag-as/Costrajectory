@@ -116,7 +116,7 @@ export class CopyBillComponent implements OnInit {
     this.ImageName = 'False';
   }
 
-  private handleFileInput(files: FileList) {
+  handleFileInput(files: FileList) {
     // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 
@@ -127,7 +127,7 @@ export class CopyBillComponent implements OnInit {
     this.imageUploaded = true;
 }
 
-  private closeDialog() {
+  closeDialog() {
     this.dialogRef.close();
   }
 

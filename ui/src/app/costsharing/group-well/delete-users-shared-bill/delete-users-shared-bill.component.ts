@@ -33,7 +33,7 @@ export class DeleteUsersSharedBillComponent implements OnInit {
     }
   }
 
-  private closeDialog() {
+  closeDialog() {
     this.dialogRef.close();
   }
 

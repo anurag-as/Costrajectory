@@ -44,7 +44,7 @@ export class AddSharedBillComponent implements OnInit {
     this.IsShowingSharing = ! this.IsShowingSharing;
   }
 
-  private handleFileInput(files: FileList) {
+  handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     // console.log(this.fileToUpload);
     const reader = new FileReader();

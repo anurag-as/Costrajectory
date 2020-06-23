@@ -59,7 +59,7 @@
 
          <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
             <label for="category" class="col-form-label" style="padding-left: 50px;">Category</label>
-            <select class="custom-select" required [(ngModel)]="Category" (ngModelChange)="ForceChangeData($event)" name="category" aria-describedby="basic-addon4">
+            <select class="custom-select" required [(ngModel)]="Category" (ngModelChange)="ForceChangeData()" name="category" aria-describedby="basic-addon4">
                 <option value="" disabled>Choose the category</option>
                 <option>All</option>
                 <option>Travel</option>
@@ -79,7 +79,7 @@
             
             <div class="list-group-item list-group-item-action bg-light" style="padding: 0px;">
                 <label for="GroupIndex" class="col-form-label" style="padding-left: 50px;">Group</label>
-                <select class="custom-select" required [(ngModel)]="GroupIndex" (ngModelChange)="ForceChangeData($event)"  name="GroupIndex"aria-describedby="basic-addon4" [disabled]="Mode == 'Personal'">
+                <select class="custom-select" required [(ngModel)]="GroupIndex" (ngModelChange)="ForceChangeData()"  name="GroupIndex"aria-describedby="basic-addon4" [disabled]="Mode == 'Personal'">
                     <option value="" disabled>Choose the Group</option>
                     <option *ngFor="let GN of GroupNames; let i = index" value="{{i}}">{{GN}}</option>
                 </select>
@@ -145,7 +145,18 @@
 
         <div class="col-md-6">
             <div class="card-body">
-                <app-diff-chart></app-diff-chart>
+                <app-diff-chart *ngIf="Mode == 'Personal'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="PersonalDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Personal_current"
+                                [rdate]="Date_r_Personal_current"></app-diff-chart>
+                <app-diff-chart *ngIf="Mode == 'Shared'"
+                                [Mode] = "Mode"
+                                [AnalyticData]="SharedDataCurrent"
+                                [timeline]="Timeline"
+                                [ldate]="Date_l_Shared_current"
+                                [rdate]="Date_r_Shared_current"></app-diff-chart>
             </div>
         </div>
 

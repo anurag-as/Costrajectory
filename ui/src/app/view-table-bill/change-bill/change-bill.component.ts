@@ -56,7 +56,7 @@ export class ChangeBillComponent implements OnInit {
     this.getImage();
   }
 
-  private handleFileInput(files: FileList) {
+  public handleFileInput(files: FileList) {
     // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 
