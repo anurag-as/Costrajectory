@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ChangeBillComponent } from './change-bill/change-bill.component';
 import { GlobalConfigsService } from '../global-configs.service';
@@ -7,6 +7,7 @@ import { ViewBillComponent } from './view-bill/view-bill.component';
 import { DeleteBillComponent } from './delete-bill/delete-bill.component';
 import { EditBillComponent } from './edit-bill/edit-bill.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { BillPhotoComponent } from './bill-photo/bill-photo.component';
 
 @Component({
   selector: 'app-view-table-bill',
@@ -24,12 +25,18 @@ export class ViewTableBillComponent implements OnInit {
   @Input() BillDate: any = undefined;
   @Input() BillId: any = undefined;
   @Input() BillCategory: any = undefined;
+  @Output() refreshCopy = new EventEmitter();
+
   ViewImage = false;
 
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) { }
 
   ngOnInit() {
     // console.log('Transaction component: ', this.BillId, this.BillIdentifier);
+  }
+
+  refreshcopy() {
+    this.refreshCopy.emit();
   }
 
   ChangeBill(): void {
@@ -47,7 +54,9 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillCategory = this.BillCategory;
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      if ( result.dataChanged ) {
+        this.refreshCopy.emit();
+      }
     });
   }
 
@@ -66,23 +75,45 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
     dialogRef.componentInstance.BillCategory = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      if ( result.dataChanged ) {
+        this.refreshCopy.emit();
+      }
     });
   }
 
   ViewBill(): void {
     const dialogRef = this.dialog.open(ViewBillComponent, {
+      panelClass: 'myapp-no-padding-dialog',
       width: '800px'
     });
     dialogRef.componentInstance.username = this.Globals.GetUsername();
-    /*
     dialogRef.componentInstance.BillName = this.BillName;
-    dialogRef.componentInstance.BillDescription = this.BillDescription;
-    dialogRef.componentInstance.BillAmount = this.BillAmount;
-    dialogRef.componentInstance.BillDate = this.ChangeBillFormat(this.BillDate);*/
+    dialogRef.componentInstance.Discription = this.BillDescription;
+    dialogRef.componentInstance.Amount = this.BillAmount;
+    dialogRef.componentInstance.dateTime = this.ChangeBillFormat(this.BillDate);
     dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
     dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillId = this.BillId;
+    dialogRef.componentInstance.category = this.BillCategory;
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+    });
+  }
 
+  ViewBillPhoto(): void {
+    const dialogRef = this.dialog.open(BillPhotoComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      width: '800px'
+    });
+    dialogRef.componentInstance.username = this.Globals.GetUsername();
+    dialogRef.componentInstance.BillName = this.BillName;
+    dialogRef.componentInstance.Discription = this.BillDescription;
+    dialogRef.componentInstance.Amount = this.BillAmount;
+    dialogRef.componentInstance.dateTime = this.ChangeBillFormat(this.BillDate);
+    dialogRef.componentInstance.MappedImageName = this.BillIdentifier;
+    dialogRef.componentInstance.ActualImageName = this.BillImage;
+    dialogRef.componentInstance.BillId = this.BillId;
+    dialogRef.componentInstance.category = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
     });
@@ -102,7 +133,9 @@ export class ViewTableBillComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      if ( result.dataChanged ) {
+        this.refreshCopy.emit();
+      }
     });
   }
 

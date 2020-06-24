@@ -114,6 +114,8 @@ import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.servic
 import { LoadersComponent } from './loaders/loaders.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BillPhotoComponent } from './view-table-bill/bill-photo/bill-photo.component';
+import { BillphotoComponent } from './costsharing/group-well/indivisual-bill/billphoto/billphoto.component';
 
 
 @NgModule({
@@ -199,6 +201,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DiffChartComponent,
     LineChartComponent,
     LoadersComponent,
+    BillPhotoComponent,
+    BillphotoComponent,
   ],
   imports: [
     BrowserModule,
@@ -264,7 +268,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     DeleteAddedBillComponent,
     CloneAddedBillComponent,
     EditAddedBillComponent,
-    InfoAddedBillComponent
+    InfoAddedBillComponent,
+    BillPhotoComponent,
+    BillphotoComponent
     ],
 })
 export class AppModule { }

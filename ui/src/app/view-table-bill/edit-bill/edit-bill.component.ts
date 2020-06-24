@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import { GlobalConfigsService } from '../../global-configs.service';
 import {HttpClient} from '@angular/common/http';
 import { UploadService } from '../../upload-form/upload.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 interface ReturnImage {
   Image: any;
@@ -35,8 +36,8 @@ export class EditBillComponent implements OnInit {
   canShowImageUploaded = false;
   imageUploaded = false;
   imageSrc;
-
-  constructor(private http: HttpClient, private uploader: UploadService) { }
+  DataChanged = false;
+  constructor(private http: HttpClient, private uploader: UploadService, private dialogRef: MatDialogRef<EditBillComponent>) { }
 
   receiveImage(URL: string, Payload: any) {
     return this.http.post<ReturnImage>(URL, Payload);
@@ -97,10 +98,13 @@ uploadFileToActivity(f: NgForm) {
     window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
    }
    this.uploading = 'ended success';
-   window.location.reload();
+   // window.location.reload();
+   this.DataChanged = true;
+   this.dialogRef.close({dataChanged : this.DataChanged});
    // window.alert('FILE UPLOADED SUCCESSFULLY');
    }, error => {
      this.uploading = 'ended fail';
+     this.dialogRef.close({dataChanged : this.DataChanged});
      // window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
    });
   }
