@@ -6,33 +6,17 @@ import { GlobalConfigsService } from '../../global-configs.service';
 import { Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-
 interface ReturnImage {
   Image: any;
 }
 
 @Component({
-  selector: 'app-view-bill',
-  templateUrl: './view-bill.component.html',
-  styleUrls: ['./view-bill.component.css']
+  selector: 'app-bill-photo',
+  templateUrl: './bill-photo.component.html',
+  styleUrls: ['./bill-photo.component.css']
 })
-export class ViewBillComponent implements OnInit {
-  /*
-  username = undefined;
-  BillName = '';
-  BillDescription = '';
-  BillAmount: string = undefined;
-  BillEnum: any = undefined;
-  BillHasImage: boolean = undefined;
-  BillIdentifier: string = undefined;
-  BillImage: any = undefined;
-  BillDate: any = undefined;
-  MappedImageName = undefined;
-  ActualImageName = undefined;
-  imageToShow = undefined;
-  canShowImage = false;
-  base64Data = undefined;
-  */
+export class BillPhotoComponent implements OnInit {
+
   username = this.Globals.GetUsername();
   @Input() MappedImageName = undefined;
   @Input() ActualImageName = undefined;
@@ -51,7 +35,7 @@ export class ViewBillComponent implements OnInit {
 
   constructor(private http: HttpClient, private domSanitizer: DomSanitizer,
               private Globals: GlobalConfigsService,
-              private dialogRef: MatDialogRef<ViewBillComponent>) { }
+              private dialogRef: MatDialogRef<BillPhotoComponent>) { }
 
    receiveImage(URL: string, Payload: any) {
     return this.http.post<ReturnImage>(URL, Payload);
@@ -70,12 +54,5 @@ export class ViewBillComponent implements OnInit {
   CloseDialog() {
     this.dialogRef.close();
   }
-
-  ChangeMode() {
-    if (this.MappedImageName !== 'False') {
-      this.IsShowingSharing = ! this.IsShowingSharing;
-    }
-  }
-
 
 }

@@ -58,7 +58,6 @@ export class LineChartComponent implements OnInit {
       currentDate = this.addDays(currentDate, TimelineDictionary[timeline]);
     }
     DateArray.push([endDate, 0]);
-
     // now iterate through the data
     if ( Mode === 'Personal') {
       for (const bill of Adata.Data) {
@@ -66,13 +65,25 @@ export class LineChartComponent implements OnInit {
         let middle = false;
         let value = 0;
         let date: Date;
-        for ( let i = 0; i <= DateArray.length - 1; i += 1) {
-          if ( new Date(bill.Date) === DateArray[i][0] ) {
+        for ( let i = 0; i <= DateArray.length - 2; i += 1) {
+          if ( (new Date(bill.Date)).getTime() < (DateArray[0][0]).getTime() ) {
+            positionUnderConsideration = 0;
+            value = parseInt(bill.Amount , 10);
+            date = new Date(bill.Date);
+            break;
+          } else if ( (new Date(bill.Date)).getTime() >= (DateArray[DateArray.length - 1 ][0]).getTime() ) {
+            positionUnderConsideration = DateArray.length - 1 ;
+            middle = true;
+            value = parseInt(bill.Amount , 10);
+            date = new Date(bill.Date);
+            break;
+          } else if ( (new Date(bill.Date)).getTime() === (DateArray[i][0]).getTime() ) {
             positionUnderConsideration = i;
             value = parseInt(bill.Amount , 10);
             date = new Date(bill.Date);
             break;
-          } else if ( new Date(bill.Date) > DateArray[i][0] && new Date(bill.Date) < DateArray[i + 1][0] ) {
+          // tslint:disable-next-line:max-line-length
+          } else if ( (new Date(bill.Date)).getTime() > (DateArray[i][0]).getTime() && (new Date(bill.Date)).getTime() < (DateArray[i + 1][0]).getTime() ) {
             positionUnderConsideration = i;
             middle = true;
             value = parseInt(bill.Amount , 10);
