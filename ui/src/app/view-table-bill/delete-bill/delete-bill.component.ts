@@ -36,9 +36,7 @@ export class DeleteBillComponent implements OnInit {
     if (r === true) {
       this.DeleteBillFromThisComponent();
       // window.location.reload();
-      this.DataChanged = true;
-      this.dialogRef.close({dataChanged : this.DataChanged});
-    } else {
+      } else {
       this.dialogRef.close({dataChanged : this.DataChanged});
     }
   }
@@ -55,7 +53,10 @@ export class DeleteBillComponent implements OnInit {
 
     // console.log('Deleting the entry :', QueryPayload);
     this.http.delete(endpoint, options).subscribe(data => {
-      window.location.reload();
+      this.DataChanged = true;
+      this.dialogRef.close({dataChanged : this.DataChanged});
+    }, err => {
+      this.dialogRef.close({dataChanged : this.DataChanged});
     });
   }
 

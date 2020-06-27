@@ -8,10 +8,15 @@ import { GlobalConfigsService } from '../global-configs.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  LogChange = 0;
   constructor(private Globals: GlobalConfigsService, private http: HttpClient) { }
 
   ngOnInit() {
+  }
+
+  ChangeLogStatus() {
+    // tslint:disable-next-line:no-bitwise
+    this.LogChange ^= 1;
   }
 
 }

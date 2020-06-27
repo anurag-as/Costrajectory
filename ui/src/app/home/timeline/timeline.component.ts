@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { GlobalConfigsService } from '../../global-configs.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Key } from 'protractor';
@@ -12,7 +12,8 @@ export class TimelineComponent implements OnInit {
   numbers = Array(50).fill(0).map((x, i) => i);
   InitialState = 0;
   LogData: any = undefined;
-  state = 0;
+  state = 1;
+  @Input() ShouldLogsBeChanged;
   @ViewChild('Timeline', { read: ElementRef, static: false }) Timeline: ElementRef;
 
   public scrollRight(): void {
@@ -28,13 +29,21 @@ export class TimelineComponent implements OnInit {
   constructor(private Globals: GlobalConfigsService, private http: HttpClient) { }
 
   ngOnInit() {
+    // tslint:disable-next-line:no-bitwise
+    this.state ^= 1;
     this.GetLogs(this.Globals.GetUserName).subscribe(data => {
       this.LogData = data.body;
       // this.LogData.reverse();
+      console.log('LOG DATA : ', this.LogData);
       this.LogData = this.PrepareLogData(this.LogData);
     }, err => {
       this.LogData = undefined;
     });
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnChanges(chg) {
+    this.ngOnInit();
   }
 
   PrepareLogData(LogData) {
@@ -70,6 +79,12 @@ export class TimelineComponent implements OnInit {
           break;
 
         case 5:
+          const splitData1 = data.split(' ');
+          const right1 =  splitData1.slice(4, splitData1.length).join(' ');
+          const left1 = splitData1.slice(0, splitData1.length - 1).join(' ');
+          FinalData.push(['Group Settlement', right1,  title , this.GetColor( element, RandomNumbersMapper) , log[0], this.state]);
+          break;
+
         case 6:
         case 7:
         case 8:
@@ -103,6 +118,7 @@ export class TimelineComponent implements OnInit {
     return this.http.get(endpoint, {
         params: {
             user_name : UserName,
+            limit: '100'
         },
         observe: 'response'
       });
