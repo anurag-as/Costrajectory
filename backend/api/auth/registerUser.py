@@ -31,7 +31,7 @@ def registerUser():
 
             message = "Welcome to Costrajectory, our beautiful chaos! You are in for an exhilarating journey with us!"
             # adding transaction to logs
-            insert_into_recent_table(connection(), username, presentTime, "Registered Profile", message)
+            insert_into_recent_table(connection(), username, presentTime, "2:Registered Profile", message)
 
             # adding entry to username alias table
             alias = get_alias(username)

@@ -27,7 +27,7 @@ def group_status_update():
         message = "You just deleted the group " + group_title
         message_description = "Hope it's purpose served you well!"
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Deleted Group" + group_title, message +
+        insert_into_recent_table(connection(), user_name, str(time()), "10:Deleted Group " + group_title, message +
                                  message_description)
 
         return jsonify(True)

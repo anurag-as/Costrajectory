@@ -38,7 +38,7 @@ def exit_group():
 
         message = "You left the group " + group_title + ". Why did you leave it? :("
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Exited group" + group_title, message)
+        insert_into_recent_table(connection(), user_name, str(time()), "13:Exited group " + group_title, message)
         return jsonify(True)
     except:
         return jsonify(False)

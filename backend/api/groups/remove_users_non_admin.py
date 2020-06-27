@@ -34,7 +34,7 @@ def remove_users_from_group():
         message = "The users were waiting for the admins approval to be removed from the group " + group_title
         message_description = " The users are " + str(users)
         insert_into_recent_table(connection(), user_name, str(time()),
-                                 "Awaiting approval for removed users from group" + group_title,
+                                 "16:Awaiting approval for removed users from group " + group_title,
                                  message + message_description)
 
         return jsonify(True)
