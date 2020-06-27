@@ -66,7 +66,7 @@ def add_users_to_group():
         if response['success']:
             message = "You added a few users to the group " + group_title + ". The users are: "
             message_description = response['success']
-            insert_into_recent_table(connection(), user_name, str(time()), "Added users to group" + group_title,
+            insert_into_recent_table(connection(), user_name, str(time()), "6:Added users to group " + group_title,
                                      message + str(message_description))
 
         return jsonify(response)

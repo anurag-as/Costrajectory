@@ -19,7 +19,7 @@ def api_go_premium():
 
         message = "Now, we're talking, you are premium, way to go!"
         # adding transaction to logs
-        insert_into_recent_table(connection(), username, str(time()), "Premium User", message)
+        insert_into_recent_table(connection(), username, str(time()), "1:Premium User", message)
 
         bool_is_user_premium = is_user_premium(connection(), username)
         if bool_is_user_premium == 'False':

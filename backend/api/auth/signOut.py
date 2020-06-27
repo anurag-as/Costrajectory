@@ -24,7 +24,7 @@ def signout():
 
         message = "There are no goodbyes for us, wherever you are, you data will stay safe in our heart!"
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Signed Out", message)
+        insert_into_recent_table(connection(), user_name, str(time()), "4:Signed Out", message)
 
         user_data_path = path.join(getcwd(), "temp", "." + user_name)
         if path.exists(user_data_path):

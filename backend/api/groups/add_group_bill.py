@@ -112,7 +112,7 @@ def group_bill():
                                'Group': group_title
                                }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Added Group Transaction" + title,
+        insert_into_recent_table(connection(), user_name, str(time()), "5:Added Group Transaction " + title,
                                  message + str(message_description))
 
         # refresh the token, needs to be added to other API Calls

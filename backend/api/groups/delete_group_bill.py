@@ -30,7 +30,7 @@ def deleteTransaction():
         message = "You deleted this group bill " + title
         message_description = str(bill_data)
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Deleted group bill" + title,
+        insert_into_recent_table(connection(), user_name, str(time()), "11:Deleted group bill " + title,
                                  message + message_description)
 
         delete_from_group_bills_table(connection(), bill_id)

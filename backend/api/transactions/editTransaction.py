@@ -64,7 +64,7 @@ def edit_transaction():
                                'Category': category,
                                }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Edit Transaction" + title,
+        insert_into_recent_table(connection(), user_name, str(time()), "19:Edit Transaction " + title,
                                  message + str(message_description))
 
         return jsonify({'editStatus': True})

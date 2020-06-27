@@ -40,7 +40,7 @@ def create_sharing_group():
 
         message = "You created a new group, enjoy! " + group_title
         # adding transaction to logs
-        insert_into_recent_table(connection(), group_admin, str(time()), "Created Group" + group_title, message)
+        insert_into_recent_table(connection(), group_admin, str(time()), "9:Created Group " + group_title, message)
 
         return jsonify(True)
     except:

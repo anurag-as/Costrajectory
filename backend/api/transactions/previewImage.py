@@ -32,13 +32,13 @@ def previewImage():
         original_image_name = request.json['original_name']
 
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Previewed Bill", original_image_name)
+        insert_into_recent_table(connection(), user_name, str(time()), "20:Previewed Bill", original_image_name)
 
     except KeyError:
         original_image_name = ""
         bill_title = request.json['bill_title']
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Previewed Group Bill", bill_title)
+        insert_into_recent_table(connection(), user_name, str(time()), "21:Previewed Group Bill", bill_title)
 
     refresh_token(connection(), user_name)
     try:

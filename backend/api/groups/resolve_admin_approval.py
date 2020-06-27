@@ -34,7 +34,7 @@ def add_users_to_group():
         message = "You as a group admin of the group " + group_title + " rejected the claim to remove the users"
         message_description = "The users are " + str(users)
         insert_into_recent_table(connection(), group_admin, str(time()),
-                                 "Rejected claim to remove users from group" + group_title, message+message_description)
+                                 "17:Rejected claim to remove users from group" + group_title, message+message_description)
 
         return jsonify(True)
     except:
