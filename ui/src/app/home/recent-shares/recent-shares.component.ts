@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { GlobalConfigsService } from '../../global-configs.service';
 import {HttpHeaders} from '@angular/common/http';
@@ -20,6 +20,8 @@ interface Status {
 export class RecentSharesComponent implements OnInit {
   @Input() SharesPayload: any;
   @Input() Username: string;
+  @Output() RefreshLogs = new EventEmitter();
+
   /* COmbinations allowed currently -->
     1. 2 settlement, 2 shares
     2. 6 settlements
@@ -133,6 +135,7 @@ export class RecentSharesComponent implements OnInit {
         this.CreateCOntentFromPayload();
         this.RandomSettlementSelector();
         this.PrepareLists();
+        this.RefreshLogs.emit();
         }, err => {
         this.SharesPayload = [];
         });

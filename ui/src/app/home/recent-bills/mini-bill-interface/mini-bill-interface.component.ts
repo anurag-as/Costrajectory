@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ChangeBillComponent } from '../../../view-table-bill/change-bill/change-bill.component';
 import { ViewBillComponent } from '../../../view-table-bill/view-bill/view-bill.component';
@@ -26,6 +26,7 @@ export class MiniBillInterfaceComponent implements OnInit {
   @Input() BillDate: any = undefined;
   @Input() BillId: any = undefined;
   @Input() BillCategory: any = undefined;
+  @Output() refreshCopy = new EventEmitter();
   ViewImage = false;
 
   constructor(public dialog: MatDialog, private Globals: GlobalConfigsService, private http: HttpClient) { }
@@ -49,7 +50,9 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillCategory = this.BillCategory;
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      if ( result.dataChanged ) {
+        this.refreshCopy.emit();
+      }
     });
   }
 
@@ -68,7 +71,9 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
     dialogRef.componentInstance.BillCategory = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      if ( result.dataChanged ) {
+        this.refreshCopy.emit();
+      }
     });
   }
 
@@ -87,7 +92,6 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillId = this.BillId;
     dialogRef.componentInstance.category = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
     });
   }
 
@@ -105,7 +109,9 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      if ( result.dataChanged ) {
+        this.refreshCopy.emit();
+      }
     });
   }
 
@@ -124,7 +130,6 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillId = this.BillId;
     dialogRef.componentInstance.category = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
     });
   }
 

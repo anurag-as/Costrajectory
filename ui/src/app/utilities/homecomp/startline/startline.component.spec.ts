@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DotlineComponent } from './dotline.component';
+import { StartlineComponent } from './startline.component';
 
-describe('DotlineComponent', () => {
-  let component: DotlineComponent;
-  let fixture: ComponentFixture<DotlineComponent>;
+describe('StartlineComponent', () => {
+  let component: StartlineComponent;
+  let fixture: ComponentFixture<StartlineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DotlineComponent ]
+      declarations: [ StartlineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DotlineComponent);
+    fixture = TestBed.createComponent(StartlineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
