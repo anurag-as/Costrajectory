@@ -72,6 +72,9 @@ export class TimelineComponent implements OnInit {
         case 1:
         case 2:
         case 3:
+          // FinalData.push(['Profile Updated', '',  title , this.GetColor( element, RandomNumbersMapper) , log[0], this.state]);
+          // break;
+
         case 4:
         case 14:
         case 20:
