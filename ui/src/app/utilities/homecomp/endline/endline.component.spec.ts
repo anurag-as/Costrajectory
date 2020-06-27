@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InfoRectUpComponent } from './info-rect-up.component';
+import { EndlineComponent } from './endline.component';
 
-describe('InfoRectUpComponent', () => {
-  let component: InfoRectUpComponent;
-  let fixture: ComponentFixture<InfoRectUpComponent>;
+describe('EndlineComponent', () => {
+  let component: EndlineComponent;
+  let fixture: ComponentFixture<EndlineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoRectUpComponent ]
+      declarations: [ EndlineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InfoRectUpComponent);
+    fixture = TestBed.createComponent(EndlineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

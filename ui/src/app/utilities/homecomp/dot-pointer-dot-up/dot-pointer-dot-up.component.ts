@@ -8,6 +8,10 @@ import { Input } from '@angular/core';
 })
 export class DotPointerDotUPComponent implements OnInit {
   @Input() BubbleColor;
+  @Input() line1 = '';
+  @Input() line2 = '';
+  @Input() Descriptor = '';
+  @Input() Date;
   constructor() { }
 
   ngOnInit() {

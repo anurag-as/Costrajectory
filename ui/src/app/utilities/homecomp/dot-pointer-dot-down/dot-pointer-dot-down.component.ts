@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dot-pointer-dot-down',
@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dot-pointer-dot-down.component.css']
 })
 export class DotPointerDotDOWNComponent implements OnInit {
-
+  @Input() BubbleColor;
+  @Input() line1 = '';
+  @Input() line2 = '';
+  @Input() Descriptor = '';
+  @Input() Date;
   constructor() { }
 
   ngOnInit() {
