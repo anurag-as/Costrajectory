@@ -24,7 +24,11 @@ export class DiffChartComponent implements OnInit {
   ngOnChanges(chg) {
     // console.log('LINE ', this.AnalyticData);
     google.charts.load('current', {packages: ['bar']});
-    google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    try {
+      google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    } catch (error) {
+      return;
+    }
   }
 
   addDays(date, days) {
@@ -85,7 +89,7 @@ export class DiffChartComponent implements OnInit {
     for ( let i = 0; i <= DateArray.length - 1; i += 1) {
       DateArray[i][0] = (DateArray[i][0]).toLocaleDateString('en-US');
     }
-    console.log('ADATA : ', DateArray, Adata);
+    // console.log('ADATA : ', DateArray, Adata);
 
     return(DateArray);
     }

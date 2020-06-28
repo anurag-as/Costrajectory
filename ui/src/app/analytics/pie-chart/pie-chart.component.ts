@@ -21,7 +21,11 @@ export class PieChartComponent implements OnInit {
   ngOnChanges(chg) {
     // console.log('PIE CHART CHANGE : ', this.Category, this.AnalyticData, this.Mode);
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode));
+    try {
+      google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode));
+    } catch (error) {
+      return;
+    }
   }
 
   uniqueElements(ArrayOfData) {

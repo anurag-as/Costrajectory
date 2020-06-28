@@ -29,7 +29,7 @@ export class RecentBillsComponent implements OnInit {
   ReloadData() {
     this.BillEntries = [];
     this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
-      console.log('MAIN DATA : ', data);
+      // console.log('MAIN DATA : ', data);
       this.DataLoading = 'Success';
       this.FormData = data;
       if (typeof(data.TableEntries) === 'undefined' ) {
@@ -64,7 +64,7 @@ export class RecentBillsComponent implements OnInit {
           ]);
         }
       }
-      console.log('BILLS : ', this.BillEntries);
+      // console.log('BILLS : ', this.BillEntries);
       if (this.BillEntries.length > 4) {
         this.BillEntries = this.BillEntries.slice(0, 4);
       }

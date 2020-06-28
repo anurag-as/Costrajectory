@@ -50,6 +50,9 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillCategory = this.BillCategory;
 
     dialogRef.afterClosed().subscribe(result => {
+      if ( result === undefined ) {
+        return;
+      }
       if ( result.dataChanged ) {
         this.refreshCopy.emit();
       }
@@ -71,6 +74,9 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
     dialogRef.componentInstance.BillCategory = this.BillCategory;
     dialogRef.afterClosed().subscribe(result => {
+      if ( result === undefined ) {
+        return;
+      }
       if ( result.dataChanged ) {
         this.refreshCopy.emit();
       }
@@ -109,6 +115,9 @@ export class MiniBillInterfaceComponent implements OnInit {
     dialogRef.componentInstance.BillID = this.BillId;
 
     dialogRef.afterClosed().subscribe(result => {
+      if ( result === undefined ) {
+        return;
+      }
       if ( result.dataChanged ) {
         this.refreshCopy.emit();
       }
