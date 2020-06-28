@@ -74,7 +74,7 @@ def profile_details():
             message = "You just updated your profile details! "
 
             # adding transaction to logs
-            insert_into_recent_table(connection(), user_name, str(time()), "Profile Details Updated",
+            insert_into_recent_table(connection(), user_name, str(time()), "23:Profile Details Updated",
                                      message + str(description))
 
             if not query_profile_details(connection(), user_name):  # User entry does not exist

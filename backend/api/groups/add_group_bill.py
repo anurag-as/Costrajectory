@@ -112,8 +112,12 @@ def group_bill():
                                'Group': group_title
                                }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "5:Added Group Transaction " + title,
-                                 message + str(message_description))
+        if category == 'settlement':
+            insert_into_recent_table(connection(), user_name, str(time()), "24:Settled amount in group " + group_title,
+                                     message + str(message_description))
+        else:
+            insert_into_recent_table(connection(), user_name, str(time()), "5:Added Group Transaction " + title,
+                                     message + str(message_description))
 
         # refresh the token, needs to be added to other API Calls
         refresh_token(connection(), request.form['username'])
