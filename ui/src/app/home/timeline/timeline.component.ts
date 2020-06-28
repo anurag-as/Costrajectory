@@ -34,7 +34,7 @@ export class TimelineComponent implements OnInit {
     this.GetLogs(this.Globals.GetUserName).subscribe(data => {
       this.LogData = data.body;
       // this.LogData.reverse();
-      console.log('LOG DATA : ', this.LogData);
+      // console.log('LOG DATA : ', this.LogData);
       this.LogData = this.PrepareLogData(this.LogData);
     }, err => {
       this.LogData = undefined;
@@ -60,7 +60,7 @@ export class TimelineComponent implements OnInit {
       const RandomColor = '#' + Math.random().toString(16).substr(2, 6);
       RandomNumbersMapper.push( { key : element, color : RandomColor});
     }
-    console.log('RANDOM COLORS : ', RandomNumbersMapper, KeySet);
+    // console.log('RANDOM COLORS : ', RandomNumbersMapper, KeySet);
     // Add a different Handling for each
     const FinalData = [];
     for ( const log of LogData) {
@@ -83,9 +83,9 @@ export class TimelineComponent implements OnInit {
 
         case 5:
           const splitData1 = data.split(' ');
-          const right1 =  splitData1.slice(4, splitData1.length).join(' ');
+          const right1 =  splitData1.slice(3, splitData1.length).join(' ');
           const left1 = splitData1.slice(0, splitData1.length - 1).join(' ');
-          FinalData.push(['Group Settlement', right1,  title , this.GetColor( element, RandomNumbersMapper) , log[0], this.state]);
+          FinalData.push(['Group Bill Added', right1,  title , this.GetColor( element, RandomNumbersMapper) , log[0], this.state]);
           break;
 
         case 6:
@@ -108,11 +108,18 @@ export class TimelineComponent implements OnInit {
           const left = splitData.slice(0, splitData.length - 1).join(' ');
           FinalData.push([left, right,  title , this.GetColor( element, RandomNumbersMapper) , log[0], this.state]);
           break;
+
+        case 24:
+          const splitData3 = data.split(' ');
+          const right3 =  splitData3.slice(4, splitData3.length).join(' ');
+          const left3 = splitData3.slice(0, splitData3.length - 1).join(' ');
+          FinalData.push(['Group Settlement', right3,  title , this.GetColor( element, RandomNumbersMapper) , log[0], this.state]);
+          break;
       }
       // tslint:disable-next-line:no-bitwise
       this.state ^= 1;
     }
-    console.log('PREPARED DATA : ', FinalData);
+    // console.log('PREPARED DATA : ', FinalData);
     return FinalData;
   }
 

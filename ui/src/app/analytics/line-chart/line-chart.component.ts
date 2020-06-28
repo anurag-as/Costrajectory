@@ -24,7 +24,11 @@ export class LineChartComponent implements OnInit {
   ngOnChanges(chg) {
     // console.log('LINE ', this.AnalyticData);
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    try {
+      google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    } catch (error) {
+      return;
+    }
   }
 
   addDays(date, days) {

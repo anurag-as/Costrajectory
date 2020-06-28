@@ -97,7 +97,6 @@ import { DeleteAddedBillComponent } from './BillInterface/delete-added-bill/dele
 import { CloneAddedBillComponent } from './BillInterface/clone-added-bill/clone-added-bill.component';
 import { EditAddedBillComponent } from './BillInterface/edit-added-bill/edit-added-bill.component';
 import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-added-bill.component';
-import { TestComponent } from './analytics/test/test.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { TimeSliderComponent } from './analytics/time-slider/time-slider.component';
 import { PieChartComponent } from './analytics/pie-chart/pie-chart.component';
@@ -184,7 +183,6 @@ import { EndlineComponent } from './utilities/homecomp/endline/endline.component
     CloneAddedBillComponent,
     EditAddedBillComponent,
     InfoAddedBillComponent,
-    TestComponent,
     TimeSliderComponent,
     PieChartComponent,
     PredictorChartComponent,

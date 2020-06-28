@@ -16,14 +16,22 @@ export class PredictorChartComponent implements OnInit {
 
   ngOnInit() {
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChart);
+    try {
+      google.charts.setOnLoadCallback(this.drawChart);
+    } catch (error) {
+      return;
+    }
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges(chg) {
     // console.log('LINE ', this.AnalyticData);
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    try {
+      google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    } catch (error) {
+      return;
+    }
   }
 
   addDays(date, days) {
@@ -128,6 +136,7 @@ export class PredictorChartComponent implements OnInit {
     }
 
   drawChart(AnalyticData, Mode, leftDate, RightDate, timeline) {
+
        /* const data = google.visualization.arrayToDataTable([
          ['Age', 'Weight'],
          [ 8,      12],
@@ -137,6 +146,9 @@ export class PredictorChartComponent implements OnInit {
          [ 3,      3.5],
          [ 6.5,    7]
        ]); */
+       if ( this === undefined) {
+        return;
+      }
        const data = new google.visualization.DataTable();
        data.addColumn('date', 'Date');
        data.addColumn('number', 'Spend');
