@@ -18,9 +18,8 @@ def recentLogs():
     """
     user_name = request.args.get('user_name')
     refresh_token(connection(), user_name)
-    try:
-        limit_transactions = request.args.get['limit']
-    except TypeError:
+    limit_transactions = request.args.get('limit')
+    if limit_transactions is None:
         limit_transactions = 10  # limit of the transaction to be retrieved
     try:
         transactions = get_recent_logs(connection(), user_name, limit_transactions)
