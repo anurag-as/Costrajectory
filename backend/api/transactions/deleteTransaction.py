@@ -27,7 +27,7 @@ def delete_transaction():
         # adding transaction to logs
         bill_data = query_particular_transaction(connection(), uid)
         message = "You just deleted this transaction "
-        insert_into_recent_table(connection(), user_name, str(time()), "Deleted Transaction" + title,
+        insert_into_recent_table(connection(), user_name, str(time()), "18:Deleted Transaction " + title,
                                  message + str(bill_data))
 
         message = delete_from_image_table(connection(), uid, user_name)

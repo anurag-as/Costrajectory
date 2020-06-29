@@ -42,7 +42,7 @@ def group_status_update():
             message = "You just changed your status in the group " + group_title + " to " + status + ". Hope you are " \
                                                                                                      "well served! "
             # adding transaction to logs
-            insert_into_recent_table(connection(), user_name, str(time()), "Changed group status of " + group_title,
+            insert_into_recent_table(connection(), user_name, str(time()), "14:Changed group status of " + group_title,
                                      message)
         return jsonify(True)
     except:

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DotlineComponent } from './dotline.component';
+import { BillphotoComponent } from './billphoto.component';
 
-describe('DotlineComponent', () => {
-  let component: DotlineComponent;
-  let fixture: ComponentFixture<DotlineComponent>;
+describe('BillphotoComponent', () => {
+  let component: BillphotoComponent;
+  let fixture: ComponentFixture<BillphotoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DotlineComponent ]
+      declarations: [ BillphotoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DotlineComponent);
+    fixture = TestBed.createComponent(BillphotoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

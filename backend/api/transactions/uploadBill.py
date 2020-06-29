@@ -90,7 +90,7 @@ def upload():
                                }
         message = "You added a new bill "
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Added Transaction" + title,
+        insert_into_recent_table(connection(), user_name, str(time()), "22:Added Transaction " + title,
                                  message + str(message_description))
 
         # refresh the token, needs to be added to other API Calls

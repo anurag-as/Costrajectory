@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InfoRectUpComponent } from './info-rect-up.component';
+import { BillPhotoComponent } from './bill-photo.component';
 
-describe('InfoRectUpComponent', () => {
-  let component: InfoRectUpComponent;
-  let fixture: ComponentFixture<InfoRectUpComponent>;
+describe('BillPhotoComponent', () => {
+  let component: BillPhotoComponent;
+  let fixture: ComponentFixture<BillPhotoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoRectUpComponent ]
+      declarations: [ BillPhotoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InfoRectUpComponent);
+    fixture = TestBed.createComponent(BillPhotoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

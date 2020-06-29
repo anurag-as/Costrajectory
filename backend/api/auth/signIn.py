@@ -31,7 +31,7 @@ def signInUser():
             message = """You just signed in, is it really you? Stay organized and on track,
                       If not! change your password immediately. For everyone minute spent in organizing,
                       an hour is earned!"""
-            insert_into_recent_table(connection(), username, str(time()), "Signed In", message)
+            insert_into_recent_table(connection(), username, str(time()), "3:Signed In", message)
 
         else:
             token = False

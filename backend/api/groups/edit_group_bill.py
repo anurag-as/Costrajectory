@@ -72,7 +72,7 @@ def edit_group_bill_api():
                                'Group': title
                                }
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Edit Group Transaction" + title,
+        insert_into_recent_table(connection(), user_name, str(time()), "12:Edit Group Bill " + title,
                                  message + str(message_description))
 
         return jsonify({'editStatus': True})

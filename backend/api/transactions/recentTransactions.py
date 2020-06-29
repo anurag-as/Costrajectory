@@ -21,7 +21,7 @@ def recentTransactions():
     try:
         limit_transactions = request.json['limit']
     except KeyError:
-        limit_transactions = 100  # limit of the transaction to be retrieved
+        limit_transactions = 1000  # limit of the transaction to be retrieved
     try:
         transactions = query_recent_transaction(connection(), user_name, limit_transactions)
         if not transactions:

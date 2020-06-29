@@ -90,10 +90,9 @@
                 </div>
                 <div class="col-md-4 mb-3">
                 <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required="" name="state" [(ngModel)]="state" >
-                    <option value="">Choose...</option>
-                    <option *ngFor="let state of stateInfo; let j = index" value="{{state}}">{{state.StateName}}</option>
-                </select>
+                
+                <input class="custom-select d-block w-100" id="state" name="state" [(ngModel)]="state" >
+                    
                 <div class="invalid-feedback">
                     Please provide a valid state.
                 </div>

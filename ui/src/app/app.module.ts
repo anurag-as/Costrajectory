@@ -88,12 +88,6 @@ import { RecentBillsComponent } from './home/recent-bills/recent-bills.component
 import { RecentSharesComponent } from './home/recent-shares/recent-shares.component';
 import { DotPointerComponent } from './utilities/dot-pointer/dot-pointer.component';
 import { LineComponent } from './utilities/line/line.component';
-import { DotlineComponent } from './utilities/homecomp/dotline/dotline.component';
-import { DotlineInfoComponent } from './utilities/homecomp/dotline-info/dotline-info.component';
-import { DotlineInfoDownComponent } from './utilities/homecomp/dotline-info-down/dotline-info-down.component';
-import { DotlineDownComponent } from './utilities/homecomp/dotline-down/dotline-down.component';
-import { InfoRectUpComponent } from './utilities/homecomp/info-rect-up/info-rect-up.component';
-import { InfoRectDownComponent } from './utilities/homecomp/info-rect-down/info-rect-down.component';
 import { DotPointerDotUPComponent } from './utilities/homecomp/dot-pointer-dot-up/dot-pointer-dot-up.component';
 import { DotPointerDotDOWNComponent } from './utilities/homecomp/dot-pointer-dot-down/dot-pointer-dot-down.component';
 import { MiniOweInterfaceComponent } from './home/recent-shares/mini-owe-interface/mini-owe-interface.component';
@@ -103,7 +97,6 @@ import { DeleteAddedBillComponent } from './BillInterface/delete-added-bill/dele
 import { CloneAddedBillComponent } from './BillInterface/clone-added-bill/clone-added-bill.component';
 import { EditAddedBillComponent } from './BillInterface/edit-added-bill/edit-added-bill.component';
 import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-added-bill.component';
-import { TestComponent } from './analytics/test/test.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { TimeSliderComponent } from './analytics/time-slider/time-slider.component';
 import { PieChartComponent } from './analytics/pie-chart/pie-chart.component';
@@ -114,6 +107,10 @@ import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.servic
 import { LoadersComponent } from './loaders/loaders.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BillPhotoComponent } from './view-table-bill/bill-photo/bill-photo.component';
+import { BillphotoComponent } from './costsharing/group-well/indivisual-bill/billphoto/billphoto.component';
+import { StartlineComponent } from './utilities/homecomp/startline/startline.component';
+import { EndlineComponent } from './utilities/homecomp/endline/endline.component';
 
 
 @NgModule({
@@ -177,12 +174,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     RecentSharesComponent,
     DotPointerComponent,
     LineComponent,
-    DotlineComponent,
-    DotlineInfoComponent,
-    DotlineInfoDownComponent,
-    DotlineDownComponent,
-    InfoRectUpComponent,
-    InfoRectDownComponent,
     DotPointerDotUPComponent,
     DotPointerDotDOWNComponent,
     MiniOweInterfaceComponent,
@@ -192,13 +183,16 @@ import { MatNativeDateModule } from '@angular/material/core';
     CloneAddedBillComponent,
     EditAddedBillComponent,
     InfoAddedBillComponent,
-    TestComponent,
     TimeSliderComponent,
     PieChartComponent,
     PredictorChartComponent,
     DiffChartComponent,
     LineChartComponent,
     LoadersComponent,
+    BillPhotoComponent,
+    BillphotoComponent,
+    StartlineComponent,
+    EndlineComponent,
   ],
   imports: [
     BrowserModule,
@@ -264,7 +258,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     DeleteAddedBillComponent,
     CloneAddedBillComponent,
     EditAddedBillComponent,
-    InfoAddedBillComponent
+    InfoAddedBillComponent,
+    BillPhotoComponent,
+    BillphotoComponent
     ],
 })
 export class AppModule { }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DotlineDownComponent } from './dotline-down.component';
+import { EndlineComponent } from './endline.component';
 
-describe('DotlineDownComponent', () => {
-  let component: DotlineDownComponent;
-  let fixture: ComponentFixture<DotlineDownComponent>;
+describe('EndlineComponent', () => {
+  let component: EndlineComponent;
+  let fixture: ComponentFixture<EndlineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DotlineDownComponent ]
+      declarations: [ EndlineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DotlineDownComponent);
+    fixture = TestBed.createComponent(EndlineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

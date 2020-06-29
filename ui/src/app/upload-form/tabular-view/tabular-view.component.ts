@@ -33,6 +33,50 @@ export class TabularViewComponent implements OnInit {
   Date_r_Personal: Date;
   constructor( private DataGetter: Getdata, public globals: GlobalConfigsService) { }
 
+  RefreshData() {
+    this.BillEntries = [];
+    this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
+      // console.log('MAIN DATA : ', data);
+      this.DataLoading = 'Success';
+      if (typeof(data.TableEntries) === 'undefined' ) {
+        return;
+      }
+      this.FormData = data;
+      this.GetDataRange();
+      for ( const entry of data.TableEntries) {
+        if (entry.Identifier !== 'False') {
+          this.BillEntries.push([
+            this.BillEntries.length + 1,
+            entry.Name,
+            entry.Description,
+            entry.Date,
+            entry.Amount,
+            true,
+            entry.Identifier,
+            data.ImageEntries[entry.Identifier],
+            entry.uid,
+            entry.category
+          ]);
+        } else {
+          this.BillEntries.push([
+            this.BillEntries.length + 1,
+            entry.Name,
+            entry.Description,
+            entry.Date,
+            entry.Amount,
+            false,
+            entry.Identifier,
+            undefined,
+            entry.uid,
+            entry.category
+          ]);
+        }
+      }
+    }, err => {
+      this.DataLoading = 'Fail';
+    });
+  }
+
   ngOnInit() {
     this.DataGetter.GetData( this.globals.GetUserName ).subscribe( data => {
       // console.log('MAIN DATA : ', data);

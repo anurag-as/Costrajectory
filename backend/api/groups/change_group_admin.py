@@ -25,7 +25,7 @@ def change_admin():
 
         # adding transaction to logs
         message = "Group: %s, New Admin: %s" % (group_title, group_admin)
-        insert_into_recent_table(connection(), group_admin, str(time()), "Changed group admin of " + group_title,
+        insert_into_recent_table(connection(), group_admin, str(time()), "8:Changed group admin of " + group_title,
                                  message)
         return jsonify(True)
     except:

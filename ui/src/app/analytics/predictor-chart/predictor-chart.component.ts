@@ -16,14 +16,22 @@ export class PredictorChartComponent implements OnInit {
 
   ngOnInit() {
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChart);
+    try {
+      google.charts.setOnLoadCallback(this.drawChart);
+    } catch (error) {
+      return;
+    }
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges(chg) {
     // console.log('LINE ', this.AnalyticData);
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    try {
+      google.charts.setOnLoadCallback(this.drawChart(this.AnalyticData, this.Mode, this.ldate, this.rdate, this.timeline));
+    } catch (error) {
+      return;
+    }
   }
 
   addDays(date, days) {
@@ -66,12 +74,24 @@ export class PredictorChartComponent implements OnInit {
         let value = 0;
         let date: Date;
         for ( let i = 0; i <= DateArray.length - 1; i += 1) {
-          if ( new Date(bill.Date) === DateArray[i][0] ) {
+          if ( (new Date(bill.Date)).getTime() < (DateArray[0][0]).getTime() ) {
+            positionUnderConsideration = 0;
+            value = parseInt(bill.Amount , 10);
+            date = new Date(bill.Date);
+            break;
+          } else if ( (new Date(bill.Date)).getTime() >= (DateArray[DateArray.length - 1 ][0]).getTime() ) {
+            positionUnderConsideration = DateArray.length - 1 ;
+            middle = true;
+            value = parseInt(bill.Amount , 10);
+            date = new Date(bill.Date);
+            break;
+          } else if ( (new Date(bill.Date)).getTime() === (DateArray[i][0]).getTime() ) {
             positionUnderConsideration = i;
             value = parseInt(bill.Amount , 10);
             date = new Date(bill.Date);
             break;
-          } else if ( new Date(bill.Date) > DateArray[i][0] && new Date(bill.Date) < DateArray[i + 1][0] ) {
+          // tslint:disable-next-line:max-line-length
+          } else if ( (new Date(bill.Date)).getTime() > (DateArray[i][0]).getTime() && (new Date(bill.Date)).getTime() < (DateArray[i + 1][0]).getTime() ) {
             positionUnderConsideration = i;
             middle = true;
             value = parseInt(bill.Amount , 10);
@@ -116,6 +136,7 @@ export class PredictorChartComponent implements OnInit {
     }
 
   drawChart(AnalyticData, Mode, leftDate, RightDate, timeline) {
+
        /* const data = google.visualization.arrayToDataTable([
          ['Age', 'Weight'],
          [ 8,      12],
@@ -125,6 +146,9 @@ export class PredictorChartComponent implements OnInit {
          [ 3,      3.5],
          [ 6.5,    7]
        ]); */
+       if ( this === undefined) {
+        return;
+      }
        const data = new google.visualization.DataTable();
        data.addColumn('date', 'Date');
        data.addColumn('number', 'Spend');

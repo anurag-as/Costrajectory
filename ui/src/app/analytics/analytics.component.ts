@@ -73,7 +73,7 @@ export class AnalyticsComponent implements OnInit {
   GetBills() {
     this.ReloadShares().subscribe(data => {
     this.SharesPayload = data.body;
-    console.log('GROUP DATA HOME: ', data.body);
+    // console.log('GROUP DATA HOME: ', data.body);
     this.GetPersonalBills();
     }, err => {
     this.SharesPayload = [];
@@ -181,10 +181,10 @@ export class AnalyticsComponent implements OnInit {
         PersonalData: this.BillEntries,
         GroupIdx: this.GroupIndex
       };
-      console.log('group index', this.GroupIndex);
+      // console.log('group index', this.GroupIndex);
       this.SharedDataCurrent = this.DataFilter.FilterData(FIlterParams);
     }
-    console.log('THINGS CHANGED: ', this.SharedDataCurrent, this.PersonalDataCurrent);
+    // console.log('THINGS CHANGED: ', this.SharedDataCurrent, this.PersonalDataCurrent);
   }
 
 }
