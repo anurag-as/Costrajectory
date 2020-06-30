@@ -1,0 +1,50 @@
+#payer {
+    top:25px;
+    position: relative;
+    display: inline-block;
+    padding-left: 10px;
+}
+
+#payee {
+    top:25px;
+    position: relative;
+    display: inline-block;
+    padding-left: 10px;
+}
+
+#Text {
+    top:25px;
+    position: relative;
+    display: inline-block;
+    padding-left: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+#SettleText {
+    top:50px;
+    position: relative;
+    padding-left: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color:sienna;
+}
+
+#SettleVal {
+    position: relative;
+    left: 90px;
+    top: 8px;
+    padding-left: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+    width: 30%;
+}
+
+#PostVal {
+    position: relative;
+    left: 90px;
+    top: 8px;
+    padding-left: 10px;
+    display: inline-block;
+}

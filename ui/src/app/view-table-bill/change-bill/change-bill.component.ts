@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import { GlobalConfigsService } from '../../global-configs.service';
 import {HttpClient} from '@angular/common/http';
 import { UploadService } from '../../upload-form/upload.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 interface ReturnImage {
   Image: any;
@@ -35,8 +36,8 @@ export class ChangeBillComponent implements OnInit {
   canShowImageUploaded = false;
   imageUploaded = false;
   imageSrc = undefined;
-
-  constructor(private http: HttpClient, private uploader: UploadService) { }
+  DataChanged = false;
+  constructor(private http: HttpClient, private uploader: UploadService, private dialogRef: MatDialogRef<ChangeBillComponent>) { }
 
   receiveImage(URL: string, Payload: any) {
     return this.http.post<ReturnImage>(URL, Payload);
@@ -56,7 +57,7 @@ export class ChangeBillComponent implements OnInit {
     this.getImage();
   }
 
-  private handleFileInput(files: FileList) {
+  public handleFileInput(files: FileList) {
     // console.log(this.fileToUpload);
     this.fileToUpload = files.item(0);
 
@@ -71,6 +72,10 @@ clearImage() {
   this.fileToUpload = null;
   this.BillHasImage = false;
   this.imageUploaded = false;
+}
+
+closeDialog() {
+    this.dialogRef.close();
 }
 
  dataURLtoFile(arr, filename) {
@@ -95,10 +100,13 @@ clearImage() {
       window.alert('USER QUOTA EXCEEDED, ADDING ONLY BILL');
      }
      this.uploading = 'ended success';
-     window.location.reload();
+     this.DataChanged = true;
+     this.dialogRef.close({dataChanged : this.DataChanged});
+     // window.location.reload();
      // window.alert('FILE UPLOADED SUCCESSFULLY');
      }, error => {
        this.uploading = 'ended fail';
+       this.dialogRef.close({dataChanged : this.DataChanged});
        // window.alert('PROBLEM WTH UPLOAD TRY AGAIN LATER');
      });
     }

@@ -1,56 +1,82 @@
-<div class="card-group">
-    <div class="card1">
-        <div class="card-body">
-            {{BillEnum}}
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            {{BillName}}
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            {{BillDescription}}
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            {{BillDate}}
-        </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-          {{BillCategory}}
-      </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body" title='Press to preview'>
-            {{BillAmount}}
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" aria-hidden="true"></span></button>   
-            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button>  
-            <!-- 
-            <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="openImage()" data-toggle="modal" data-target="#PreviewBill"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" aria-hidden="true"></span></button> 
-            -->
-            <button type="button" class="btn" title="Edit bill" style="background-color:transparent;margin-left: 3px;" (click)="EditBill()"><span class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></span></button>   
-            <!--
-            <button type="button" class="btn" title="Delete Bill" style="background-color:transparent;margin-left: 3px;" data-toggle="modal" data-target="#DeleteBill"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
-            -->
-            <button type="button" class="btn" title="Delete bill" style="background-color:transparent;margin-left: 3px;" (click)="DeleteBill()"><span class="fa fa-trash fa-2x" aria-hidden="true"></span></button>   
+<!-- <div class="cardHouse">
+  <div class="card-group">
+      <div class="card1">
+          <div class="card-body">
+              {{BillEnum}}
           </div>
+      </div>
+      <div class="cardx">
+          <div class="card-body">
+              {{BillName}}
+          </div>
+      </div>
+      <div class="cardx">
+          <div class="card-body">
+              {{BillDescription}}
+          </div>
+      </div>
+
+      <div class="cardx">
+          <div class="card-body">
+              {{BillDate}}
+          </div>
+      </div>
+
+      <div class="cardx">
+        <div class="card-body">
+            {{BillCategory}}
+        </div>
+      </div>
+
+      <div class="cardx">
+          <div class="card-body" title='Press to preview'>
+              {{BillAmount}}
+          </div>
+      </div>
+
+      <div class="cardxy">
+          <div class="card-body">
+              <button type="button" class="btn" title="Copy Bill" style="background-color:transparent;margin-left: 3px;" (click)="ChangeBill()"><span class="fa fa-clone fa-2x" style="color: black;" aria-hidden="true"></span></button>   
+              <button type="button" class="btn" title="Bill Preview" style="background-color:transparent;margin-left: 3px;" (click)="ViewBill()"  [disabled]="!BillHasImage"><span class="fa fa-camera fa-2x" style="color: blue;" aria-hidden="true"></span></button>  
+              <button type="button" class="btn" title="Edit bill" style="background-color:transparent;margin-left: 3px;" (click)="EditBill()"><span class="fa fa-pencil-square-o fa-2x" style="color: gold;" aria-hidden="true"></span></button>   
+              <button type="button" class="btn" title="Delete bill" style="background-color:transparent;margin-left: 3px;" (click)="DeleteBill()"><span class="fa fa-trash fa-2x" style="color: red;" aria-hidden="true"></span></button>   
+            </div>
+      </div>
+  </div>
+
+</div> -->
+
+ 
+<div class="card bg-light">
+  <nav class="navbar navbar-expand-sm" id="topHalf">
+      <a class="navbar-brand"> <b> {{BillName}} </b></a>
+      <span class="example-spacer"></span>
+      <a class="navbar-brand"> <b>Rs {{BillAmount}}</b></a>
+  </nav>
+  
+  <nav class="navbar navbar-expand-sm" id="BottomHalf">
+    <a class="navbar-brand"> {{BillDate}}</a>
+  </nav>
+  <nav class="navbar navbar-expand-sm" id="Description">
+    <a class="navbar-brand"> {{BillDescription}}</a>
+  </nav>
+  <nav class="navbar navbar-expand-sm" id="MiddleHalf">
+    <a class="navbar-brand"> {{BillCategory}}</a>
+    <span class="example-spacer"></span>
+    <div class="navbar-nav" id="buttonGroup">
+        <a class="nav-link" type='button'  (click)="ViewBill()" title="Bill info"><i style="color: rgb(102, 84, 2);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </a>
+        <a class="nav-link" type='button'  title="Copy Bill" (click)="ChangeBill()"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
+        <a class="nav-link" type='button'  title="View Bill" (click)="ViewBillPhoto()" *ngIf="BillHasImage == true"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
+        <a class="nav-link" type='button'  (click)="EditBill()" title="Edit Bill"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
+        <a class="nav-link" type='button'  (click)="DeleteBill()" title="Delete the Bill"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
     </div>
+</nav>
+  
 </div>
 
 
-  
+
+
   <!-- Procedure to DELETE THE BILL -->
   <div class="modal fade" id="DeleteBill" tabindex="-1" role="dialog" aria-labelledby="DeleteBill" aria-hidden="true">
     <div class="modal-dialog" role="document">

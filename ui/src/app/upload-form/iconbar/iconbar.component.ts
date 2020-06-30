@@ -22,7 +22,7 @@ export class IconbarComponent implements OnInit {
   usageQuota = undefined;
   maxQuota = undefined;
   color: ThemePalette = 'warn';
-  constructor(public dialog: MatDialog, private route: Router, private http: HttpClient, private GlobalService: GlobalConfigsService) {}
+  constructor(public dialog: MatDialog, private route: Router, private http: HttpClient, public GlobalService: GlobalConfigsService) {}
 
   getUsageQuota() {
     const endpoint = 'http://127.0.0.1:5000/analytics/usage';
@@ -60,9 +60,14 @@ export class IconbarComponent implements OnInit {
     this.route.navigate(['/analytics']);
   }
 
-  GoHome(): void {
+  BillHome(): void {
     this.route.navigate(['']);
   }
+
+  Home(): void {
+    this.route.navigate(['/Home']);
+  }
+
 
   CostSharing(): void {
     this.route.navigate(['CostSharing']);

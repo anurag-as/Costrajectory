@@ -1,0 +1,53 @@
+<div #Timeline style="position: relative; top:0px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+    <!-- 
+        UNIQUE ITEMS 
+        1 : premium_user
+        2 : Registered Profile
+        3 : Sign In
+        4 : Signed Out
+        5 : Added Group Transaction
+        6 : Add users to group
+        7 : Add users to group Non Admin
+        8 : Changed Group Admin
+        9 : Created Group
+        10: Deleted Group
+        11: Deleted Group Bill
+        12: Edited Group Bill
+        13: Exited Goup
+        14: Change Group Status
+        15: Remove Users from Group
+        16: Remove users non-admin
+        17: Reject clain to remove users
+        18: Deleted Transaction Personal
+        19: Edited Tranaction Personal
+        20: Previed bill
+        21: Previed group bill
+        22: Added Transaction personal
+    -->
+     <div *ngFor="let Loginstance of LogData" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-startline *ngIf=' Loginstance == LogData[0]'></app-startline>
+        <app-dot-pointer-dot-up [BubbleColor]="Loginstance[3]" [line1]='Loginstance[0]' [line2]='Loginstance[1]' [Descriptor]='Loginstance[2]' [Date]='Loginstance[4]' *ngIf='!Loginstance[5]'></app-dot-pointer-dot-up>
+        <app-dot-pointer-dot-down [BubbleColor]="Loginstance[3]" [line1]='Loginstance[0]' [line2]='Loginstance[1]' [Descriptor]='Loginstance[2]' [Date]='Loginstance[4]' *ngIf='Loginstance[5]'></app-dot-pointer-dot-down> 
+        <app-endline *ngIf=' Loginstance == LogData[LogData.length - 1]' ></app-endline>
+    </div>
+
+
+</div>
+
+<div class="SliderRight" type="button" (click)="scrollRight()">
+    <span>
+        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+    </span>
+</div>
+
+<div class="SliderLeft" type="button" (click)="scrollLeft()"> <!-- *ngIf="InitialState != 0" -->
+    <span>
+        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>    </span>
+</div>
+
+<!-- <div style="position: relative; top:-20px; flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+    <div *ngFor="let number of numbers" style="flex: 0 0 auto; display: flex; overflow-x: scroll; padding: 0px;">
+        <app-dot-pointer-dot-down></app-dot-pointer-dot-down>
+    </div>
+</div>
+ -->

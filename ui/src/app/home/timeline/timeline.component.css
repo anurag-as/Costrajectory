@@ -1,0 +1,94 @@
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+
+.SliderRight {
+    background-color: red;
+    z-index:100;
+    position: absolute;
+    top: 110px;
+    right: 0px; 
+    width: 60px;
+    height: 60px;
+    background-color:rgb(255, 255, 255);
+    border-bottom-color:rgb(223, 225, 229);
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    box-shadow:rgba(0, 0, 0, 0.2) 0px 7px 15px 0px;
+    border-top-left-radius:50%;
+    border-top-right-radius:50%;
+}
+
+.SliderRight > span {
+    bottom:0px;
+    color:rgb(117, 117, 117);
+    cursor:pointer;
+    display:block;
+    fill:rgb(117, 117, 117);
+    font-family:helvetica, arial, sans-serif;
+    font-size:14px;
+    height:48px;
+    left:2px;
+    margin-bottom:12px;
+    margin-left:12px;
+    margin-right:12px;
+    margin-top:12px;
+    position:absolute;
+    right:10px;
+    top:4px;
+    user-select:none;
+    visibility:visible;
+    width:32px;
+}
+
+.SliderRight > span :hover {
+    fill:black;
+
+}
+
+
+.SliderLeft {
+    background-color: red;
+    z-index:100;
+    position: absolute;
+    top: 110px;
+    left: 0px; 
+    width: 60px;
+    height: 60px;
+    background-color:rgb(255, 255, 255);
+    border-bottom-color:rgb(223, 225, 229);
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    box-shadow:rgba(0, 0, 0, 0.2) 0px 7px 15px 0px;
+    border-top-left-radius:50%;
+    border-top-right-radius:50%;
+}
+
+.SliderLeft > span {
+    bottom:0px;
+    color:rgb(117, 117, 117);
+    cursor:pointer;
+    display:block;
+    fill:rgb(117, 117, 117);
+    font-family:helvetica, arial, sans-serif;
+    font-size:14px;
+    height:48px;
+    left:2px;
+    margin-bottom:12px;
+    margin-left:12px;
+    margin-right:12px;
+    margin-top:12px;
+    position:absolute;
+    right:10px;
+    top:4px;
+    user-select:none;
+    visibility:visible;
+    width:32px;
+}
+
+.SliderLeft > span :hover {
+    fill:black;
+
+}

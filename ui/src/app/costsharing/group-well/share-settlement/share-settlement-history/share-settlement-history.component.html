@@ -1,0 +1,4 @@
+<app-alias-holder [Alias]="AliasData[payer].alias | uppercase" id="payer" title={{payer}}></app-alias-holder>
+<p id="Text">SETTLED</p>
+<app-alias-holder [Alias]="AliasData[payee].alias | uppercase" id="payee" title={{payee}}></app-alias-holder>
+<p id="Text">{{amount | currency: 'INR'}}</p>

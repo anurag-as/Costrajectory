@@ -4,13 +4,13 @@
     <div class="btnRoundReject" type="button" (click)="Reject()"><i class="fa fa-times fa-lg fontawesomeRej" aria-hidden="true" style="color: whitesmoke;"></i></div>
 </div>
 
-<div class="grid2 card card-body bg-light" *ngIf="RequestType == 2">
+<div class="grid3 card card-body bg-light" *ngIf="RequestType == 2">
     <p>Add <b style="color: black;"> &nbsp;&nbsp;&nbsp;{{UserToBeAddedOrRemoved}}&nbsp;&nbsp;</b> into <b style="color: blueviolet;"> &nbsp;&nbsp;&nbsp;{{GroupName}}&nbsp;&nbsp;</b></p>
     <div class="btnRoundAccept" type="button" (click)="Accept()"><i class="fa fa-check fa-lg fontawesomeAcc" aria-hidden="true" style="color: whitesmoke;"></i></div>
     <div class="btnRoundReject" type="button" (click)="Reject()"><i class="fa fa-times fa-lg fontawesomeRej" aria-hidden="true" style="color: whitesmoke;"></i></div>
 </div>
 
-<div class="grid2 card card-body bg-light" *ngIf="RequestType == 3">
+<div class="grid3 card card-body bg-light" *ngIf="RequestType == 3">
     <p>Remove <b style="color: red;"> &nbsp;&nbsp;&nbsp;{{UserToBeAddedOrRemoved}}&nbsp;&nbsp;</b> from <b style="color: blueviolet;"> &nbsp;&nbsp;&nbsp;{{GroupName}}&nbsp;&nbsp;</b></p>
     <div class="btnRoundAccept" type="button" (click)="Accept()"><i class="fa fa-check fa-lg fontawesomeAcc" aria-hidden="true" style="color: whitesmoke;"></i></div>
     <div class="btnRoundReject" type="button" (click)="Reject()"><i class="fa fa-times fa-lg fontawesomeRej" aria-hidden="true" style="color: whitesmoke;"></i></div>

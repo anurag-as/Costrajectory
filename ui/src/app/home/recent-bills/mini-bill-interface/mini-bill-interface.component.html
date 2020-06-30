@@ -1,0 +1,19 @@
+<div class="card bg-light">
+    <nav class="navbar navbar-expand-sm" id="topHalf">
+        <a class="navbar-brand"> <b> {{BillName}} </b></a>
+        <span class="example-spacer"></span>
+        <a class="navbar-brand"> <b>Rs {{BillAmount}}</b></a>
+    </nav>
+    <nav class="navbar navbar-expand-sm" id="BottomHalf">
+        <a class="navbar-brand"> {{BillCategory}}</a>
+        <span class="example-spacer"></span>
+        <div class="navbar-nav" id="buttonGroup">
+            <a class="nav-link" type='button'  (click)="ViewBill()" title="Bill info"><i style="color: rgb(102, 84, 2);" class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  title="Copy Bill" (click)="ChangeBill()"><i style="color: rgb(87, 4, 87)" class="fa fa-clone fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  title="View Bill" (click)="ViewBillPhoto()" *ngIf="BillHasImage == true"><i style="color: rgb(4, 53, 34);" class="fa fa-camera fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  (click)="EditBill()" title="Edit Bill"><i style="color: blue" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
+            <a class="nav-link" type='button'  (click)="DeleteBill()" title="Delete the Bill"><i style="color: red;" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+        </div>
+    </nav>
+</div>
+

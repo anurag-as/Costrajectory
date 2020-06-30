@@ -64,8 +64,10 @@ def add_users_to_group():
         # adding transaction to logs
 
         if response['success']:
-            insert_into_recent_table(connection(), user_name, str(time()), "Added additional users to group",
-                                     group_title)
+            message = "You added a few users to the group " + group_title + ". The users are: "
+            message_description = response['success']
+            insert_into_recent_table(connection(), user_name, str(time()), "6:Added users to group " + group_title,
+                                     message + str(message_description))
 
         return jsonify(response)
     except:

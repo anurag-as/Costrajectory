@@ -5,6 +5,7 @@ from database_functions.account.token_auth_flow import refresh_token
 from database_functions.logs.recentLogs import insert_into_recent_table
 from database_functions.groups.updation_functions import update_group_status, add_new_users_group, \
     remove_user_from_pending, update_pending_state_machine
+from database_functions.groups.querying_functions import get_group_title
 from database_functions.groups.querying_functions import get_group_current_users, get_group_pending_state_machine
 from ast import literal_eval
 from time import time
@@ -37,8 +38,12 @@ def group_status_update():
                 rejects += 1
                 update_pending_state_machine(connection(), group_id, user_name, rejects)
 
+            group_title = get_group_title(connection(), group_id)
+            message = "You just changed your status in the group " + group_title + " to " + status + ". Hope you are " \
+                                                                                                     "well served! "
             # adding transaction to logs
-            insert_into_recent_table(connection(), user_name, str(time()), "Changed group status", status)
+            insert_into_recent_table(connection(), user_name, str(time()), "14:Changed group status of " + group_title,
+                                     message)
         return jsonify(True)
     except:
         return jsonify(False)

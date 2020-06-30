@@ -75,6 +75,43 @@ import { ErrorfloatComponent } from './utilities/errorfloat/errorfloat.component
 import { SuccessfloatComponent } from './utilities/successfloat/successfloat.component';
 import { AddUsersSharedBillComponent } from './costsharing/group-well/add-users-shared-bill/add-users-shared-bill.component';
 import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-users-shared-bill/delete-users-shared-bill.component';
+import { ShareSettlementComponent } from './costsharing/group-well/share-settlement/share-settlement.component';
+import { ShareOweComponent } from './costsharing/group-well/share-settlement/share-owe/share-owe.component';
+// tslint:disable-next-line:max-line-length
+import { ShareSettlementHistoryComponent } from './costsharing/group-well/share-settlement/share-settlement-history/share-settlement-history.component';
+import { ShareOthersComponent } from './costsharing/group-well/share-settlement/share-others/share-others.component';
+import { AliasHolderComponent } from './utilities/alias-holder/alias-holder.component';
+import { RandomcolorModule } from 'angular-randomcolor';
+import { HomeComponent } from './home/home.component';
+import { TimelineComponent } from './home/timeline/timeline.component';
+import { RecentBillsComponent } from './home/recent-bills/recent-bills.component';
+import { RecentSharesComponent } from './home/recent-shares/recent-shares.component';
+import { DotPointerComponent } from './utilities/dot-pointer/dot-pointer.component';
+import { LineComponent } from './utilities/line/line.component';
+import { DotPointerDotUPComponent } from './utilities/homecomp/dot-pointer-dot-up/dot-pointer-dot-up.component';
+import { DotPointerDotDOWNComponent } from './utilities/homecomp/dot-pointer-dot-down/dot-pointer-dot-down.component';
+import { MiniOweInterfaceComponent } from './home/recent-shares/mini-owe-interface/mini-owe-interface.component';
+import { MiniBillInterfaceComponent } from './home/recent-bills/mini-bill-interface/mini-bill-interface.component';
+import { ViewAddedBillComponent } from './BillInterface/view-added-bill/view-added-bill.component';
+import { DeleteAddedBillComponent } from './BillInterface/delete-added-bill/delete-added-bill.component';
+import { CloneAddedBillComponent } from './BillInterface/clone-added-bill/clone-added-bill.component';
+import { EditAddedBillComponent } from './BillInterface/edit-added-bill/edit-added-bill.component';
+import { InfoAddedBillComponent } from './BillInterface/info-added-bill/info-added-bill.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { TimeSliderComponent } from './analytics/time-slider/time-slider.component';
+import { PieChartComponent } from './analytics/pie-chart/pie-chart.component';
+import { PredictorChartComponent } from './analytics/predictor-chart/predictor-chart.component';
+import { DiffChartComponent } from './analytics/diff-chart/diff-chart.component';
+import { LineChartComponent } from './analytics/line-chart/line-chart.component';
+import { Filter, AuxillaryTasksService} from './analytics/auxillary-tasks.service';
+import { LoadersComponent } from './loaders/loaders.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BillPhotoComponent } from './view-table-bill/bill-photo/bill-photo.component';
+import { BillphotoComponent } from './costsharing/group-well/indivisual-bill/billphoto/billphoto.component';
+import { StartlineComponent } from './utilities/homecomp/startline/startline.component';
+import { EndlineComponent } from './utilities/homecomp/endline/endline.component';
+
 
 @NgModule({
   declarations: [
@@ -126,6 +163,36 @@ import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-
     SuccessfloatComponent,
     AddUsersSharedBillComponent,
     DeleteUsersSharedBillComponent,
+    ShareSettlementComponent,
+    ShareOweComponent,
+    ShareSettlementHistoryComponent,
+    ShareOthersComponent,
+    AliasHolderComponent,
+    HomeComponent,
+    TimelineComponent,
+    RecentBillsComponent,
+    RecentSharesComponent,
+    DotPointerComponent,
+    LineComponent,
+    DotPointerDotUPComponent,
+    DotPointerDotDOWNComponent,
+    MiniOweInterfaceComponent,
+    MiniBillInterfaceComponent,
+    ViewAddedBillComponent,
+    DeleteAddedBillComponent,
+    CloneAddedBillComponent,
+    EditAddedBillComponent,
+    InfoAddedBillComponent,
+    TimeSliderComponent,
+    PieChartComponent,
+    PredictorChartComponent,
+    DiffChartComponent,
+    LineChartComponent,
+    LoadersComponent,
+    BillPhotoComponent,
+    BillphotoComponent,
+    StartlineComponent,
+    EndlineComponent,
   ],
   imports: [
     BrowserModule,
@@ -152,8 +219,20 @@ import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-
     MatTableModule,
     ResizableModule,
     GoogleChartsModule,
-    ],
-  providers: [TabularViewComponent, GlobalConfigsService, Title],
+    RandomcolorModule,
+    Ng5SliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    TabularViewComponent,
+    GlobalConfigsService,
+    Title,
+    Filter,
+    AuxillaryTasksService,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   bootstrap: [AppComponent],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA
@@ -173,7 +252,15 @@ import { DeleteUsersSharedBillComponent } from './costsharing/group-well/delete-
     BugreportComponent,
     GroupacceptpopupComponent,
     AddUsersSharedBillComponent,
-    DeleteUsersSharedBillComponent
+    DeleteUsersSharedBillComponent,
+    ShareSettlementComponent,
+    ViewAddedBillComponent,
+    DeleteAddedBillComponent,
+    CloneAddedBillComponent,
+    EditAddedBillComponent,
+    InfoAddedBillComponent,
+    BillPhotoComponent,
+    BillphotoComponent
     ],
 })
 export class AppModule { }

@@ -13,47 +13,60 @@ from os import SEEK_END
 
 editBillAPI = Blueprint('editBillAPI', __name__)
 
+
 # API to edit a particular transaction based on uid
 @editBillAPI.route('/transactions/editTransaction', methods=['POST'])
 @cross_origin()
 def edit_transaction():
-    if 'image' in request.files:
-        # Image has to be uploaded
-        file = request.files['image']
-        file_name = file.filename
-        file_extension = file_name.split('.')[-1]
-        original_file_name = file_name
-        present_time = str(time())
-        file_name = present_time + '.' + file_extension
-        mapped_file_name = file_name
-        # adding image mapping for cross referencing later
-        insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
+    try:
+        if 'image' in request.files:
+            # Image has to be uploaded
+            file = request.files['image']
+            file_name = file.filename
+            file_extension = file_name.split('.')[-1]
+            original_file_name = file_name
+            present_time = str(time())
+            file_name = present_time + '.' + file_extension
+            mapped_file_name = file_name
+            # adding image mapping for cross referencing later
+            insert_into_image_mapping_table(connection(), request.form['username'], original_file_name, mapped_file_name)
 
-        # uploading the file to dropbox
-        uploadFile(file, mapped_file_name)
+            # uploading the file to dropbox
+            uploadFile(file, mapped_file_name)
 
-        file.seek(0, SEEK_END)
-        file_size = file.tell() / (10 ** 6)  # file_size in mb
-        # adding entry to image size table
-        insert_into_image_size_table(connection(), mapped_file_name, file_size)
+            file.seek(0, SEEK_END)
+            file_size = file.tell() / (10 ** 6)  # file_size in mb
+            # adding entry to image size table
+            insert_into_image_size_table(connection(), mapped_file_name, file_size)
 
-    else:
-        # Image not a part of the transaction
-        mapped_file_name = str(False)
-    user_name = request.form['username']
-    uid = request.form['uid']
-    title = request.form['Name']
-    date_time = request.form['Date']
-    description = request.form['Description']
-    amount = request.form['Amount']
-    category = request.form['category']
-    # adding the transaction record
-    edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description,
-                                  mapped_file_name, category)
-    # refresh the token, needs to be added to other API Calls
-    refresh_token(connection(), request.form['username'])
+        else:
+            # Image not a part of the transaction
+            mapped_file_name = str(False)
+        user_name = request.form['username']
+        uid = request.form['uid']
+        title = request.form['Name']
+        date_time = request.form['Date']
+        description = request.form['Description']
+        amount = request.form['Amount']
+        category = request.form['category']
 
-    # adding transaction to logs
-    insert_into_recent_table(connection(), user_name, str(time()), "Edit Transaction", title)
+        # adding the transaction record
+        edit_transactions_image_table(connection(), uid, user_name, title, date_time, amount, description,
+                                      mapped_file_name, category)
+        # refresh the token, needs to be added to other API Calls
+        refresh_token(connection(), request.form['username'])
 
-    return jsonify({'editStatus': True})
+        message = "You edited this transaction "
+        message_description = {'Title': title,
+                               'DateTime': date_time,
+                               'Description': description,
+                               'Amount': amount,
+                               'Category': category,
+                               }
+        # adding transaction to logs
+        insert_into_recent_table(connection(), user_name, str(time()), "19:Edit Transaction " + title,
+                                 message + str(message_description))
+
+        return jsonify({'editStatus': True})
+    except:
+        return jsonify(False)

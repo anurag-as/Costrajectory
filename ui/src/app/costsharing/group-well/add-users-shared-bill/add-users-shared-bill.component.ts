@@ -139,7 +139,7 @@ export class AddUsersSharedBillComponent implements OnInit {
     this.divs.push(this.divs.length + 1);
   }
 
-  private closeDialog() {
+  closeDialog() {
     this.dialogRef.close();
   }
 

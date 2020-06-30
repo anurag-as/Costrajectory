@@ -5,14 +5,16 @@ from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
 from database_functions.transactions.create_bill import delete_from_image_table, get_bill_name
 from utilities.delete_file import delete_file
+from database_functions.transactions.query_transactions import query_particular_transaction
 from database_functions.logs.recentLogs import insert_into_recent_table
 
 deleteTransactionsAPI = Blueprint('deleteTransactionsAPI', __name__)
 
+
 # API to delete a particular transaction based on uid
 @deleteTransactionsAPI.route('/transactions/deleteTransaction', methods=['DELETE'])
 @cross_origin()
-def deleteTransaction():
+def delete_transaction():
     """
     API to delete a particular transaction
     """
@@ -23,7 +25,10 @@ def deleteTransaction():
     try:
         title = get_bill_name(connection(), uid)
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Deleted Transaction", title)
+        bill_data = query_particular_transaction(connection(), uid)
+        message = "You just deleted this transaction "
+        insert_into_recent_table(connection(), user_name, str(time()), "18:Deleted Transaction " + title,
+                                 message + str(bill_data))
 
         message = delete_from_image_table(connection(), uid, user_name)
         delete_file(mapped_name)  # deleting that image from dropbox

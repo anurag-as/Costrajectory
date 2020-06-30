@@ -41,8 +41,10 @@ def remove_users_from_group():
                 add_new_users_group(connection(), group_id, str(new_users))
             except:
                 pass
+        message = "You removed users from the group " + group_title + ". The users removed were " + str(users)
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Removed users from group", group_title)
+        insert_into_recent_table(connection(), user_name, str(time()), "15:Removed users from group " + group_title,
+                                 message)
 
         return jsonify(True)
     except:

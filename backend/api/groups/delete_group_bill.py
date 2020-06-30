@@ -3,12 +3,13 @@ from flask_cors import cross_origin
 from time import time
 from database_functions.db_connection.connection import connection
 from database_functions.account.token_auth_flow import refresh_token
-from database_functions.groups.querying_functions import get_bill_name
+from database_functions.groups.querying_functions import get_bill_name, get_bill_data
 from database_functions.groups.deletion_functions import delete_from_group_bills_table, delete_from_groups_table
 from utilities.delete_file import delete_file
 from database_functions.logs.recentLogs import insert_into_recent_table
 
 deleteGroupBillAPI = Blueprint('deleteGroupBillAPI', __name__)
+
 
 # API to delete a particular transaction based on uid
 @deleteGroupBillAPI.route('/group/deleteGroupBill', methods=['DELETE'])
@@ -24,8 +25,13 @@ def deleteTransaction():
     mapped_name = request.json['mapped_name']
     try:
         title = get_bill_name(connection(), bill_id)
+        bill_data = get_bill_data(connection(), bill_id)
+
+        message = "You deleted this group bill " + title
+        message_description = str(bill_data)
         # adding transaction to logs
-        insert_into_recent_table(connection(), user_name, str(time()), "Deleted group bill", title)
+        insert_into_recent_table(connection(), user_name, str(time()), "11:Deleted group bill " + title,
+                                 message + message_description)
 
         delete_from_group_bills_table(connection(), bill_id)
         delete_from_groups_table(connection(), bill_id, group_id)

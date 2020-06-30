@@ -1,0 +1,63 @@
+<div *ngIf='line2 != ""'>
+  <svg version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg"
+     style="width: 200; height: 280;">
+     
+     <line x1="0" y1="140" x2="200" y2="140" style="stroke:red;stroke-width:3;" />
+     
+     
+     <line x1="100" y1="140" x2="100" y2="80" style="stroke-width:3;" [attr.stroke]="BubbleColor"/>
+      
+      
+      <g class="box">
+        <circle cx="100" cy="140" r="5" [style.fill]="BubbleColor"/>
+        <title>{{Date}}</title>
+      </g>
+
+<!--       <rect x="-10" y="200" width="50" height="60" style="stroke:black;stroke-width:2;opacity:1"  fill-opacity="0"/>
+      <rect x="110" y="200" width="50" height="60" style="stroke:black;stroke-width:2;opacity:1"  fill-opacity="0"/>
+ -->
+      <g>
+        <rect x="5" y="20" width="190" height="60" style="stroke-width:2;opacity:1" [attr.stroke]="BubbleColor" fill-opacity="0" />
+        <text x="100" y="45" text-anchor="middle" stroke="black" stroke-width="1px" style="font-family: georgia, impact, times, serif; font-weight: normal; font-style: normal">{{line1}} </text>
+        <text x="100" y="65" text-anchor="middle" stroke="#683ab7" stroke-width="1px" style="font-family: serif, impact, georgia, times; font-weight: normal; font-style: bold">{{line2}} </text>
+        <title>{{Descriptor}}</title>
+      </g>
+      
+
+  </svg>
+</div>
+
+
+<div *ngIf='line2 == ""'>
+  <svg version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg"
+     style="width: 200; height: 280;">
+     
+     <line x1="0" y1="140" x2="200" y2="140" style="stroke:red;stroke-width:3;" />
+     
+     
+     <line x1="100" y1="140" x2="100" y2="80" style="stroke-width:3;" [attr.stroke]="BubbleColor"/>
+      
+      
+      <g class="box">
+        <circle cx="100" cy="140" r="5" [style.fill]="BubbleColor"/>
+        <title>{{Date}}</title>
+      </g>
+
+<!--       <rect x="-10" y="200" width="50" height="60" style="stroke:black;stroke-width:2;opacity:1"  fill-opacity="0"/>
+      <rect x="110" y="200" width="50" height="60" style="stroke:black;stroke-width:2;opacity:1"  fill-opacity="0"/>
+ -->
+      <g>
+        <rect x="5" y="20" width="190" height="60" style="stroke-width:2;opacity:1" [attr.stroke]="BubbleColor" fill-opacity="0" />
+        <text x="100" y="55" text-anchor="middle" stroke="black" stroke-width="1px" style="font-family: georgia, impact, times, serif; font-weight: normal; font-style: normal">{{line1}} </text>
+        <title>{{Descriptor}}</title>
+      </g>
+      
+
+  </svg>
+</div>
+
+

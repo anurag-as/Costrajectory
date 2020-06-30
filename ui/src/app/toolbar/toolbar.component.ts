@@ -89,7 +89,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  LogOut(path) {
+  LogOut() {
     const endpoint = 'http://127.0.0.1:5000/auth/signout';
     const options = {
       headers: new HttpHeaders({

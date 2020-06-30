@@ -88,10 +88,10 @@ body{
 
 .header div{
 	float: left;
-	color: #fff;
+	color: blue;
 	font-family: 'Exo', sans-serif;
 	font-size: 35px;
-	font-weight: 200;
+	font-weight: bold;
 }
 
 .header div span{

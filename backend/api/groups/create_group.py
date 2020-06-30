@@ -27,7 +27,6 @@ def create_sharing_group():
         users = list(set(users))  # Avoid adding same users multiple times to the groups
         pending_users = users[:]
 
-
         current_users = str([group_admin])  # only adding admin to the group
         group_creation_time = str(time())
         group_id = insert_into_group_table(connection(), group_admin, current_users, group_title, group_description,
@@ -39,8 +38,9 @@ def create_sharing_group():
         for user in pending_users:
             insert_into_pending_requests_table(connection(), group_id, user, "pending")
 
+        message = "You created a new group, enjoy! " + group_title
         # adding transaction to logs
-        insert_into_recent_table(connection(), group_admin, str(time()), "Created Group", group_title)
+        insert_into_recent_table(connection(), group_admin, str(time()), "9:Created Group " + group_title, message)
 
         return jsonify(True)
     except:

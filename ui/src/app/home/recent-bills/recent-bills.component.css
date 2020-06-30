@@ -1,0 +1,18 @@
+#NavbarHouserHome {
+    position: sticky;
+    top: 0px;
+    left: -20px;
+    width: 100%;
+    z-index: 1;
+}
+
+.navbar {
+    height: 35px;
+    position: relative;
+    top: -21px;
+    left: -20px;
+    width: 105.5%;
+}
+
+
+

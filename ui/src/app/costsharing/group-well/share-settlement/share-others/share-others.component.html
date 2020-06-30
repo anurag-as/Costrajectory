@@ -1,0 +1,4 @@
+<app-alias-holder [Alias]="AliasData[SharedEntry[0]].alias | uppercase" id="payer" title={{SharedEntry[0]}}></app-alias-holder>
+<p id="Text">TO PAY</p>
+<app-alias-holder [Alias]="AliasData[SharedEntry[1]].alias | uppercase" id="payee" title={{SharedEntry[1]}}></app-alias-holder>
+<p id="Text">{{SharedEntry[2] | currency: 'INR'}} <span *ngIf="GroupName != undefined" title="{{GroupName}}" style="color: blue;"> : {{GroupNameTruncated}}</span></p>

@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Input } from '@angular/core';
 import { GlobalConfigsService } from '../../global-configs.service';
+import { Output } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 interface ReturnImage {
@@ -37,9 +39,19 @@ export class ViewBillComponent implements OnInit {
   imageToShow = undefined;
   canShowImage = false;
   base64Data = undefined;
+  IsShowingSharing = true;
+  canShowImageUploaded = false;
+  @Input() BillId: number;
+  @Input() Amount: string;
+  @Input() category: string;
+  @Input() dateTime: string;
+  @Input() Discription: string;
+  @Input() payer: string;
+  @Input() BillName: string;
 
-
-  constructor(private http: HttpClient, private domSanitizer: DomSanitizer, private Globals: GlobalConfigsService) { }
+  constructor(private http: HttpClient, private domSanitizer: DomSanitizer,
+              private Globals: GlobalConfigsService,
+              private dialogRef: MatDialogRef<ViewBillComponent>) { }
 
    receiveImage(URL: string, Payload: any) {
     return this.http.post<ReturnImage>(URL, Payload);
@@ -54,5 +66,16 @@ export class ViewBillComponent implements OnInit {
       this.base64Data = data.Image;
     });
   }
+
+  CloseDialog() {
+    this.dialogRef.close();
+  }
+
+  ChangeMode() {
+    if (this.MappedImageName !== 'False') {
+      this.IsShowingSharing = ! this.IsShowingSharing;
+    }
+  }
+
 
 }

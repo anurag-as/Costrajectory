@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 import { AddUsersSharedBillComponent } from './add-users-shared-bill/add-users-shared-bill.component';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DeleteUsersSharedBillComponent } from './delete-users-shared-bill/delete-users-shared-bill.component';
+import { ShareSettlementComponent } from './share-settlement/share-settlement.component';
 
 interface Validity {
   username: string;
@@ -33,6 +34,10 @@ export class GroupWellComponent implements OnInit {
   @Output() ChangeEvent = new EventEmitter();
   @Input() PendingUsers: string[];
   @Input() Description;
+  @Input() UserAlias: any;
+  @Input() SharingData: any[];
+  @Input() GroupIndex: number;
+  @Input() SettlementHistory: any[];
   deletedParticipants: string[] = [];
   NEXTADMIN = '';
   NEXTADMINVALID = false;
@@ -49,6 +54,7 @@ export class GroupWellComponent implements OnInit {
   currentUsername: string;
   IntimationMessage: string;
   FormattedDate: any;
+  HasSHaredDataChanged = false;
   error = false;
   constructor(private GroupOperations: GroupOperationsService,
               private http: HttpClient,
@@ -57,7 +63,6 @@ export class GroupWellComponent implements OnInit {
   ngOnInit() {
     this.FormattedStringId = String(this.GroupId);
     this.FormattedDate = new Date(Math.trunc(this.GroupCreationTime));
-    // console.log('++++++++++++ ', this.PendingUsers);
   }
 
   ResetAddUsersData() {
@@ -296,4 +301,26 @@ export class GroupWellComponent implements OnInit {
       // this.RefreshData();
     });
   }
+
+    Settlements(): void {
+      const dialogRef = this.dialog.open(ShareSettlementComponent, {
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      dialogRef.componentInstance.UserAlias = this.UserAlias;
+      dialogRef.componentInstance.SharingData = this.SharingData;
+      dialogRef.componentInstance.username = this.Username;
+      dialogRef.componentInstance.GroupId = this.GroupId;
+      dialogRef.componentInstance.GroupIndex = this.GroupIndex;
+      dialogRef.componentInstance.SettlementHistory = this.SettlementHistory;
+      dialogRef.afterClosed().subscribe(result => {
+        if (result.DATACHANGED) {
+          console.log('DATA has changed');
+          this.RefreshData();
+        }
+      });
+    }
+
+    GroupDataChanged() {
+      this.HasSHaredDataChanged = true;
+    }
 }

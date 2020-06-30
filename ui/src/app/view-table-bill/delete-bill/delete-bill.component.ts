@@ -26,7 +26,7 @@ export class DeleteBillComponent implements OnInit {
   canShowImage = false;
   base64Data = undefined;
   BillID: any = undefined;
-
+  DataChanged = false;
   constructor(private http: HttpClient, private domSanitizer: DomSanitizer, private Globals: GlobalConfigsService,
               private dialogRef: MatDialogRef<DeleteBillComponent>) { }
 
@@ -35,9 +35,9 @@ export class DeleteBillComponent implements OnInit {
     const r = confirm('Are you sure you want to delete the Bill? ');
     if (r === true) {
       this.DeleteBillFromThisComponent();
-      window.location.reload();
-    } else {
-      this.dialogRef.close();
+      // window.location.reload();
+      } else {
+      this.dialogRef.close({dataChanged : this.DataChanged});
     }
   }
 
@@ -53,7 +53,10 @@ export class DeleteBillComponent implements OnInit {
 
     // console.log('Deleting the entry :', QueryPayload);
     this.http.delete(endpoint, options).subscribe(data => {
-      window.location.reload();
+      this.DataChanged = true;
+      this.dialogRef.close({dataChanged : this.DataChanged});
+    }, err => {
+      this.dialogRef.close({dataChanged : this.DataChanged});
     });
   }
 

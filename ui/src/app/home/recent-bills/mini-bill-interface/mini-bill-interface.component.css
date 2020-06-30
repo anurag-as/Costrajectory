@@ -1,0 +1,34 @@
+.card {
+    height: 65px; 
+    width: 80%;
+    background-image: linear-gradient(to bottom right, #86DDEE, #10C6A3);
+/*     background-image: linear-gradient(to bottom right, #35cf27, #683ab7);
+ */    box-shadow: rgba(9, 30, 66, 0.25) 0px 20px 32px -8px;
+    margin:0 auto;
+}
+
+#lineHouse {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#topHalf {
+    width: 100%;
+    height:30px;
+}
+
+#Middle {
+    height:3px;
+}
+
+#BottomHalf {
+    width: 100%;
+    height: 30px;
+}
+
+#buttonGroup {
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
